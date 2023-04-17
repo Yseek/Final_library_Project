@@ -2,6 +2,53 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="toolguys.library.library.mapper.admin.AdminMapper">
-
+<mapper namespace="toolguys.library.library.mapper.admin.AdminMapperPKS">
+    <resultMap id="book" type="Book">
+        <id property="bookSeq" column="BOOKSEQ"/>
+        <id property="bookTitle" column="BOOKTITLE"/>
+        <id property="bookWriter" column="BOOKWRITER"/>
+        <id property="bookPub" column="BOOKPUB"/>
+        <id property="bookStory" column="BOOKSTORY"/>
+        <id property="bookImgName" column="BOOKIMGNAME"/>
+        <id property="bookImgPath" column="BOOKIMGPATH"/>
+        <id property="bookImgOgn" column="BOOKIMGOGN"/>
+        <id property="bookStatus" column="BOOKSTATUS"/>
+        <id property="bookCount" column="BOOKCOUNT"/>
+        <id property="rentCount" column="RENTCOUNT"/>
+    </resultMap>
+    <resultMap id="member" type="Member">
+        <id property="memberSeq" column="MEMBERSEQ"/>
+        <id property="memberEmail" column="MEMBEREMAIL"/>
+        <id property="memberName" column="MEMBERNAME"/>
+        <id property="memberPhone" column="MEMBERPHONE"/>
+        <id property="memberAddr" column="MEMBERADDR"/>
+        <id property="memberStatus" column="MEMBERSTATUS"/>
+        <id property="memberOrAdmin" column="MEMBERORADMIN"/>
+    </resultMap>
+    <resultMap id="rentcard" type="RentCard">
+        <id property="rentCardSeq" column="RENTCARDSEQ"/>
+        <collection property="Member" resultMap="member"/>
+    </resultMap>
+    <resultMap id="bookrent" type="BookRent">
+        <id property="bookRentSeq" column="BOOKRENTSEQ"/>
+        <id property="bookRentDate" column="BOOKRENTDATE"/>
+        <id property="bookRentDDay" column="BOOKRENTDDAY"/>
+        <id property="bookRentReturn" column="BOOKRENTRETURN"/>
+        <id property="bookRentCoin" column="BOOKRENTCOIN"/>
+        <collection property="RentCard" resultMap="rentcard"/>
+        <collection property="Book" resultMap="book"/>
+    </resultMap>
+    <select id="selectAll" resultMap="book">
+        select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
+        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE group by b2.BOOKTITLE) as RENTCOUNT
+        from BOOK b1 group by BOOKTITLE, BOOKWRITER, BOOKPUB
+    </select>
+    <select id="listBySearch" parameterType="String" resultMap="book">
+        select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
+        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE group by b2.BOOKTITLE) as RENTCOUNT
+        from BOOK b1 where BOOKTITLE like CONCAT('%', #{keyword}, '%') group by BOOKTITLE, BOOKWRITER, BOOKPUB
+    </select>
+    <select id="selecBookinfo" parameterType="hashMap" resultMap="book">
+        select * from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
+    </select>
 </mapper>
