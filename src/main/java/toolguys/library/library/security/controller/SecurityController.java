@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.security.dto.FindEmailRequest;
 import toolguys.library.library.security.dto.MemberLoginRequest;
 import toolguys.library.library.security.service.SecurityMemberService;
 
@@ -32,8 +33,19 @@ public class SecurityController {
 		return ResponseEntity.ok().body("회원가입 성공");
 	}
 
+	@PostMapping("logout.do")
+	public ResponseEntity<Object> logout(Authentication authentication){
+		return ResponseEntity.ok().body(securityMemberService.memberInfo(authentication.getName()));
+	}
+
 	@PostMapping("memberInfo")
 	public ResponseEntity<Object> memberInfo(Authentication authentication){
 		return ResponseEntity.ok().body(securityMemberService.memberInfo(authentication.getName()));
+	}
+
+	@PostMapping("findEmail")
+	public ResponseEntity<String> findEmail(@RequestBody FindEmailRequest dto){
+		String email = securityMemberService.findEmail(dto.getMemberPhone(), dto.getMemberName(), dto.getMemberBirth());
+		return ResponseEntity.ok().body(email);
 	}
 }
