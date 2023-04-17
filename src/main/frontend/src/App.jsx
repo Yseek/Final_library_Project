@@ -11,6 +11,7 @@ import NoticeAdmin from "./user/dongwon/NoticeAdmin"
 import NoticeWrite from "./user/dongwon/NoticeWrite"
 import NoticeUpdate from "./user/dongwon/NoticeAdminUpdate"
 import NoticeAdminContent from "./user/dongwon/NoticeAdminContent"
+import AdminMemberList from './admin/AdminMemberList';
 
 function App() {
 	return (
@@ -28,6 +29,8 @@ function App() {
 					<Route path="/noticeAdmin/write" element={<NoticeWrite/>}></Route>
 					<Route path="/noticeAdmin/update/:noticeSeq" element={<NoticeUpdate/>}></Route>
 					<Route path="/noticeAdmin/content/:noticeSeq" element={<NoticeAdminContent/>}></Route>
+					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
+					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
