@@ -5,6 +5,7 @@ import FooterLayout from './security/FooterLayout';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from './security/LoginPage';
 import JoinPage from './security/JoinPage';
+import Profile from './admin/Profile';
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
+					<Route path="/profile" element={<Profile />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
