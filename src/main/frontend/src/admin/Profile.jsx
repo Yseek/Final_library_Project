@@ -1,29 +1,22 @@
-import { useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./css/Profile.css";
 
 export default function Profile(){
     
-    const [param, setParam] = useState(useParams());
-    const memberinfo = fetch('http://127.0.0.1:8080/read/1');
+    const [param, setParam] = useState();
     
     useEffect(()=>{
 		fetch(`http://127.0.0.1:8080/read/1`)
 		.then(res => res.json())
-		.then(data => setData(data.content))
-	}, [param]);
+		.then(data => setParam(data))
+	}, []);
+    console.log("param"+param);
 
-    console.log("memberinfo : "+memberinfo);
-    const phoneRef = useRef();
-    const addrRef = useRef();
-    
     const onSubmit = (e) => {
         e.preventDefault();
         
         const formData = new FormData();
-        formData.append("memberSeq", memberinfo.memberSeq);
-        formData.append("memberPhone", phoneRef.current.value);
-        formData.append("memberAddr", addrRef.current.value);
 
         fetch('http://127.0.0.1:8080/update', {
             method: 'POST',
@@ -44,17 +37,17 @@ export default function Profile(){
     return (
         <form onSubmit={onSubmit}>
             <div className="input_area">
-                <input type="hidden" name="memberSeq" value={memberinfo.memberSeq}></input>
+                <input type="hidden" name="memberSeq" value={""}></input>
             </div>
 
             <div className="input_area">
                 <label className="prifileL">전화번호:</label>
-                <input type="text" name="memberPhone" className="profileI" ref={phoneRef} defaultValue={memberinfo.memberPhone}></input>
+                <input type="text" name="memberPhone" className="profileI" defaultValue={""}></input>
             </div>
 
             <div className="input_area">
                 <label className="profileL">주소:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" name="memberAddr" className="profileI" ref={addrRef} defaultValue={memberinfo.memberAddr}></input>
+                <input type="text" name="memberAddr" className="profileI" defaultValue={""}></input>
             </div>
 
             <button type="submit" className="profileB">등록</button>&nbsp;&nbsp;&nbsp;
