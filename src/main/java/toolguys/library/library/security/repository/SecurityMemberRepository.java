@@ -8,4 +8,5 @@ import toolguys.library.library.domain.Member;
 
 public interface SecurityMemberRepository extends JpaRepository<Member, Long>{
 	Optional<Member> findByMemberEmail(String memberEmail);
+	Optional<Member> findByMemberPhoneAndMemberNameAndMemberBirth(String memberPhone, String memeberName, int memberBirth);
 }
