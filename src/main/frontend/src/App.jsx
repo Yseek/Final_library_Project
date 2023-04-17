@@ -15,8 +15,8 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
-					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
-					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
