@@ -19,16 +19,16 @@ public class AdminControllerPKS {
 
     @GetMapping("booklist")
     public List<Book> bookList(){
+        System.out.println(adminServicePKS.selectAll());
         return adminServicePKS.selectAll();
     }
 
-    @GetMapping("booklist?{sort}={keyword}")
-    public List<Book> bookListBySearch(@PathVariable String sort, @PathVariable String keyword){
-        System.out.println(adminServicePKS.listBySearch(sort, keyword));
-        return adminServicePKS.listBySearch(sort, keyword);
+    @GetMapping("booklist/title={keyword}")
+    public List<Book> bookListBySearch(@PathVariable String keyword){
+        return adminServicePKS.listBySearch(keyword);
     }
 
-    @GetMapping("bookInfo?title={title}&writer={writer}")
+    @GetMapping("bookInfo/title={title}&writer={writer}")
     public Book bookInfo(@PathVariable String title, @PathVariable String writer){
         return null;
     }

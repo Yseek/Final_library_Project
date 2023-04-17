@@ -18,8 +18,8 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     }
 
     @Override
-    public List<Book> listBySearch(String sort, String keyword) {
-        return adminMapperPKS.listBySearch(sort, keyword);
+    public List<Book> listBySearch(String keyword) {
+        return adminMapperPKS.listBySearch(keyword);
     }
 
 }
