@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toolguys.library.library.mapper.ldw.NoticeMapper">
+    <resultMap type="Notice" id="noticeMemberMap">
+        <id property="noticeSeq" column="noticeSeq"/>
+        <result property="noticeTitle" column="noticeTitle"/>
+        <result property="noticeContent" column="noticeContent"/>
+        <result property="noticeRdate" column="noticeRdate"/>
+        <association property="member" column="memberSeq" resultMap="memberMap"/>
+    </resultMap>
+    <resultMap type="Member" id="memberMap">
+        <id property="memberSeq" column="memberSeq" />
+        <result property="memberName" column="memberName" />
+    </resultMap>
+
+    <select id="getNoticeList" resultType="Notice">
+        select * from NOTICE
+    </select>
+    <select id="getTotalCount" resultType="long">
+        select COUNT(*) from NOTICE
+    </select>
+    <select id="getNoticeListByPage" resultType="Notice" parameterType="java.util.HashMap" resultMap="noticeMemberMap">
+        select * from NOTICE n join MEMBER m on n.member_memberSeq=m.memberSeq
+        ORDER BY NOTICESEQ desc
+        LIMIT
+        #{offset}, #{size}
+    </select>
+    <select id="getNoticeContent" resultType="Notice" parameterType="long" resultMap="noticeMemberMap">
+        select * from NOTICE n join MEMBER m on n.member_memberSeq=m.memberSeq where n.NOTICESEQ=#{noticeSeq}
+    </select>
+    <delete id="deleteNotice" parameterType="long">
+        delete from NOTICE where NOTICESEQ=#{noticeSeq}
+    </delete>
+    <insert id="insertNotice" parameterType="Notice">
+        insert into NOTICE values(0, #{noticeTitle}, #{noticeContent}, now(), 1);
+    </insert>
+    <update id="updateNotice" parameterType="Notice">
+        update NOTICE set NOTICETITLE=#{noticeTitle}, NOTICECONTENT=#{noticeContent} where NOTICESEQ=#{noticeSeq}
+    </update>
+</mapper>
