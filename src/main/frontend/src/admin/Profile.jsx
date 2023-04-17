@@ -1,9 +1,18 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./css/Profile.css";
 
 export default function Profile(){
+    
+    const [param, setParam] = useState(useParams());
     const memberinfo = fetch('http://127.0.0.1:8080/read/1');
+    
+    useEffect(()=>{
+		fetch(`http://127.0.0.1:8080/read/1`)
+		.then(res => res.json())
+		.then(data => setData(data.content))
+	}, [param]);
+
     console.log("memberinfo : "+memberinfo);
     const phoneRef = useRef();
     const addrRef = useRef();
