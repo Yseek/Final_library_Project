@@ -25,8 +25,8 @@ function App() {
 					<Route path="/findEmail" element={<FindEmail />}></Route>
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<TestMain />}></Route>
-					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
-					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />

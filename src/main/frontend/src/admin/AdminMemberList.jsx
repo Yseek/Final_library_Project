@@ -26,10 +26,24 @@ export default function AdminMemberList(){
 
     const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
+    /* var pageWidth = 10; // 한 화면에 보여줄 페이지 수
+    var pageWidthNumber = (page.number+1) / pageWidth + 1; // 현재 pageWidth index
+    if((page.number+1) == pageWidth) pageWidthNumber = pageWidthNumber -1;
+    var startPage = 1 + (pageWidthNumber-1) * pageWidth;
+    var endPage = (pageWidthNumber-1) * pageWidth + pageWidth;
+    if(endPage > page.totalPages) endPage = page.totalPages; */
+
+     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
-    // var pageWidthNumber = (page.pageNumber)
-    console.log(page.number);
-    // console.log(page.pageable.pageNumber);
+    var pageWidthNumber = page.number / pageWidth; // 현재 pageWidth index
+    var startPage = 1 + pageWidthNumber * pageWidth;
+    var endPage = pageWidthNumber * pageWidth + pageWidth;
+    if(endPage > page.totalPages) endPage = page.totalPages;
+    
+    console.log(`page.number: ${page.number}`);
+    console.log(`pageWidthNumber: ${pageWidthNumber}`);
+    console.log(`startPage: ${startPage}`);
+    console.log(`endPage: ${endPage}`);
 
     return (
         <center>
