@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import "./css/BookList.css";
+import './css/BookList.css';
 
 export default function BookList() {
 
@@ -27,28 +27,28 @@ export default function BookList() {
 	let stat = "1"
 
 	return (
-		<div className="BookListDiv">
-			<Link to={`/`}>메인메인!!!!</Link>
-			<table className="table">
+		<div className='BookListDiv'>
+			<button><Link to={`/`}>메인메인!!!!</Link></button>
+			<table className='BookListTable'>
 				<thead>
 					<tr>
-						<th>제목</th>
-						<th>저자</th>
-						<th>출판사</th>
-						<th>상태</th>
-						<th>예약</th>
-						<th>내용보기</th>
+						<th className='BookListTh'>제목</th>
+						<th className='BookListTh'>저자</th>
+						<th className='BookListTh'>출판사</th>
+						<th className='BookListTh'>상태</th>
+						<th className='BookListTh'>예약</th>
+						<th className='BookListTh'>내용보기</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookSeq}>
-							<td>{res.bookTitle}</td>
-							<td>{res.bookWriter}</td>
-							<td>{res.bookPub}</td>
-							<td>{stat === "2" ? <span>대여가능</span> : <span>대여불가</span>}</td>
-							<td>{btn === "2" ? <button>예약</button> : <button>불가</button>}</td>
-							<td><Link to={`/user/bookDetail/${res.bookSeq}`}>보기</Link></td>
+							<td className='BookListTd'>{res.bookTitle}</td>
+							<td className='BookListTd'>{res.bookWriter}</td>
+							<td className='BookListTd'>{res.bookPub}</td>
+							<td className='BookListTd'>{stat === "2" ? <span>대여가능</span> : <span>대여불가</span>}</td>
+							<td className='BookListTd'>{btn === "2" ? <button>예약</button> : <button>불가</button>}</td>
+							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
 						</tr>
 					))}
 				</tbody>

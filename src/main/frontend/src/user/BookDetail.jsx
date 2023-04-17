@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './css/BookDetail.css';
 
 const BookDetail = () => {
   const { bookSeq } = useParams();
@@ -21,31 +22,31 @@ const BookDetail = () => {
   };
 
   return (
-    <div className='bookDetailDiv'>
+    <div className='BookDetailDiv'>
       <button onClick={onClickBack}>목록으로</button>
-      <table className="table">
+      <table className="BookDetailTable">
         <thead>
           <tr>
-            <th>구분</th>
-            <th>내용</th>
+            <th className='BookDetailTh'>구분</th>
+            <th className='BookDetailTh'>내용</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className='font-bold'>책 표지</td>
-            <td>{book.bookImgPath}</td>
+            <td className='font-bold BookDetailTd'>책 표지</td>
+            <td className='BookDetailTd'>{book.bookImgPath}</td>
           </tr>
           <tr>
-            <td className='font-bold'>제목</td>
+            <td className='font-bold BookDetailTd'>제목</td>
             <td>{book.bookTitle}</td>
           </tr>
           <tr>
-            <td className='font-bold'>저자</td>
-            <td>{book.bookWriter}</td>
+            <td className='font-bold BookDetailTd'>저자</td>
+            <td className='BookDetailTd'>{book.bookWriter}</td>
           </tr>
           <tr>
-            <td className='font-bold'>내용</td>
-            <td>{book.bookStory}</td>
+            <td className='font-bold BookDetailTd'>내용</td>
+            <td className='BookDetailTd'>{book.bookStory}</td>
           </tr>
         </tbody>
       </table>
