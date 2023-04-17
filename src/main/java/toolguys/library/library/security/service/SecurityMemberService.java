@@ -42,7 +42,14 @@ public class SecurityMemberService {
 		securityMemberRepository.save(member);
 	}
 
-	public Member memberInfo(String memberEmail){
+	public Member memberInfo(String memberEmail) {
 		return securityMemberRepository.findByMemberEmail(memberEmail).get();
+	}
+
+	public String findEmail(String memberPhone, String memberName, int memberBirth) {
+		Member member = securityMemberRepository
+				.findByMemberPhoneAndMemberNameAndMemberBirth(memberPhone, memberName, memberBirth)
+				.orElseThrow(() -> new AppException(ErrorCode.NO_USER, "유저 정보가 존재하지 않습니다."));
+		return member.getMemberEmail();
 	}
 }
