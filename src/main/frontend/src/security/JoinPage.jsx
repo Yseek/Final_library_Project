@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import "./securityCss/JoinPage.css"
+import { useNavigate } from "react-router-dom";
 
 export default function JoinPage() {
 	const emailRef = useRef(null);
@@ -9,6 +11,7 @@ export default function JoinPage() {
 	const addrRef = useRef(null);
 	const statusRef = useRef(null);
 	const adminRef = useRef(null);
+	const navi = useNavigate();
 
 	function onSubmit(e) {
 		e.preventDefault();
@@ -29,27 +32,31 @@ export default function JoinPage() {
 			},
 			body: JSON.stringify({ memberEmail, memberPwd, memberName, memberPhone, memberBirth, memberAddr, memberStatus, memberAdmin }),
 		})
+			.then(res => res.text())
+			.then(res=> alert(res))
+			.then(navi(`/`));
 	}
 
 	return (
-		<div className="joinPge">
+		<div className="joinPage">
+			<div><h3>회원가입</h3></div>
 			<form onSubmit={onSubmit}>
-				<div>
+				<div className="joinInput">
 					이메일 : <input type="text" ref={emailRef} />
 				</div>
-				<div>
+				<div className="joinInput">
 					비밀번호 : <input type="text" ref={pwdRef} />
 				</div>
-				<div>
+				<div className="joinInput">
 					이름 : <input type="text" ref={nameRef} />
 				</div>
-				<div>
+				<div className="joinInput">
 					휴대폰 : <input type="text" ref={phoneRef} />
 				</div>
-				<div>
+				<div className="joinInput">
 					생년월일 : <input type="text" ref={birthRef} />
 				</div>
-				<div>
+				<div className="joinInput">
 					주소 : <input type="text" ref={addrRef} />
 				</div>
 				<input type="hidden" name="" ref={statusRef} value={1} />
