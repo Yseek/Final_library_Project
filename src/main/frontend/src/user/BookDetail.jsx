@@ -38,11 +38,15 @@ const BookDetail = () => {
           </tr>
           <tr>
             <td className='font-bold BookDetailTd'>제목</td>
-            <td>{book.bookTitle}</td>
+            <td className='BookDetailTd'>{book.bookTitle}</td>
           </tr>
           <tr>
             <td className='font-bold BookDetailTd'>저자</td>
             <td className='BookDetailTd'>{book.bookWriter}</td>
+          </tr>
+          <tr>
+            <td className='font-bold BookDetailTd'>출판사</td>
+            <td className='BookDetailTd'>{book.bookPub}</td>
           </tr>
           <tr>
             <td className='font-bold BookDetailTd'>내용</td>
