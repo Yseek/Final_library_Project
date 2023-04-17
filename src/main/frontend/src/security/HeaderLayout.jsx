@@ -35,7 +35,7 @@ export default function HeaderLayout() {
 				</h1>
 				<nav>
 					<ul>
-						<li className="link"><Link to={`/auth`}>보안페이지</Link></li>
+						<li><Link to={`/auth`} className="link">보안페이지</Link></li>
 						{localStorage.getItem("token") ?  <li className="link">{name}님 환영합니다</li>:""}
 						<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
 						{localStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
