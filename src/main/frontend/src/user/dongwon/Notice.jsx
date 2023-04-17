@@ -9,13 +9,13 @@ export default function Notice() {
 	const [page, setPage] = useState([]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/notice?page=${params.page}&size=10`)
+		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`)
 		.then(res => res.json())
 		.then(data => setData(data.content))
 	}, [data]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/notice?page=${params.page}&size=10`)
+		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`)
 		.then(res => res.json())
 		.then(page => setPage(page))
 	}, [page]);

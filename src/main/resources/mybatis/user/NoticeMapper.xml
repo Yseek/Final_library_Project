@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="toolguys.library.library.mapper.ldw.NoticeMapper">
+<mapper namespace="toolguys.library.library.mapper.user.NoticeMapper">
     <resultMap type="Notice" id="noticeMemberMap">
         <id property="noticeSeq" column="noticeSeq"/>
         <result property="noticeTitle" column="noticeTitle"/>
