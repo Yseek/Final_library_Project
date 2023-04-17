@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from './security/LoginPage';
 import JoinPage from './security/JoinPage';
 import AdminMemberList from './admin/AdminMemberList';
+import BookRentCheck from './user/BookRentCheck';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 					<Route path="/loginPage" element={<LoginPage />}></Route>
 					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
+					<Route path='/bookRentCheck' element={<BookRentCheck />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
