@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./AdminMemberList.css";
 
 export default function AdminMemberList() {
@@ -9,6 +9,8 @@ export default function AdminMemberList() {
         2: "블랙리스트"
     }
 
+    const searchCategoryRef = useRef();
+    const searchKeywordRef = useRef();
     const params = useParams();
 
     const [param, setParam] = useState(useParams()); // 삭제 새로고침용 
@@ -26,12 +28,32 @@ export default function AdminMemberList() {
 
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
-    var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 pageWidth index
+    var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
     var startPage = 1 + pageWidthNumber * pageWidth;
     var endPage = pageWidthNumber * pageWidth + pageWidth;
     if (endPage > page.totalPages) endPage = page.totalPages;
 
     const pageList = Array.from({ length: (endPage - startPage + 1) }, (_, index) => startPage + index);
+
+    function searchMember(){
+        const category = searchCategoryRef.current.value;
+        const keyword = searchKeywordRef.current.value;
+
+        fetch(`http://127.0.0.1:8080/admin/searchMember`, {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({category, keyword}),
+        })
+        .then(res => {
+            if(res.ok){
+                console.log(`category: ${category}, keyword: ${keyword}'로 검색`);
+            }
+            res.json();
+        })
+        .then(data => console.log("###"+data))
+    }
 
     return (
         <center>
@@ -68,6 +90,16 @@ export default function AdminMemberList() {
                 ))}
                 <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`}>&gt;</Link></span>
                 <span><Link to={`/admin/memberList/${page.totalPages}`}>&raquo;</Link></span>
+            </div>
+            <div>
+                <select ref={searchCategoryRef}>
+                    <option>회원번호</option>
+                    <option>이메일</option>
+                    <option>책번호</option>
+                </select>
+                <input type="text" ref={searchKeywordRef}></input>
+                <button onClick={searchMember}>검색</button>
+                <a>a</a>
             </div>
         </center>
     );
