@@ -12,4 +12,6 @@ public interface AdminMapperPKS {
 	List<Book> selectAll();
 
 	List<Book> listBySearch(String keyword);
+
+	Book searchByBookId(long seq);
 }

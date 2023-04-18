@@ -8,4 +8,6 @@ public interface AdminServicePKS {
     List<Book> selectAll();
 
     List<Book> listBySearch(String keyword);
+
+    Book searchByBookId(long seq);
 }

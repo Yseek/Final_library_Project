@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import toolguys.library.library.domain.Book;
 import toolguys.library.library.service.admin.AdminServicePKS;
 
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -28,8 +29,17 @@ public class AdminControllerPKS {
         return adminServicePKS.listBySearch(keyword);
     }
 
-    @GetMapping("bookInfo/title={title}&writer={writer}")
-    public Book bookInfo(@PathVariable String title, @PathVariable String writer){
+    @GetMapping("booklist/id={seq}")
+    public Book bookSearch(@PathVariable long seq){
+        return adminServicePKS.searchByBookId(seq);
+    }
+
+    @GetMapping("bookinfo/title={title}&writer={writer}&pub={publisher}")
+    public List<Book> bookInfo(@PathVariable String title, @PathVariable String writer, @PathVariable String publisher){
+        System.out.println("title: " + title);
+        System.out.println("writer: " + writer);
+        System.out.println("publisher: " + publisher);
+        //adminServicePKS.bookInfo(title, writer, publisher);
         return null;
     }
 }

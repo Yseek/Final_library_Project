@@ -22,4 +22,9 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         return adminMapperPKS.listBySearch(keyword);
     }
 
+    @Override
+    public Book searchByBookId(long seq){
+        return adminMapperPKS.searchByBookId(seq);
+    }
+
 }
