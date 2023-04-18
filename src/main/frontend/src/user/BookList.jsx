@@ -5,10 +5,10 @@ import './css/BookList.css';
 export default function BookList() {
 
 	const bookStat = {
-		0 : "분실",
-		1 : "예약 가능",
-		2 : "예약 불가"
-}
+		0: "분실",
+		1: "예약 가능",
+		2: "예약 불가"
+	}
 
 	const params = useParams();
 
@@ -31,7 +31,7 @@ export default function BookList() {
 
 	return (
 		<div className='BookListDiv'>
-			<button><Link to={`/`}>메인메인!!!!</Link></button>
+			<button><Link to={`../`}>메인메인!!!!</Link></button>
 			<table className='BookListTable'>
 				<thead>
 					<tr>

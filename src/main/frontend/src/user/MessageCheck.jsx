@@ -39,7 +39,7 @@ export default function MessageCheck() {
 
   return (
     <div className='MsgDiv'>
-      <button><Link to={`/`}>메인메인!!!!</Link></button>
+      <button><Link to={`../`}>메인메인!!!!</Link></button>
       <table className='MsgTable'>
         <thead>
           <tr>
