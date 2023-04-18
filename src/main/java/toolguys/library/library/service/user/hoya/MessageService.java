@@ -25,4 +25,9 @@ public class MessageService implements MessageServiceInterface{
 		messageRepository.deleteById(messageSeq);
 		return "ok";
 	}
+
+  @Transactional(readOnly = true)
+	public Message messageDetail(Long messageSeq) {
+		return messageRepository.findById(messageSeq).orElseThrow(() -> new IllegalStateException(""));
+	}
 }

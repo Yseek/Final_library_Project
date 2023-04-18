@@ -32,7 +32,7 @@ function App() {
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/user/bookList" element={<BookList />}></Route>
 					<Route path="/user/bookList/:page" element={<BookList />}></Route>
-					<Route path="/user/bookDetail" element={<BookDetail />}></Route>
+					<Route path="/user/bookDetail/:bookSeq" element={<BookDetail />}></Route>
 					<Route path="/user/messageCheck" element={<MessageCheck />}></Route>
 					<Route path="/user/messageCheck/:page" element={<MessageCheck />}></Route>
 				</Routes>

@@ -40,4 +40,10 @@ public class MessageController {
   public ResponseEntity<?> deleteById(@PathVariable Long messageSeq) {
     return new ResponseEntity<>(messageService.deleteMessage(messageSeq), HttpStatus.OK);
   }
+
+  @GetMapping("messageCheck/{messageSeq}")
+  public ResponseEntity<?> findById(@PathVariable Long messageSeq) {
+    return new ResponseEntity<>(messageService.messageDetail(messageSeq), HttpStatus.OK);
+  }
+
 }
