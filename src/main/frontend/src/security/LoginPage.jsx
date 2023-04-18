@@ -22,13 +22,6 @@ export default function LoginPage() {
 		})
 			.then(res => res.text())
 			.then(res => {
-<<<<<<< HEAD
-				localStorage.setItem("token", res);
-				if (state) {
-					navi(state);
-				} else {
-					navi('/');
-=======
 				if(res.startsWith("USERNAME_NOT_FOUND")|| res.startsWith("INVALID_PASSWORD")){
 					alert(res);
 					return false;
@@ -38,7 +31,6 @@ export default function LoginPage() {
 					navi(state, { state: emailRef });
 				} else {
 					navi('/', { state: emailRef });
->>>>>>> 1cf60aaa5a5e71b0fe2525eac10d7da10d4ef327
 				}
 			});
 	}

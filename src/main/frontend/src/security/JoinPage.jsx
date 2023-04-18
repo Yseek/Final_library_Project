@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import { useRef } from "react";
-import "./securityCss/JoinPage.css"
-import { useNavigate } from "react-router-dom";
-=======
 import { useEffect, useRef, useState } from "react";
 import "./securityCss/JoinPage.css"
 import { useNavigate } from "react-router-dom";
 import DaumPostcode from "react-daum-postcode";
->>>>>>> 1cf60aaa5a5e71b0fe2525eac10d7da10d4ef327
 
 export default function JoinPage() {
 	const emailRef = useRef(null);
@@ -20,9 +14,6 @@ export default function JoinPage() {
 	const detailAddrRef = useRef(null);
 	const statusRef = useRef(null);
 	const adminRef = useRef(null);
-<<<<<<< HEAD
-	const navi = useNavigate();
-=======
 	const certiPwdRef = useRef(null);
 	const pwdCheckRef = useRef(null);
 	const navi = useNavigate();
@@ -42,7 +33,6 @@ export default function JoinPage() {
 			setSubmitBtn(false);
 		}
 	}, [emailDuplicate, checkMsg, pwdInCheck, phoneDuplicate])
->>>>>>> 1cf60aaa5a5e71b0fe2525eac10d7da10d4ef327
 
 	function onSubmit(e) {
 		e.preventDefault();
@@ -85,10 +75,6 @@ export default function JoinPage() {
 			body: JSON.stringify({ joinName, joinEmail }),
 		})
 			.then(res => res.text())
-<<<<<<< HEAD
-			.then(res=> alert(res))
-			.then(navi(`/`));
-=======
 			.then(res => alert(res));
 	}
 
@@ -192,7 +178,6 @@ export default function JoinPage() {
 	function findPost(e) {
 		e.preventDefault();
 		setModal(true);
->>>>>>> 1cf60aaa5a5e71b0fe2525eac10d7da10d4ef327
 	}
 
 	return (
@@ -200,24 +185,6 @@ export default function JoinPage() {
 			<div><h3>회원가입</h3></div>
 			<form onSubmit={onSubmit}>
 				<div className="joinInput">
-<<<<<<< HEAD
-					이메일 : <input type="text" ref={emailRef} />
-				</div>
-				<div className="joinInput">
-					비밀번호 : <input type="text" ref={pwdRef} />
-				</div>
-				<div className="joinInput">
-					이름 : <input type="text" ref={nameRef} />
-				</div>
-				<div className="joinInput">
-					휴대폰 : <input type="text" ref={phoneRef} />
-				</div>
-				<div className="joinInput">
-					생년월일 : <input type="text" ref={birthRef} />
-				</div>
-				<div className="joinInput">
-					주소 : <input type="text" ref={addrRef} />
-=======
 					이메일 : <input type="text" ref={emailRef} placeholder="ex@example.com" />
 					<button type="button" onClick={duplicateCheck}>중복체크</button>
 				</div>
@@ -257,7 +224,6 @@ export default function JoinPage() {
 				<div className="postApi">
 					<DaumPostcode style={postCodeStyle} onComplete={onCompletePost} autoClose={false}>
 					</DaumPostcode>
->>>>>>> 1cf60aaa5a5e71b0fe2525eac10d7da10d4ef327
 				</div>
 				<input type="hidden" name="" ref={statusRef} value={1} />
 				<input type="hidden" name="" ref={adminRef} value={1} />
