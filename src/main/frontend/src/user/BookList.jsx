@@ -31,7 +31,6 @@ export default function BookList() {
 
 	return (
 		<div className='BookListDiv'>
-			<button><Link to={`../`}>메인메인!!!!</Link></button>
 			<table className='BookListTable'>
 				<thead>
 					<tr>
