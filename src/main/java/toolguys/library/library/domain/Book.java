@@ -36,8 +36,4 @@ public class Book {
 
 	@Column(name = "BOOKSTATUS")
 	private byte bookStatus;
-
-	private int bookCount;
-
-	private int rentCount;
 }
