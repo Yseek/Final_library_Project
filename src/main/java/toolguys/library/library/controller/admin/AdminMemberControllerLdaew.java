@@ -20,7 +20,7 @@ public class AdminMemberControllerLdaew {
 
     @GetMapping("memberList")
     public Page<Member> memberList(
-            @PageableDefault(page = 0, size = 10, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable) {
+            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable) {
 
         return adminMemberServiceLdaew.memberList(pageable);
     }
