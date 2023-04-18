@@ -35,6 +35,10 @@ public class AdminControllerPKS {
         return adminServicePKS.searchByBookId(seq);
     }
 
+    @GetMapping("booklist/update/title={title}&writer={writer}&pub={pub}")
+    public ResponseEntity<List> bookupdate(@PathVariable String title, @PathVariable String writer, @PathVariable String pub){
+        return ResponseEntity.ok().body(adminServicePKS.selectBookInfo(title, writer, pub));
+    }
     @GetMapping("bookinfo/title={title}&writer={writer}&pub={publisher}")
     public List<BookDTO> bookInfo(@PathVariable String title, @PathVariable String writer, @PathVariable String publisher){
         System.out.println("title: " + title);

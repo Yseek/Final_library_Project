@@ -11,4 +11,6 @@ public interface AdminServicePKS {
     List<BookDTO> listBySearch(String keyword);
 
     BookDTO searchByBookId(long seq);
+
+    List<BookDTO> selectBookInfo(String title, String writer, String pub);
 }

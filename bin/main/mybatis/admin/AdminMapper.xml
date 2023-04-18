@@ -27,7 +27,7 @@
     </resultMap>
     <resultMap id="rentCardDTO" type="toolguys.library.library.dto.admin.RentCardDTO">
         <id property="rentCardSeq" column="RENTCARDSEQ"/>
-        <collection property="toolguys.library.library.dto.admin.MemberDTO" resultMap="memberDTO"/>
+        <association property="toolguys.library.library.dto.admin.MemberDTO" resultMap="memberDTO"/>
     </resultMap>
     <resultMap id="bookrentDTO" type="toolguys.library.library.dto.admin.BookRentDTO">
         <id property="bookRentSeq" column="BOOKRENTSEQ"/>
@@ -35,8 +35,8 @@
         <id property="bookRentDDay" column="BOOKRENTDDAY"/>
         <id property="bookRentReturn" column="BOOKRENTRETURN"/>
         <id property="bookRentCoin" column="BOOKRENTCOIN"/>
-        <collection property="toolguys.library.library.dto.admin.RentCardDTO" resultMap="rentCardDTO"/>
-        <collection property="toolguys.library.library.dto.admin.BookDTO" resultMap="bookDTO"/>
+        <association property="toolguys.library.library.dto.admin.RentCardDTO" resultMap="rentCardDTO"/>
+        <association property="toolguys.library.library.dto.admin.BookDTO" resultMap="bookDTO"/>
     </resultMap>
     <select id="selectAll" resultType="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,

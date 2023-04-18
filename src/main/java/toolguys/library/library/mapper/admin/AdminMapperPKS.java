@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import toolguys.library.library.domain.Book;
 import toolguys.library.library.dto.admin.BookDTO;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -15,4 +16,6 @@ public interface AdminMapperPKS {
 	List<BookDTO> listBySearch(String keyword);
 
 	BookDTO searchByBookId(long seq);
+
+	List<BookDTO> selectBookInfo(HashMap map);
 }

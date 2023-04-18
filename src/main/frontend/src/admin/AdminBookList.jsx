@@ -33,18 +33,15 @@ export default function AdminBookList(){
 		}
 	}*/
 
-    function update(bookHopeSeq, bookHopeStatus){
-        if (bookHopeStatus > 1){
-            alert("처리중인경우 취소할 수 없습니다")
-        }
-        else if (window.confirm("수정하시겠습니까?")){
-            fetch(`http://127.0.0.1:8080/admin/booklist/update/${bookHopeSeq}`,{
+    function update(booktitle, bookwriter, bookpub){
+        if (window.confirm("수정하시겠습니까?")){
+            fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${booktitle}&writer=${bookwriter}&pub=${bookpub}`,{
                 method: "GET"
             })
             .then(res => {
                 if (res.ok){
                     alert("수정 페이지로 이동합니다");
-                    history(`/admin/booklist/update/${bookHopeSeq}`)
+                    history(`/admin/booklist/update/title=${booktitle}&writer=${bookwriter}&pub=${bookpub}`)
                 }
             })
         }
