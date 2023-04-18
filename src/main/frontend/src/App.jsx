@@ -13,6 +13,7 @@ import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
 import BookList from './user/BookList';
 import BookDetail from './user/BookDetail';
+import MessageCheck from './user/MessageCheck';
 
 function App() {
 	return (
@@ -32,6 +33,8 @@ function App() {
 					<Route path="/user/bookList" element={<BookList />}></Route>
 					<Route path="/user/bookList/:page" element={<BookList />}></Route>
 					<Route path="/user/bookDetail" element={<BookDetail />}></Route>
+					<Route path="/user/messageCheck" element={<MessageCheck />}></Route>
+					<Route path="/user/messageCheck/:page" element={<MessageCheck />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
