@@ -4,14 +4,12 @@ import { useEffect, useState } from "react";
 
 export default function HeaderLayout() {
 
-	const { path } = useLocation();
-	const [token, setToken] = useState("");
+	const { state } = useLocation();
 	const [name, setName] = useState("");
 
 
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
-			setToken(path);
 			fetch(`http://127.0.0.1:8080/memberInfo`, {
 				method: "POST",
 				headers: {
@@ -23,7 +21,7 @@ export default function HeaderLayout() {
 					setName(res.memberName);
 				})
 		}
-	}, [token]);
+	}, [state]);
 
 	return (
 		<div className="header">
@@ -35,8 +33,8 @@ export default function HeaderLayout() {
 				</h1>
 				<nav>
 					<ul>
-						<li><Link to={`/auth`} className="link">보안페이지</Link></li>
-						{localStorage.getItem("token") ?  <li className="link">{name}님 환영합니다</li>:""}
+						<li><Link to={`/myPage`} className="link">마이페이지</Link></li>
+						{localStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
 						<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
 						{localStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
 					</ul>
