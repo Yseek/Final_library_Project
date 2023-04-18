@@ -1,26 +1,28 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 
 export default function AdminBookUpdate(){
 
-    const { bookHopeSeq } = useParams();
-    const [data, setData] = useState({});
-
-    const titleRef = useRef();
-    const writerRef = useRef();
-    const pubRef = useRef();
-    const bookHopeSeqRef = useRef();
+    const { bookTitle, bookWriter, bookPub } = useParams();
+    const [bookList, setBookList] = useState([]);
     const history = useNavigate();
 
+    const booktitleRef = useRef();
+    const bookwriterRef = useRef();
+    const bookpubRef = useRef();
+    const bookstatusRef = useRef();
+
     useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${booktitle}&writer=${bookwriter}&pub=${bookpub}`)
+		fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`)
         .then(res => res.json())
-        .then(data => setData(data))
+        .then(data => setBookList(data))
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
 	}, []);
     function onSubmit(e){
-        e.preventDefault();          
+        /*e.preventDefault();          
         const bookHopeTitle = titleRef.current.value;
         const bookHopeWriter = writerRef.current.value;
         const bookHopePub = pubRef.current.value;
@@ -41,31 +43,31 @@ export default function AdminBookUpdate(){
                 alert("입력 완료");
                 history(`/bookWishCheck`)
             }
-        });
+        });*/
     }
 
     return(
     <div>
-         {bookList.map((book, index) => (
+        {bookList.map((book, index) => (
         <form method="post" name="e" onSubmit={onSubmit} key={index}>
             <div className="row">
                 <div className="row-in">          
-                    <h2>제목</h2><input type="text" name="bookTitle" ref={titleRef} defaultValue={book.bookTitle}/>
+                    <h2>제목</h2><input type="text" name="bookTitle" ref={booktitleRef} defaultValue={book.bookTitle}/>
                 </div>
             </div>
             <div className="row">
                 <div className="row-in">          
-                    <h2>저자</h2><input type="text" name="bookWriter" ref={writerRef} defaultValue={book.bookWriter}/>
+                    <h2>저자</h2><input type="text" name="bookWriter" ref={bookwriterRef} defaultValue={book.bookWriter}/>
                 </div>
             </div>
             <div className="row">
                 <div className="row-in">          
-                    <h2>출판사</h2><input type="text" name="bookPub" ref={pubRef} defaultValue={book.bookPub}/>
+                    <h2>출판사</h2><input type="text" name="bookPub" ref={bookpubRef} defaultValue={book.bookPub}/>
                 </div>
             </div>
             <div className="row">
                 <div className="row-in">          
-                    <input type="hidden" name="bookstatus" ref={bookHopeSeqRef} defaultValue={book.bookstatus}/>
+                    <input type="hidden" name="bookstatus" ref={bookstatusRef} defaultValue={book.bookstatus}/>
                 </div>
             </div>
             <div className="row">

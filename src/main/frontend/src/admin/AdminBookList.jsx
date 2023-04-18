@@ -33,15 +33,15 @@ export default function AdminBookList(){
 		}
 	}*/
 
-    function update(booktitle, bookwriter, bookpub){
+    function update(bookTitle, bookWriter, bookPub){
         if (window.confirm("수정하시겠습니까?")){
-            fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${booktitle}&writer=${bookwriter}&pub=${bookpub}`,{
+            fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`,{
                 method: "GET"
             })
             .then(res => {
                 if (res.ok){
                     alert("수정 페이지로 이동합니다");
-                    history(`/admin/booklist/update/title=${booktitle}&writer=${bookwriter}&pub=${bookpub}`)
+                    history(`/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`);
                 }
             })
         }
@@ -68,7 +68,7 @@ export default function AdminBookList(){
                             <td>{book.bookCount}</td>
                             <td>{book.rentCount}</td>
                             <td>
-                                <button onClick={() => update(book.booktitle, book.bookwriter, book.bookpub)}>수정</button>
+                                <button onClick={() => update(book.bookTitle, book.bookWriter, book.bookPub)}>수정</button>
                             </td>
                         </tr>
                     ))}

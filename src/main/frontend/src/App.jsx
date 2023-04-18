@@ -13,6 +13,7 @@ import AdminMemberList from './admin/AdminMemberList';
 import AdminBookList from './admin/AdminBookList';
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
+import AdminBookUpdate from './admin/AdminBookUpdate';
 
 function App() {
 	return (
@@ -24,7 +25,6 @@ function App() {
 					<Route path="/loginPage" element={<LoginPage />}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
-					<Route path="/auth" element={<Auth />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<TestMain />}></Route>
@@ -32,6 +32,7 @@ function App() {
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
+					<Route path="/admin/booklist/update/title=:bookTitle&writer=:bookWriter&pub=:bookPub" element={<AdminBookUpdate />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
