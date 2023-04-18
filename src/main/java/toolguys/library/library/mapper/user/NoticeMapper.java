@@ -9,9 +9,9 @@ import toolguys.library.library.domain.Notice;
 
 @Mapper
 public interface NoticeMapper {
-	List<Notice> getNoticeList();
     long getTotalCount();
-    List<Notice> getNoticeListByPage(HashMap<String, Integer> input);
+    List<Notice> getNoticeListByPage(HashMap<String, Object> input);
+    List<Notice> getNoticeListByPageAndSearch(HashMap<String, Object> input);
     Notice getNoticeContent(long noticeSeq);
     void deleteNotice(long noticeSeq);
     void insertNotice(Notice notice);

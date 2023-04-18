@@ -7,7 +7,7 @@ export default function Notice() {
 	const params = useParams();
 	const navigate = useNavigate();
 	const [data, setData] = useState([]);
-	const [page, setPage] = useState([]);
+	// const [page, setPage] = useState([]);
 	const [userInput, setUserInput] = useState('');
 
 	const getValue = (e) => {
@@ -18,20 +18,24 @@ export default function Notice() {
 		e.preventDefault();
 		navigate(`/notice/search/${userInput}`);
 	};
+    const onClickList = (e) => {
+		e.preventDefault();
+		navigate(`/notice/1`);
+	};
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`)
+		fetch(`http://127.0.0.1:8080/user/notice?page=1&size=10&search=${params.userInput}`)
 		.then(res => res.json())
 		.then(data => setData(data.content))
 	}, [params]);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`)
-		.then(res => res.json())
-		.then(page => setPage(page))
-	}, [params]);
+	// useEffect(()=>{
+	// 	fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`)
+	// 	.then(res => res.json())
+	// 	.then(page => setPage(page))
+	// }, [params]);
 
-	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+	// const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
 		<div className="Notice">
@@ -54,16 +58,9 @@ export default function Notice() {
 					))}
 				</tbody>
 			</table>
-			<div className="page">
-				{pageList.map(res => (
-					<span key={res}>
-						<Link to={`/notice/${res}`}>{res}</Link>
-						{" "}
-					</span>
-				))}
-			</div>
 			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25"/>&nbsp;
-			<button id="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
+			<button id="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button>&nbsp;
+            <button id="noticeSearchBtn" onClick={onClickList}>전체목록</button></span>
 		</div>
 	);
 }

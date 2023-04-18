@@ -15,9 +15,6 @@
         <result property="memberName" column="memberName" />
     </resultMap>
 
-    <select id="getNoticeList" resultType="Notice">
-        select * from NOTICE
-    </select>
     <select id="getTotalCount" resultType="long">
         select COUNT(*) from NOTICE
     </select>
@@ -27,16 +24,14 @@
         LIMIT
         #{offset}, #{size}
     </select>
+    <select id="getNoticeListByPageAndSearch" resultType="Notice" parameterType="java.util.HashMap" resultMap="noticeMemberMap">
+        select * from NOTICE n join MEMBER m on n.member_memberSeq=m.memberSeq
+        where NOTICETITLE like CONCAT('%', #{search}, '%')
+        order by NOTICESEQ desc
+        LIMIT
+        #{offset}, #{size}
+    </select>
     <select id="getNoticeContent" resultType="Notice" parameterType="long" resultMap="noticeMemberMap">
         select * from NOTICE n join MEMBER m on n.member_memberSeq=m.memberSeq where n.NOTICESEQ=#{noticeSeq}
     </select>
-    <delete id="deleteNotice" parameterType="long">
-        delete from NOTICE where NOTICESEQ=#{noticeSeq}
-    </delete>
-    <insert id="insertNotice" parameterType="Notice">
-        insert into NOTICE values(0, #{noticeTitle}, #{noticeContent}, now(), 1);
-    </insert>
-    <update id="updateNotice" parameterType="Notice">
-        update NOTICE set NOTICETITLE=#{noticeTitle}, NOTICECONTENT=#{noticeContent} where NOTICESEQ=#{noticeSeq}
-    </update>
 </mapper>

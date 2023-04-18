@@ -12,6 +12,7 @@ import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
 import Notice from "./user/dongwon/Notice"
+import NoticeSearch from "./user/dongwon/NoticeSearch"
 import NoticeContent from "./user/dongwon/NoticeContent"
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/loginPage" element={<LoginPage />}></Route>
 					<Route path="/notice" element={<Notice/>}></Route>
 					<Route path="/notice/:page" element={<Notice/>}></Route>
+					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/auth" element={<Auth />}></Route>

@@ -15,17 +15,17 @@ public class NoticeServiceImpl implements NoticeService {
     @Autowired
 	NoticeMapper noticeMapper;
 
-	@Override
-	public List<Notice> listNotice() {
-		return noticeMapper.getNoticeList();
-	}
     @Override
     public long getTotalCountS() {
         return noticeMapper.getTotalCount();
     }
     @Override
-    public List<Notice> listNoticeByPage(HashMap<String, Integer> input) {
+    public List<Notice> listNoticeByPage(HashMap<String, Object> input) {
         return noticeMapper.getNoticeListByPage(input);
+    }
+    @Override
+    public List<Notice> listNoticeByPageAndSearch(HashMap<String, Object> input) {
+        return noticeMapper.getNoticeListByPageAndSearch(input);
     }
     @Override
     public Notice getNoticeContentS(long noticeSeq) {

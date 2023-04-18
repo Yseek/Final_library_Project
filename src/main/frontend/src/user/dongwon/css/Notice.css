@@ -36,3 +36,11 @@
 }
 
 a { text-decoration:none }
+
+#noticeSearchBtn {
+	width: 80px;
+	height: 25px;
+	color: white;
+	background-color: grey;
+	margin-bottom: 1em;
+}
