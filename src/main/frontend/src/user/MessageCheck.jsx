@@ -33,7 +33,7 @@ export default function MessageCheck() {
         });
     }
   }
-  const [visible, setVisible] = useState(false); // 내용접기, 펼치기
+  //const [visible, setVisible] = useState(false); // 내용접기, 펼치기
 
   const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
@@ -54,9 +54,9 @@ export default function MessageCheck() {
             <tr key={res.messageSeq}>
               <td className='MsgTd'>{res.messageSeq}</td>
               <td className='MsgTd'>{res.messageDate}</td>
-              <td className='MsgTd'><button className='MsgBtn' onClick={() => { setVisible(!visible);}}>{visible ? "접기" : "내용보기"}</button></td>
+              {/* <td className='MsgTd'><button className='MsgBtn' onClick={() => { setVisible(!visible);}}>{visible ? "접기" : "내용보기"}</button></td> */}
+              <td className='MsgTd'>{res.messageContent}</td>
               <td className='MsgTd'><button className='MsgBtn' onClick={() => deleteMessage(res.messageSeq)}>삭제</button></td>
-              {visible && res.messageContent}
             </tr>
           ))}
         </tbody>
