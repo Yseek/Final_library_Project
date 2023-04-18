@@ -5,8 +5,14 @@ import FooterLayout from './security/FooterLayout';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from './security/LoginPage';
 import JoinPage from './security/JoinPage';
-import BookList from "./user/BookList";
-import BookDetail from "./user/BookDetail";
+import Logout from './security/Logout';
+import Auth from './security/Auth';
+import TestMain from './security/TestMain';
+import FindEmail from './security/FindEmail';
+import FindPwd from './security/FindPwd';
+import AdminMemberList from './admin/AdminMemberList';
+import BookList from './user/BookList';
+import BookDetail from './user/BookDetail';
 
 function App() {
 	return (
@@ -16,9 +22,16 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
-					<Route path="/user/bookList" element={<BookList/>}></Route>
-					<Route path="/user/bookList/:page" element={<BookList/>}></Route>
-					<Route path="/user/bookDetail/:bookSeq" element={<BookDetail/>}></Route>
+					<Route path="/logout" element={<Logout />}></Route>
+					<Route path="/auth" element={<Auth />}></Route>
+					<Route path="/findEmail" element={<FindEmail />}></Route>
+					<Route path="/findPwd" element={<FindPwd />}></Route>
+					<Route path="/" element={<TestMain />}></Route>
+					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
+					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/user/bookList" element={<BookList />}></Route>
+					<Route path="/user/bookList/:page" element={<BookList />}></Route>
+					<Route path="/user/bookDetail" element={<BookDetail />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />

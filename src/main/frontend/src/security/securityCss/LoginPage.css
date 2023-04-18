@@ -1,0 +1,27 @@
+.loginPage {
+	margin: 10%;
+	border: 1px solid black;
+	padding: 2%;
+}
+
+.loginInput {
+	padding-bottom: 2%;
+
+}
+
+.loginBottomButton {
+	color: black;
+	padding-left: 1em;
+}
+
+button {
+	width: 200px;
+	height: 40px;
+	color: white;
+	background-color: grey;
+	margin-bottom: 1em;
+}
+
+button:hover {
+	cursor: pointer;
+}
