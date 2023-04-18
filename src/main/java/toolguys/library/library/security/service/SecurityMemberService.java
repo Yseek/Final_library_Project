@@ -1,5 +1,7 @@
 package toolguys.library.library.security.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -51,5 +53,28 @@ public class SecurityMemberService {
 				.findByMemberPhoneAndMemberNameAndMemberBirth(memberPhone, memberName, memberBirth)
 				.orElseThrow(() -> new AppException(ErrorCode.NO_USER, "유저 정보가 존재하지 않습니다."));
 		return member.getMemberEmail();
+	}
+
+	public Optional<Member> findByMemberEmail(String memberEmail) {
+		return securityMemberRepository.findByMemberEmail(memberEmail);
+	}
+
+	public Optional<Member> findByMemberPhone(String memberPhone) {
+		return securityMemberRepository.findByMemberPhone(memberPhone);
+	}
+
+	public void findPwd(String findPwdEmail, String findPwdName) {
+		Member member = securityMemberRepository.findByMemberEmail(findPwdEmail)
+				.orElseThrow(() -> new AppException(ErrorCode.NO_USER, "유저 정보가 존재하지 않습니다"));
+		if (!member.getMemberName().equals(findPwdName)) {
+			throw new AppException(ErrorCode.NO_USER, "유저 정보가 존재하지 않습니다");
+		}
+	}
+
+	public void changePwd(String findPwdEmail, String tempoPwd) {
+		System.out.println(tempoPwd + findPwdEmail);
+		Member member = securityMemberRepository.findByMemberEmail(findPwdEmail).get();
+		member.setMemberPwd(bCryptPasswordEncoder.encode(tempoPwd));
+		securityMemberRepository.save(member);
 	}
 }

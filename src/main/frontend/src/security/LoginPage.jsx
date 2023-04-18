@@ -22,11 +22,15 @@ export default function LoginPage() {
 		})
 			.then(res => res.text())
 			.then(res => {
+				if(res.startsWith("USERNAME_NOT_FOUND")|| res.startsWith("INVALID_PASSWORD")){
+					alert(res);
+					return false;
+				}
 				localStorage.setItem("token", res);
 				if (state) {
-					navi(state);
+					navi(state, { state: emailRef });
 				} else {
-					navi('/');
+					navi('/', { state: emailRef });
 				}
 			});
 	}
