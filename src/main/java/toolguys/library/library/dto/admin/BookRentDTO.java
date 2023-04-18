@@ -9,8 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
-import toolguys.library.library.domain.Book;
-import toolguys.library.library.domain.RentCard;
 
 @Entity
 @Data

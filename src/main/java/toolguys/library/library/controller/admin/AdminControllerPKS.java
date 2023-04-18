@@ -1,12 +1,12 @@
 package toolguys.library.library.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import toolguys.library.library.domain.Book;
 import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.service.admin.AdminServicePKS;
 
@@ -20,9 +20,9 @@ public class AdminControllerPKS {
     AdminServicePKS adminServicePKS;
 
     @GetMapping("booklist")
-    public List<BookDTO> bookList(){
+    public ResponseEntity<List> bookList(){
         System.out.println(adminServicePKS.selectAll());
-        return adminServicePKS.selectAll();
+        return ResponseEntity.ok().body(adminServicePKS.selectAll());
     }
 
     @GetMapping("booklist/title={keyword}")

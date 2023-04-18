@@ -7,7 +7,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
-import toolguys.library.library.domain.Member;
 
 @Entity
 @Data

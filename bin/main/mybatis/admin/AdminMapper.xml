@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toolguys.library.library.mapper.admin.AdminMapperPKS">
-    <resultMap id="bookDTO" type="BookDTO">
+    <resultMap id="bookDTO" type="toolguys.library.library.dto.admin.BookDTO">
         <id property="bookSeq" column="BOOKSEQ"/>
         <id property="bookTitle" column="BOOKTITLE"/>
         <id property="bookWriter" column="BOOKWRITER"/>
@@ -16,7 +16,7 @@
         <id property="bookCount" column="BOOKCOUNT"/>
         <id property="rentCount" column="RENTCOUNT"/>
     </resultMap>
-    <resultMap id="memberDTO" type="MemberDTO">
+    <resultMap id="memberDTO" type="toolguys.library.library.dto.admin.MemberDTO">
         <id property="memberSeq" column="MEMBERSEQ"/>
         <id property="memberEmail" column="MEMBEREMAIL"/>
         <id property="memberName" column="MEMBERNAME"/>
@@ -25,18 +25,18 @@
         <id property="memberStatus" column="MEMBERSTATUS"/>
         <id property="memberOrAdmin" column="MEMBERORADMIN"/>
     </resultMap>
-    <resultMap id="rentCardDTO" type="RentCardDTO">
+    <resultMap id="rentCardDTO" type="toolguys.library.library.dto.admin.RentCardDTO">
         <id property="rentCardSeq" column="RENTCARDSEQ"/>
-        <collection property="MemberDTO" resultMap="memberDTO"/>
+        <collection property="toolguys.library.library.dto.admin.MemberDTO" resultMap="memberDTO"/>
     </resultMap>
-    <resultMap id="bookrentDTO" type="BookRentDTO">
+    <resultMap id="bookrentDTO" type="toolguys.library.library.dto.admin.BookRentDTO">
         <id property="bookRentSeq" column="BOOKRENTSEQ"/>
         <id property="bookRentDate" column="BOOKRENTDATE"/>
         <id property="bookRentDDay" column="BOOKRENTDDAY"/>
         <id property="bookRentReturn" column="BOOKRENTRETURN"/>
         <id property="bookRentCoin" column="BOOKRENTCOIN"/>
-        <collection property="RentCardDTO" resultMap="rentCardDTO"/>
-        <collection property="BookDTO" resultMap="bookDTO"/>
+        <collection property="toolguys.library.library.dto.admin.RentCardDTO" resultMap="rentCardDTO"/>
+        <collection property="toolguys.library.library.dto.admin.BookDTO" resultMap="bookDTO"/>
     </resultMap>
     <select id="selectAll" resultType="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,

@@ -11,6 +11,7 @@ import TestMain from './security/TestMain';
 import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
+import AdminBookList from './admin/AdminBookList';
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<TestMain />}></Route>
 					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
+					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 				</Routes>
 			</BrowserRouter>
