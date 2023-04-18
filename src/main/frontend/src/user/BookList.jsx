@@ -4,12 +4,6 @@ import './css/BookList.css';
 
 export default function BookList() {
 
-	const bookStat = {
-		0: "분실",
-		1: "예약 가능",
-		2: "예약 불가"
-	}
-
 	const params = useParams();
 
 	const [data, setData] = useState([]);
@@ -28,6 +22,12 @@ export default function BookList() {
 	}, [params]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+
+	const bookStat = {
+		0: "분실",
+		1: "예약 가능",
+		2: "예약 불가"
+	}
 
 	return (
 		<div className='BookListDiv'>
