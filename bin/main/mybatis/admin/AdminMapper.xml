@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="toolguys.library.library.mapper.admin.AdminMapperPKS">
     <resultMap id="book" type="Book">
         <id property="bookSeq" column="BOOKSEQ"/>
@@ -51,4 +52,8 @@
     <select id="selecBookinfo" parameterType="hashMap" resultMap="book">
         select * from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
     </select>
+=======
+<mapper namespace="toolguys.library.library.mapper.admin.AdminMapper">
+
+>>>>>>> dc4005bad0fdc4348f3d77455d6bc0145ed1e7c8
 </mapper>
