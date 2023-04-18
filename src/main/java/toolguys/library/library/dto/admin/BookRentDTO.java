@@ -33,8 +33,8 @@ public class BookRentDTO {
     private byte bookRentCoin;
 
     @ManyToOne
-    private RentCard rentCard;
+    private RentCardDTO rentCardDTO;
 
     @ManyToOne
-    private Book book;
+    private BookDTO bookDTO;
 }

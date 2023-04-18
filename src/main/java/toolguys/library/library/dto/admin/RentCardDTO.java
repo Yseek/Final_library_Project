@@ -18,6 +18,6 @@ public class RentCardDTO {
     private long rentCardSeq;
 
     @ManyToOne
-    private Member member;
+    private MemberDTO memberDTO;
 }
 

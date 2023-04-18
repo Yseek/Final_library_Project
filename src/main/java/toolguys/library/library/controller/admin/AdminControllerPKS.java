@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import toolguys.library.library.domain.Book;
+import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.service.admin.AdminServicePKS;
 
 import java.nio.file.Path;
@@ -19,23 +20,23 @@ public class AdminControllerPKS {
     AdminServicePKS adminServicePKS;
 
     @GetMapping("booklist")
-    public List<Book> bookList(){
+    public List<BookDTO> bookList(){
         System.out.println(adminServicePKS.selectAll());
         return adminServicePKS.selectAll();
     }
 
     @GetMapping("booklist/title={keyword}")
-    public List<Book> bookListBySearch(@PathVariable String keyword){
+    public List<BookDTO> bookListBySearch(@PathVariable String keyword){
         return adminServicePKS.listBySearch(keyword);
     }
 
     @GetMapping("booklist/id={seq}")
-    public Book bookSearch(@PathVariable long seq){
+    public BookDTO bookSearch(@PathVariable long seq){
         return adminServicePKS.searchByBookId(seq);
     }
 
     @GetMapping("bookinfo/title={title}&writer={writer}&pub={publisher}")
-    public List<Book> bookInfo(@PathVariable String title, @PathVariable String writer, @PathVariable String publisher){
+    public List<BookDTO> bookInfo(@PathVariable String title, @PathVariable String writer, @PathVariable String publisher){
         System.out.println("title: " + title);
         System.out.println("writer: " + writer);
         System.out.println("publisher: " + publisher);

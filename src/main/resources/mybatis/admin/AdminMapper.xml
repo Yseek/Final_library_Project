@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toolguys.library.library.mapper.admin.AdminMapperPKS">
-    <resultMap id="book" type="BookDTO">
+    <resultMap id="bookDTO" type="BookDTO">
         <id property="bookSeq" column="BOOKSEQ"/>
         <id property="bookTitle" column="BOOKTITLE"/>
         <id property="bookWriter" column="BOOKWRITER"/>
@@ -16,7 +16,7 @@
         <id property="bookCount" column="BOOKCOUNT"/>
         <id property="rentCount" column="RENTCOUNT"/>
     </resultMap>
-    <resultMap id="member" type="MemberDTO">
+    <resultMap id="memberDTO" type="MemberDTO">
         <id property="memberSeq" column="MEMBERSEQ"/>
         <id property="memberEmail" column="MEMBEREMAIL"/>
         <id property="memberName" column="MEMBERNAME"/>
@@ -25,33 +25,33 @@
         <id property="memberStatus" column="MEMBERSTATUS"/>
         <id property="memberOrAdmin" column="MEMBERORADMIN"/>
     </resultMap>
-    <resultMap id="rentcard" type="RentCardDTO">
+    <resultMap id="rentCardDTO" type="RentCardDTO">
         <id property="rentCardSeq" column="RENTCARDSEQ"/>
-        <collection property="MemberDTO" resultMap="member"/>
+        <collection property="MemberDTO" resultMap="memberDTO"/>
     </resultMap>
-    <resultMap id="bookrent" type="BookRentDTO">
+    <resultMap id="bookrentDTO" type="BookRentDTO">
         <id property="bookRentSeq" column="BOOKRENTSEQ"/>
         <id property="bookRentDate" column="BOOKRENTDATE"/>
         <id property="bookRentDDay" column="BOOKRENTDDAY"/>
         <id property="bookRentReturn" column="BOOKRENTRETURN"/>
         <id property="bookRentCoin" column="BOOKRENTCOIN"/>
-        <collection property="RentCardDTO" resultMap="rentcard"/>
-        <collection property="BookDTO" resultMap="book"/>
+        <collection property="RentCardDTO" resultMap="rentCardDTO"/>
+        <collection property="BookDTO" resultMap="bookDTO"/>
     </resultMap>
-    <select id="selectAll" resultMap="book">
+    <select id="selectAll" resultType="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
         (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE group by b2.BOOKTITLE) as RENTCOUNT
         from BOOK b1 group by BOOKTITLE, BOOKWRITER, BOOKPUB
     </select>
-    <select id="searchByBookId" parameterType="long" resultType="book">
+    <select id="searchByBookId" parameterType="long" resultType="bookDTO">
         select * from BOOK where BOOKSEQ=#{seq}
     </select>
-    <select id="listBySearch" parameterType="String" resultMap="book">
+    <select id="listBySearch" parameterType="String" resultMap="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
         (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE group by b2.BOOKTITLE) as RENTCOUNT
         from BOOK b1 where BOOKTITLE like CONCAT('%', #{keyword}, '%') group by BOOKTITLE, BOOKWRITER, BOOKPUB
     </select>
-    <select id="selectBookInfo" parameterType="hashMap" resultMap="book">
+    <select id="selectBookInfo" parameterType="hashMap" resultMap="bookDTO">
         select * from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
     </select>
 </mapper>
