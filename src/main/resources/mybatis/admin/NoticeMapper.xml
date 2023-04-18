@@ -7,7 +7,7 @@
         <id property="noticeSeq" column="noticeSeq"/>
         <result property="noticeTitle" column="noticeTitle"/>
         <result property="noticeContent" column="noticeContent"/>
-        <result property="noticeRdate" column="noticeRdate"/>
+        <result property="noticeRdate" column="noticeRdate" javaType="java.time.LocalDateTime"/>
         <association property="member" column="memberSeq" resultMap="memberMap"/>
     </resultMap>
     <resultMap type="Member" id="memberMap">

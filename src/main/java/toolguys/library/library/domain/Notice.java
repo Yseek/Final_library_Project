@@ -1,6 +1,7 @@
 package toolguys.library.library.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,8 +24,12 @@ public class Notice {
 	private String noticeContent;
 
 	@Column(name = "NOTICERDATE")
-	private Date noticeRdate;
+	private LocalDateTime noticeRdate;
 
 	@ManyToOne
 	private Member member;
+	
+	public String getFormattedNoticeRdate() {
+        return noticeRdate.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 a hh시 mm분 ss초"));
+    }
 }

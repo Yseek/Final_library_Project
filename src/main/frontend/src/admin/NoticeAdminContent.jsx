@@ -1,10 +1,9 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 
 export default function Notice() {
 	const params = useParams();
-
 	const [data, setData] = useState([]);
 	let url=`http://127.0.0.1:8080/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
@@ -14,6 +13,22 @@ export default function Notice() {
 		.catch(error => console.log("####"+error))
 	}, [url]);
 	console.log("data:"+JSON.stringify(data))
+
+	const history = useNavigate();
+
+	function del(noticeSeq) {
+		if (window.confirm("삭제하시겠습니까?")) {
+			fetch(`http://127.0.0.1:8080/noticeAdmin/delete/${noticeSeq}`, {
+				method: "DELETE"
+			})
+			.then(res => {
+				if (res.ok) {
+					alert("삭제완료");
+					history('/noticeAdmin');
+				}
+			});
+		}
+	}
 
 	return (
 		<div className="NoticeContent">
@@ -40,7 +55,10 @@ export default function Notice() {
 					</tr>
 				</tbody>
 			</table>
-            <p><button><Link to={`/noticeAdmin/update/${data.noticeSeq}`}>수정</Link></button></p>
+			<div>
+            	<button><Link to={`/noticeAdmin/update/${data.noticeSeq}`}>수정</Link></button>&nbsp;&nbsp;&nbsp;
+            	<button onClick={() => del(data.noticeSeq)}>삭제</button>
+			</div>
 		</div>
 	);
 }

@@ -5,20 +5,18 @@ import { useEffect, useState } from "react";
 export default function Notice() {
 	const params = useParams();
 
-	const [data, setData] = useState([]);
 	const [page, setPage] = useState([]);
+	const [param, setParam] = useState(useParams());
+
+	useEffect(() => {
+		setParam({ params })
+	}, [params]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/notice?page=${params.page}&size=10`)
-		.then(res => res.json())
-		.then(data => setData(data.content))
-	}, [data]);
-
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/notice?page=${params.page}&size=10`)
+		fetch(`http://127.0.0.1:8080/notice?page=${params.page || 1}&size=10`)
 		.then(res => res.json())
 		.then(page => setPage(page))
-	}, [page]);
+	}, [param]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
@@ -34,7 +32,7 @@ export default function Notice() {
 					</tr>
 				</thead>
 				<tbody>
-					{Array.isArray(data) && data.map(res => (
+					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.noticeSeq}>
                             <td width="15%">{res.member.memberName}</td>
 							<td width="60%"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>

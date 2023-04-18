@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Notice;
@@ -21,7 +22,7 @@ public class NoticeController {
 	NoticeService noticeService;
 
 	@GetMapping("notice")
-	public HashMap<String, Object> notice(int page, int size) {
+	public HashMap<String, Object> notice(@RequestParam(value="page" ,defaultValue = "1") int page, int size) {
 		long totalCount = noticeService.getTotalCountS();
 		Paginator paginator = new Paginator(page, size, totalCount);
 		HashMap<String, Integer> input = new HashMap<String, Integer>();
