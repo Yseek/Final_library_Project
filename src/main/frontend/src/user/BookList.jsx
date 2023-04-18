@@ -4,6 +4,12 @@ import './css/BookList.css';
 
 export default function BookList() {
 
+	const bookStat = {
+		0 : "분실",
+		1 : "예약 가능",
+		2 : "예약 불가"
+}
+
 	const params = useParams();
 
 	const [data, setData] = useState([]);
@@ -23,9 +29,6 @@ export default function BookList() {
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
-	let btn = "1"
-	let stat = "1"
-
 	return (
 		<div className='BookListDiv'>
 			<button><Link to={`/`}>메인메인!!!!</Link></button>
@@ -36,7 +39,6 @@ export default function BookList() {
 						<th className='BookListTh'>저자</th>
 						<th className='BookListTh'>출판사</th>
 						<th className='BookListTh'>상태</th>
-						<th className='BookListTh'>예약</th>
 						<th className='BookListTh'>내용보기</th>
 					</tr>
 				</thead>
@@ -46,8 +48,7 @@ export default function BookList() {
 							<td className='BookListTd'>{res.bookTitle}</td>
 							<td className='BookListTd'>{res.bookWriter}</td>
 							<td className='BookListTd'>{res.bookPub}</td>
-							<td className='BookListTd'>{stat === "2" ? <span>대여가능</span> : <span>대여불가</span>}</td>
-							<td className='BookListTd'>{btn === "2" ? <button>예약</button> : <button>불가</button>}</td>
+							<td className='BookListTd'>{bookStat[res.bookStatus]}</td>
 							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
 						</tr>
 					))}
