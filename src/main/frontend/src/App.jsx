@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from './security/LoginPage';
 import JoinPage from './security/JoinPage';
 import Logout from './security/Logout';
-import Auth from './security/Auth';
 import TestMain from './security/TestMain';
 import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
@@ -17,6 +16,8 @@ import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeContent from './admin/NoticeContent';
 import NoticeWrite from './admin/NoticeWrite';
+import MyPage from './security/MyPage';
+import ChangePwd from './security/ChangePwd';
 
 function App() {
 	return (
@@ -27,7 +28,7 @@ function App() {
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
-					<Route path="/auth" element={<Auth />}></Route>
+					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<TestMain />}></Route>
@@ -44,6 +45,7 @@ function App() {
 					<Route path="/noticeAdmin/write" element={<NoticeWrite />}></Route>
 					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
