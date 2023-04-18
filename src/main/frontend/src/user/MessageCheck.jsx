@@ -21,6 +21,19 @@ export default function MessageCheck() {
 			.then(page => { setPage(page) })
 	}, [params]);
 
+  function deleteMessage(messageSeq) {
+    if (window.confirm("삭제하시겠습니까?")) {
+      fetch(`http://127.0.0.1:8080/user/messageCheck/${messageSeq}`, {
+        method: "DELETE"
+      })
+        .then(res => {
+          if (res.ok) {
+            window.location.replace("/user/messageCheck");
+          }
+        });
+    }
+  }
+
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
@@ -32,6 +45,7 @@ export default function MessageCheck() {
 						<th className='BookListTh'>번호</th>
 						<th className='BookListTh'>날짜</th>
 						<th className='BookListTh'>내용</th>
+            <th className='BookListTh'>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,6 +54,7 @@ export default function MessageCheck() {
 							<td className='BookListTd'>{res.messageSeq}</td>
 							<td className='BookListTd'>{res.messageDate}</td>
 							<td className='BookListTd'>{res.messageContent}</td>
+              <td className='BookListTd'><button onClick={() => deleteMessage(res.messageSeq)}>삭제</button></td>
 						</tr>
 					))}
 				</tbody>
@@ -47,7 +62,7 @@ export default function MessageCheck() {
 			<div className="page">
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/user/BookMessage/${res}`}>{res}</Link>
+						<Link to={`/user/MessageCheck/${res}`}>{res}</Link>
 					</span>
 				))}
 			</div>

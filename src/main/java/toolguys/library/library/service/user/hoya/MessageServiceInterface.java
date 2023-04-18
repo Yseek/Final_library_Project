@@ -6,5 +6,6 @@ import toolguys.library.library.domain.Message;
 
 public interface MessageServiceInterface {
   Page<Message> messageByMessage(Pageable pageable);
+  String deleteMessage(long messageSeq);
   
 }
