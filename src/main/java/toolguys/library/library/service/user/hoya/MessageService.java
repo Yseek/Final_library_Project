@@ -28,6 +28,6 @@ public class MessageService implements MessageServiceInterface{
 
   @Transactional(readOnly = true)
 	public Message messageDetail(Long messageSeq) {
-		return messageRepository.findById(messageSeq).orElseThrow(() -> new IllegalStateException(""));
+		return messageRepository.findById(messageSeq).orElseThrow(() -> new IllegalStateException("없는 쪽지 입니다."));
 	}
 }

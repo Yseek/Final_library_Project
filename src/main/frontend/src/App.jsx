@@ -12,6 +12,7 @@ import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
 import BookList from './user/BookList';
 import BookDetail from './user/BookDetail';
+import MessageDetail from './user/MessageDetail';
 import MessageCheck from './user/MessageCheck';
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
@@ -36,6 +37,7 @@ function App() {
 					<Route path="/user/bookDetail/:bookSeq" element={<BookDetail />}></Route>
 					<Route path="/user/messageCheck" element={<MessageCheck />}></Route>
 					<Route path="/user/messageCheck/:page" element={<MessageCheck />}></Route>
+					<Route path="/user/messageDetail/:messageSeq" element={<MessageDetail />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 				</Routes>
 			</BrowserRouter>

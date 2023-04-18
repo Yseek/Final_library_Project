@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import toolguys.library.library.service.user.hoya.BookListService;
+import toolguys.library.library.service.user.hoya.MessageService;
 
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("user")
-public class BookDetailController {
-  
-  private final BookListService bookListService;
+public class MessageDetailController {
 
-  @GetMapping("bookDetail/{bookSeq}")
-  public ResponseEntity<?> findById(@PathVariable Long bookSeq) {
-    return new ResponseEntity<>(bookListService.bookDetail(bookSeq), HttpStatus.OK);
+  private final MessageService messageService;
+
+  @GetMapping("messageDetail/{messageSeq}")
+  public ResponseEntity<?> findById(@PathVariable Long messageSeq) {
+    return new ResponseEntity<>(messageService.messageDetail(messageSeq), HttpStatus.OK);
   }
 }

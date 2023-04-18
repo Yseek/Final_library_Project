@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import './css/MessageCheck.css';
 
 export default function MessageCheck() {
@@ -37,6 +37,15 @@ export default function MessageCheck() {
 
   const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
+  const { messageSeq } = useParams();
+  const navi = useNavigate();
+	const [info, setInfo] = useState({});
+
+  function toChangPwd(e){
+		e.preventDefault();
+		navi(`/user/messageCheck`+messageSeq, {state : info.messageContet})
+	}
+
   return (
     <div className='MsgDiv'>
       <table className='MsgTable'>
@@ -44,7 +53,8 @@ export default function MessageCheck() {
           <tr>
             <th className='MsgTh'>번호</th>
             <th className='MsgTh'>날짜</th>
-            <th className='MsgTh'>내용 보기</th>
+            <th className='MsgTh'>내용</th>
+            <th className='MsgTh'>상세 보기</th>
             <th className='MsgTh'>삭제</th>
           </tr>
         </thead>
@@ -55,6 +65,7 @@ export default function MessageCheck() {
               <td className='MsgTd'>{res.messageDate}</td>
               {/* <td className='MsgTd'><button className='MsgBtn' onClick={() => { setVisible(!visible);}}>{visible ? "접기" : "내용보기"}</button></td> */}
               <td className='MsgTd'>{res.messageContent}</td>
+              <td className='BookListTd'><Link to={`/user/messageDetail/${res.messageSeq}`} className='BookListA'>보기</Link></td>
               <td className='MsgTd'><button className='MsgBtn' onClick={() => deleteMessage(res.messageSeq)}>삭제</button></td>
             </tr>
           ))}
