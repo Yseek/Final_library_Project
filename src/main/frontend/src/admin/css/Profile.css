@@ -1,0 +1,28 @@
+.profileB {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    border: 0 none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: dodgerblue;
+  }
+
+.input_area {
+margin-bottom: 10px;
+clear: both;
+}
+
+.profileL {
+display: inline-block;
+margin-bottom: 10px;
+}
+
+.profileI {
+width: 400px;
+height: 40px;
+font-size: 20px;
+padding: 0 10px;
+}
