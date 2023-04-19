@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminBookUpdate(){
 
-    const { bookTitle, bookWriter, bookPub } = useParams();
+    const { bookTitle } = useParams();
+    const { bookWriter } = useParams();
+    const { bookPub } = useParams();
+    console.log(bookTitle);
+    console.log(bookWriter);
+    console.log(bookPub);
+
     const [bookList, setBookList] = useState([]);
     const history = useNavigate();
 
@@ -15,12 +21,13 @@ export default function AdminBookUpdate(){
     const bookstatusRef = useRef();
 
     useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`)
+        fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${encodeURIComponent(bookTitle)}&writer=${encodeURIComponent(bookWriter)}&pub=${encodeURIComponent(bookPub)}`)
         .then(res => res.json())
         .then(data => setBookList(data))
         .then(data => console.log(data))
         .catch(error => console.error(error));
 	}, []);
+    console.log(bookList);
     function onSubmit(e){
         /*e.preventDefault();          
         const bookHopeTitle = titleRef.current.value;

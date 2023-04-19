@@ -32,7 +32,7 @@ function App() {
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
-					<Route path="/admin/booklist/update/title=:bookTitle&writer=:bookWriter&pub=:bookPub" element={<AdminBookUpdate />}></Route>
+					<Route path="/admin/booklist/update/title=:bookTitle&writer=:bookWriter&pub=:bookPub" element={<AdminBookUpdate />} />
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />

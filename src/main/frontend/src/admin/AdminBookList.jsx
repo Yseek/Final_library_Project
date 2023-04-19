@@ -34,17 +34,17 @@ export default function AdminBookList(){
 	}*/
 
     function update(bookTitle, bookWriter, bookPub){
-        if (window.confirm("수정하시겠습니까?")){
+        /* if (window.confirm("수정하시겠습니까?")){
             fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`,{
                 method: "GET"
             })
-            .then(res => {
-                if (res.ok){
+            .then(res => { 
+                if (res.ok){ */
                     alert("수정 페이지로 이동합니다");
                     history(`/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`);
-                }
-            })
-        }
+     //            }
+     //       })
+     //   }
     }
 
     return (
