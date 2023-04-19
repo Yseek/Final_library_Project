@@ -24,8 +24,8 @@
 }
 
 .joinInput>button {
-	color: black;
+	color: white;
 	height: 10%;
 	width: 20%;
-	padding: auto;
+	margin-left: 2%;
 }
