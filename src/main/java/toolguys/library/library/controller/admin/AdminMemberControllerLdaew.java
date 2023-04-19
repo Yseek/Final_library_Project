@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.dto.admin.AdminMemberDto;
 import toolguys.library.library.service.admin.AdminMemberServiceLdaew;
 
 @RequestMapping("admin")
@@ -30,11 +31,11 @@ public class AdminMemberControllerLdaew {
     }
 
     @PostMapping("searchMember")
-    public Page<Member> searchMember(
+    public Page<AdminMemberDto> searchMember(
             @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestBody HashMap<String, String> searchData) {
 
-        Page<Member> member = adminMemberServiceLdaew.searchMember(searchData, pageable);
+        Page<AdminMemberDto> member = adminMemberServiceLdaew.searchMember(searchData, pageable);
         System.out.println("####"+member.getContent());
         return member;
     }

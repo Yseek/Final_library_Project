@@ -12,6 +12,13 @@ public class AdminMemberDto {
     private final String memberEmail;
     private final byte memberStatus;
 
+    public AdminMemberDto(long memberSeq, String memberName, String memberEmail, byte memberStatus){
+        this.memberSeq = memberSeq;
+        this.memberName = memberName;
+        this.memberEmail = memberEmail;
+        this.memberStatus = memberStatus;
+    }
+
     public static AdminMemberDto from(Member member){
         return AdminMemberDto.builder()
         .memberSeq(member.getMemberSeq())

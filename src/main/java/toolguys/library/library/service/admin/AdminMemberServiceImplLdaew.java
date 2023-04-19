@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.dto.admin.AdminMemberDto;
 import toolguys.library.library.repository.admin.AdminMemberRepositoryLdaew;
 
 public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
@@ -14,24 +15,33 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
     @Autowired
     private final AdminMemberRepositoryLdaew adminMemberRepositoryLdaew;
 
-    public AdminMemberServiceImplLdaew(AdminMemberRepositoryLdaew adminMemberRepositoryLdaew){
+    public AdminMemberServiceImplLdaew(AdminMemberRepositoryLdaew adminMemberRepositoryLdaew) {
         this.adminMemberRepositoryLdaew = adminMemberRepositoryLdaew;
     }
+
     @Override
     public Page<Member> memberList(Pageable pageable) {
         return adminMemberRepositoryLdaew.findAll(pageable);
     }
+
     @Override
-    public Page<Member> searchMember(HashMap<String, String> searchData, Pageable pageable) {
+    public Page<AdminMemberDto> searchMember(HashMap<String, String> searchData, Pageable pageable) {
         String category = searchData.get("category");
         String keyword = searchData.get("keyword");
 
-        switch(category){
-            case "회원번호" : return adminMemberRepositoryLdaew.findByMemberSeqContaining(keyword, pageable);
-            case "이메일" : return adminMemberRepositoryLdaew.findByMemberEmailContaining(keyword, pageable);
-            case "책번호" : return adminMemberRepositoryLdaew.findByBookSeqContaining(keyword, pageable);
-            default : return null;
+        switch (category) {
+            case "회원번호":
+                return adminMemberRepositoryLdaew.findByMemberSeqContaining(keyword, pageable)
+                .map(member -> AdminMemberDto.from(member));
+            case "이메일":
+                return adminMemberRepositoryLdaew.findByMemberEmailContaining(keyword, pageable)
+                .map(member -> AdminMemberDto.from(member));
+            case "책번호":
+                return adminMemberRepositoryLdaew.findByBookSeqContaining(keyword, pageable)
+                .map(member -> AdminMemberDto.from(member));
+            default:
+                return null;
         }
     }
-    
+
 }
