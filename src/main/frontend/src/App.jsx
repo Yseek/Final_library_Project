@@ -14,6 +14,7 @@ import AdminBookList from './admin/AdminBookList';
 import Notice from "./user/dongwon/Notice"
 import NoticeSearch from "./user/dongwon/NoticeSearch"
 import NoticeContent from "./user/dongwon/NoticeContent"
+import Mybook from "./user/dongwon/Mybook"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
@@ -30,6 +31,7 @@ function App() {
 					<Route path="/notice/:page" element={<Notice/>}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
+					<Route path="/mybook" element={<Mybook/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
