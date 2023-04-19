@@ -46,13 +46,8 @@ export default function AdminMemberList() {
             },
             body: JSON.stringify({category, keyword}),
         })
-        .then(res => {
-            if(res.ok){
-                console.log(`category: ${category}, keyword: ${keyword}'로 검색`);
-            }
-            res.json();
-        })
-        .then(data => console.log("###"+data))
+        .then(res => res.json())
+        .then(page => setPage(page))
     }
 
     return (
@@ -99,7 +94,6 @@ export default function AdminMemberList() {
                 </select>
                 <input type="text" ref={searchKeywordRef}></input>
                 <button onClick={searchMember}>검색</button>
-                <a>a</a>
             </div>
         </center>
     );

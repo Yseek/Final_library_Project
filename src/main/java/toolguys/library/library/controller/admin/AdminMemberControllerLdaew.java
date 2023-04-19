@@ -33,7 +33,9 @@ public class AdminMemberControllerLdaew {
     public Page<Member> searchMember(
             @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestBody HashMap<String, String> searchData) {
-        
-        return adminMemberServiceLdaew.searchMember(searchData, pageable);
+
+        Page<Member> member = adminMemberServiceLdaew.searchMember(searchData, pageable);
+        System.out.println("####"+member.getContent());
+        return member;
     }
 }

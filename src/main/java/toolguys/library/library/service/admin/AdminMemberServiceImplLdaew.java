@@ -25,12 +25,13 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
     public Page<Member> searchMember(HashMap<String, String> searchData, Pageable pageable) {
         String category = searchData.get("category");
         String keyword = searchData.get("keyword");
-        System.out.println(String.format("### %s", category));
 
-        /* switch(category){
-            case "회원번호" : return adminMemberRepositoryLdaew.find .findAllById(Long.parseLong(keyword), pageable);
-        } */
-        return adminMemberRepositoryLdaew.findAll(pageable);
+        switch(category){
+            case "회원번호" : return adminMemberRepositoryLdaew.findByMemberSeqContaining(keyword, pageable);
+            case "이메일" : return adminMemberRepositoryLdaew.findByMemberEmailContaining(keyword, pageable);
+            case "책번호" : return adminMemberRepositoryLdaew.findByBookSeqContaining(keyword, pageable);
+            default : return null;
+        }
     }
     
 }
