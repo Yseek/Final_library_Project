@@ -11,6 +11,9 @@ import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
 import AdminBookList from './admin/AdminBookList';
+import Notice from "./user/dongwon/Notice"
+import NoticeSearch from "./user/dongwon/NoticeSearch"
+import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
@@ -23,6 +26,10 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
+					<Route path="/notice" element={<Notice/>}></Route>
+					<Route path="/notice/:page" element={<Notice/>}></Route>
+					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
+					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
