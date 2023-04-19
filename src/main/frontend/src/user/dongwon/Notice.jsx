@@ -40,7 +40,7 @@ export default function Notice() {
 				<thead className="noticeTableHead">
 					<tr>
                         <th>작성자</th>
-						<th>공지제목</th>
+						<th>공지 제목</th>
 						<th>공지날짜</th>
 					</tr>
 				</thead>
