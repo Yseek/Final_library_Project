@@ -65,7 +65,6 @@ export default function JoinPage() {
 
 	function sendMail(e) {
 		e.preventDefault();
-		setEmailCerti(true);
 		const joinEmail = emailRef.current.value;
 		const joinName = nameRef.current.value;
 		fetch(`http://127.0.0.1:8080/mail`, {
@@ -76,7 +75,13 @@ export default function JoinPage() {
 			body: JSON.stringify({ joinName, joinEmail }),
 		})
 			.then(res => res.text())
-			.then(res => alert(res));
+			.then(res => {
+				if (res.startsWith("INFO")) {
+					alert(res);
+				} else {
+					setEmailCerti(true);
+				}
+			});
 	}
 
 	function certi(e) {

@@ -21,6 +21,8 @@ import toolguys.library.library.security.dto.MailDupliceteCheckRequst;
 import toolguys.library.library.security.dto.MemberLoginRequest;
 import toolguys.library.library.security.dto.PhoneDuplicateCheckRequest;
 import toolguys.library.library.security.dto.SendEmailRequest;
+import toolguys.library.library.security.exception.AppException;
+import toolguys.library.library.security.exception.ErrorCode;
 import toolguys.library.library.security.service.SecurityMemberService;
 import toolguys.library.library.security.utils.MailSenderRunner;
 
@@ -67,6 +69,9 @@ public class SecurityController {
 
 	@PostMapping("/mail")
 	public ResponseEntity<String> sendEmail(@RequestBody SendEmailRequest dto) throws Exception {
+		if(dto.getJoinEmail().length()==0||dto.getJoinName().length()==0){
+			throw new AppException(ErrorCode.INFO_NONE,"입력값이 없습니다");
+		}
 		key.put(dto.getJoinEmail(), mailSenderRunner.createKey());
 		mailSenderRunner.sendEmail(dto.getJoinName(), dto.getJoinEmail(), key.get(dto.getJoinEmail()));
 		return ResponseEntity.ok().body("메일발송완료");
