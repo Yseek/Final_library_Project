@@ -3,6 +3,12 @@
 	place-items: center;
 }
 
+#NoticeTitle {
+	padding: 10px 30%;
+	border-bottom: 3px solid;
+	border-color: darkblue;
+}
+
 .NoticeContent{
 	display: grid;
 	place-items: center;
