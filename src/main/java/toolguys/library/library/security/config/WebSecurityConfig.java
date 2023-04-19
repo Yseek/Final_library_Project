@@ -30,9 +30,9 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.httpBasic(http -> http.disable()).csrf(csrf -> csrf.disable()).cors(cors -> cors.and());
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/memberInfo").hasAnyRole("USER", "ADMIN"));
-		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/*").hasRole("USER"));
+		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/*").hasAnyRole("USER", "ADMIN"));
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/admin/*").hasRole("ADMIN"));
-        httpSecurity.exceptionHandling(handling -> handling.accessDeniedHandler(new CustomAccessDeniedHandler()));
+		httpSecurity.exceptionHandling(handling -> handling.accessDeniedHandler(new CustomAccessDeniedHandler()));
 		httpSecurity.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		httpSecurity.addFilterBefore(new JwtFilter(securityMemberService, secretKey),
 				UsernamePasswordAuthenticationFilter.class);

@@ -6,10 +6,26 @@
 
 .joinInput {
 	padding-bottom: 1%;
-
+	text-align: left;
 }
 
-.postApi{
-	display: block;
-	padding-left: 37%;
+.postApi {
+	display: inline-block;
+}
+
+.joinPage_content {
+	border: 1px solid black;
+	width: 50%;
+	margin: auto;
+}
+
+.joinPage_content_InputBox {
+	margin-left: 3%;
+}
+
+.joinInput>button {
+	color: black;
+	height: 10%;
+	width: 20%;
+	padding: auto;
 }

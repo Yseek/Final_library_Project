@@ -69,7 +69,7 @@ public class SecurityController {
 	public ResponseEntity<String> sendEmail(@RequestBody SendEmailRequest dto) throws Exception {
 		key.put(dto.getJoinEmail(), mailSenderRunner.createKey());
 		mailSenderRunner.sendEmail(dto.getJoinName(), dto.getJoinEmail(), key.get(dto.getJoinEmail()));
-		return ResponseEntity.ok().body("메일이 잘 갔어요");
+		return ResponseEntity.ok().body("메일발송완료");
 	}
 
 	@PostMapping("/joinMailCheck")
