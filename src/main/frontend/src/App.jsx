@@ -10,15 +10,13 @@ import TestMain from './security/TestMain';
 import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
-import NoticeAdmin from './admin/NoticeAdmin';
-import NoticeAdminContent from './admin/NoticeAdminContent';
-import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
-import NoticeWrite from './admin/NoticeWrite';
+import AdminBookList from './admin/AdminBookList';
 import Notice from "./user/dongwon/Notice"
 import NoticeSearch from "./user/dongwon/NoticeSearch"
 import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
+import AdminBookUpdate from './admin/AdminBookUpdate';
 
 function App() {
 	return (
@@ -28,8 +26,6 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
-					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
-					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
@@ -37,14 +33,18 @@ function App() {
 					<Route path="/" element={<TestMain />}></Route>
 					<Route path="/notice" element={<Notice />}></Route>
 					<Route path="/notice/:page" element={<Notice />}></Route>
+					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
+					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/admin/notice" element={<NoticeAdmin />}></Route>
 					<Route path="/admin/notice/:page" element={<NoticeAdmin />}></Route>
 					<Route path="/admin/notice/content" element={<NoticeAdminContent />}></Route>
 					<Route path="/admin/notice/content/:noticeSeq" element={<NoticeAdminContent />}></Route>
 					<Route path="/admin/notice/update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
 					<Route path="/admin/notice/write" element={<NoticeWrite />}></Route>
-					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
-					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
+					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 				</Routes>
 			</BrowserRouter>
