@@ -17,6 +17,11 @@ import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
+import NoticeAdmin from './admin/NoticeAdmin';
+import NoticeAdminContent from './admin/NoticeAdminContent';
+import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
+import NoticeWrite from './admin/NoticeWrite';
+
 
 function App() {
 	return (
@@ -28,6 +33,7 @@ function App() {
 					<Route path="/loginPage" element={<LoginPage />}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
+					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<TestMain />}></Route>
@@ -45,7 +51,6 @@ function App() {
 					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
-					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />

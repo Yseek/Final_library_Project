@@ -33,8 +33,8 @@
     <delete id="deleteNotice" parameterType="long">
         delete from NOTICE where NOTICESEQ=#{noticeSeq}
     </delete>
-    <insert id="insertNotice" parameterType="Notice">
-        insert into NOTICE values(0, #{noticeTitle}, #{noticeContent}, now(), 2);
+    <insert id="insertNotice" parameterType="NoticeDTO">
+        insert into NOTICE values(0, #{noticeTitle}, #{noticeContent}, now(), #{memberSeq});
     </insert>
     <update id="updateNotice" parameterType="Notice">
         update NOTICE set NOTICETITLE=#{noticeTitle}, NOTICECONTENT=#{noticeContent} where NOTICESEQ=#{noticeSeq}

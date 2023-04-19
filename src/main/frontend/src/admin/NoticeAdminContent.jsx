@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import moment from 'moment';
@@ -23,6 +23,10 @@ export default function Notice() {
 
 	const history = useNavigate();
 
+	function update(noticeSeq){
+		history(`/admin/notice/update/${noticeSeq}`);
+	}
+
 	function del(noticeSeq) {
 		if (window.confirm("삭제하시겠습니까?")) {
 			fetch(`http://127.0.0.1:8080/admin/noticeAdmin/delete/${noticeSeq}`, {
@@ -40,6 +44,24 @@ export default function Notice() {
 			});
 		}
 	}
+
+	const { state } = useLocation();
+    const [loginSeq, setLoginSeq] = useState("");
+
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			fetch(`http://127.0.0.1:8080/memberInfo`, {
+				method: "POST",
+				headers: {
+					"Authorization": "Bearer " + localStorage.getItem("token")
+				}
+			})
+				.then(res => res.json())
+				.then(res => {
+                    setLoginSeq(res.memberSeq)
+				})
+		}
+	}, [state]);
 
 	return (
 		<div className="NoticeContent">
@@ -67,8 +89,9 @@ export default function Notice() {
 				</tbody>
 			</table>
 			<div>
-            	<button><Link to={`/admin/notice/update/${data.noticeSeq}`} style={{color:"white"}}>수정</Link></button>&nbsp;&nbsp;&nbsp;
-            	<button onClick={() => del(data.noticeSeq)}>삭제</button>
+				{data.memberSeq === loginSeq ? <><button onClick={() => update(data.noticeSeq)}>수정</button>&nbsp;&nbsp;&nbsp;
+												<button onClick={() => del(data.noticeSeq)}>삭제</button></>
+												: ""}
 			</div>
 		</div>
 	);

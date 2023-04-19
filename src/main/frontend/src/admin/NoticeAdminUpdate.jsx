@@ -36,12 +36,15 @@ export default function Notice() {
 			},
 			body: JSON.stringify({ noticeSeq, noticeTitle, noticeContent }),
 		})
-        .then(navigate(`/noticeAdmin/1`))
+        .then(navigate(`/admin/notice`))
     };
 
 	const fontWeight = {
         fontWeight:"500"
     }
+    const goBack = () => {
+        navigate(-1);
+    };
 
 	return (
 		<div className="NoticeContent">
@@ -68,7 +71,8 @@ export default function Notice() {
                         <tr>
                             <td></td>
                             <td align="center">
-                                <button>수정완료</button>
+                                <button>수정완료</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" className="profileB" onClick={goBack}>취소</button>
                             </td>
                         </tr>
                     </tbody>

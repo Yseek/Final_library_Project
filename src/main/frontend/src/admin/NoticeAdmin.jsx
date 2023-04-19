@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import moment from 'moment';
@@ -44,6 +44,11 @@ export default function Notice() {
 			});
 		}
 	}
+	
+	const history = useNavigate();
+	function write(){
+		history('/admin/notice/write');
+	}
 
 	return (
 		<div className="Notice">
@@ -61,7 +66,7 @@ export default function Notice() {
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.noticeSeq}>
                             <td width="15%">{res.member.memberName}</td>
-							<td width="50%"><Link to={`/noticeAdmin/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
+							<td width="50%"><Link to={`/admin/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
 							<td width="25%">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 							<td><button onClick={() => del(res.noticeSeq)}>삭제</button></td>
 						</tr>
@@ -71,11 +76,11 @@ export default function Notice() {
 			<div className="page">
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/noticeAdmin/${res}`}>{res}</Link>
+						<Link to={`/admin/notice/${res}`}>{res}</Link>
 						{" "}
 					</span>
 				))}
-				<p><button><Link to={`/noticeAdmin/write`}>글쓰기</Link></button></p>
+				<p><button onClick={() => write()}>글쓰기</button></p>
 			</div>
 		</div>
 	);
