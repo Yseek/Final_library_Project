@@ -14,7 +14,13 @@ export default function Notice() {
 	},[params]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/noticeAdmin?page=${params.page || 1}&size=10`)
+		fetch(`http://127.0.0.1:8080/admin/noticeAdmin?page=${params.page || 1}&size=10`, {
+            method: "GET",
+            headers: {
+               "Content-Type": "application/json",
+               "Authorization": "Bearer " + localStorage.getItem("token"),
+      		},
+		})
 		.then(res => res.json())
 		.then(page => setPage(page))
 	}, [param]);
@@ -23,8 +29,12 @@ export default function Notice() {
 	
 	function del(noticeSeq) {
 		if (window.confirm("삭제하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/noticeAdmin/delete/${noticeSeq}`, {
-				method: "DELETE"
+			fetch(`http://127.0.0.1:8080/admin/noticeAdmin/delete/${noticeSeq}`, {
+            	method: "DELETE",
+            	headers: {
+					"Content-Type": "application/json",
+					"Authorization": "Bearer " + localStorage.getItem("token"),
+				},
 			})
 			.then(res => {
 				if (res.ok) {

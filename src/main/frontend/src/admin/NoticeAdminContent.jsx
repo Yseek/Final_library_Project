@@ -6,9 +6,15 @@ import moment from 'moment';
 export default function Notice() {
 	const params = useParams();
 	const [data, setData] = useState([]);
-	let url=`http://127.0.0.1:8080/notice/content/${params.noticeSeq}`
+	let url=`http://127.0.0.1:8080/admin/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
-		fetch(url)
+		fetch(url, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			},
+		})
 		.then(res => res.json())
 		.then(data => setData(data))
 		.catch(error => console.log("####"+error))
@@ -19,7 +25,7 @@ export default function Notice() {
 
 	function del(noticeSeq) {
 		if (window.confirm("삭제하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/noticeAdmin/delete/${noticeSeq}`, {
+			fetch(`http://127.0.0.1:8080/admin/noticeAdmin/delete/${noticeSeq}`, {
 				method: "DELETE"
 			})
 			.then(res => {

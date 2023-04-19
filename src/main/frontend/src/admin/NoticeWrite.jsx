@@ -11,7 +11,7 @@ export default function NoticeWrite() {
         event.preventDefault();
         const noticeTitle = titleRef.current.value;
 		const noticeContent = contentRef.current.value;
-        fetch(`http://127.0.0.1:8080/noticeAdmin/write.do`,{
+        fetch(`http://127.0.0.1:8080/admin/noticeAdmin/write.do`,{
 			method:"POST",
 			headers : {
 				"Content-Type": "application/json"

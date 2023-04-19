@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ import toolguys.library.library.domain.Notice;
 import toolguys.library.library.domain.dongwon.Paginator;
 import toolguys.library.library.service.admin.AdminNoticeService;
 
+@RequestMapping("admin")
 @RestController
 public class AdminNoticeController {
 

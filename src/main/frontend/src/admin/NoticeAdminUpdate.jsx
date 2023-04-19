@@ -5,7 +5,7 @@ import "./css/Notice.css";
 export default function Notice() {
 	const params = useParams();
 	const [data, setData] = useState([]);
-	let url=`http://127.0.0.1:8080/notice/content/${params.noticeSeq}`
+	let url=`http://127.0.0.1:8080/admin/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
 		fetch(url)
 		.then(res => res.json())
@@ -22,7 +22,7 @@ export default function Notice() {
         const noticeTitle = titleRef.current.value;
 		const noticeContent = contentRef.current.value;
 		const noticeSeq = seqRef.current.value;
-        fetch(`http://127.0.0.1:8080/noticeAdmin/update.do`,{
+        fetch(`http://127.0.0.1:8080/admin/noticeAdmin/update.do`,{
 			method:"POST",
 			headers : {
 				"Content-Type": "application/json"
