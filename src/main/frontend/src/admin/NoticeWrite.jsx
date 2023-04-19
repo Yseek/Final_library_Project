@@ -14,11 +14,12 @@ export default function NoticeWrite() {
         fetch(`http://127.0.0.1:8080/admin/noticeAdmin/write.do`,{
 			method:"POST",
 			headers : {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 			body: JSON.stringify({ noticeTitle, noticeContent }),
 		})
-        .then(navigate(`/noticeAdmin/1`))
+        .then(navigate(`/noticeAdmin`))
     };
 
     const fontWeight = {

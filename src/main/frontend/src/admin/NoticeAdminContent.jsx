@@ -26,7 +26,11 @@ export default function Notice() {
 	function del(noticeSeq) {
 		if (window.confirm("삭제하시겠습니까?")) {
 			fetch(`http://127.0.0.1:8080/admin/noticeAdmin/delete/${noticeSeq}`, {
-				method: "DELETE"
+				method: "DELETE",
+				headers: {
+				   "Content-Type": "application/json",
+				   "Authorization": "Bearer " + localStorage.getItem("token"),
+			 	},
 			})
 			.then(res => {
 				if (res.ok) {
@@ -63,7 +67,7 @@ export default function Notice() {
 				</tbody>
 			</table>
 			<div>
-            	<button><Link to={`/noticeAdmin/update/${data.noticeSeq}`}>수정</Link></button>&nbsp;&nbsp;&nbsp;
+            	<button><Link to={`/admin/notice/update/${data.noticeSeq}`} style={{color:"white"}}>수정</Link></button>&nbsp;&nbsp;&nbsp;
             	<button onClick={() => del(data.noticeSeq)}>삭제</button>
 			</div>
 		</div>

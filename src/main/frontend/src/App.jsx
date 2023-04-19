@@ -37,13 +37,12 @@ function App() {
 					<Route path="/" element={<TestMain />}></Route>
 					<Route path="/notice" element={<Notice />}></Route>
 					<Route path="/notice/:page" element={<Notice />}></Route>
-					<Route path="/noticeAdmin" element={<NoticeAdmin />}></Route>
-					<Route path="/noticeAdmin/:page" element={<NoticeAdmin />}></Route>
-					<Route path="/noticeAdmin/Content" element={<NoticeAdminContent />}></Route>
-					<Route path="/noticeAdmin/Content/:noticeSeq" element={<NoticeAdminContent />}></Route>
-					<Route path="/noticeAdmin/Update" element={<NoticeAdminUpdate />}></Route>
-					<Route path="/noticeAdmin/Update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
-					<Route path="/noticeAdmin/write" element={<NoticeWrite />}></Route>
+					<Route path="/admin/notice" element={<NoticeAdmin />}></Route>
+					<Route path="/admin/notice/:page" element={<NoticeAdmin />}></Route>
+					<Route path="/admin/notice/content" element={<NoticeAdminContent />}></Route>
+					<Route path="/admin/notice/content/:noticeSeq" element={<NoticeAdminContent />}></Route>
+					<Route path="/admin/notice/update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
+					<Route path="/admin/notice/write" element={<NoticeWrite />}></Route>
 					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>

@@ -7,7 +7,13 @@ export default function Notice() {
 	const [data, setData] = useState([]);
 	let url=`http://127.0.0.1:8080/admin/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
-		fetch(url)
+		fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+        })
 		.then(res => res.json())
 		.then(data => setData(data))
 	}, [url]);
@@ -25,7 +31,8 @@ export default function Notice() {
         fetch(`http://127.0.0.1:8080/admin/noticeAdmin/update.do`,{
 			method:"POST",
 			headers : {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 			body: JSON.stringify({ noticeSeq, noticeTitle, noticeContent }),
 		})
@@ -47,7 +54,7 @@ export default function Notice() {
                         <tr>
                             <td width="30%" align="center" style={fontWeight}>Name</td>
                             {/* <td><input type="text" name="writer" readonly value='홍길동' size="80"/></td> */}
-                            <td align="left">홍길동</td>
+                            <td align="left"><label>{data.memberName}</label></td>
                         </tr>
                         <tr>
                             <td align="center" style={fontWeight}>Title</td>
