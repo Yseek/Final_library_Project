@@ -1,8 +1,6 @@
 package toolguys.library.library.domain;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
