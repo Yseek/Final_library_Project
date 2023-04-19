@@ -21,7 +21,13 @@ export default function AdminMemberList() {
     }, [params]);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8080/admin/memberList?page=${params.page}`)
+        fetch(`http://127.0.0.1:8080/admin/memberList?page=${params.page}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+        })
             .then(res => res.json())
             .then(page => setPage(page))
     }, [param]);
@@ -35,19 +41,20 @@ export default function AdminMemberList() {
 
     const pageList = Array.from({ length: (endPage - startPage + 1) }, (_, index) => startPage + index);
 
-    function searchMember(){
+    function searchMember() {
         const category = searchCategoryRef.current.value;
         const keyword = searchKeywordRef.current.value;
 
         fetch(`http://127.0.0.1:8080/admin/searchMember`, {
             method: "POST",
             headers: {
-                "Content-Type" : "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
             },
-            body: JSON.stringify({category, keyword}),
+            body: JSON.stringify({ category, keyword }),
         })
-        .then(res => res.json())
-        .then(page => setPage(page))
+            .then(res => res.json())
+            .then(page => setPage(page))
     }
 
     return (
@@ -78,7 +85,7 @@ export default function AdminMemberList() {
                 {pageList.map(res => (
                     <span key={res}>
                         <Link to={`/admin/memberList/${res}`}>
-                            {page.number+1 === res ? <strong>{res}</strong> : res}
+                            {page.number + 1 === res ? <strong>{res}</strong> : res}
                         </Link>
                         {" "}
                     </span>

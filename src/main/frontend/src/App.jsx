@@ -44,8 +44,8 @@ function App() {
 					<Route path="/noticeAdmin/Update" element={<NoticeAdminUpdate />}></Route>
 					<Route path="/noticeAdmin/Update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
 					<Route path="/noticeAdmin/write" element={<NoticeWrite />}></Route>
-					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
-					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 				</Routes>
 			</BrowserRouter>
