@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./securityCss/HeaderLayout.css"
 import { useEffect, useState } from "react";
 
@@ -6,6 +6,7 @@ export default function HeaderLayout() {
 
 	const { state } = useLocation();
 	const [name, setName] = useState("");
+	const navi =  useNavigate();
 
 
 	useEffect(() => {
@@ -18,6 +19,10 @@ export default function HeaderLayout() {
 			})
 				.then(res => res.json())
 				.then(res => {
+					if(res.status==500){
+						alert("로그인 시간이 만료되었습니다.");
+						navi(`/logout`);
+					}
 					setName(res.memberName);
 				})
 		}
