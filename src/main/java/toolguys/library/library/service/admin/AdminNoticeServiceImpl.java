@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import toolguys.library.library.domain.Notice;
-import toolguys.library.library.mapper.admin.NoticeMapper;
+import toolguys.library.library.mapper.admin.AdminNoticeMapper;
 
 @Service
-public class NoticeServiceImpl implements NoticeService {
+public class AdminNoticeServiceImpl implements AdminNoticeService {
 
     @Autowired
-	NoticeMapper noticeMapper;
+	AdminNoticeMapper noticeMapper;
 
 	@Override
 	public List<Notice> listNotice() {

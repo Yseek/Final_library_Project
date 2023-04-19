@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
+import moment from 'moment';
 
 export default function Notice() {
 	const params = useParams();
@@ -51,7 +52,7 @@ export default function Notice() {
 					</tr>
 					<tr>
 						<td className="contentColumnName" align='center'>작성날짜</td>
-						<td>{data.noticeRdate}</td>
+						<td>{moment(data.noticeRdate).format('YYYY년MM월DD일 HH시mm분ss초')}</td>
 					</tr>
 				</tbody>
 			</table>

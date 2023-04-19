@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
+import moment from 'moment';
 
 export default function Notice() {
 	const params = useParams();
@@ -51,7 +52,7 @@ export default function Notice() {
 						<tr key={res.noticeSeq}>
                             <td width="15%">{res.member.memberName}</td>
 							<td width="50%"><Link to={`/noticeAdmin/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
-							<td width="25%">{res.noticeRdate}</td>
+							<td width="25%">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 							<td><button onClick={() => del(res.noticeSeq)}>삭제</button></td>
 						</tr>
 					))}

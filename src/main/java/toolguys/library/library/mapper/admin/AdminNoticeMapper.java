@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import toolguys.library.library.domain.Notice;
 
 @Mapper
-public interface NoticeMapper {
+public interface AdminNoticeMapper {
 	List<Notice> getNoticeList();
     long getTotalCount();
     List<Notice> getNoticeListByPage(HashMap<String, Integer> input);

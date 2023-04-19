@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Notice;
-import toolguys.library.library.domain.admin.Paginator;
-import toolguys.library.library.service.admin.NoticeService;
+import toolguys.library.library.domain.dongwon.Paginator;
+import toolguys.library.library.service.admin.AdminNoticeService;
 
 @RestController
-public class NoticeController {
+public class AdminNoticeController {
 
 	@Autowired
-	NoticeService noticeService;
+	AdminNoticeService noticeService;
 
 	@GetMapping("notice")
 	public HashMap<String, Object> notice(@RequestParam(value="page" ,defaultValue = "1") int page, int size) {

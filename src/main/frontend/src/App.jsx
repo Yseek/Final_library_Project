@@ -10,11 +10,9 @@ import TestMain from './security/TestMain';
 import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
-import NoticeAd from './admin/Notice';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
-import NoticeContentAd from './admin/NoticeContent';
 import NoticeWrite from './admin/NoticeWrite';
 import Notice from "./user/dongwon/Notice"
 import NoticeSearch from "./user/dongwon/NoticeSearch"
@@ -30,8 +28,6 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
-					<Route path="/notice" element={<NoticeAd/>}></Route>
-					<Route path="/notice/:page" element={<NoticeAd/>}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
@@ -47,8 +43,6 @@ function App() {
 					<Route path="/noticeAdmin/Content/:noticeSeq" element={<NoticeAdminContent />}></Route>
 					<Route path="/noticeAdmin/Update" element={<NoticeAdminUpdate />}></Route>
 					<Route path="/noticeAdmin/Update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
-					<Route path="/notice/Content" element={<NoticeContentAd />}></Route>
-					<Route path="/notice/Content/:noticeSeq" element={<NoticeContentAd />}></Route>
 					<Route path="/noticeAdmin/write" element={<NoticeWrite />}></Route>
 					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
