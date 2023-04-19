@@ -35,9 +35,7 @@ export default function Notice() {
 
 	return (
 		<div className="Notice">
-			<div id="NoticeTitle">
-            <h2>공지사항</h2>
-			</div>
+			<div id="NoticeTitle"><h2>공지사항</h2></div>
 			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
 				<thead className="noticeTableHead">
