@@ -43,7 +43,7 @@ export default function JoinPage() {
 		const memberBirth = birthRef.current.value.replaceAll(`-`, ``);
 		const memberAddr = `우편번호: ${zipRef.current.value} 주소: ${addrRef.current.value} ${detailAddrRef.current.value}`;
 		const memberStatus = statusRef.current.value;
-		const memberAdmin = adminRef.current.value;
+		const memeberOrAdmin = adminRef.current.value;
 
 		if (memberEmail.length == 0 || memberPwd.length == 0 || memberName.length == 0 || memberPhone.length == 0 || memberBirth.length == 0 || zipRef.current.value.length == 0 || addrRef.current.value.length == 0 || detailAddrRef.current.value.length == 0) {
 			alert("모든 값을 입력하세요");
@@ -53,7 +53,7 @@ export default function JoinPage() {
 				headers: {
 					"Content-Type": "application/json"
 				},
-				body: JSON.stringify({ memberEmail, memberPwd, memberName, memberPhone, memberBirth, memberAddr, memberStatus, memberAdmin }),
+				body: JSON.stringify({ memberEmail, memberPwd, memberName, memberPhone, memberBirth, memberAddr, memberStatus, memeberOrAdmin }),
 			})
 				.then(res => res.text())
 				.then(res => alert(res))
@@ -140,7 +140,7 @@ export default function JoinPage() {
 	function phoneCheck(e) {
 		e.preventDefault();
 		const checkPhone = phoneRef.current.value;
-		let phoneReg = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+		let phoneReg = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
 		if (phoneReg.test(checkPhone)) {
 			fetch(`http://127.0.0.1:8080/phoneDuplicateCheck`, {
 				method: "POST",

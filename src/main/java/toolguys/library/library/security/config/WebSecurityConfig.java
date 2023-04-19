@@ -11,6 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
+import toolguys.library.library.security.exception.CustomAccessDeniedHandler;
 import toolguys.library.library.security.service.SecurityMemberService;
 import toolguys.library.library.security.utils.JwtFilter;
 
@@ -27,10 +28,11 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.httpBasic(http -> http.disable()).csrf(csrf -> csrf.disable()).cors(cors -> cors.disable());
-		// httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/memberInfo").hasAnyRole("USER","ADMIN"));
-		// httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/**").hasRole("USER"));
-		// httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/admin/**").hasRole("ADMIN"));
+		httpSecurity.httpBasic(http -> http.disable()).csrf(csrf -> csrf.disable()).cors(cors -> cors.and());
+		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/memberInfo").hasAnyRole("USER", "ADMIN"));
+		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/*").hasRole("USER"));
+		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/admin/*").hasRole("ADMIN"));
+        httpSecurity.exceptionHandling(handling -> handling.accessDeniedHandler(new CustomAccessDeniedHandler()));
 		httpSecurity.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		httpSecurity.addFilterBefore(new JwtFilter(securityMemberService, secretKey),
 				UsernamePasswordAuthenticationFilter.class);
