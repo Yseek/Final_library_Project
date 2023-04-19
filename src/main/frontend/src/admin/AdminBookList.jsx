@@ -1,12 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation  } from "react-router-dom";
 
 
 export default function AdminBookList(){
     const params = useParams();
     const [bookList, setBookList] = useState([]);
     const history = useNavigate();
+
+    const location = useLocation();
+    const queryString = location.search;
 
     useEffect(()=>{
 		fetch(`http://127.0.0.1:8080/admin/booklist`)
@@ -41,7 +44,13 @@ export default function AdminBookList(){
             .then(res => { 
                 if (res.ok){ */
                     alert("수정 페이지로 이동합니다");
-                    history(`/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`);
+                    history(`/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`, {
+                        state: {
+                            bookTitle: bookTitle,
+                            bookWriter: bookWriter,
+                            bookPub: bookPub
+                        }
+                    });
      //            }
      //       })
      //   }

@@ -13,7 +13,6 @@ export default function AdminBookUpdate(){
     console.log(bookPub);
 
     const [bookList, setBookList] = useState([]);
-    const history = useNavigate();
 
     const booktitleRef = useRef();
     const bookwriterRef = useRef();
@@ -21,7 +20,7 @@ export default function AdminBookUpdate(){
     const bookstatusRef = useRef();
 
     useEffect(()=>{
-        fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${encodeURIComponent(bookTitle)}&writer=${encodeURIComponent(bookWriter)}&pub=${encodeURIComponent(bookPub)}`)
+        fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`)
         .then(res => res.json())
         .then(data => setBookList(data))
         .then(data => console.log(data))
