@@ -18,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import toolguys.library.library.domain.Member;
 import toolguys.library.library.security.service.SecurityMemberService;
 
 @RequiredArgsConstructor
@@ -53,8 +54,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// Token 에서 이름 꺼내기
 		String userEmail = JwtUtil.getUserEmail(token, secretKey);
+		// Member 에서 권한 꺼내기
+		Member member = securityMemberService.findByMemberEmail(userEmail).get();
 		// 권한 부여
-		if (userEmail.startsWith("test")) {
+		if (member.getMemeberOrAdmin() == 2) {
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userEmail,
 					null, List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
 			// Detail을 넣어줍니다.
