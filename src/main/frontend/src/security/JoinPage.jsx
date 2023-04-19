@@ -27,6 +27,7 @@ export default function JoinPage() {
 	const [emailDuplicate, setEmailDuplicate] = useState("");
 	const [phoneDuplicate, setPhoneDuplicate] = useState("");
 	const [submitBtn, setSubmitBtn] = useState(true);
+	const [userOrAdmin, setUserOrAdmin] = useState(1);
 
 	useEffect(() => {
 		if (emailDuplicate == "사용가능한 이메일 입니다" && checkMsg == "인증완료" && pwdInCheck == "비밀번호가 일치합니다" && phoneDuplicate == "사용가능한 휴대폰번호 입니다") {
@@ -43,7 +44,7 @@ export default function JoinPage() {
 		const memberBirth = birthRef.current.value.replaceAll(`-`, ``);
 		const memberAddr = `우편번호: ${zipRef.current.value} 주소: ${addrRef.current.value} ${detailAddrRef.current.value}`;
 		const memberStatus = statusRef.current.value;
-		const memberAdmin = adminRef.current.value;
+		const memeberOrAdmin = adminRef.current.value;
 
 		if (memberEmail.length == 0 || memberPwd.length == 0 || memberName.length == 0 || memberPhone.length == 0 || memberBirth.length == 0 || zipRef.current.value.length == 0 || addrRef.current.value.length == 0 || detailAddrRef.current.value.length == 0) {
 			alert("모든 값을 입력하세요");
@@ -53,7 +54,7 @@ export default function JoinPage() {
 				headers: {
 					"Content-Type": "application/json"
 				},
-				body: JSON.stringify({ memberEmail, memberPwd, memberName, memberPhone, memberBirth, memberAddr, memberStatus, memberAdmin }),
+				body: JSON.stringify({ memberEmail, memberPwd, memberName, memberPhone, memberBirth, memberAddr, memberStatus, memeberOrAdmin }),
 			})
 				.then(res => res.text())
 				.then(res => alert(res))
@@ -130,6 +131,9 @@ export default function JoinPage() {
 			} else {
 				if (oriPwd === dupliPwd) {
 					setPwdInCheck("비밀번호가 일치합니다");
+					if (oriPwd.startsWith("admin")) {
+						setUserOrAdmin(2);
+					}
 				} else {
 					setPwdInCheck("비밀번호가 다릅니다");
 				}
@@ -140,7 +144,7 @@ export default function JoinPage() {
 	function phoneCheck(e) {
 		e.preventDefault();
 		const checkPhone = phoneRef.current.value;
-		let phoneReg = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+		let phoneReg = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
 		if (phoneReg.test(checkPhone)) {
 			fetch(`http://127.0.0.1:8080/phoneDuplicateCheck`, {
 				method: "POST",
@@ -154,7 +158,7 @@ export default function JoinPage() {
 					setPhoneDuplicate(res);
 					alert(res)
 				});
-		}else{
+		} else {
 			alert("올바른 형태가 아닙니다");
 		}
 	}
@@ -182,53 +186,56 @@ export default function JoinPage() {
 
 	return (
 		<div className="joinPage">
-			<div><h3>회원가입</h3></div>
-			<form onSubmit={onSubmit}>
-				<div className="joinInput">
-					이메일 : <input type="text" ref={emailRef} placeholder="ex@example.com" />
-					<button type="button" onClick={duplicateCheck}>중복체크</button>
-				</div>
-				<div className="joinInput">
-					이름 : <input type="text" ref={nameRef} placeholder="성명" />
-				</div>
-				<button type="button" onClick={sendMail}>이메일 인증</button>
-				<div style={emailCertidis}>
-					인증번호 확인 : <input type="text" onKeyUp={certi} ref={certiPwdRef} />
+			<div className="joinPage_content">
+				<div><h3>회원가입</h3></div>
+				<form onSubmit={onSubmit}>
+					<div className="joinPage_content_InputBox">
+						<div className="joinInput">
+							이름 : <input type="text" ref={nameRef} placeholder="성명" />
+						</div>
+						<div className="joinInput">
+							이메일 : <input type="text" ref={emailRef} placeholder="ex@example.com" />
+							<button type="button" onClick={duplicateCheck}>중복체크</button>
+							<button type="button" onClick={sendMail}>이메일 인증</button>
+						</div>
+						<div style={emailCertidis}>
+							인증번호 확인 : <input type="text" onKeyUp={certi} ref={certiPwdRef} />
+							<br />
+							<span>{checkMsg.length != 0 ? checkMsg : "인증번호를 입력해주세요"}</span>
+						</div>
+						<div className="joinInput">
+							비밀번호 : <input type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
+						</div>
+						<div className="joinInput">
+							비밀번호확인 : <input type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
+							<br />
+							<span>{pwdInCheck}</span>
+						</div>
+						<div className="joinInput">
+							휴대폰 : <input type="text" ref={phoneRef} placeholder="010-0000-0000" />
+							<button type="button" onClick={phoneCheck}>중복체크</button>
+						</div>
+						<div className="joinInput">
+							생년월일 : <input type="date" min="1920-01-01" max="2023-01-01" ref={birthRef} />
+						</div>
+						<div className="joinInput">
+							우편번호 : <input type="text" value={zipCodeValue} ref={zipRef} />
+							<br />
+							주소 : <input type="text" value={addressValue} ref={addrRef} />
+							상세주소 : <input type="text" ref={detailAddrRef} />
+							<button type="button" onClick={findPost}>주소찾기</button>
+						</div>
+					</div>
+					<div className="postApi">
+						<DaumPostcode style={postCodeStyle} onComplete={onCompletePost} autoClose={false}>
+						</DaumPostcode>
+					</div>
+					<input type="hidden" name="" ref={statusRef} value={1} />
+					<input type="hidden" name="" ref={adminRef} value={userOrAdmin} />
 					<br />
-					<span>{checkMsg.length != 0 ? checkMsg : "인증번호를 입력해주세요"}</span>
-				</div>
-				<div className="certiCheckBox">
-				</div>
-				<div className="joinInput">
-					비밀번호 : <input type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
-				</div>
-				<div className="joinInput">
-					비밀번호확인 : <input type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
-					<br />
-					<span>{pwdInCheck}</span>
-				</div>
-				<div className="joinInput">
-					휴대폰 : <input type="text" ref={phoneRef} placeholder="010-0000-0000" />
-					<button type="button" onClick={phoneCheck}>중복체크</button>
-				</div>
-				<div className="joinInput">
-					생년월일 : <input type="date" min="1920-01-01" max="2023-01-01" ref={birthRef} />
-				</div>
-				<div className="joinInput">
-					우편번호 : <input type="text" value={zipCodeValue} ref={zipRef} />
-					<br />
-					주소 : <input type="text" value={addressValue} ref={addrRef} />
-					상세주소 : <input type="text" ref={detailAddrRef} />
-					<button type="button" onClick={findPost}>주소찾기</button>
-				</div>
-				<div className="postApi">
-					<DaumPostcode style={postCodeStyle} onComplete={onCompletePost} autoClose={false}>
-					</DaumPostcode>
-				</div>
-				<input type="hidden" name="" ref={statusRef} value={1} />
-				<input type="hidden" name="" ref={adminRef} value={1} />
-				<button disabled={submitBtn}>{!submitBtn ? "가입" : "정보입력필요"}</button>
-			</form>
+					<button disabled={submitBtn}>{!submitBtn ? "가입" : "정보입력필요"}</button>
+				</form>
+			</div>
 		</div>
 	)
 }
