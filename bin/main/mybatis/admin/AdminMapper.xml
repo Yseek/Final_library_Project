@@ -40,7 +40,7 @@
     </resultMap>
     <select id="selectAll" resultType="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
-        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE group by b2.BOOKTITLE) as RENTCOUNT
+        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE and b2.BOOKWRITER=b1.BOOKWRITER and b1.BOOKPUB=b2.BOOKPUB group by b2.BOOKTITLE) as RENTCOUNT
         from BOOK b1 group by BOOKTITLE, BOOKWRITER, BOOKPUB
     </select>
     <select id="searchByBookId" parameterType="long" resultType="bookDTO">
@@ -48,10 +48,11 @@
     </select>
     <select id="listBySearch" parameterType="String" resultMap="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
-        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE group by b2.BOOKTITLE) as RENTCOUNT
+        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE and b2.BOOKWRITER=b1.BOOKWRITER and b1.BOOKPUB=b2.BOOKPUB group by b2.BOOKTITLE) as RENTCOUNT
         from BOOK b1 where BOOKTITLE like CONCAT('%', #{keyword}, '%') group by BOOKTITLE, BOOKWRITER, BOOKPUB
     </select>
     <select id="selectBookInfo" parameterType="hashMap" resultMap="bookDTO">
         select * from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
     </select>
+    <update id="updateBookInfo" parameterType="hashMap"></update>
 </mapper>

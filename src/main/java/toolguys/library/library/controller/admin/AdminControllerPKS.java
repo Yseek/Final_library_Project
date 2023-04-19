@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.service.admin.AdminServicePKS;
 
@@ -42,6 +39,13 @@ public class AdminControllerPKS {
         System.out.println(adminServicePKS.selectBookInfo(title, writer, pub));
         return ResponseEntity.ok().body(adminServicePKS.selectBookInfo(title, writer, pub));
     }
+
+    @PostMapping("booklist/update")
+    public ResponseEntity<BookDTO> bookupdate(@RequestBody BookDTO dto){
+        System.out.println(dto);
+        return null;
+    }
+
     @GetMapping("bookinfo/title={title}&writer={writer}&pub={publisher}")
     public List<BookDTO> bookInfo(@PathVariable String title, @PathVariable String writer, @PathVariable String publisher){
         System.out.println("title: " + title);

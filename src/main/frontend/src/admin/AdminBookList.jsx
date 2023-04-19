@@ -11,49 +11,30 @@ export default function AdminBookList(){
     const location = useLocation();
     const queryString = location.search;
 
+    const query = new URLSearchParams(queryString);
+    const bookTitle = query.get('bookTitle');
+    const bookWriter = query.get('bookWriter');
+    const bookPub = query.get('bookPub');
+
     useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/admin/booklist`)
+		fetch(`http://127.0.0.1:8080/admin/booklist`,{
+            method: "GET",
+            headers: {
+               "Content-Type": "application/json",
+               "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+         })
 		.then(res => res.json())
 		.then(data => setBookList(data))
         .catch(error => console.error(error));
 	}, []);
 
-    /*function del(bookHopeSeq, bookHopeStatus) {
-        if (bookHopeStatus > 1){
-            alert("처리중인경우 취소할 수 없습니다")
-        }
-		else if (window.confirm("취소하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/admin/booklist/delete/${bookHopeSeq}`, {
-				method: "POST"
-			})
-			.then(res => {
-				if (res.ok) {
-					alert("취소완료");
-					setParam({param});
-                    window.location.reload()
-				}
-			});
-		}
-	}*/
-
-    function update(bookTitle, bookWriter, bookPub){
-        /* if (window.confirm("수정하시겠습니까?")){
-            fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`,{
-                method: "GET"
-            })
-            .then(res => { 
-                if (res.ok){ */
-                    alert("수정 페이지로 이동합니다");
-                    history(`/admin/booklist/update/title=${bookTitle}&writer=${bookWriter}&pub=${bookPub}`, {
-                        state: {
-                            bookTitle: bookTitle,
-                            bookWriter: bookWriter,
-                            bookPub: bookPub
-                        }
-                    });
-     //            }
-     //       })
-     //   }
+    function update(bookTitle, bookWriter, bookPub){  
+        alert("수정 페이지로 이동합니다");
+        const a=[bookTitle,bookWriter,bookPub]
+        history(`/admin/booklist/update`,{
+            state: a
+        });
     }
 
     return (
