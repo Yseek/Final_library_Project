@@ -1,6 +1,6 @@
 package toolguys.library.library.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +23,7 @@ public class Notice {
 	private String noticeContent;
 
 	@Column(name = "NOTICERDATE")
-	private Date noticeRdate;
+	private LocalDateTime noticeRdate;
 
 	@ManyToOne
 	private Member member;
