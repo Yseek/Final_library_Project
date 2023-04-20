@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
-
+import Pagination from "./Paginatiion";
 
 export default function AdminBookList(){
     const [bookList, setBookList] = useState([]);
+    const [limit, setLimit] = useState(5);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
     const history = useNavigate();
 
     useEffect(()=>{
@@ -29,6 +32,21 @@ export default function AdminBookList(){
     }
 
     return (
+    <>
+        <label>
+            페이지 당 표시할 게시물 수:&nbsp;
+            <select
+                type="number"
+                value={limit}
+                onChange={({ target: { value } }) => setLimit(Number(value))}
+            >
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            </select>
+        </label>
         <div className="BookWishDiv">
             <table className="BookWishTable">
                 <thead>
@@ -41,7 +59,7 @@ export default function AdminBookList(){
                     </tr>
                 </thead>
                 <tbody>
-                {bookList.map((book, index) => (
+                {bookList.slice(offset, offset + limit).map((book, index) => (
                         <tr key={index}>
                         <td>{book.bookTitle}</td>
                         <td>{book.bookWriter}</td>
@@ -53,8 +71,17 @@ export default function AdminBookList(){
                         </td>
                     </tr>
                 ))}
-                </tbody>
+                </tbody>         
             </table>
+            <span>
+                <Pagination
+                    total={bookList.length}
+                    limit={limit}
+                    page={page}
+                    setPage={setPage}
+                />
+            </span>
         </div>
+    </>
     )
 }
