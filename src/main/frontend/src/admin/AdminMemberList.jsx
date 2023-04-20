@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import "./AdminMemberList.css";
+import Ip from "../Ip";
 
 export default function AdminMemberList() {
 
@@ -29,12 +30,11 @@ export default function AdminMemberList() {
         }else{
             searchMember();
         }
-
         // setParam({ params })
     }, [params]);
 
     function getMemberList() {
-        fetch(`http://127.0.0.1:8080/admin/memberList?page=${params.page}`, {
+        fetch(`${Ip.url}/admin/memberList?page=${params.page}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -57,15 +57,17 @@ export default function AdminMemberList() {
     //         .then(page => setPage(page))
     // }, [param]);
 
+    function checkSearchList(){
+        // page를 1로 만든다. param = 1;
+        setParam(1);
+        searchMember();
+    }
+
     function searchMember() {
         const category = searchCategoryRef.current.value;
         const keyword = searchKeywordRef.current.value;
-        
-        if(!isSearchList){
-            setParam(1);
-        }
-        
-        fetch(`http://127.0.0.1:8080/admin/searchMember?page=${params.page}`, {
+
+        fetch(`${Ip.url}/admin/searchMember?page=${params.page}`, { // params.page -> param
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -75,7 +77,7 @@ export default function AdminMemberList() {
         })
             .then(res => res.json())
             .then(page => setPage(page))
-            // setIsSearchList 추가
+
             setIsSearchList(true);
     }
 
