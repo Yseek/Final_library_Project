@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './css/MessageCheck.css';
+import Ip from "../Ip";
 
 export default function MessageCheck() {
 
@@ -10,7 +11,7 @@ export default function MessageCheck() {
   const [page, setPage] = useState([]);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/user/messageCheck?page=${params.page}`, {
+    fetch(`${Ip.url}/user/messageCheck?page=${params.page}`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -21,7 +22,7 @@ export default function MessageCheck() {
   }, [params]);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/user/messageCheck?page=${params.page}`, {
+    fetch(`${Ip.url}/user/messageCheck?page=${params.page}`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -33,7 +34,7 @@ export default function MessageCheck() {
 
   function deleteMessage(messageSeq) {
     if (window.confirm("삭제하시겠습니까?")) {
-      fetch(`http://127.0.0.1:8080/user/messageCheck/${messageSeq}`, {
+      fetch(`${Ip.url}/user/messageCheck/${messageSeq}`, {
         method: "DELETE"
       })
         .then(res => {

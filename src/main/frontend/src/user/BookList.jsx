@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import './css/BookList.css';
+import Ip from "../Ip";
 
 export default function BookList() {
 
@@ -10,7 +11,7 @@ export default function BookList() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/bookList?page=${params.page}`, {
+		fetch(`${Ip.url}/user/bookList?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
@@ -21,7 +22,7 @@ export default function BookList() {
 	}, [params]);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/bookList?page=${params.page}`, {
+		fetch(`${Ip.url}/user/bookList?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),

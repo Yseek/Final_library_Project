@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './css/MessageDetail.css';
+import Ip from "../Ip";
 
 const MessageDetail = () => {
   const { messageSeq } = useParams();
@@ -8,7 +9,7 @@ const MessageDetail = () => {
   const [message, setMessage] = useState({});
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/user/messageDetail/` + messageSeq, {
+    fetch(`${Ip.url}/user/messageDetail/` + messageSeq, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + localStorage.getItem("token"),
