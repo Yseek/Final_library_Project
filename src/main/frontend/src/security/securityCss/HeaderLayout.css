@@ -33,3 +33,46 @@ ul {
 	padding: .5rem 1rem;
 	font-weight: bold;
 }
+
+.chatBox {
+	position: absolute;
+	float: left;
+	width: 15%;
+}
+
+
+.chatBtn>button {
+	margin-top: 8%;
+	width: 40%;
+}
+
+.chatRoom {
+	border: 1px solid black;
+	margin-top: 2%;
+	margin-left: 5%;
+	width: 400px;
+	height: 500px;
+}
+
+.chatRoomView {
+	border: 1px solid black;
+	height: 89%;
+	background-color: white;
+}
+
+.chatRoomType>textarea {
+	float: left;
+	width: 88.5%;
+	resize: none;
+	border: none;
+}
+
+.chatRoomType>button{
+	width: 10%;
+	height: 50px;
+	float: right;
+}
+
+.chatUl{
+	display: block;
+}
