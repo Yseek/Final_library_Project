@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Ip from "../Ip";
 
 export default function MyPage() {
 	const navi = useNavigate();
@@ -10,7 +11,7 @@ export default function MyPage() {
 		if (!localStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
-			fetch(`http://127.0.0.1:8080/memberInfo`, {
+			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

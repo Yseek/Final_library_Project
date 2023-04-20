@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Ip from "../Ip";
 
 export default function ChangePwd() {
 
@@ -34,7 +35,7 @@ export default function ChangePwd() {
 		const changePwdPwd = pwdRef.current.value;
 		const changePwdEmail = state;
 		if (pwdInCheck == "비밀번호가 일치합니다") {
-			fetch(`http://127.0.0.1:8080/user/changePwd`, {
+			fetch(`${Ip.url}/user/changePwd`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
