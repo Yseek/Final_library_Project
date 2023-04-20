@@ -66,7 +66,7 @@ export default function BookHopeCheck() {
 
   return (
     <div className="BookHopeDiv">
-      <table className="BookHopetable">
+      <table className="BookHopeTable">
         <thead>
           <tr>
             <th className='BookHopeTh'>책제목</th>
