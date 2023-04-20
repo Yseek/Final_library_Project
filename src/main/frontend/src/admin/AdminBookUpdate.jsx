@@ -5,15 +5,14 @@ import Ip from "../Ip";
 
 export default function AdminBookUpdate() {
     const navigate = useNavigate();
+    const [bookList, setBookList] = useState([]);
     const { state } = useLocation();
 
-    const encodedTitle = encodeURIComponent(state[0]);
-    const encodedWriter = encodeURIComponent(state[1]);
-    const encodedPub = encodeURIComponent(state[2]);
-
-    const [bookList, setBookList] = useState([]);
-
     useEffect(() => {
+        const encodedTitle = encodeURIComponent(state[0]);
+        const encodedWriter = encodeURIComponent(state[1]);
+        const encodedPub = encodeURIComponent(state[2]);
+
         fetch(`${Ip.url}/admin/booklist/update/title=${encodedTitle}&writer=${encodedWriter}&pub=${encodedPub}`, {
                 method: "GET",
                 headers: {

@@ -22,7 +22,7 @@ export default function AdminBookList(){
 
     function update(bookTitle, bookWriter, bookPub){  
         alert("수정 페이지로 이동합니다");
-        const a=[bookTitle,bookWriter,bookPub]
+        const a = [bookTitle,bookWriter,bookPub]
         history(`/admin/booklist/update`,{
             state: a
         });
