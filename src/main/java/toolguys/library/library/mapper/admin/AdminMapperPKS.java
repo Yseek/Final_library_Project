@@ -18,4 +18,6 @@ public interface AdminMapperPKS {
 	BookDTO searchByBookId(long seq);
 
 	List<BookDTO> selectBookInfo(HashMap map);
+
+	void updateBookInfo(HashMap map);
 }

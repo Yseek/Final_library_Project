@@ -1,20 +1,10 @@
-import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AdminBookList(){
-    const params = useParams();
     const [bookList, setBookList] = useState([]);
     const history = useNavigate();
-
-    const location = useLocation();
-    const queryString = location.search;
-
-    const query = new URLSearchParams(queryString);
-    const bookTitle = query.get('bookTitle');
-    const bookWriter = query.get('bookWriter');
-    const bookPub = query.get('bookPub');
 
     useEffect(()=>{
 		fetch(`http://127.0.0.1:8080/admin/booklist`,{
@@ -51,17 +41,17 @@ export default function AdminBookList(){
                 </thead>
                 <tbody>
                 {bookList.map((book, index) => (
-                          <tr key={index}>
-                            <td>{book.bookTitle}</td>
-                            <td>{book.bookWriter}</td>
-                            <td>{book.bookPub}</td>
-                            <td>{book.bookCount}</td>
-                            <td>{book.rentCount}</td>
-                            <td>
-                                <button onClick={() => update(book.bookTitle, book.bookWriter, book.bookPub)}>수정</button>
-                            </td>
-                        </tr>
-                    ))}
+                        <tr key={index}>
+                        <td>{book.bookTitle}</td>
+                        <td>{book.bookWriter}</td>
+                        <td>{book.bookPub}</td>
+                        <td>{book.bookCount}</td>
+                        <td>{book.rentCount}</td>
+                        <td>
+                            <button onClick={() => update(book.bookTitle, book.bookWriter, book.bookPub)}>수정</button>
+                        </td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
         </div>

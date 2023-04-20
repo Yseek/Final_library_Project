@@ -19,7 +19,7 @@ public class AdminControllerPKS {
     AdminServicePKS adminServicePKS;
 
     @GetMapping("booklist")
-    public ResponseEntity<List> bookList(){
+    public ResponseEntity<List<BookDTO>> bookList(){
         System.out.println(adminServicePKS.selectAll());
         return ResponseEntity.ok().body(adminServicePKS.selectAll());
     }
@@ -30,24 +30,25 @@ public class AdminControllerPKS {
     }
 
     @GetMapping("booklist/id={seq}")
-    public BookDTO bookSearch(@PathVariable long seq){
-        return adminServicePKS.searchByBookId(seq);
+    public ResponseEntity<BookDTO> bookSearch(@PathVariable long seq){
+        System.out.println("1111111111111111111111" + adminServicePKS.searchByBookId(seq));
+        return ResponseEntity.ok().body(adminServicePKS.searchByBookId(seq));
     }
 
     @GetMapping("booklist/update/title={title}&writer={writer}&pub={pub}")
-    public ResponseEntity<List> bookupdate(@PathVariable String title, @PathVariable String writer, @PathVariable String pub){
+    public ResponseEntity<List<BookDTO>> bookUpdate(@PathVariable("title") String title, @PathVariable("writer") String writer, @PathVariable("pub") String pub){
         System.out.println(adminServicePKS.selectBookInfo(title, writer, pub));
         return ResponseEntity.ok().body(adminServicePKS.selectBookInfo(title, writer, pub));
     }
 
     @PostMapping("booklist/update")
-    public ResponseEntity<BookDTO> bookupdate(@RequestBody BookDTO dto){
-        System.out.println(dto);
-        return null;
+    public void bookupdate(@RequestBody BookDTO dto){
+        System.out.println("updateForm: " + dto);
+        adminServicePKS.updateBookInfo(dto);
     }
 
     @GetMapping("bookinfo/title={title}&writer={writer}&pub={publisher}")
-    public List<BookDTO> bookInfo(@PathVariable String title, @PathVariable String writer, @PathVariable String publisher){
+    public List<BookDTO> bookInfo(@PathVariable("title") String title, @PathVariable("writer") String writer, @PathVariable("publisher") String publisher){
         System.out.println("title: " + title);
         System.out.println("writer: " + writer);
         System.out.println("publisher: " + publisher);
