@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import './css/BookDetail.css';
 import Ip from "../Ip";
+import './css/BookDetail.css';
 
 const BookDetail = () => {
   const { bookSeq } = useParams();
