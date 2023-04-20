@@ -14,11 +14,13 @@ import BookList from './user/BookList';
 import BookDetail from './user/BookDetail';
 import MessageDetail from './user/MessageDetail';
 import MessageCheck from './user/MessageCheck';
+import AdminBookList from './admin/AdminBookList';
 import Notice from "./user/dongwon/Notice"
 import NoticeSearch from "./user/dongwon/NoticeSearch"
 import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
+import AdminBookUpdate from './admin/AdminBookUpdate';
 
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<TestMain />}></Route>
 					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
+					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/user/bookList" element={<BookList />}></Route>
 					<Route path="/user/bookList/:page" element={<BookList />}></Route>
@@ -47,6 +50,7 @@ function App() {
 					<Route path="/user/messageCheck/:page" element={<MessageCheck />}></Route>
 					<Route path="/user/messageDetail/:messageSeq" element={<MessageDetail />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
+					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
