@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./securityCss/JoinPage.css"
 import { useNavigate } from "react-router-dom";
 import DaumPostcode from "react-daum-postcode";
+import Ip from "../Ip";
 
 export default function JoinPage() {
 	const emailRef = useRef(null);
@@ -49,7 +50,7 @@ export default function JoinPage() {
 		if (memberEmail.length == 0 || memberPwd.length == 0 || memberName.length == 0 || memberPhone.length == 0 || memberBirth.length == 0 || zipRef.current.value.length == 0 || addrRef.current.value.length == 0 || detailAddrRef.current.value.length == 0) {
 			alert("모든 값을 입력하세요");
 		} else {
-			fetch(`http://127.0.0.1:8080/join.do`, {
+			fetch(`${Ip.url}/join.do`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -67,7 +68,7 @@ export default function JoinPage() {
 		e.preventDefault();
 		const joinEmail = emailRef.current.value;
 		const joinName = nameRef.current.value;
-		fetch(`http://127.0.0.1:8080/mail`, {
+		fetch(`${Ip.url}/mail`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -79,6 +80,7 @@ export default function JoinPage() {
 				if (res.startsWith("INFO")) {
 					alert(res);
 				} else {
+					alert("발송완료");
 					setEmailCerti(true);
 				}
 			});
@@ -88,7 +90,7 @@ export default function JoinPage() {
 		e.preventDefault();
 		const key = certiPwdRef.current.value;
 		const joinEmail = emailRef.current.value;
-		fetch(`http://127.0.0.1:8080/joinMailCheck`, {
+		fetch(`${Ip.url}/joinMailCheck`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -108,7 +110,7 @@ export default function JoinPage() {
 			return false;
 		}
 		else {
-			fetch(`http://127.0.0.1:8080/mailDupliceteCheck`, {
+			fetch(`${Ip.url}/mailDupliceteCheck`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -151,7 +153,7 @@ export default function JoinPage() {
 		const checkPhone = phoneRef.current.value;
 		let phoneReg = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
 		if (phoneReg.test(checkPhone)) {
-			fetch(`http://127.0.0.1:8080/phoneDuplicateCheck`, {
+			fetch(`${Ip.url}/phoneDuplicateCheck`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
