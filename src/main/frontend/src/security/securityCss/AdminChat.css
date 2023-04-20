@@ -1,0 +1,36 @@
+.adminChatRoom {
+	border: 1px solid black;
+	width: 800px;
+	height: 600px;
+	margin: auto;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.adminChatRoomView {
+	border: 1px solid black;
+	height: 90%;
+}
+
+.adminChatRoomType {
+	height: 10%;
+	background-color: gray;
+}
+
+.adminChatRoomType>form>input {
+	width: 80%;
+	font-size: 46px;
+	float: left;
+}
+
+.adminChatRoomType>form>button {
+	float: right;
+	width: 19%;
+	height: 60px;
+}
+
+.adminChatRoomList>ul>li{
+	border: 1px solid black;
+	margin-left: 3px;
+	margin-right: 3px;
+}

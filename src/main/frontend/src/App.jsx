@@ -17,6 +17,7 @@ import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
+import AdminChat from './security/AdminChat';
 
 function App() {
 	return (
@@ -26,10 +27,10 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
-					<Route path="/notice" element={<Notice/>}></Route>
-					<Route path="/notice/:page" element={<Notice/>}></Route>
-					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
-					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
+					<Route path="/notice" element={<Notice />}></Route>
+					<Route path="/notice/:page" element={<Notice />}></Route>
+					<Route path="/notice/search/:userInput" element={<NoticeSearch />}></Route>
+					<Route path="/notice/content/:noticeSeq" element={<NoticeContent />}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
@@ -40,6 +41,7 @@ function App() {
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
+					<Route path="/adminChat" element={<AdminChat />} />
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />

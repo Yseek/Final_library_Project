@@ -48,7 +48,6 @@ ul {
 
 .chatRoom {
 	border: 1px solid black;
-	margin-top: 2%;
 	margin-left: 5%;
 	width: 400px;
 	height: 500px;
@@ -75,4 +74,9 @@ ul {
 
 .chatUl{
 	display: block;
+}
+
+.chatContentView{
+	height: 100%;
+	overflow: auto;
 }

@@ -12,6 +12,10 @@ export default function HeaderLayout() {
 	const { state } = useLocation();
 	const [name, setName] = useState("");
 	const [chatview, setChatview] = useState(false);
+	const [stomp, setStomp] = useState(null);
+	const [msg, setMsg] = useState([]);
+	const [text, setText] = useState('');
+	const messageListRef = useRef(null);
 	const navi = useNavigate();
 
 	useEffect(() => {
@@ -33,6 +37,12 @@ export default function HeaderLayout() {
 		}
 	}, [state]);
 
+	useEffect(() => {
+		// 새로운 메시지가 추가될 때마다 스크롤이 맨 아래로 내려감
+		messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+	}, [msg]);
+
+
 	function openChat(e) {
 		e.preventDefault();
 		if (!localStorage.getItem("token")) {
@@ -43,6 +53,7 @@ export default function HeaderLayout() {
 				didMount(e);
 			} else {
 				setChatview(false);
+				disMount(e);
 			}
 		}
 	}
@@ -52,37 +63,65 @@ export default function HeaderLayout() {
 	};
 
 
-	const [stomp, setStomp] = useState(null);
-	const [msg, setMsg] = useState([]);
-	const testRef = useRef(null);
+	const onChange = (e) => {
+		setText(e.target.value);
+	};
+
+	const onReset = () => {
+		setText('');
+	};
 
 	function didMount(e) {
 		e.preventDefault();
 		const socket = new SockJS(`${Ip.url}/ws`);
 		const stompClient = Stomp.over(socket);
+		setMsg([]);
 		stompClient.connect({}, () => {
 			setStomp(stompClient);
 			stompClient.subscribe("/sub/chat/1", (data) => {
 				const newMessage = JSON.parse(data.body);
-				console.log(newMessage);
 				setMsg((msg) => [...msg, newMessage]);
-			}, "");
-			console.log('Connected!');
+			}, name);
+			const inUser = {
+				channelId: 1,
+				writerId: name,
+				chat: "접속 했습니다"
+			}
+			stompClient.send("/pub/chat", "", JSON.stringify(inUser));
 		});
+	}
+
+	function disMount(e) {
+		e.preventDefault();
+		const outUser = {
+			channelId: 1,
+			writerId: name,
+			chat: "접속을 종료했습니다"
+		}
+		stomp.send("/pub/chat", "", JSON.stringify(outUser));
+		stomp.disconnect(() => {
+			stomp.unsubscribe(name);
+		}, name);
+
 	}
 
 	function sendMsg(e) {
 		e.preventDefault();
 		stomp.debug = null;
-		const data = {
-			channelId: 1,
-			writerId: name,
-			chat: testRef.current.value
-		};
-		//예시 - 데이터 보낼때 json형식을 맞추어 보낸다.
-		stomp.send("/pub/chat", "", JSON.stringify(data));
+		if (text.length == 0) {
+			return;
+		} else {
+			const data = {
+				channelId: 1,
+				writerId: name,
+				chat: text
+			};
+			//예시 - 데이터 보낼때 json형식을 맞추어 보낸다.
+			onReset();
+			stomp.send("/pub/chat", "", JSON.stringify(data));
+		}
 	}
-	let i=0;
+	let i = 0;
 	return (
 		<div className="header">
 			<div className="header__inner">
@@ -92,7 +131,7 @@ export default function HeaderLayout() {
 					</div>
 					<div className="chatRoom" style={chatviewStyle}>
 						<div className="chatRoomView">
-							<div>
+							<div className="chatContentView" ref={messageListRef}>
 								<ul className="chatUl">
 									{msg.map((message) => (
 										<li key={`${name}${i++}`}>{message.writerId}이 보낸 메세지 : {message.chat}</li>
@@ -102,7 +141,7 @@ export default function HeaderLayout() {
 						</div>
 						<div className="chatRoomType">
 							<form onSubmit={sendMsg}>
-								<input type="text" ref={testRef}></input>
+								<input type="text" onChange={onChange} value={text}></input>
 								<button type="button" onClick={sendMsg}>전송</button>
 							</form>
 						</div>
@@ -115,6 +154,7 @@ export default function HeaderLayout() {
 				</h1>
 				<nav>
 					<ul>
+						<li><Link to={`/adminChat`} className="link">관리자채팅방</Link></li>
 						<li><Link to={`/myPage`} className="link">마이페이지</Link></li>
 						{localStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
 						<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
