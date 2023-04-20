@@ -21,6 +21,8 @@ import toolguys.library.library.security.dto.MailDupliceteCheckRequst;
 import toolguys.library.library.security.dto.MemberLoginRequest;
 import toolguys.library.library.security.dto.PhoneDuplicateCheckRequest;
 import toolguys.library.library.security.dto.SendEmailRequest;
+import toolguys.library.library.security.exception.AppException;
+import toolguys.library.library.security.exception.ErrorCode;
 import toolguys.library.library.security.service.SecurityMemberService;
 import toolguys.library.library.security.utils.MailSenderRunner;
 
@@ -67,6 +69,9 @@ public class SecurityController {
 
 	@PostMapping("/mail")
 	public ResponseEntity<String> sendEmail(@RequestBody SendEmailRequest dto) throws Exception {
+		if (dto.getJoinEmail().length() == 0 || dto.getJoinName().length() == 0) {
+			throw new AppException(ErrorCode.INFO_NONE, "입력값이 없습니다");
+		}
 		key.put(dto.getJoinEmail(), mailSenderRunner.createKey());
 		mailSenderRunner.sendEmail(dto.getJoinName(), dto.getJoinEmail(), key.get(dto.getJoinEmail()));
 		return ResponseEntity.ok().body("메일발송완료");
@@ -98,22 +103,22 @@ public class SecurityController {
 	}
 
 	@PostMapping("/findPwd")
-	public ResponseEntity<String> findPwd(@RequestBody FindPwdRequest dto) throws Exception{
+	public ResponseEntity<String> findPwd(@RequestBody FindPwdRequest dto) throws Exception {
 		securityMemberService.findPwd(dto.getFindPwdEmail(), dto.getFindPwdName());
 		String tempoPwd = mailSenderRunner.createKey();
-		securityMemberService.changePwd(dto.getFindPwdEmail(),tempoPwd);
+		securityMemberService.changePwd(dto.getFindPwdEmail(), tempoPwd);
 		mailSenderRunner.sendEmailPwd(dto.getFindPwdEmail(), dto.getFindPwdName(), tempoPwd);
-		return ResponseEntity.ok().body(dto.getFindPwdEmail()+"로 발송된 임시비밀번호로 로그인해주세요.");
+		return ResponseEntity.ok().body(dto.getFindPwdEmail() + "로 발송된 임시비밀번호로 로그인해주세요.");
 	}
 
 	@PostMapping("/user/changePwd")
-	public ResponseEntity<String> changePwd(@RequestBody ChangePwdRequest dto){
-		securityMemberService.changePwd(dto.getChangePwdEmail(),dto.getChangePwdPwd());
+	public ResponseEntity<String> changePwd(@RequestBody ChangePwdRequest dto) {
+		securityMemberService.changePwd(dto.getChangePwdEmail(), dto.getChangePwdPwd());
 		return ResponseEntity.ok().body("비밀번호 변경이 완료 되었습니다");
 	}
 
 	@GetMapping("/auth")
-	public ResponseEntity<String> test(){
+	public ResponseEntity<String> test() {
 		return ResponseEntity.ok().body("권한이 없습니다");
 	}
 }
