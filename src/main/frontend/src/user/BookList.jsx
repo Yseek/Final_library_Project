@@ -10,13 +10,23 @@ export default function BookList() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/bookList?page=${params.page}`)
+		fetch(`http://127.0.0.1:8080/user/bookList?page=${params.page}`, {
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			},
+		})
 			.then(res => res.json())
 			.then(data => { setData(data.content) })
 	}, [params]);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/bookList?page=${params.page}`)
+		fetch(`http://127.0.0.1:8080/user/bookList?page=${params.page}`, {
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			},
+		})
 			.then(res => res.json())
 			.then(page => { setPage(page) })
 	}, [params]);

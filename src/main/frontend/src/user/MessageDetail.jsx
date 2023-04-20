@@ -8,7 +8,12 @@ const MessageDetail = () => {
   const [message, setMessage] = useState({});
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8080/user/messageDetail/` + messageSeq)
+    fetch(`http://127.0.0.1:8080/user/messageDetail/` + messageSeq, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token"),
+      },
+    })
       .then(res => res.json())
       .then(res => {
         setMessage(res);
