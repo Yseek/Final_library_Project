@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Book;
+import toolguys.library.library.service.user.hoya.BookListService;
 import toolguys.library.library.service.user.hoya.BookListServiceInterface;
 
 @RestController
@@ -20,12 +21,13 @@ public class BookListController {
 	@Autowired
 	BookListServiceInterface bookListServiceInterface;
 
+	@Autowired
+	BookListService bookListService;
+
 	@GetMapping("bookList")
 	public Page<Book> bookList(
 			@PageableDefault(page = 0, size = 3, sort = "bookSeq", direction = Sort.Direction.DESC) Pageable pageable,
 			Model model) {
 		return bookListServiceInterface.bookListByBook(pageable);
 	}
-
-	
 }

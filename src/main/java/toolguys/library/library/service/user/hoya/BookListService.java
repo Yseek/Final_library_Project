@@ -25,5 +25,4 @@ public class BookListService implements BookListServiceInterface {
 	public Book bookDetail(Long bookSeq) {
 		return bookListRepository.findById(bookSeq).orElseThrow(() -> new IllegalStateException("없는 책 입니다"));
 	}
-
 }
