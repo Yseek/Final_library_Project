@@ -57,6 +57,13 @@ export default function BookHopeCheck() {
     }
   }
 
+  const bookHopeStat = {
+		1: "신청중",
+		2: "입고완료",
+		3: "취소됨",
+    4: "거부됨"
+	}
+
   return (
     <div className="BookHopeDiv">
       <table className="BookHopetable">
@@ -77,7 +84,7 @@ export default function BookHopeCheck() {
               <td className='BookHopeTd'>{res.bookHopeWriter}</td>
               <td className='BookHopeTd'>{res.bookHopePub}</td>
               <td className='BookHopeTd'>{res.bookHopeWantDay}</td>
-              <td className='BookHopeTd'>{res.bookHopeStatus}</td>
+              <td className='BookHopeTd'>{bookHopeStat[res.bookHopeStatus]}</td>
               <td className='BookHopeTd'><button onClick={() => del(res.bookHopeSeq)}>신청취소</button></td>
             </tr>
           ))}
