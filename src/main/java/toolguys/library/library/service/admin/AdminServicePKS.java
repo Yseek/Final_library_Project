@@ -1,9 +1,8 @@
 package toolguys.library.library.service.admin;
 
-import toolguys.library.library.domain.Book;
-import toolguys.library.library.dto.admin.BookDTO;
-
 import java.util.List;
+
+import toolguys.library.library.dto.admin.BookDTO;
 
 public interface AdminServicePKS {
     List<BookDTO> selectAll();

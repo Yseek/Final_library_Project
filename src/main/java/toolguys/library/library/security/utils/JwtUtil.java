@@ -25,7 +25,7 @@ public class JwtUtil {
 			return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getExpiration()
 					.before(new Date());
 		} catch (MalformedJwtException mj) {
-			throw new AppException(ErrorCode.INVALID_TOKEN, token + "은 올바른 토큰이 아닙니다.");
+			throw new AppException(ErrorCode.INVALID_TOKEN,"토큰 만료");
 		}
 	}
 

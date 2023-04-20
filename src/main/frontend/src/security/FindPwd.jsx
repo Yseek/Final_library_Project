@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Ip from "../Ip";
 
 export default function FindPwd() {
 
@@ -11,7 +12,7 @@ export default function FindPwd() {
 		e.preventDefault();
 		const findPwdEmail = findPwdEmailRef.current.value;
 		const findPwdName = findPwdNameRef.current.value;
-		fetch(`http://127.0.0.1:8080/findPwd`, {
+		fetch(`${Ip.url}/findPwd`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
