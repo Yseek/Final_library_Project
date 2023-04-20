@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Ip from "../Ip";
 
 
 export default function AdminBookList(){
@@ -7,7 +8,7 @@ export default function AdminBookList(){
     const history = useNavigate();
 
     useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/admin/booklist`,{
+		fetch(`${Ip.url}/admin/booklist`,{
             method: "GET",
             headers: {
                "Content-Type": "application/json",

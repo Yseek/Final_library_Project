@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import Ip from "../Ip";
 
 export default function AdminBookUpdate() {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function AdminBookUpdate() {
     const [bookList, setBookList] = useState([]);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8080/admin/booklist/update/title=${encodedTitle}&writer=${encodedWriter}&pub=${encodedPub}`, {
+        fetch(`${Ip.url}/admin/booklist/update/title=${encodedTitle}&writer=${encodedWriter}&pub=${encodedPub}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -35,7 +36,7 @@ export default function AdminBookUpdate() {
         const bookStatus = e.target.bookStatus.value;
 
         console.log(bookSeq, bookTitle, bookWriter, bookPub, bookStatus);
-        fetch(`http://127.0.0.1:8080/admin/booklist/update`, {
+        fetch(`${Ip.url}/admin/booklist/update`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
