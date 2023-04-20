@@ -26,24 +26,7 @@ export default function Notice() {
 	}, [param]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
-	
-	function del(noticeSeq) {
-		if (window.confirm("삭제하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/admin/noticeAdmin/delete/${noticeSeq}`, {
-            	method: "DELETE",
-            	headers: {
-					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
-				},
-			})
-			.then(res => {
-				if (res.ok) {
-					alert("삭제완료");
-					setParam({param});
-				}
-			});
-		}
-	}
+
 	
 	const history = useNavigate();
 	function write(){
@@ -59,16 +42,14 @@ export default function Notice() {
                         <th>작성자</th>
 						<th>공지제목</th>
 						<th>공지날짜</th>
-						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.noticeSeq}>
-                            <td width="15%">{res.member.memberName}</td>
-							<td width="50%"><Link to={`/admin/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
-							<td width="25%">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
-							<td><button onClick={() => del(res.noticeSeq)}>삭제</button></td>
+                            <td width="20%">{res.member.memberName}</td>
+							<td width="60%"><Link to={`/admin/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
+							<td width="20%">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 						</tr>
 					))}
 				</tbody>

@@ -1,0 +1,16 @@
+.AdminBookHope{
+    display: grid;
+    place-items: center;
+}
+
+.AdminBookHopeTable{
+    width: 65%;
+	border-collapse: collapse;
+	border-top: 1px solid #444444;
+}
+
+.AdminBookHopeTableHead{
+    background-color: beige;
+	height: 75px;
+}
+

@@ -21,6 +21,7 @@ import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
+import AdminBookHope from './admin/AdminBookHope';
 
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
 					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
+					<Route path="/admin/bookhope" element={<AdminBookHope />} />
+					<Route path="/admin/bookhope/:page" element={<AdminBookHope />} />
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
