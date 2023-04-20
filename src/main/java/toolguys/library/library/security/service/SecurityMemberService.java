@@ -77,4 +77,5 @@ public class SecurityMemberService {
 		member.setMemberPwd(bCryptPasswordEncoder.encode(tempoPwd));
 		securityMemberRepository.save(member);
 	}
+
 }
