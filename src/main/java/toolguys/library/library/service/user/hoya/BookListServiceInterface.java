@@ -6,5 +6,4 @@ import toolguys.library.library.domain.Book;
 public interface BookListServiceInterface {
   Page<Book> bookListByBook(Pageable pageable);
   Book bookDetail(Long bookSeq);
-  
 }
