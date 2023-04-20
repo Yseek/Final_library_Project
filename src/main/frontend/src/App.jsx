@@ -19,6 +19,8 @@ import NoticeSearch from "./user/dongwon/NoticeSearch"
 import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
+import BookRentCheck from './user/BookRentCheck';
+
 
 function App() {
 	return (
@@ -47,6 +49,7 @@ function App() {
 					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
+					<Route path="/bookrentcheck" element={<BookRentCheck />} ></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
