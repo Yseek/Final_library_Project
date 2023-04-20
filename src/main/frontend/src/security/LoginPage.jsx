@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./securityCss/LoginPage.css"
+import Ip from "../Ip";
 
 export default function LoginPage() {
 
@@ -13,7 +14,7 @@ export default function LoginPage() {
 		e.preventDefault();
 		const memberEmail = emailRef.current.value;
 		const insertPwd = pwdRef.current.value;
-		fetch(`http://127.0.0.1:8080/login.do`, {
+		fetch(`${Ip.url}/login.do`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

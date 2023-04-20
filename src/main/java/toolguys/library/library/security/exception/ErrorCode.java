@@ -10,6 +10,7 @@ import lombok.Getter;
 public enum ErrorCode {
 	USERNAME_DUPLICATED(HttpStatus.CONFLICT, ""),
 	USERNAME_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
+	INFO_NONE(HttpStatus.NOT_FOUND, ""),
 	INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, ""),
 	INVALID_TOKEN(HttpStatus.INTERNAL_SERVER_ERROR,""),
 	NO_USER(HttpStatus.NOT_FOUND,"");
