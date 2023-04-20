@@ -21,6 +21,7 @@ import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
+import BookHopeCheck from "./user/BookHopeCheck";
 
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
 					<Route path="/user/messageDetail/:messageSeq" element={<MessageDetail />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
+					<Route path="/user/bookHope" element={<BookHopeCheck/>}></Route>
+					<Route path="/user/bookHope/:page" element={<BookHopeCheck/>}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
