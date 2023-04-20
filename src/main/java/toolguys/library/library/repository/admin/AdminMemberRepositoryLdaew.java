@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.dto.admin.AdminMemberVo;
 
 public interface AdminMemberRepositoryLdaew extends JpaRepository<Member, Long> {
 	@Query(value = "select * from MEMBER where MEMBERSEQ like %:keyword%", nativeQuery = true)
@@ -14,11 +15,11 @@ public interface AdminMemberRepositoryLdaew extends JpaRepository<Member, Long> 
 
 	Page<Member> findByMemberEmailContaining(String keyword, Pageable pageable);
 
-	@Query(value = "select MEMBERSEQ, MEMBEREMAIL, MEMBERPWD, MEMBERNAME, MEMBERPHONE, MEMBERBIRTH, MEMBERADDR, MEMBERSTATUS, MEMBERORADMIN " +
+	@Query(value = "select MEMBERSEQ, MEMBERNAME, MEMBEREMAIL, MEMBERSTATUS " +
 			"from MEMBER mb join RENTCARD rc on mb.MEMBERSEQ = rc.MEMBER_MEMBERSEQ " +
 			"join BOOKRENT br on rc.RENTCARDSEQ = br.RENTCARD_RENTCARDSEQ " +
 			"join BOOK b on b.BOOKSEQ = br.BOOK_BOOKSEQ " +
 			"where BOOKSEQ like %:keyword% and BOOKRENTRDATE > DATE_ADD(NOW(), INTERVAL -7 DAY)", nativeQuery = true)
-	Page<Member> findByBookSeqContaining(@Param("keyword") String keyword, Pageable pageable);
+	Page<AdminMemberVo> findByBookSeqContaining(@Param("keyword") String keyword, Pageable pageable);
 
 }

@@ -35,8 +35,6 @@ public class AdminMemberControllerLdaew {
             @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestBody HashMap<String, String> searchData) {
 
-        Page<AdminMemberDto> member = adminMemberServiceLdaew.searchMember(searchData, pageable);
-        System.out.println("####"+member.getContent());
-        return member;
+        return adminMemberServiceLdaew.searchMember(searchData, pageable);
     }
 }

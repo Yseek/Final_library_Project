@@ -27,4 +27,13 @@ public class AdminMemberDto {
         .memberStatus(member.getMemberStatus())
         .build();
     }
+
+    public static AdminMemberDto fromVo(AdminMemberVo member){
+        return AdminMemberDto.builder()
+        .memberSeq(member.getMEMBERSEQ())
+        .memberName(member.getMEMBERNAME())
+        .memberEmail(member.getMEMBEREMAIL())
+        .memberStatus(member.getMEMBERSTATUS())
+        .build();
+    }
 }

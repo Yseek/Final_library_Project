@@ -15,12 +15,25 @@ export default function AdminMemberList() {
 
     const [param, setParam] = useState(useParams()); // 삭제 새로고침용 
     const [page, setPage] = useState([]);
+    const [isSearchList, setIsSearchList] = useState(false);
+    // const [category, setCategory] = useState(searchCategoryRef);
+
+	// useEffect(()=>{
+	// 	setParam({params})
+	// },[params]);
 
     useEffect(() => {  // 페이지 이동용 
-        setParam({ params })
+        // isSearchList 에 따라 바꿔준다
+        if(!isSearchList){
+            getMemberList();
+        }else{
+            searchMember();
+        }
+
+        // setParam({ params })
     }, [params]);
 
-    useEffect(() => {
+    function getMemberList() {
         fetch(`http://127.0.0.1:8080/admin/memberList?page=${params.page}`, {
             method: "GET",
             headers: {
@@ -30,22 +43,29 @@ export default function AdminMemberList() {
         })
             .then(res => res.json())
             .then(page => setPage(page))
-    }, [param]);
+    }
 
-    // 한 화면에 보여줄 페이지 수 계산
-    var pageWidth = 10;
-    var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
-    var startPage = 1 + pageWidthNumber * pageWidth;
-    var endPage = pageWidthNumber * pageWidth + pageWidth;
-    if (endPage > page.totalPages) endPage = page.totalPages;
-
-    const pageList = Array.from({ length: (endPage - startPage + 1) }, (_, index) => startPage + index);
+    // useEffect(() => {
+    //     fetch(`http://127.0.0.1:8080/admin/memberList?page=${params.page}`, {
+    //         method: "GET",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer " + localStorage.getItem("token"),
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(page => setPage(page))
+    // }, [param]);
 
     function searchMember() {
         const category = searchCategoryRef.current.value;
         const keyword = searchKeywordRef.current.value;
-
-        fetch(`http://127.0.0.1:8080/admin/searchMember`, {
+        
+        if(!isSearchList){
+            setParam(1);
+        }
+        
+        fetch(`http://127.0.0.1:8080/admin/searchMember?page=${params.page}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -55,7 +75,18 @@ export default function AdminMemberList() {
         })
             .then(res => res.json())
             .then(page => setPage(page))
+            // setIsSearchList 추가
+            setIsSearchList(true);
     }
+
+    // 한 화면에 보여줄 페이지 수 계산
+    var pageWidth = 10;
+    var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
+    var startPage = 1 + pageWidthNumber * pageWidth;
+    var endPage = pageWidthNumber * pageWidth + pageWidth;
+    if (endPage > page.totalPages) endPage = page.totalPages;
+
+    const pageList = Array.from({ length: (endPage - startPage + 1) }, (_, index) => startPage + index);
 
     return (
         <center>

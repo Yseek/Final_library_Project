@@ -38,7 +38,7 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
                 .map(member -> AdminMemberDto.from(member));
             case "책번호":
                 return adminMemberRepositoryLdaew.findByBookSeqContaining(keyword, pageable)
-                .map(member -> AdminMemberDto.from(member));
+                .map(member -> AdminMemberDto.fromVo(member));
             default:
                 return null;
         }
