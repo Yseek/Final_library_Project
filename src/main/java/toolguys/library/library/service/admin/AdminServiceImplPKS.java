@@ -36,4 +36,15 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         map.put("pub", pub);
         return adminMapperPKS.selectBookInfo(map);
     }
+
+    @Override
+    public void updateBookInfo(BookDTO dto){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("seq", dto.getBookSeq());
+        map.put("title", dto.getBookTitle());
+        map.put("writer", dto.getBookWriter());
+        map.put("pub", dto.getBookPub());
+        map.put("status", dto.getBookStatus());
+        adminMapperPKS.updateBookInfo(map);
+    }
 }
