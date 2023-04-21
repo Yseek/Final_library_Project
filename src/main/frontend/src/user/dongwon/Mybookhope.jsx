@@ -1,6 +1,40 @@
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./css/Notice.css";
 
 export default function Mybookhope() {
+
+	const navi = useNavigate();
+	const { pathname } = useLocation();
+	const [info, setInfo] = useState({});
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		if (!localStorage.getItem("token")) {
+			navi("/loginPage", { state: pathname });
+		} else {
+			fetch(`http://127.0.0.1:8080/memberInfo`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": "Bearer " + localStorage.getItem("token"),
+				},
+			})
+				.then(res => res.json())
+				.then(res => setInfo(res))
+		}
+	}, []);
+
+	useEffect(()=>{
+		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}`,{
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			}
+		})
+		.then(res => res.json())
+		.then(data => setData(data))
+	}, [info]);
 
 	return (
 		<div className="Notice">
@@ -9,7 +43,6 @@ export default function Mybookhope() {
 				<thead className="noticeTableHead">
 					<tr>
                         <th>책 제목</th>
-                        <th>커버 이미지</th>
 						<th>저자</th>
 						<th>출판사</th>
                         <th>신청일</th>
@@ -17,14 +50,15 @@ export default function Mybookhope() {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-                        <th>시간의 역사</th>
-                        <th>(커버 이미지)</th>
-						<th>스티븐 호킹</th>
-						<th>까치출판사</th>
-                        <th>2023-04-20</th>
-                        <th>?</th>
-					</tr>
+					{Array.isArray(data) && data.map(res => (
+						<tr key={res.bookHopeSeq}>
+                            <td width="25%">{res.bookHopeTitle}</td>
+							<td>{res.bookHopeWriter}</td>
+							<td>{res.bookHopePub}</td>
+							<td>{res.bookHopeWantDay}</td>
+							<td>{res.bookHopeStatus}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>

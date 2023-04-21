@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toolguys.library.library.mapper.user.MybookrentMapper">
+    <resultMap type="BookRent" id="BookRentBookMap">
+        <id property="bookRentSeq" column="bookRentSeq"/>
+        <result property="bookRentRdate" column="bookRentRdate"/>
+        <result property="bookRentDDay" column="bookRentDDay"/>
+        <result property="bookRentReturn" column="bookRentReturn"/>
+        <result property="bookRentCoin" column="bookRentCoin"/>
+        <association property="book" column="bookSeq" resultMap="BookMap"/>
+    </resultMap>
+    <resultMap type="Book" id="BookMap">
+        <id property="bookSeq" column="bookSeq" />
+        <result property="bookTitle" column="bookTitle" />
+    </resultMap>
+
+    <select id="getMybookrent" resultType="Bookrent" parameterType="long" resultMap="BookRentBookMap">
+        select * from BOOKRENT br join Book bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+    </select>
+    <update id="prolongMybookrent" parameterType="BookRent">
+        update BOOKRENT set BOOKRENTDDAY=DATE_ADD(#{bookRentDDay}, INTERVAL 7 DAY), BOOKRENTCOIN=1 where BOOKRENTSEQ=#{bookRentSeq}
+    </update>
+</mapper>
