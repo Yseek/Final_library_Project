@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom"
+import Ip from "../Ip";
 
 export default function BookRentCheck(){
     
@@ -14,7 +15,7 @@ export default function BookRentCheck(){
     }, [params]);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8080/bookrentcheck?page=${params.page}`)
+        fetch(`${Ip.url}/bookrentcheck?page=${params.page}`)
         .then(res => res.json())
         .then(page => setPage(page))
     },);
