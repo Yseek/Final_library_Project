@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
-import Pagination from "./Paginatiion";
+import Pagination from "./Pagination";
 
 export default function AdminBookList(){
     const [bookList, setBookList] = useState([]);
