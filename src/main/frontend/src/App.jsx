@@ -21,16 +21,12 @@ import NoticeContent from "./user/dongwon/NoticeContent"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
-<<<<<<< HEAD
 import BookHopeCheck from "./user/BookHopeCheck";
 import BookApply from './user/BookApply';
-
-=======
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
->>>>>>> 8f6cc50edc860a4225ded8a4e8a05238f814e72c
 
 function App() {
 	return (
