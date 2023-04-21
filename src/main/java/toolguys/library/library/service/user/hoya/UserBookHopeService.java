@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import toolguys.library.library.domain.BookHope;
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.mapper.user.UserBookHopeDTO;
 import toolguys.library.library.repository.user.hoya.UserBookHopeRepository;
 import toolguys.library.library.security.repository.SecurityMemberRepository;
 
@@ -36,4 +37,13 @@ public class UserBookHopeService implements UserBookHopeServiceInterface{
 	public Member findMember(long memberSeq) {
 		return securityMemberRepository.findById(memberSeq).get();
 	}
+
+	public void submitBookRequest(UserBookHopeDTO userBookHopeDTO) throws Exception {
+		BookHope bookHope = new BookHope();
+		bookHope.setMemberId(userBookHopeDTO.getMemberId());
+		bookHope.setBookTitle(userBookHopeDTO.getBookTitle());
+		bookHope.setBookAuthor(userBookHopeDTO.getBookAuthor());
+		bookHope.setBookHopeStatus(BookHopeStatus.PENDING);
+		UserbookHopeRepository.save(bookHope);
+}
 }

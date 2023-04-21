@@ -1,0 +1,28 @@
+.BookApplyTable {
+	width: 90%;
+	border-collapse: collapse;
+	border: 1px solid black;
+	margin : 5%;
+}
+
+.BookApplyTh{
+	border: 1px solid black;
+	padding: 10px;
+	background-color: #0665A9;
+	color: white;
+}
+
+.BookApplyTd{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.BookApplyA{
+	text-decoration: none;
+}
+
+.BookApplyInput{
+	width: 90%;
+  height: 90%;
+  font-size: medium;
+}

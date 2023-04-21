@@ -22,6 +22,7 @@ import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import BookHopeCheck from "./user/BookHopeCheck";
+import BookApply from './user/BookApply';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 					<Route path="/user/bookHope" element={<BookHopeCheck/>}></Route>
 					<Route path="/user/bookHope/:page" element={<BookHopeCheck/>}></Route>
+					<Route path="/user/bookApply/" element={<BookApply/>}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
