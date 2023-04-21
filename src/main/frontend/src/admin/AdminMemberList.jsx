@@ -1,6 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+/* eslint-disable */ // useEffect의 디펜던시에 사용하지 않는 데이터 warning 무시하는 코드
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import "./AdminMemberList.css";
+import "./css/AdminMemberList.css";
 import Ip from "../Ip";
 
 export default function AdminMemberList() {
@@ -10,29 +11,24 @@ export default function AdminMemberList() {
         2: "블랙리스트"
     }
 
+    const navigate = useNavigate();
     const searchCategoryRef = useRef();
     const searchKeywordRef = useRef();
     const params = useParams();
 
-    const [param, setParam] = useState(useParams()); // 삭제 새로고침용 
     const [page, setPage] = useState([]);
+    const [isBookSeq, setIsBookSeq] = useState(false);
     const [isSearchList, setIsSearchList] = useState(false);
-    // const [category, setCategory] = useState(searchCategoryRef);
 
-	// useEffect(()=>{
-	// 	setParam({params})
-	// },[params]);
-
-    useEffect(() => {  // 페이지 이동용 
-        // isSearchList 에 따라 바꿔준다
-        if(!isSearchList){
+    useEffect(() => {
+        if (!isSearchList) {
             getMemberList();
-        }else{
+        } else {
             searchMember();
         }
-        // setParam({ params })
     }, [params]);
 
+    // 모든 회원 목록 가져오기
     function getMemberList() {
         fetch(`${Ip.url}/admin/memberList?page=${params.page}`, {
             method: "GET",
@@ -45,29 +41,19 @@ export default function AdminMemberList() {
             .then(page => setPage(page))
     }
 
-    // useEffect(() => {
-    //     fetch(`http://127.0.0.1:8080/admin/memberList?page=${params.page}`, {
-    //         method: "GET",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Authorization": "Bearer " + localStorage.getItem("token"),
-    //         },
-    //     })
-    //         .then(res => res.json())
-    //         .then(page => setPage(page))
-    // }, [param]);
-
-    function checkSearchList(){
-        // page를 1로 만든다. param = 1;
-        setParam(1);
-        searchMember();
+    // 검색을 누를 경우
+    function SearchInput(e) {
+        e.preventDefault();
+        setIsSearchList(true);
+        navigate('/admin/memberList/1');
     }
 
+    // 검색을 누를 때, 검색 목록에서 페이지 이동 시
     function searchMember() {
         const category = searchCategoryRef.current.value;
         const keyword = searchKeywordRef.current.value;
 
-        fetch(`${Ip.url}/admin/searchMember?page=${params.page}`, { // params.page -> param
+        fetch(`${Ip.url}/admin/searchMember?page=${params.page}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -77,8 +63,17 @@ export default function AdminMemberList() {
         })
             .then(res => res.json())
             .then(page => setPage(page))
+    }
 
-            setIsSearchList(true);
+    function checkSearchCategory() {
+        const category = searchCategoryRef.current.value;
+
+        switch (category) {
+            case "회원번호": setIsBookSeq(false); break;
+            case "이메일": setIsBookSeq(false); break
+            case "책번호": setIsBookSeq(true); break
+            default: setIsBookSeq(false);
+        }
     }
 
     // 한 화면에 보여줄 페이지 수 계산
@@ -112,7 +107,8 @@ export default function AdminMemberList() {
                     ))}
                 </tbody>
             </table>
-            <div className="page">
+            {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+            {pageList.length !== 0 && <div className="page">
                 <span><Link to={`/admin/memberList/1`}>&laquo;</Link>&nbsp;</span>
                 <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`}>&lt;</Link>&nbsp;</span>
                 {pageList.map(res => (
@@ -123,17 +119,19 @@ export default function AdminMemberList() {
                         {" "}
                     </span>
                 ))}
-                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`}>&gt;</Link></span>
+                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`}>&gt;</Link>&nbsp;</span>
                 <span><Link to={`/admin/memberList/${page.totalPages}`}>&raquo;</Link></span>
-            </div>
+            </div>}
             <div>
-                <select ref={searchCategoryRef}>
-                    <option>회원번호</option>
-                    <option>이메일</option>
-                    <option>책번호</option>
-                </select>
-                <input type="text" ref={searchKeywordRef}></input>
-                <button onClick={searchMember}>검색</button>
+                <form onSubmit={SearchInput}>
+                    <select onChange={checkSearchCategory} ref={searchCategoryRef}>
+                        <option>회원번호</option>
+                        <option>이메일</option>
+                        <option>책번호</option>
+                    </select>
+                    <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
+                    <button>검색</button>
+                </form>
             </div>
         </center>
     );
