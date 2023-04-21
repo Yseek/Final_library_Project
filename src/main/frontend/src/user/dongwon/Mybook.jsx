@@ -1,6 +1,40 @@
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./css/Notice.css";
 
 export default function Mybook() {
+
+	const navi = useNavigate();
+	const { pathname } = useLocation();
+	const [info, setInfo] = useState({});
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		if (!localStorage.getItem("token")) {
+			navi("/loginPage", { state: pathname });
+		} else {
+			fetch(`http://127.0.0.1:8080/memberInfo`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": "Bearer " + localStorage.getItem("token"),
+				},
+			})
+				.then(res => res.json())
+				.then(res => setInfo(res))
+		}
+	}, []);
+
+	useEffect(()=>{
+		fetch(`http://127.0.0.1:8080/user/mybooklist?memberSeq=${info.memberSeq}`,{
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			}
+		})
+		.then(res => res.json())
+		.then(data => setData(data))
+	}, [info]);
 
 	return (
 		<div className="Notice">
@@ -15,12 +49,14 @@ export default function Mybook() {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-                        <th>시간의 역사</th>
-                        <th>(커버 이미지)</th>
-						<th>스티븐 호킹</th>
-						<th>까치출판사</th>
-					</tr>
+					{Array.isArray(data) && data.map(res => (
+						<tr key={res.bookSeq}>
+                            <td width="25%">{res.bookTitle}</td>
+							<td>{res.bookImgPath}</td>
+							<td>{res.bookWriter}</td>
+							<td>{res.bookPub}</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</div>
