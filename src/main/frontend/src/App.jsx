@@ -19,6 +19,10 @@ import ChangePwd from './security/ChangePwd';
 import BookRentCheck from './user/BookRentCheck';
 
 import AdminBookUpdate from './admin/AdminBookUpdate';
+import NoticeAdmin from './admin/NoticeAdmin';
+import NoticeAdminContent from './admin/NoticeAdminContent';
+import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
+import NoticeWrite from './admin/NoticeWrite';
 
 function App() {
 	return (
@@ -28,8 +32,6 @@ function App() {
 				<Routes>
 					<Route path='/joinPage' element={<JoinPage />}></Route>
 					<Route path="/loginPage" element={<LoginPage />}></Route>
-					<Route path="/notice" element={<Notice/>}></Route>
-					<Route path="/notice/:page" element={<Notice/>}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
@@ -37,9 +39,18 @@ function App() {
 					<Route path="/findEmail" element={<FindEmail />}></Route>
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<TestMain />}></Route>
-					<Route path="/adminMemberList" element={<AdminMemberList />}></Route>
+					<Route path="/notice" element={<Notice />}></Route>
+					<Route path="/notice/:page" element={<Notice />}></Route>
+					<Route path="/noticeAdmin" element={<NoticeAdmin />}></Route>
+					<Route path="/noticeAdmin/:page" element={<NoticeAdmin />}></Route>
+					<Route path="/noticeAdmin/Content" element={<NoticeAdminContent />}></Route>
+					<Route path="/noticeAdmin/Content/:noticeSeq" element={<NoticeAdminContent />}></Route>
+					<Route path="/noticeAdmin/Update" element={<NoticeAdminUpdate />}></Route>
+					<Route path="/noticeAdmin/Update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
+					<Route path="/noticeAdmin/write" element={<NoticeWrite />}></Route>
+					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
-					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/bookrentcheck" element={<BookRentCheck />} ></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
