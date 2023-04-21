@@ -12,24 +12,24 @@ import toolguys.library.library.security.repository.SecurityMemberRepository;
 public class UserBookHopeService implements UserBookHopeServiceInterface{
 
 	@Autowired
-	private final UserBookHopeRepository userBookHopeRepository;
+	private final UserBookHopeRepository bookHopeRepository;
 
 	@Autowired
 	private final SecurityMemberRepository securityMemberRepository;
 
-	public UserBookHopeService(UserBookHopeRepository userBookHopeRepository, SecurityMemberRepository securityMemberRepository) {
-		this.userBookHopeRepository = userBookHopeRepository;
+	public UserBookHopeService(UserBookHopeRepository bookHopeRepository, SecurityMemberRepository securityMemberRepository) {
+		this.bookHopeRepository = bookHopeRepository;
 		this.securityMemberRepository = securityMemberRepository;
 	}
 
 	@Override
 	public Page<BookHope> listBookHopeByMember(Member member, Pageable pageable) {
-		return userBookHopeRepository.findAllByMember(member, pageable);
+		return bookHopeRepository.findAllByMember(member, pageable);
 	}
 
 	@Override
 	public void deleteBookHope(long bookHopeSeq) {
-		userBookHopeRepository.deleteById(bookHopeSeq);
+		bookHopeRepository.deleteById(bookHopeSeq);
 	}
 
 	@Override

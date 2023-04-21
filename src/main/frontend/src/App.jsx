@@ -1,33 +1,32 @@
 import React from 'react';
-import './App.css';
-import HeaderLayout from './security/HeaderLayout';
-import FooterLayout from './security/FooterLayout';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from './security/LoginPage';
-import JoinPage from './security/JoinPage';
-import Logout from './security/Logout';
-import TestMain from './security/TestMain';
-import FindEmail from './security/FindEmail';
-import FindPwd from './security/FindPwd';
-import AdminMemberList from './admin/AdminMemberList';
-import BookList from './user/BookList';
-import BookDetail from './user/BookDetail';
-import MessageDetail from './user/MessageDetail';
-import MessageCheck from './user/MessageCheck';
+import './App.css';
 import AdminBookList from './admin/AdminBookList';
-import Notice from "./user/dongwon/Notice"
-import NoticeSearch from "./user/dongwon/NoticeSearch"
-import NoticeContent from "./user/dongwon/NoticeContent"
-import MyPage from './security/MyPage';
-import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
-import BookHopeCheck from "./user/BookHopeCheck";
-import BookApply from './user/BookApply';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
+import AdminMemberList from './admin/AdminMemberList';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
+import ChangePwd from './security/ChangePwd';
+import FindEmail from './security/FindEmail';
+import FindPwd from './security/FindPwd';
+import FooterLayout from './security/FooterLayout';
+import HeaderLayout from './security/HeaderLayout';
+import JoinPage from './security/JoinPage';
+import LoginPage from './security/LoginPage';
+import Logout from './security/Logout';
+import MyPage from './security/MyPage';
+import TestMain from './security/TestMain';
+import BookDetail from './user/BookDetail';
+import BookHopeCheck from "./user/BookHopeCheck";
+import BookList from './user/BookList';
+import MessageCheck from './user/MessageCheck';
+import MessageDetail from './user/MessageDetail';
+import Notice from "./user/dongwon/Notice";
+import NoticeContent from "./user/dongwon/NoticeContent";
+import NoticeSearch from "./user/dongwon/NoticeSearch";
 
 function App() {
 	return (
@@ -67,7 +66,6 @@ function App() {
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 					<Route path="/user/bookHope" element={<BookHopeCheck/>}></Route>
 					<Route path="/user/bookHope/:page" element={<BookHopeCheck/>}></Route>
-					<Route path="/user/bookApply/" element={<BookApply/>}></Route>
 					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
 				</Routes>
 			</BrowserRouter>

@@ -85,7 +85,7 @@ export default function BookHopeCheck() {
               <td className='BookHopeTd'>{res.bookHopePub}</td>
               <td className='BookHopeTd'>{res.bookHopeWantDay}</td>
               <td className='BookHopeTd'>{bookHopeStat[res.bookHopeStatus]}</td>
-              <td className='BookHopeTd'><button onClick={() => del(res.bookHopeSeq)}>신청취소</button></td>
+              <td className='BookHopeTd'><button onClick={() => del(res.bookHopeSeq)}>취소</button></td>
             </tr>
           ))}
         </tbody>
@@ -94,7 +94,6 @@ export default function BookHopeCheck() {
         {pageList.map(res => (
           <span key={res}>
             <Link to={`user/bookHope/${res}`}>{res}</Link>
-            {" "}
           </span>
         ))}
       </div>
