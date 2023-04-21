@@ -10,6 +10,7 @@ import TestMain from './security/TestMain';
 import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
 import AdminMemberList from './admin/AdminMemberList';
+import AdminMemberContent from './admin/AdminMemberContent';
 import AdminBookList from './admin/AdminBookList';
 import Notice from "./user/dongwon/Notice"
 import NoticeSearch from "./user/dongwon/NoticeSearch"
@@ -49,6 +50,7 @@ function App() {
 					<Route path="/noticeAdmin/write" element={<NoticeWrite />}></Route>
 					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
 					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList/content" element={<AdminMemberContent />}></Route>
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />

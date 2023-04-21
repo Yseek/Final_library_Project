@@ -37,4 +37,10 @@ public class AdminMemberControllerLdaew {
 
         return adminMemberServiceLdaew.searchMember(searchData, pageable);
     }
+
+    @PostMapping("memberList/content")
+    public AdminMemberDto memberContent(@RequestBody HashMap<String, String> memberData){
+        long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+        return adminMemberServiceLdaew.memberContent(memberSeq);
+    }
 }

@@ -1,45 +1,49 @@
 /* eslint-disable */ // useEffect의 디펜던시에 사용하지 않는 데이터 warning 무시하는 코드
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import "./css/AdminMemberList.css";
 import Ip from "../Ip";
 
-export default function AdminMemberList() {
+export default function AdminMemberContent() {
 
     const memberStatusString = {
         1: "일반 회원",
         2: "블랙리스트"
     }
 
+    const location = useLocation();
     const navigate = useNavigate();
     const searchCategoryRef = useRef();
     const searchKeywordRef = useRef();
     const params = useParams();
 
+    const [member, setMember] = useState([]);
     const [page, setPage] = useState([]);
     const [isBookSeq, setIsBookSeq] = useState(false);
     const [isSearchList, setIsSearchList] = useState(false);
 
-    useEffect(() => {
-        if (!isSearchList) {
-            getMemberList();
-        } else {
-            searchMember();
-        }
-    }, [params]);
+    /*     useEffect(() => {
+            if (!isSearchList) {
+                getMemberList();
+            } else {
+                searchMember();
+            }
+        }, [params]); */
 
-    // 모든 회원 목록 가져오기
-    function getMemberList() {
-        fetch(`${Ip.url}/admin/memberList?page=${params.page}`, {
-            method: "GET",
+    // 선택한 회원 정보 가져오기
+    useEffect(() => {
+        fetch(`${Ip.url}/admin/memberList/content}`, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token"),
             },
+            body: JSON.stringify({ memberSeq : location.state.user }),
         })
             .then(res => res.json())
-            .then(page => setPage(page))
-    }
+            .then(member => setMember(member))
+            .catch(error => console.log(`선택한 회원 정보 찾기 에러: ${error}`))
+    }, [])
 
     // 검색을 누를 경우
     function SearchInput(e) {
@@ -87,7 +91,30 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <h3>회원 목록 페이지</h3>
+            <h3>회원 상세 정보 페이지</h3>
+            <div>{location.state.user}</div>
+            <table className="adminMemberList">
+                <thead>
+                    <tr>
+                        <th>회원번호</th>
+                        <th>이름</th>
+                        <th>이메일</th>
+                        <th>블랙리스트 여부</th>
+                        <th>블랙리스트 추가 버튼</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {/* <td>{member.memberSeq}</td>
+                        <td>{member.memberName}</td>
+                        <td>{member.memberEmail}</td>
+                        <td>{memberStatusString[member.memberStatus]}</td>
+                        <td>추가 버튼</td> */}
+                    </tr>
+                </tbody>
+            </table><br/>
+
+
             <table className="adminMemberList">
                 <thead>
                     <tr>
@@ -100,7 +127,7 @@ export default function AdminMemberList() {
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
                         <tr key={member.memberSeq}>
-                            <td><Link to={`/admin/memberList/content`}  state={{ user: member.memberSeq }}>{member.memberSeq}</Link></td>
+                            <td>{member.memberSeq}</td>
                             <td>{member.memberName}</td>
                             <td>{member.memberEmail}</td>
                             <td>{memberStatusString[member.memberStatus]}</td>
