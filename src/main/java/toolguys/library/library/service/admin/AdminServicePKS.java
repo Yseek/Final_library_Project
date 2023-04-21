@@ -1,8 +1,7 @@
 package toolguys.library.library.service.admin;
 
-import java.util.List;
-
 import toolguys.library.library.dto.admin.BookDTO;
+import java.util.List;
 
 public interface AdminServicePKS {
     List<BookDTO> selectAll();
@@ -12,4 +11,6 @@ public interface AdminServicePKS {
     BookDTO searchByBookId(long seq);
 
     List<BookDTO> selectBookInfo(String title, String writer, String pub);
+
+    void updateBookInfo(BookDTO dto);
 }

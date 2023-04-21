@@ -23,6 +23,7 @@ import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import BookHopeCheck from "./user/BookHopeCheck";
 import BookApply from './user/BookApply';
+import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
@@ -67,6 +68,7 @@ function App() {
 					<Route path="/user/bookHope" element={<BookHopeCheck/>}></Route>
 					<Route path="/user/bookHope/:page" element={<BookHopeCheck/>}></Route>
 					<Route path="/user/bookApply/" element={<BookApply/>}></Route>
+					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
