@@ -109,7 +109,7 @@ export default function AdminChat() {
 				<div className="adminChatRoomList">
 					<ul>
 						{chatList.map((res) => (
-							<li key={res}><button type="button" value={res} onClick={didMount}>{res}</button>//<button type="button" value={res} onClick={disMount}>{res}나가기</button></li>
+							<li key={res}><button type="button" value={res} onClick={didMount}>{res}</button><button type="button" value={res} onClick={disMount}>{res}나가기</button></li>
 						))}
 					</ul>
 				</div>
