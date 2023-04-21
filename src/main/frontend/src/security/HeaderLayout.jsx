@@ -6,6 +6,7 @@ import SockJS from "sockjs-client";
 import Ip from "../Ip";
 
 
+
 export default function HeaderLayout() {
 
 	const { pathname } = useLocation();
@@ -15,6 +16,7 @@ export default function HeaderLayout() {
 	const [stomp, setStomp] = useState(null);
 	const [msg, setMsg] = useState([]);
 	const [text, setText] = useState('');
+	const [memberSeq, setMemberSeq] = useState(0);
 	const messageListRef = useRef(null);
 	const navi = useNavigate();
 
@@ -33,6 +35,7 @@ export default function HeaderLayout() {
 						navi(`/logout`);
 					}
 					setName(res.memberName);
+					setMemberSeq(res.memberSeq);
 				})
 		}
 	}, [state]);
@@ -78,30 +81,33 @@ export default function HeaderLayout() {
 		setMsg([]);
 		stompClient.connect({}, () => {
 			setStomp(stompClient);
-			stompClient.subscribe("/sub/chat/1", (data) => {
+			stompClient.subscribe(`/sub/chat/${memberSeq}`, (data) => {
 				const newMessage = JSON.parse(data.body);
 				setMsg((msg) => [...msg, newMessage]);
 			}, name);
 			const inUser = {
-				channelId: 1,
+				channelId: memberSeq,
 				writerId: name,
 				chat: "접속 했습니다"
 			}
+			stompClient.send("/pub/chat/pub", "", JSON.stringify(inUser));
 			stompClient.send("/pub/chat", "", JSON.stringify(inUser));
+			
 		});
 	}
 
 	function disMount(e) {
 		e.preventDefault();
 		const outUser = {
-			channelId: 1,
+			channelId: memberSeq,
 			writerId: name,
 			chat: "접속을 종료했습니다"
 		}
 		stomp.send("/pub/chat", "", JSON.stringify(outUser));
+		stomp.send("/pub/chat/pub", "", JSON.stringify(outUser));
 		stomp.disconnect(() => {
-			stomp.unsubscribe(name);
-		}, name);
+			stomp.unsubscribe(memberSeq);
+		}, memberSeq);
 
 	}
 
@@ -112,7 +118,7 @@ export default function HeaderLayout() {
 			return;
 		} else {
 			const data = {
-				channelId: 1,
+				channelId: memberSeq,
 				writerId: name,
 				chat: text
 			};
