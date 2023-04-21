@@ -7,4 +7,5 @@ import toolguys.library.library.domain.BookHope;
 
 public interface AdminBookHopeServiceYSH {
     Page<BookHope> BookHopeListAll(Pageable pageable);
+    BookHope bookHopeRead(long seq);
 }

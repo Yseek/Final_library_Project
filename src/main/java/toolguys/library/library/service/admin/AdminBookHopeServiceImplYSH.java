@@ -20,7 +20,11 @@ public class AdminBookHopeServiceImplYSH implements AdminBookHopeServiceYSH{
 
     @Override
     public Page<BookHope> BookHopeListAll(Pageable pageable){
-        System.out.println(pageable);
         return adminBookHopeRepositoryYSH.findAll(pageable);
+    }
+
+    @Override
+    public BookHope bookHopeRead(long seq){
+        return adminBookHopeRepositoryYSH.findById(seq).get();
     }
 }

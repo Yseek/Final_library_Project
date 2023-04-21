@@ -1,11 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import "./css/Notice.css";
+import Ip from "../Ip";
 
 export default function Notice() {
 	const params = useParams();
 	const [data, setData] = useState([]);
-	let url=`http://127.0.0.1:8080/admin/notice/content/${params.noticeSeq}`
+	let url=`${Ip.url}/admin/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
 		fetch(url, {
             method: "GET",
@@ -28,7 +29,7 @@ export default function Notice() {
         const noticeTitle = titleRef.current.value;
 		const noticeContent = contentRef.current.value;
 		const noticeSeq = seqRef.current.value;
-        fetch(`http://127.0.0.1:8080/admin/noticeAdmin/update.do`,{
+        fetch(`${Ip.url}/admin/noticeAdmin/update.do`,{
 			method:"POST",
 			headers : {
 				"Content-Type": "application/json",

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import Ip from "../Ip";
 
 export default function FindEmail() {
 
@@ -12,7 +13,7 @@ export default function FindEmail() {
 		const memberName = findEmailNameRef.current.value;
 		const memberBirth = findEmailBirthRef.current.value;
 
-		fetch(`http://127.0.0.1:8080/findEmail`, {
+		fetch(`${Ip.url}/findEmail`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

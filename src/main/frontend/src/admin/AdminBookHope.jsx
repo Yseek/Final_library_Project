@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import './css/AdminBookHope.css';
+import Ip from "../Ip";
+import { Link, useParams } from "react-router-dom";
 
 export default function AdminBookHope() {
     const params = useParams();
@@ -13,7 +14,7 @@ export default function AdminBookHope() {
     }, [params]);
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8080/admin/bookHope?page=${params.page}1&size=10`, {
+        fetch(`${Ip.url}/admin/bookHope?page=${params.page}&size=10`, {
             method: "GET",
             headers: {
                "Content-Type": "application/json",
@@ -23,6 +24,9 @@ export default function AdminBookHope() {
             .then(res => res.json())
             .then(page => setPage(page))
     }, [param]);
+    console.log(JSON.stringify(page))
+
+    const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
     return (
         <div className="AdminBookHope">
@@ -49,17 +53,27 @@ export default function AdminBookHope() {
                             <td>{res.bookHopeWantDay}</td>
                             <td>
                                 {res.bookHopeStatus === 1 && '신청중'}
-                                {res.bookHopeStatus === 2 && '처리중'}
-                                {res.bookHopeStatus === 3 && '소장중'}
-                                {res.bookHopeStatus === 4 && '취소됨'}
+                                {res.bookHopeStatus === 2 && '입고완료'}
+                                {res.bookHopeStatus === 3 && '취소됨'}
+                                {res.bookHopeStatus === 4 && '거부됨'}
                             </td>
                             <td>{res.member.memberName}</td>
-                            <td>승인</td>
-                            <td>거절</td>
+                            <td><button className="bookHopeButton" disabled={res.bookHopeStatus !== 1} color="blue">승인</button></td>
+                            <td><button className="bookHopeButton bookHopeBtCc" disabled={res.bookHopeStatus !== 1} color="red">거부</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <div className="page">
+                <span><Link to={`/admin/bookhope/1`}>&lt;</Link>&nbsp;</span>
+                {pageList.map(res => (
+                    <span key={res}>
+                        <Link to={`/admin/bookhope/${res}`}>{res}</Link>
+                        {" "}
+                    </span>
+                ))}
+                <span><Link to={`/admin/bookhope/${page.totalPages}`}>&gt;</Link></span>
+            </div>
         </div>
     );
 }

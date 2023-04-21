@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import moment from 'moment';
+import Ip from "../Ip";
 
 export default function Notice() {
 	const params = useParams();
@@ -14,7 +15,7 @@ export default function Notice() {
 	},[params]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/admin/noticeAdmin?page=${params.page || 1}&size=10`, {
+		fetch(`${Ip.url}/admin/noticeAdmin?page=${params.page || 1}&size=10`, {
             method: "GET",
             headers: {
                "Content-Type": "application/json",

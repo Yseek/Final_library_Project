@@ -4,7 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.service.admin.AdminServicePKS;
 
@@ -15,7 +21,7 @@ public class AdminControllerPKS {
     AdminServicePKS adminServicePKS;
 
     @GetMapping("booklist")
-    public ResponseEntity<List> bookList(){
+    public ResponseEntity<List<BookDTO>> bookList(){
         System.out.println(adminServicePKS.selectAll());
         return ResponseEntity.ok().body(adminServicePKS.selectAll());
     }
@@ -31,7 +37,7 @@ public class AdminControllerPKS {
     }
 
     @GetMapping("booklist/update/title={title}&writer={writer}&pub={pub}")
-    public ResponseEntity<List> bookupdate(@PathVariable String title, @PathVariable String writer, @PathVariable String pub){
+    public ResponseEntity<List<BookDTO>> bookupdate(@PathVariable String title, @PathVariable String writer, @PathVariable String pub){
         System.out.println(adminServicePKS.selectBookInfo(title, writer, pub));
         return ResponseEntity.ok().body(adminServicePKS.selectBookInfo(title, writer, pub));
     }

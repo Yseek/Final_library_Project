@@ -22,6 +22,7 @@ import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
 import AdminBookHope from './admin/AdminBookHope';
+import AdminBookHopeOk from './admin/AdminBookHopeOk';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 					<Route path="/admin/bookhope" element={<AdminBookHope />} />
 					<Route path="/admin/bookhope/:page" element={<AdminBookHope />} />
+					<Route path="/admin/bookhopeOk/:bookHopeSeq" element={<AdminBookHopeOk />} />
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />

@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from "react";
 import "./css/Notice.css";
+import Ip from '../Ip';
 
 export default function NoticeWrite() {
 	const titleRef = useRef(null);
@@ -11,7 +12,7 @@ export default function NoticeWrite() {
         event.preventDefault();
         const noticeTitle = titleRef.current.value;
 		const noticeContent = contentRef.current.value;
-        fetch(`http://127.0.0.1:8080/admin/noticeAdmin/write.do`,{
+        fetch(`${Ip.url}/admin/noticeAdmin/write.do`,{
 			method:"POST",
 			headers : {
 				"Content-Type": "application/json",
@@ -36,7 +37,7 @@ export default function NoticeWrite() {
 
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
-			fetch(`http://127.0.0.1:8080/memberInfo`, {
+			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Authorization": "Bearer " + localStorage.getItem("token")

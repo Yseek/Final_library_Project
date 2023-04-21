@@ -1,12 +1,13 @@
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import moment from 'moment';
+import Ip from "../Ip";
 
 export default function Notice() {
 	const params = useParams();
 	const [data, setData] = useState([]);
-	let url=`http://127.0.0.1:8080/admin/notice/content/${params.noticeSeq}`
+	let url=`${Ip.url}/admin/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
 		fetch(url, {
 			method: "GET",
@@ -29,7 +30,7 @@ export default function Notice() {
 
 	function del(noticeSeq) {
 		if (window.confirm("삭제하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/admin/noticeAdmin/delete/${noticeSeq}`, {
+			fetch(`${Ip.url}/admin/noticeAdmin/delete/${noticeSeq}`, {
 				method: "DELETE",
 				headers: {
 				   "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export default function Notice() {
 
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
-			fetch(`http://127.0.0.1:8080/memberInfo`, {
+			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Authorization": "Bearer " + localStorage.getItem("token")
