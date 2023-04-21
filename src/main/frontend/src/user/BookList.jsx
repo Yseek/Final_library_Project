@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Ip from "../Ip";
 import './css/BookList.css';
-import axios from 'axios';
 
 export default function BookList() {
 
