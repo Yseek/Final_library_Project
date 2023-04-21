@@ -22,7 +22,7 @@ export default function AdminBookUpdateDetail(){
         .then((res) => res.json())
         .then((data) => setbookData(data))
         .catch((error) => console.error(error));
-    }, []);
+    }, [bookSeq]);
 
     console.log(bookData);
 
@@ -61,7 +61,7 @@ export default function AdminBookUpdateDetail(){
     return(
         <div>
              {Object.keys(bookData).length > 0 && (
-            <form method="post" name="e" onSubmit={onSubmit}>
+            <form method="post" name="e" onSubmit={onSubmit} autocomplete="off">
                 <div className="row">
                     <div className="row-in">          
                         <h2>책번호</h2><input readOnly type="text" name="bookSeq" defaultValue={bookData.bookSeq}/>
