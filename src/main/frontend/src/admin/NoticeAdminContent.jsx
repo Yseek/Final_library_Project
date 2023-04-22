@@ -40,7 +40,7 @@ export default function Notice() {
 			.then(res => {
 				if (res.ok) {
 					alert("삭제완료");
-					history('/noticeAdmin');
+					history('/admin/notice');
 				}
 			});
 		}

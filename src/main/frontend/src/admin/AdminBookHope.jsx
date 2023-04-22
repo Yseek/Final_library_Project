@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import './css/AdminBookHope.css';
 import Ip from "../Ip";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function AdminBookHope() {
     const params = useParams();
 
     const [param, setParam] = useState(useParams()); // 삭제 새로고침용 
     const [page, setPage] = useState([]);
+    const history = useNavigate();
 
     useEffect(() => {  // 페이지 이동용 
         setParam({ params })
@@ -27,6 +28,24 @@ export default function AdminBookHope() {
     console.log(JSON.stringify(page))
 
     const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+
+    function deny(bookHopeSeq){
+        if (window.confirm("거부하시겠습니까?")) {
+			fetch(`${Ip.url}/admin/bookHope/deny/${bookHopeSeq}`, {
+				method: "GET",
+				headers: {
+				   "Content-Type": "application/json",
+				   "Authorization": "Bearer " + localStorage.getItem("token"),
+			 	},
+			})
+			.then(res => {
+				if (res.ok) {
+					alert("거부완료");
+					setParam({param});
+				}
+			});
+		}
+    }
 
     return (
         <div className="AdminBookHope">
@@ -58,8 +77,8 @@ export default function AdminBookHope() {
                                 {res.bookHopeStatus === 4 && '거부됨'}
                             </td>
                             <td>{res.member.memberName}</td>
-                            <td><button className="bookHopeButton" disabled={res.bookHopeStatus !== 1} color="blue">승인</button></td>
-                            <td><button className="bookHopeButton bookHopeBtCc" disabled={res.bookHopeStatus !== 1} color="red">거부</button></td>
+                            <td><button className="bookHopeButton" disabled={res.bookHopeStatus !== 1} onClick={() => history(`/admin/bookHopeOk/${res.bookHopeSeq}`)}>승인</button></td>
+                            <td><button className="bookHopeButton bookHopeBtCc" disabled={res.bookHopeStatus !== 1} onClick={() => deny(res.bookHopeSeq)}>거부</button></td>
                         </tr>
                     ))}
                 </tbody>
