@@ -88,7 +88,7 @@ export default function AdminMemberList() {
     return (
         <center>
             <h3>회원 목록 페이지</h3>
-            <table className="adminMemberList">
+            <table className="adminMemberTable">
                 <thead>
                     <tr>
                         <th>회원번호</th>
@@ -131,7 +131,7 @@ export default function AdminMemberList() {
                         <option>책번호</option>
                     </select>
                     <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
-                    <button className="searchButton">검색</button>
+                    <button className="adminMemberButton">검색</button>
                 </form>
             </div>
         </center>

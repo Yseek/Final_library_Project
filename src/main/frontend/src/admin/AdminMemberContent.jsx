@@ -22,6 +22,8 @@ export default function AdminMemberContent() {
     const [isBookSeq, setIsBookSeq] = useState(false);
     const [isSearchList, setIsSearchList] = useState(false);
 
+    const [bookRentList, setBookRentList] = useState([]);
+
     /*     useEffect(() => {
             if (!isSearchList) {
                 getMemberList();
@@ -32,18 +34,37 @@ export default function AdminMemberContent() {
 
     // 선택한 회원 정보 가져오기
     useEffect(() => {
-        fetch(`${Ip.url}/admin/memberList/content}`, {
+        fetch(`${Ip.url}/admin/memberList/member`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token"),
             },
-            body: JSON.stringify({ memberSeq : location.state.user }),
+            body: JSON.stringify({ "memberSeq": location.state.user }),
         })
             .then(res => res.json())
             .then(member => setMember(member))
             .catch(error => console.log(`선택한 회원 정보 찾기 에러: ${error}`))
     }, [])
+
+    // 대출 현황 목록 가져오기
+    useEffect(() => {
+        async function getBookRentList() {
+            const data = await fetch(`${Ip.url}/admin/memberList/bookRentList`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({ "memberSeq": location.state.user }),
+            })
+                .then(res => res.json())
+                .then(page => setBookRentList(page))
+        }
+        getBookRentList();
+    }, [])
+    console.log("토큰: " + localStorage.getItem("token"));
+    console.log(`대출 현황: ${JSON.stringify(bookRentList)}`);
 
     // 검색을 누를 경우
     function SearchInput(e) {
@@ -92,30 +113,53 @@ export default function AdminMemberContent() {
     return (
         <center>
             <h3>회원 상세 정보 페이지</h3>
-            <div>{location.state.user}</div>
-            <table className="adminMemberList">
+            <table className="adminMemberTable">
                 <thead>
                     <tr>
                         <th>회원번호</th>
                         <th>이름</th>
                         <th>이메일</th>
                         <th>블랙리스트 여부</th>
-                        <th>블랙리스트 추가 버튼</th>
+                        <td>추가 버튼</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        {/* <td>{member.memberSeq}</td>
+                        <td>{member.memberSeq}</td>
                         <td>{member.memberName}</td>
                         <td>{member.memberEmail}</td>
                         <td>{memberStatusString[member.memberStatus]}</td>
-                        <td>추가 버튼</td> */}
+                        <th><button className="adminMemberButton" disabled={member.memberStatus === 2}>추가</button></th>
                     </tr>
                 </tbody>
-            </table><br/>
+            </table><br />
 
+            <h3>대출 현황</h3>
+            <table className="adminMemberTable">
+                <thead>
+                    <tr>
+                        <th>책 번호</th>
+                        <th>제목</th>
+                        <th>저자</th>
+                        <th>출판사</th>
+                        <th>책 상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {Array.isArray(bookRentList.content) && bookRentList.content.map(book => (
+                        <tr key={book.bookSeq}>
+                            <td>{book.bookSeq}</td>
+                            <td>{book.bookTitle}</td>
+                            <td>{book.bookWriter}</td>
+                            <td>{book.bookPub}</td>
+                            <td>{book.bookStatus}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
-            <table className="adminMemberList">
+            <h3>대출 기록</h3>
+            <table className="adminMemberTable">
                 <thead>
                     <tr>
                         <th>회원번호</th>
@@ -158,7 +202,7 @@ export default function AdminMemberContent() {
                         <option>책번호</option>
                     </select>
                     <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
-                    <button className="searchButton">검색</button>
+                    <button className="adminMemberButton">검색</button>
                 </form>
             </div>
         </center>
