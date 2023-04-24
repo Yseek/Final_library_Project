@@ -1,0 +1,30 @@
+.mainPage{
+	width: 100%;
+	height: 100%;
+}
+
+.mainTop{
+	width: 100%;
+	height: 50%;
+	border: 1px solid black;
+}
+
+.mainBottom{
+	width: 100%;
+	height: 50%;
+	border: 1px solid black;
+}
+
+.mainLeftBottom{
+	float: left;
+	width: 50%;
+	height: 100%;
+	border: 1px solid black;
+}
+
+.mainRightBottom{
+	width: 50%;
+	height: 100%;
+	margin-left: 50%;
+	border: 1px solid black;
+}

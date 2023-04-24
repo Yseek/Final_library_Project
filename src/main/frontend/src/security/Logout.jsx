@@ -15,6 +15,6 @@ export default function Logout() {
 		.then(res => res.json())
 		.then(res => {
 			localStorage.removeItem("token");
-			navi('/');
+			navi('/', { state: "logout" });
 		});
 }
