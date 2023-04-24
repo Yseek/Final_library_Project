@@ -5,6 +5,7 @@ import AdminBookList from './admin/AdminBookList';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberList from './admin/AdminMemberList';
+import AdminMemberContent from './admin/AdminMemberContent';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
@@ -70,6 +71,8 @@ function App() {
 					<Route path="/admin/notice/write" element={<NoticeWrite />}></Route>
 					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
 					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
+					<Route path="/admin/memberList/content" element={<AdminMemberContent />}></Route>
+					<Route path="/admin/memberList/content/:page" element={<AdminMemberContent />}></Route>
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/adminMemberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/user/bookList" element={<BookList />}></Route>

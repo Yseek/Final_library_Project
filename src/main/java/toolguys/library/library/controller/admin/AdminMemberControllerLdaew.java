@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.dto.admin.AdminBookRentDto;
 import toolguys.library.library.dto.admin.AdminMemberDto;
 import toolguys.library.library.service.admin.AdminMemberServiceLdaew;
 
@@ -36,5 +37,27 @@ public class AdminMemberControllerLdaew {
             @RequestBody HashMap<String, String> searchData) {
 
         return adminMemberServiceLdaew.searchMember(searchData, pageable);
+    }
+
+    @PostMapping("memberList/member")
+    public AdminMemberDto memberContent(@RequestBody HashMap<String, String> memberData) {
+        long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+        return adminMemberServiceLdaew.memberContent(memberSeq);
+    }
+
+    @PostMapping("memberList/bookRentList")
+    public Page<AdminBookRentDto> bookRentList(
+            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestBody HashMap<String, String> memberData) {
+        long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+        return adminMemberServiceLdaew.bookRentList(memberSeq, pageable);
+    }
+
+    @PostMapping("memberList/bookRentHistory")
+    public Page<AdminBookRentDto> bookRentHistory(
+        @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+        @RequestBody HashMap<String, String> memberData) {
+            long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+            return adminMemberServiceLdaew.bookRentHistory(memberSeq, pageable);
     }
 }
