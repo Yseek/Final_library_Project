@@ -1,15 +1,18 @@
 package toolguys.library.library.service.user.hoya;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import toolguys.library.library.domain.BookHope;
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.dto.user.BookHopeDTO;
 import toolguys.library.library.repository.user.hoya.UserBookHopeRepository;
 import toolguys.library.library.security.repository.SecurityMemberRepository;
 
-public class UserBookHopeService implements UserBookHopeServiceInterface{
+public class UserBookHopeService implements UserBookHopeServiceInterface {
 
 	@Autowired
 	private final UserBookHopeRepository bookHopeRepository;
@@ -17,7 +20,8 @@ public class UserBookHopeService implements UserBookHopeServiceInterface{
 	@Autowired
 	private final SecurityMemberRepository securityMemberRepository;
 
-	public UserBookHopeService(UserBookHopeRepository bookHopeRepository, SecurityMemberRepository securityMemberRepository) {
+	public UserBookHopeService(UserBookHopeRepository bookHopeRepository,
+			SecurityMemberRepository securityMemberRepository) {
 		this.bookHopeRepository = bookHopeRepository;
 		this.securityMemberRepository = securityMemberRepository;
 	}

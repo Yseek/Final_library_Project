@@ -27,6 +27,7 @@ import MessageDetail from './user/MessageDetail';
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
+import BookHopeApply from "./user/BookHopeApply";
 
 function App() {
 	return (
@@ -67,6 +68,7 @@ function App() {
 					<Route path="/user/bookHope" element={<BookHopeCheck/>}></Route>
 					<Route path="/user/bookHope/:page" element={<BookHopeCheck/>}></Route>
 					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
+					<Route path="/user/bookHopeApply" element={<BookHopeApply/>}></Route>
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
