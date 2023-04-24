@@ -68,6 +68,7 @@ public class AdminControllerPKS {
     @CrossOrigin
     @PostMapping("booklist/delete/{seq}")
     public void bookWishDelete(@PathVariable long seq){
-        
+        System.out.println(seq);
+        adminServicePKS.deleteBook(seq);
     }
 }

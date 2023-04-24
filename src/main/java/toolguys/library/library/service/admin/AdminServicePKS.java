@@ -19,4 +19,6 @@ public interface AdminServicePKS {
     void updateBookInfo(BookDTO dto);
 
     void updateBookInfoDetail(BookDTO dto);
+
+    void deleteBook(long seq);
 }

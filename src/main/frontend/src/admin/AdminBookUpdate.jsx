@@ -63,13 +63,14 @@ export default function AdminBookUpdate() {
     }
 
     function deleteBook(bookSeq){
-        if (window.confirm("취소하시겠습니까?")) {
+        if (window.confirm("삭제하시겠습니까?")) {
 			fetch(`${Ip.url}/admin/booklist/delete/${bookSeq}`, {
-				method: "DELETE"
+				method: "POST"
 			})
 			.then(res => {
 				if (res.ok) {
 					alert("삭제완료");
+                    navigate(link);
 				}
 			});
 		}

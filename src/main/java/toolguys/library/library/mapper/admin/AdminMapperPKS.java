@@ -27,4 +27,6 @@ public interface AdminMapperPKS {
 	void updateBookInfo(HashMap<String, Object> map);
 
 	void updateBookInfoDetail(HashMap<String, Object> map);
+
+	void deleteBook(long seq);
 }

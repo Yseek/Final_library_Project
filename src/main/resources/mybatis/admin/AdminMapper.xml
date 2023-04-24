@@ -87,4 +87,7 @@
         BOOKSTORY=#{bookStory}, BOOKIMGNAME=#{bookImgName}, BOOKIMGPATH=#{bookImgPath}, BOOKIMGOGN=#{boomImgOgn}
         where BOOKSEQ=#{seq}
     </update>
+    <delete id="deleteBook" parameterType="long">
+        delete from BOOK where BOOKSEQ=#{seq}
+    </delete>
 </mapper>

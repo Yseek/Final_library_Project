@@ -38,7 +38,7 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         map.put("pub", pub);
         return adminMapperPKS.searchDetail(map);
     }
-    
+
 
     @Override
     public BookDTO searchByBookId(long seq){
@@ -78,5 +78,10 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         map.put("bookImgPath", dto.getBookImgPath());
         map.put("boomImgOgn", dto.getBookImgOgn());
         adminMapperPKS.updateBookInfoDetail(map);
+    }
+
+    @Override
+    public void deleteBook(long seq){
+        adminMapperPKS.deleteBook(seq);
     }
 }
