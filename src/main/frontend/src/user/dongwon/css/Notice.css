@@ -3,6 +3,16 @@
 	place-items: center;
 }
 
+#NoticeTitle {
+	padding: 10px 30%;
+	border-bottom: 3px solid;
+	border-color:#03a9f47a;
+}
+
+#NoticeItems {
+	margin-right: 55%;
+}
+
 .NoticeContent{
 	display: grid;
 	place-items: center;
