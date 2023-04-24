@@ -190,11 +190,9 @@ export default function HeaderLayout() {
 				<div className="userNav">
 					유저용
 					<ul>
-						<li><Link>유저1</Link></li>
-						<li><Link>유저2</Link></li>
-						<li><Link>유저3</Link></li>
-						<li><Link>유저4</Link></li>
-						<li><Link>유저5</Link></li>
+						<li><Link to={`/notice`}>공지사항</Link></li>
+						<li><Link to={`/user/bookList`}>도서목록</Link></li>
+						<li><Link>도서신청(작업중)</Link></li>
 					</ul>
 				</div>
 				<div className="adminNav">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Ip from "../Ip";
 
 export default function MyPage() {
@@ -46,6 +46,10 @@ export default function MyPage() {
 				생년월일 : {info.memberBirth}
 			</div>
 			<a href="#" onClick={toChangPwd}>비밀번호 변경</a>
+			<p><Link to={`/user/messageCheck`}>쪽지확인</Link></p>
+			<p><Link to={`/mypage/mybook`}>내서재</Link></p>
+			<p><Link to={`/mypage/mybookhope`}>희망도서신청상태확인</Link></p>
+			<p><Link to={`/mypage/mybookrent`}>대여목록</Link></p>
 		</div>
 	)
 }
