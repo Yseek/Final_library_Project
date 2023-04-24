@@ -57,8 +57,9 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
                 .map(book -> AdminBookRentDto.from(book));
     }
 
-    /* @Override
+    @Override
     public Page<AdminBookRentDto> bookRentHistory(long memberSeq, Pageable pageable) {
-        return adminMemberRepositoryLdaew.findBookRentHistory(memberSeq, pa)
-    } */
+        return adminMemberRepositoryLdaew.findBookRentHistory(memberSeq, pageable)
+                .map(book -> AdminBookRentDto.from(book));
+    }
 }

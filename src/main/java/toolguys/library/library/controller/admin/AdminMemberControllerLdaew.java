@@ -53,11 +53,11 @@ public class AdminMemberControllerLdaew {
         return adminMemberServiceLdaew.bookRentList(memberSeq, pageable);
     }
 
-/*     @PostMapping("memberList/bookRentHistory")
+    @PostMapping("memberList/bookRentHistory")
     public Page<AdminBookRentDto> bookRentHistory(
         @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
         @RequestBody HashMap<String, String> memberData) {
             long memberSeq = Long.parseLong(memberData.get("memberSeq"));
             return adminMemberServiceLdaew.bookRentHistory(memberSeq, pageable);
-    } */
+    }
 }

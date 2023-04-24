@@ -14,5 +14,5 @@ public interface AdminMemberServiceLdaew {
 	Page<AdminMemberDto> searchMember(HashMap<String, String> searchData, Pageable pageable);
 	AdminMemberDto memberContent(long memberSeq);
 	Page<AdminBookRentDto> bookRentList(long memberSeq, Pageable pageable);
-	// Page<AdminBookRentDto> bookRentHistory(long memberSeq, Pageable pageable);
+	Page<AdminBookRentDto> bookRentHistory(long memberSeq, Pageable pageable);
 }
