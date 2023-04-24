@@ -1,0 +1,28 @@
+.BookListDiv{
+	display: grid;
+	place-items: center;
+}
+
+
+.BookListTable {
+	width: 80%;
+	border-collapse: collapse;
+	border: 1px solid black;
+	margin : 5%;
+}
+
+.BookListTh{
+	border: 1px solid black;
+	padding: 10px;
+	background-color: #0665A9;
+	color: white;
+}
+
+.BookListTd{
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.BookListA{
+	text-decoration: none;
+}

@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Entity
@@ -17,6 +21,8 @@ public class Message {
 	private long messageSeq;
 
 	@Column(name = "MESSAGEDATE")
+	@DateTimeFormat(pattern = "yyyy-MM")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date messageDate;
 
 	@Column(name = "MESSAGECONTENT")
