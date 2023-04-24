@@ -45,10 +45,4 @@ public class UserBookHopeController {
 	public void delete(@PathVariable long bookHopeSeq) {
 		bookHopeServiceInterface.deleteBookHope(bookHopeSeq);
 	} 
-
-	@PostMapping("bookHopeApply")
-  public ResponseEntity<?> bookHopeApply(@RequestBody BookHope bookHope){
-    userBookHopeRepository.save(bookHope);
-    return ResponseEntity.ok().build();
-  }
 }

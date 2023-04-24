@@ -30,9 +30,8 @@ public class UserBookListController {
 
 	@GetMapping("bookList")
 	public Page<Book> bookList(
-	@PageableDefault(page = 0, size = 3, sort = "bookSeq", direction =
-	Sort.Direction.DESC) Pageable pageable,
-	Model model) {
-	return userBookListServiceInterface.bookListByBook(pageable);
+			@PageableDefault(page = 0, size = 3, sort = "bookSeq", direction = Sort.Direction.DESC) Pageable pageable,
+			Model model) {
+		return userBookListServiceInterface.bookListByBook(pageable);
 	}
 }

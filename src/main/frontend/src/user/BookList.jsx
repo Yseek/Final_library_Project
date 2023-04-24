@@ -18,7 +18,7 @@ export default function BookList() {
 			},
 		})
 			.then(res => res.json())
-			.then(data => { setData(data.content) })
+			.then(data => { console.log(data); setData(data.content) })
 	}, [params]);
 
 	useEffect(() => {
