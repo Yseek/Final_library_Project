@@ -4,7 +4,9 @@ import useFetch from "./useFetch";
 
 export default function Notice() {
 	const params = useParams();
-	const noticeList = useFetch(`http://127.0.0.1:8080/user/notice/content/${params.noticeSeq}`);
+	const noticeList = useFetch(
+		`http://127.0.0.1:8080/user/notice/content/${params.noticeSeq}`
+		);
 	const navigate = useNavigate();
 
 	const goBack = (e) => {

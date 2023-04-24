@@ -24,18 +24,15 @@ export default function Notice() {
 	};
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=1&size=10&search=${params.userInput}`)
+		fetch(`http://127.0.0.1:8080/user/notice?page=1&size=10&search=${params.userInput}`,{
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			}
+		})
 		.then(res => res.json())
 		.then(data => setData(data.content))
 	}, [params]);
-
-	// useEffect(()=>{
-	// 	fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`)
-	// 	.then(res => res.json())
-	// 	.then(page => setPage(page))
-	// }, [params]);
-
-	// const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
 		<div className="Notice">

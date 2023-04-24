@@ -54,5 +54,8 @@
     <select id="selectBookInfo" parameterType="hashMap" resultMap="bookDTO">
         select * from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
     </select>
-    <update id="updateBookInfo" parameterType="hashMap"></update>
+    <update id="updateBookInfo" parameterType="hashMap">
+        update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
+        where BOOKSEQ=#{seq}
+    </update>
 </mapper>
