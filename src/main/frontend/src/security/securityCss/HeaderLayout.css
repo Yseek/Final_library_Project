@@ -66,17 +66,43 @@ ul {
 	border: none;
 }
 
-.chatRoomType>button{
+.chatRoomType>button {
 	width: 10%;
 	height: 50px;
 	float: right;
 }
 
-.chatUl{
+.chatUl {
 	display: block;
 }
 
-.chatContentView{
+.chatContentView {
 	height: 100%;
 	overflow: auto;
+}
+
+.sideBar {
+	float: left;
+	position: relative;
+	height: 600px;
+	background-color: gray;
+	width: 200px;
+	z-index: 3;
+	opacity: 0.6;
+}
+
+.userNav>ul {
+	display: inline;
+}
+
+.userNav>ul>li {
+	padding-top: 5%;
+}
+
+.adminNav>ul {
+	display: inline;
+}
+
+.adminNav>ul>li {
+	padding-top: 5%;
 }

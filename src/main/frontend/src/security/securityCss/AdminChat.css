@@ -30,7 +30,11 @@
 }
 
 .adminChatRoomList>ul>li{
-	border: 1px solid black;
 	margin-left: 3px;
 	margin-right: 3px;
+}
+
+.adminChatRoomList>ul>li>button{
+	margin-bottom: 0;
+	height: 30px;
 }

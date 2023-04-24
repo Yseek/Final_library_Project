@@ -17,9 +17,9 @@ export default function HeaderLayout() {
 	const [msg, setMsg] = useState([]);
 	const [text, setText] = useState('');
 	const [memberSeq, setMemberSeq] = useState(0);
+	const [memeberOrAdmin, setMemeberOrAdmin] = useState(0);
 	const messageListRef = useRef(null);
 	const navi = useNavigate();
-
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
 			fetch(`${Ip.url}/memberInfo`, {
@@ -32,11 +32,27 @@ export default function HeaderLayout() {
 				.then(res => {
 					if (res.status == 500) {
 						alert("로그인 시간이 만료되었습니다.");
-						navi(`/logout`);
+						navi(`/logout`, { state: "logout" });
 					}
 					setName(res.memberName);
 					setMemberSeq(res.memberSeq);
+					setMemeberOrAdmin(res.memeberOrAdmin);
 				})
+		} else {
+			if (stomp != null) {
+				setMemeberOrAdmin(0);
+				const outUser = {
+					channelId: memberSeq,
+					writerId: name,
+					chat: "접속을 종료했습니다"
+				}
+				stomp.send("/pub/chat", "", JSON.stringify(outUser));
+				stomp.send("/pub/chat/pub", "", JSON.stringify(outUser));
+				stomp.disconnect(() => {
+					stomp.unsubscribe(memberSeq);
+				}, memberSeq);
+			}
+			setMemeberOrAdmin(0);
 		}
 	}, [state]);
 
@@ -92,7 +108,7 @@ export default function HeaderLayout() {
 			}
 			stompClient.send("/pub/chat/pub", "", JSON.stringify(inUser));
 			stompClient.send("/pub/chat", "", JSON.stringify(inUser));
-			
+
 		});
 	}
 
@@ -127,46 +143,71 @@ export default function HeaderLayout() {
 			stomp.send("/pub/chat", "", JSON.stringify(data));
 		}
 	}
+
 	let i = 0;
 	return (
-		<div className="header">
-			<div className="header__inner">
-				<div className="chatBox">
-					<div className="chatBtn">
-						<button type="button" onClick={openChat}>채팅</button>
-					</div>
-					<div className="chatRoom" style={chatviewStyle}>
-						<div className="chatRoomView">
-							<div className="chatContentView" ref={messageListRef}>
-								<ul className="chatUl">
-									{msg.map((message) => (
-										<li key={`${name}${i++}`}>{message.writerId}이 보낸 메세지 : {message.chat}</li>
-									))}
-								</ul>
+		<div className="allNavBox">
+			<div className="header">
+				<div className="header__inner">
+					<div className="chatBox">
+						{memeberOrAdmin != 2 ? <div className="chatBtn">
+							<button type="button" onClick={openChat}>채팅</button>
+						</div> : ""}
+						<div className="chatRoom" style={chatviewStyle}>
+							<div className="chatRoomView">
+								<div className="chatContentView" ref={messageListRef}>
+									<ul className="chatUl">
+										{msg.map((message) => (
+											<li key={`${name}${i++}`}>{message.writerId}이 보낸 메세지 : {message.chat}</li>
+										))}
+									</ul>
+								</div>
+							</div>
+							<div className="chatRoomType">
+								<form onSubmit={sendMsg}>
+									<input type="text" onChange={onChange} value={text}></input>
+									<button type="button" onClick={sendMsg}>전송</button>
+								</form>
 							</div>
 						</div>
-						<div className="chatRoomType">
-							<form onSubmit={sendMsg}>
-								<input type="text" onChange={onChange} value={text}></input>
-								<button type="button" onClick={sendMsg}>전송</button>
-							</form>
-						</div>
 					</div>
+					<h1>
+						<Link className="logoImg" to={`/`} >로고</Link>
+					</h1>
+					<nav>
+						<ul>
+							{memeberOrAdmin == 2 ? <li><Link to={`/adminChat`} className="link">관리자채팅방</Link></li> : ""}
+							<li><Link to={`/myPage`} className="link">마이페이지</Link></li>
+							{localStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
+							<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
+							{localStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
+						</ul>
+					</nav>
 				</div>
-				<h1>
-					<a className="logoImg" href="/">
-						로고
-					</a>
-				</h1>
-				<nav>
+			</div>
+			<div className="sideBar">
+				<h2>여기가 사이드바</h2>
+				<div className="userNav">
+					유저용
 					<ul>
-						<li><Link to={`/adminChat`} className="link">관리자채팅방</Link></li>
-						<li><Link to={`/myPage`} className="link">마이페이지</Link></li>
-						{localStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
-						<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
-						{localStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
+						<li><Link>유저1</Link></li>
+						<li><Link>유저2</Link></li>
+						<li><Link>유저3</Link></li>
+						<li><Link>유저4</Link></li>
+						<li><Link>유저5</Link></li>
 					</ul>
-				</nav>
+				</div>
+				<div className="adminNav">
+					관리자용
+					<ul>
+						<li><Link>관리자1</Link></li>
+						<li><Link>관리자2</Link></li>
+						<li><Link>관리자3</Link></li>
+						<li><Link>관리자4</Link></li>
+						<li><Link>관리자5</Link></li>
+					</ul>
+				</div>
+
 			</div>
 		</div>
 	);

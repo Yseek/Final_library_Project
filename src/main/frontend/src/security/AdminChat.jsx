@@ -7,7 +7,7 @@ import { Stomp } from "@stomp/stompjs";
 export default function AdminChat() {
 
 
-	const [chatList, setChatList] = useState([]);
+	const [chatList, setChatList] = useState({});
 	const [stomp, setStomp] = useState(null);
 	const [msg, setMsg] = useState([]);
 	const [name, setName] = useState("");
@@ -34,7 +34,6 @@ export default function AdminChat() {
 	stompPub.connect({}, () => {
 		console.log("접속완료")
 		stompPub.subscribe(`/sub/chat/pub`, (data) => {
-			console.log("이렇게 온 거죠"+data);
 			const newMessage = JSON.parse(data.body);
 			setChatRoomCheck(newMessage);
 		}, "");
@@ -42,30 +41,62 @@ export default function AdminChat() {
 
 	function didMount(e) {
 		e.preventDefault();
-		setChatSelectNum(e.target.value);
 		const mountNum = e.target.value;
-		console.log(chatSelectNum);
-		const socket = new SockJS(`${Ip.url}/ws`);
-		const stompClient = Stomp.over(socket);
-		setMsg([]);
-		stompClient.connect({}, () => {
-			setStomp(stompClient);
-			stompClient.subscribe(`/sub/chat/${mountNum}`, (data) => {
-				const newMessage = JSON.parse(data.body);
-				setMsg((msg) => [...msg, newMessage]);
-				setName(mountNum + newMessage.writerId);
-			}, mountNum);
-			const inUser = {
-				channelId: mountNum,
-				writerId: "관리자님",
-				chat: "상담을 시작할 수 있습니다."
+		if (chatSelectNum != null) {
+			if (mountNum != chatSelectNum) {
+				setMsg([]);
+				const outUser = {
+					channelId: chatSelectNum,
+					writerId: "관리자",
+					chat: "접속을 종료했습니다"
+				}
+				stomp.send("/pub/chat", "", JSON.stringify(outUser));
+				stomp.disconnect(() => {
+					stomp.unsubscribe(chatSelectNum);
+				}, chatSelectNum);
+				setChatSelectNum(mountNum);
+				const socket = new SockJS(`${Ip.url}/ws`);
+				const stompClient = Stomp.over(socket);
+				stompClient.connect({}, () => {
+					setStomp(stompClient);
+					stompClient.subscribe(`/sub/chat/${mountNum}`, (data) => {
+						const newMessage = JSON.parse(data.body);
+						setMsg((msg) => [...msg, newMessage]);
+						setName(mountNum + newMessage.writerId);
+					}, mountNum);
+					const inUser = {
+						channelId: mountNum,
+						writerId: "관리자님",
+						chat: "상담을 시작할 수 있습니다."
+					}
+					stompClient.send("/pub/chat", "", JSON.stringify(inUser));
+				});
 			}
-			stompClient.send("/pub/chat", "", JSON.stringify(inUser));
-		});
+		} else {
+			setChatSelectNum(mountNum);
+			const socket = new SockJS(`${Ip.url}/ws`);
+			const stompClient = Stomp.over(socket);
+			stompClient.connect({}, () => {
+				setStomp(stompClient);
+				stompClient.subscribe(`/sub/chat/${mountNum}`, (data) => {
+					const newMessage = JSON.parse(data.body);
+					setMsg((msg) => [...msg, newMessage]);
+					setName(mountNum + newMessage.writerId);
+				}, mountNum);
+				const inUser = {
+					channelId: mountNum,
+					writerId: "관리자님",
+					chat: "상담을 시작할 수 있습니다."
+				}
+				stompClient.send("/pub/chat", "", JSON.stringify(inUser));
+			});
+		}
 	}
 
 	function disMount(e) {
 		e.preventDefault();
+		setMsg([]);
+		setChatSelectNum(null);
 		const outUser = {
 			channelId: chatSelectNum,
 			writerId: "관리자",
@@ -108,26 +139,27 @@ export default function AdminChat() {
 			<div className="adminChatRoom">
 				<div className="adminChatRoomList">
 					<ul>
-						{chatList.map((res) => (
-							<li key={res}><button type="button" value={res} onClick={didMount}>{res}</button><button type="button" value={res} onClick={disMount}>{res}나가기</button></li>
+						{Object.values(chatList).map((res) => (
+							<li key={res.channelId}>{res.channelId == chatSelectNum ? <button type="button" value={res.channelId} onClick={disMount}>나가기</button> : <button type="button" value={res.channelId} onClick={didMount}>{res.writerId}</button>}</li>
 						))}
 					</ul>
 				</div>
-				<div className="adminChatRoomView">
+				{chatSelectNum == null ? "이미지로고?" : <div className="adminChatRoomView">
 					<div className="adminChatContentView">
-						<ul className="chatUl" ref={messageListRef}>
+						{chatList.length == 0 ? "채팅요청이 없습니다." : <ul className="chatUl" ref={messageListRef}>
 							{msg.map((message) => (
 								<li key={`${name}${i++}`}>{message.writerId}이 보낸 메세지 : {message.chat}</li>
 							))}
-						</ul>
+						</ul>}
 					</div>
-				</div>
-				<div className="adminChatRoomType">
+				</div>}
+				{chatSelectNum == null ? "" : <div className="adminChatRoomType">
 					<form onSubmit={sendMsg}>
 						<input type="text" onChange={onChange} value={text}></input>
 						<button type="button" onClick={sendMsg}>전송</button>
 					</form>
-				</div>
+				</div>}
+
 			</div>
 		</div>
 	)

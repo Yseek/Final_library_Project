@@ -1,0 +1,17 @@
+.changePwd{
+	margin-top: 10%;
+	margin-left: 15%;
+	width: 60%;
+	height: 60%;
+	border: 1px solid black;
+}
+
+.changePwd>form{
+	margin-top: 5%;
+	margin-left: 20%;
+}
+
+.changePwd>form>div{
+	margin-left: 10%;
+	margin-right: 10%;
+}
