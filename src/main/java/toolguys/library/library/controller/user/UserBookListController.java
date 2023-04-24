@@ -7,16 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Book;
-import toolguys.library.library.service.user.BookServiceImpl;
+import toolguys.library.library.service.user.BookListServiceImpl;
 
 @RestController
-public class UserBooksController {
+public class UserBookListController {
 
     @Autowired
-    BookServiceImpl booksservice;
+    BookListServiceImpl booklistservice;
 
-    @GetMapping("bookslist")
-    public List<Book> bookslist(){
-        return booksservice.bookslist();
+    @GetMapping("booklist")
+    public List<Book> booklist(){
+        return booklistservice.booklist();
     }
 }
+

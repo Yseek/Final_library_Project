@@ -4,6 +4,6 @@ import java.util.List;
 
 import toolguys.library.library.domain.Book;
 
-public interface BookService{
-    List<Book> bookslist();
+public interface BookListService {
+    List<Book> booklist();
 }
