@@ -28,7 +28,7 @@ public class AdminMemberDto {
         .build();
     }
 
-    public static AdminMemberDto fromVo(AdminMemberVo member){
+    public static AdminMemberDto from(AdminMemberVo member){
         return AdminMemberDto.builder()
         .memberSeq(member.getMEMBERSEQ())
         .memberName(member.getMEMBERNAME())
