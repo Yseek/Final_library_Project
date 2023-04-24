@@ -38,6 +38,7 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         map.put("pub", pub);
         return adminMapperPKS.searchDetail(map);
     }
+    
 
     @Override
     public BookDTO searchByBookId(long seq){

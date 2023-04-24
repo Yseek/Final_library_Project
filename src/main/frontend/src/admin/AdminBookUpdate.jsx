@@ -62,6 +62,19 @@ export default function AdminBookUpdate() {
         });
     }
 
+    function deleteBook(bookSeq){
+        if (window.confirm("취소하시겠습니까?")) {
+			fetch(`${Ip.url}/admin/booklist/delete/${bookSeq}`, {
+				method: "DELETE"
+			})
+			.then(res => {
+				if (res.ok) {
+					alert("삭제완료");
+				}
+			});
+		}
+    }
+
     return(
     <div>
         {bookList.map((book, bookSeq) => (
@@ -93,6 +106,7 @@ export default function AdminBookUpdate() {
             </div>
             <div className="row">
                 <button>저장</button>
+                <button onClick={() => deleteBook(book.bookSeq)}>삭제</button>
                 <button onClick={() => detail(book.bookSeq)}>상세정보수정</button>
             </div>
         </form>))}

@@ -64,4 +64,10 @@ public class AdminControllerPKS {
         //adminServicePKS.bookInfo(title, writer, publisher);
         return null;
     }
+
+    @CrossOrigin
+    @PostMapping("booklist/delete/{seq}")
+    public void bookWishDelete(@PathVariable long seq){
+        
+    }
 }
