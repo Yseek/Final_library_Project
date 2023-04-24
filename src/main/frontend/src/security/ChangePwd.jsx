@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import "./securityCss/ChangePwd.css"
 import Ip from "../Ip";
 
 export default function ChangePwd() {
@@ -8,6 +9,7 @@ export default function ChangePwd() {
 	const pwdCheckRef = useRef(null);
 	const { state } = useLocation();
 	const [pwdInCheck, setPwdInCheck] = useState("");
+	const navi = useNavigate();
 
 
 	function pwdCheck(e) {
@@ -44,7 +46,10 @@ export default function ChangePwd() {
 				body: JSON.stringify({ changePwdEmail, changePwdPwd }),
 			})
 				.then(res => res.text())
-				.then(res => alert(res))
+				.then(res => {
+					alert(res);
+					navi(`/`);
+				})
 		} else {
 			alert("비밀번호가 옳지 않습니다.");
 		}
@@ -52,6 +57,7 @@ export default function ChangePwd() {
 
 	return (
 		<div className="changePwd">
+			<h3>비밀번호변경</h3>
 			<form onSubmit={changePwdInfo}>
 				<div className="joinInput">
 					비밀번호 : <input type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
