@@ -60,4 +60,13 @@ public class AdminMemberControllerLdaew {
             long memberSeq = Long.parseLong(memberData.get("memberSeq"));
             return adminMemberServiceLdaew.bookRentHistory(memberSeq, pageable);
     }
+
+    // 책 검색
+    @PostMapping("searchBookRent")
+    public Page<AdminMemberDto> searchBookRent(
+            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestBody HashMap<String, String> searchData) {
+
+        return adminMemberServiceLdaew.searchBookRent(searchData, pageable);
+    }
 }

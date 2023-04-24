@@ -26,17 +26,16 @@ export default function AdminMemberContent() {
 
     const [member, setMember] = useState([]);
     const [page, setPage] = useState([]);
-    const [isBookSeq, setIsBookSeq] = useState(false);
     const [isSearchList, setIsSearchList] = useState(false);
 
     const [bookRentList, setBookRentList] = useState([]);
     const [memberSeq, setMemberSeq] = useState();
 
     useEffect(() => {
-        setMemberSeq(location.state.user);
+        if (location.state.user) {
+            setMemberSeq(location.state.user);
+        }
     }, [])
-    // console.log("토큰: " + localStorage.getItem("token"));
-    console.log(`멤버 번호: ${memberSeq}`);
 
     // 선택한 회원 정보 가져오기
     useEffect(() => {
@@ -77,20 +76,27 @@ export default function AdminMemberContent() {
         } else {
             searchBookRent();
         }
-    }, [params]);
+    }, [params, memberSeq]);
 
     // 대출 기록 가져오기
     function getBookRentHistory() {
-        fetch(`${Ip.url}/admin/memberList/content?page=${params.page}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
-            },
-        })
-            .then(res => res.json())
-            .then(page => setPage(page))
+        if (memberSeq !== undefined) {
+            fetch(`${Ip.url}/admin/memberList/bookRentHistory?page=${params.page}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({ "memberSeq": memberSeq }),
+            })
+                .then(res => res.json())
+                .then(page => setPage(page))
+        }
     }
+
+    console.log("토큰: " + localStorage.getItem("token"));
+    // console.log(`대출 기록: ${JSON.stringify(page)}`);
+
 
     // 검색을 누를 경우
     function SearchInput(e) {
@@ -104,28 +110,20 @@ export default function AdminMemberContent() {
         const category = searchCategoryRef.current.value;
         const keyword = searchKeywordRef.current.value;
 
-        fetch(`${Ip.url}/admin/searchMember?page=${params.page}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
-            },
-            body: JSON.stringify({ category, keyword }),
-        })
-            .then(res => res.json())
-            .then(page => setPage(page))
-    }
-
-    function checkSearchCategory() {
-        const category = searchCategoryRef.current.value;
-
-        switch (category) {
-            case "회원번호": setIsBookSeq(false); break;
-            case "이메일": setIsBookSeq(false); break
-            case "책번호": setIsBookSeq(true); break
-            default: setIsBookSeq(false);
+        if (memberSeq !== undefined) {
+            fetch(`${Ip.url}/admin/searchBookRent?page=${params.page}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({ category, keyword, "memberSeq": memberSeq }),
+            })
+                .then(res => res.json())
+                .then(page => setPage(page))
         }
     }
+
 
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
@@ -196,7 +194,7 @@ export default function AdminMemberContent() {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.isArray(bookRentList.content) && bookRentList.content.map(book => (
+                    {Array.isArray(page.content) && page.content.map(book => (
                         <tr key={book.bookSeq}>
                             <td>{book.bookSeq}</td>
                             <td>{book.bookTitle}</td>
@@ -224,12 +222,14 @@ export default function AdminMemberContent() {
             </div>}
             <div>
                 <form onSubmit={SearchInput}>
-                    <select onChange={checkSearchCategory} ref={searchCategoryRef}>
-                        <option>회원번호</option>
-                        <option>이메일</option>
+                    <select ref={searchCategoryRef}>
                         <option>책번호</option>
+                        <option>제목</option>
+                        <option>저자</option>
+                        <option>출판사</option>
+                        <option>책상태</option>
                     </select>
-                    <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
+                    <input type="text" size={30} ref={searchKeywordRef}></input>
                     <button className="adminMemberButton">검색</button>
                 </form>
             </div>
