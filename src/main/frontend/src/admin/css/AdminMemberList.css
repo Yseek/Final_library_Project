@@ -1,13 +1,13 @@
-table {
+.adminMemberTable {
     border-collapse: collapse;
 }
 
-table td {
+.adminMemberTable td {
     height: 2rem;
     text-align: center;
 }
 
-button {
+.adminMemberButton {
     width: 4rem;
 	height: 30px;
 	margin-bottom: 1em;

@@ -87,7 +87,8 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <table>
+            <h3>회원 목록 페이지</h3>
+            <table className="adminMemberTable">
                 <thead>
                     <tr>
                         <th>회원번호</th>
@@ -99,7 +100,7 @@ export default function AdminMemberList() {
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
                         <tr key={member.memberSeq}>
-                            <td>{member.memberSeq}</td>
+                            <td><Link to={`/admin/memberList/content`}  state={{ user: member.memberSeq }}>{member.memberSeq}</Link></td>
                             <td>{member.memberName}</td>
                             <td>{member.memberEmail}</td>
                             <td>{memberStatusString[member.memberStatus]}</td>
@@ -130,7 +131,7 @@ export default function AdminMemberList() {
                         <option>책번호</option>
                     </select>
                     <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
-                    <button>검색</button>
+                    <button className="adminMemberButton">검색</button>
                 </form>
             </div>
         </center>
