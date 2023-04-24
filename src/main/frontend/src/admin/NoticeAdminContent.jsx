@@ -1,14 +1,21 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import moment from 'moment';
+import Ip from "../Ip";
 
 export default function Notice() {
 	const params = useParams();
 	const [data, setData] = useState([]);
-	let url=`http://127.0.0.1:8080/notice/content/${params.noticeSeq}`
+	let url=`${Ip.url}/admin/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
-		fetch(url)
+		fetch(url, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			},
+		})
 		.then(res => res.json())
 		.then(data => setData(data))
 		.catch(error => console.log("####"+error))
@@ -17,19 +24,45 @@ export default function Notice() {
 
 	const history = useNavigate();
 
+	function update(noticeSeq){
+		history(`/admin/notice/update/${noticeSeq}`);
+	}
+
 	function del(noticeSeq) {
 		if (window.confirm("삭제하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/noticeAdmin/delete/${noticeSeq}`, {
-				method: "DELETE"
+			fetch(`${Ip.url}/admin/noticeAdmin/delete/${noticeSeq}`, {
+				method: "DELETE",
+				headers: {
+				   "Content-Type": "application/json",
+				   "Authorization": "Bearer " + localStorage.getItem("token"),
+			 	},
 			})
 			.then(res => {
 				if (res.ok) {
 					alert("삭제완료");
-					history('/noticeAdmin');
+					history('/admin/notice');
 				}
 			});
 		}
 	}
+
+	const { state } = useLocation();
+    const [loginSeq, setLoginSeq] = useState("");
+
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			fetch(`${Ip.url}/memberInfo`, {
+				method: "POST",
+				headers: {
+					"Authorization": "Bearer " + localStorage.getItem("token")
+				}
+			})
+				.then(res => res.json())
+				.then(res => {
+                    setLoginSeq(res.memberSeq)
+				})
+		}
+	}, [state]);
 
 	return (
 		<div className="NoticeContent">
@@ -57,8 +90,9 @@ export default function Notice() {
 				</tbody>
 			</table>
 			<div>
-            	<button><Link to={`/noticeAdmin/update/${data.noticeSeq}`}>수정</Link></button>&nbsp;&nbsp;&nbsp;
-            	<button onClick={() => del(data.noticeSeq)}>삭제</button>
+				{data.memberSeq === loginSeq ? <><button onClick={() => update(data.noticeSeq)}>수정</button>&nbsp;&nbsp;&nbsp;
+												<button onClick={() => del(data.noticeSeq)}>삭제</button></>
+												: ""}
 			</div>
 		</div>
 	);

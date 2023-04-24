@@ -25,16 +25,23 @@ export default function Mybookhope() {
 		}
 	}, []);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}`,{
+	useEffect(() => {
+		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
-		.then(res => res.json())
-		.then(data => setData(data))
+			.then(res => res.json())
+			.then(data => setData(data))
 	}, [info]);
+
+	const bookHopeStat = {
+		1: "신청중",
+		2: "입고완료",
+		3: "취소됨",
+		4: "거부됨"
+	}
 
 	return (
 		<div className="Notice">
@@ -42,21 +49,21 @@ export default function Mybookhope() {
 			<table className="noticeTable">
 				<thead className="noticeTableHead">
 					<tr>
-                        <th>책 제목</th>
+						<th>책 제목</th>
 						<th>저자</th>
 						<th>출판사</th>
-                        <th>신청일</th>
-                        <th>신청상태</th>
+						<th>신청일</th>
+						<th>신청상태</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookHopeSeq}>
-                            <td width="25%">{res.bookHopeTitle}</td>
+							<td width="25%">{res.bookHopeTitle}</td>
 							<td>{res.bookHopeWriter}</td>
 							<td>{res.bookHopePub}</td>
 							<td>{res.bookHopeWantDay}</td>
-							<td>{res.bookHopeStatus}</td>
+							<td>{bookHopeStat[res.bookHopeStatus]}</td>
 						</tr>
 					))}
 				</tbody>

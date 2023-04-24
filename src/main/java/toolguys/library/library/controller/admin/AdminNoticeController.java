@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Notice;
 import toolguys.library.library.domain.dongwon.Paginator;
+import toolguys.library.library.dto.admin.NoticeDTO;
 import toolguys.library.library.service.admin.AdminNoticeService;
 
+@RequestMapping("admin")
 @RestController
 public class AdminNoticeController {
 
@@ -39,6 +42,7 @@ public class AdminNoticeController {
 	public HashMap<String, Object> noticeContent(@PathVariable long noticeSeq){
 		HashMap<String, Object> output = new HashMap<String, Object>();
 		output.put("memberName", noticeService.getNoticeContentS(noticeSeq).getMember().getMemberName());
+		output.put("memberSeq", noticeService.getNoticeContentS(noticeSeq).getMember().getMemberSeq());
 		output.put("noticeSeq", noticeService.getNoticeContentS(noticeSeq).getNoticeSeq());
 		output.put("noticeTitle", noticeService.getNoticeContentS(noticeSeq).getNoticeTitle());
 		output.put("noticeContent", noticeService.getNoticeContentS(noticeSeq).getNoticeContent());
@@ -64,8 +68,9 @@ public class AdminNoticeController {
 		noticeService.deleteNoticeS(noticeSeq);
 	}
 	@PostMapping("noticeAdmin/write.do")
-	public void noticeWrite(@RequestBody Notice notice){
-		noticeService.insertNoticeS(notice);
+	public void noticeWrite(@RequestBody NoticeDTO noticeDTO){
+		System.out.println("noticeDTO:"+noticeDTO);
+		noticeService.insertNoticeS(noticeDTO);
 	}
 	@PostMapping("noticeAdmin/update.do")
 	public void noticeUpdate(@RequestBody Notice notice){
