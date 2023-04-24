@@ -1,23 +1,17 @@
-import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation  } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import Ip from "../Ip";
+import Pagination from "./Pagination";
 
 export default function AdminBookList(){
-    const params = useParams();
     const [bookList, setBookList] = useState([]);
+    const [limit, setLimit] = useState(5);
+    const [page, setPage] = useState(1);
+    const offset = (page - 1) * limit;
     const history = useNavigate();
 
-    const location = useLocation();
-    const queryString = location.search;
-
-    const query = new URLSearchParams(queryString);
-    const bookTitle = query.get('bookTitle');
-    const bookWriter = query.get('bookWriter');
-    const bookPub = query.get('bookPub');
-
     useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/admin/booklist`,{
+		fetch(`${Ip.url}/admin/booklist`,{
             method: "GET",
             headers: {
                "Content-Type": "application/json",
@@ -31,13 +25,28 @@ export default function AdminBookList(){
 
     function update(bookTitle, bookWriter, bookPub){  
         alert("수정 페이지로 이동합니다");
-        const a=[bookTitle,bookWriter,bookPub]
+        const a = [bookTitle,bookWriter,bookPub]
         history(`/admin/booklist/update`,{
             state: a
         });
     }
 
     return (
+    <>
+        <label>
+            페이지 당 표시할 게시물 수:&nbsp;
+            <select
+                type="number"
+                value={limit}
+                onChange={({ target: { value } }) => setLimit(Number(value))}
+            >
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            </select>
+        </label>
         <div className="BookWishDiv">
             <table className="BookWishTable">
                 <thead>
@@ -50,20 +59,29 @@ export default function AdminBookList(){
                     </tr>
                 </thead>
                 <tbody>
-                {bookList.map((book, index) => (
-                          <tr key={index}>
-                            <td>{book.bookTitle}</td>
-                            <td>{book.bookWriter}</td>
-                            <td>{book.bookPub}</td>
-                            <td>{book.bookCount}</td>
-                            <td>{book.rentCount}</td>
-                            <td>
-                                <button onClick={() => update(book.bookTitle, book.bookWriter, book.bookPub)}>수정</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
+                {bookList.slice(offset, offset + limit).map((book, index) => (
+                        <tr key={index}>
+                        <td>{book.bookTitle}</td>
+                        <td>{book.bookWriter}</td>
+                        <td>{book.bookPub}</td>
+                        <td>{book.bookCount}</td>
+                        <td>{book.rentCount}</td>
+                        <td>
+                            <button onClick={() => update(book.bookTitle, book.bookWriter, book.bookPub)}>수정</button>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>         
             </table>
+            <span>
+                <Pagination
+                    total={bookList.length}
+                    limit={limit}
+                    page={page}
+                    setPage={setPage}
+                />
+            </span>
         </div>
+    </>
     )
 }

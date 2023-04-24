@@ -14,11 +14,15 @@ import AdminBookList from './admin/AdminBookList';
 import Notice from "./user/dongwon/Notice"
 import NoticeSearch from "./user/dongwon/NoticeSearch"
 import NoticeContent from "./user/dongwon/NoticeContent"
+import Mybook from "./user/dongwon/Mybook"
+import Mybookrent from "./user/dongwon/MyBookrent"
+import Mybookhope from "./user/dongwon/Mybookhope"
 import MyPage from './security/MyPage';
 import ChangePwd from './security/ChangePwd';
 import BookRentCheck from './user/BookRentCheck';
 
 import AdminBookUpdate from './admin/AdminBookUpdate';
+import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
@@ -34,6 +38,9 @@ function App() {
 					<Route path="/loginPage" element={<LoginPage />}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
+					<Route path="/myPage/mybook" element={<Mybook/>}></Route>
+					<Route path="/myPage/mybookrent" element={<Mybookrent/>}></Route>
+					<Route path="/myPage/mybookhope" element={<Mybookhope/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
@@ -54,6 +61,7 @@ function App() {
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/bookrentcheck" element={<BookRentCheck />} ></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
+					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
 				</Routes>
 			</BrowserRouter>
 			<FooterLayout />
