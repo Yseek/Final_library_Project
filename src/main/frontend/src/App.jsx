@@ -2,6 +2,14 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import AdminBookList from './admin/AdminBookList';
+import Notice from "./user/dongwon/Notice"
+import NoticeSearch from "./user/dongwon/NoticeSearch"
+import NoticeContent from "./user/dongwon/NoticeContent"
+import Mybook from "./user/dongwon/Mybook"
+import Mybookrent from "./user/dongwon/MyBookrent"
+import Mybookhope from "./user/dongwon/Mybookhope"
+import MyPage from './security/MyPage';
+import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberList from './admin/AdminMemberList';
@@ -10,7 +18,6 @@ import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
 import AdminChat from './security/AdminChat';
-import ChangePwd from './security/ChangePwd';
 import FindEmail from './security/FindEmail';
 import FindPwd from './security/FindPwd';
 import FooterLayout from './security/FooterLayout';
@@ -18,10 +25,6 @@ import HeaderLayout from './security/HeaderLayout';
 import JoinPage from './security/JoinPage';
 import LoginPage from './security/LoginPage';
 import Logout from './security/Logout';
-import MyPage from './security/MyPage';
-import Notice from "./user/dongwon/Notice";
-import NoticeContent from "./user/dongwon/NoticeContent";
-import NoticeSearch from "./user/dongwon/NoticeSearch";
 import Main from './security/Main';
 
 function App() {
@@ -37,6 +40,11 @@ function App() {
 					<Route path="/notice/:page" element={<Notice />}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch />}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent />}></Route>
+					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
+					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
+					<Route path="/myPage/mybook" element={<Mybook/>}></Route>
+					<Route path="/myPage/mybookrent" element={<Mybookrent/>}></Route>
+					<Route path="/myPage/mybookhope" element={<Mybookhope/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/findEmail" element={<FindEmail />}></Route>
