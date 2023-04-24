@@ -28,7 +28,6 @@ import Logout from './security/Logout';
 import Main from './security/Main';
 import AdminBookHope from './admin/AdminBookHope';
 import AdminBookHopeOk from './admin/AdminBookHopeOk';
-import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 
 function App() {
 	return (
