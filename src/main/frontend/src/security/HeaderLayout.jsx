@@ -200,11 +200,10 @@ export default function HeaderLayout() {
 				<div className="adminNav">
 					관리자용
 					<ul>
-						<li><Link>관리자1</Link></li>
-						<li><Link>관리자2</Link></li>
-						<li><Link>관리자3</Link></li>
-						<li><Link>관리자4</Link></li>
-						<li><Link>관리자5</Link></li>
+						<li><Link to={`/noticeAdmin`}>공지사항 목록</Link></li>
+						<li><Link>희망도서 승인</Link></li>
+						<li><Link to={`/admin/booklist`}>도서 목록</Link></li>
+						<li><Link to={`/admin/memberList`}>회원 목록</Link></li>
 					</ul>
 				</div>
 

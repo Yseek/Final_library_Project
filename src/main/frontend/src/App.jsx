@@ -1,13 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from './security/LoginPage';
-import JoinPage from './security/JoinPage';
-import Logout from './security/Logout';
-import TestMain from './security/TestMain';
-import FindEmail from './security/FindEmail';
-import FindPwd from './security/FindPwd';
-import AdminMemberList from './admin/AdminMemberList';
-import AdminMemberContent from './admin/AdminMemberContent';
 import './App.css';
 import AdminBookList from './admin/AdminBookList';
 import Notice from "./user/dongwon/Notice"
@@ -21,6 +13,7 @@ import ChangePwd from './security/ChangePwd';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberList from './admin/AdminMemberList';
+import AdminMemberContent from './admin/AdminMemberContent';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
