@@ -2,7 +2,6 @@ package toolguys.library.library.dto.admin;
 
 import lombok.Builder;
 import lombok.Data;
-import toolguys.library.library.domain.Book;
 
 @Builder
 @Data
@@ -13,13 +12,13 @@ public class AdminBookRentDto {
     private final String bookPub;
     private final byte bookStatus;
 
-    public static AdminBookRentDto from(Book book){
+    public static AdminBookRentDto from(AdminBookRentVo book){
         return AdminBookRentDto.builder()
-        .bookSeq(book.getBookSeq())
-        .bookTitle(book.getBookTitle())
-        .bookWriter(book.getBookWriter())
-        .bookPub(book.getBookPub())
-        .bookStatus(book.getBookStatus())
+        .bookSeq(book.getBOOKSEQ())
+        .bookTitle(book.getBOOKTITLE())
+        .bookWriter(book.getBOOKWRITER())
+        .bookPub(book.getBOOKPUB())
+        .bookStatus(book.getBOOKSTATUS())
         .build();
     }
 }

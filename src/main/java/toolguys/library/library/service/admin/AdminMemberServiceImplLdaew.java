@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.dto.admin.AdminBookRentDto;
 import toolguys.library.library.dto.admin.AdminBookRentVo;
 import toolguys.library.library.dto.admin.AdminMemberDto;
 import toolguys.library.library.repository.admin.AdminMemberRepositoryLdaew;
@@ -51,8 +52,13 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
     }
 
     @Override
-    public Page<AdminBookRentVo> bookRentList(long memberSeq, Pageable pageable) {
-        return adminMemberRepositoryLdaew.findBookRentList(memberSeq, pageable);
+    public Page<AdminBookRentDto> bookRentList(long memberSeq, Pageable pageable) {
+        return adminMemberRepositoryLdaew.findBookRentList(memberSeq, pageable)
+                .map(book -> AdminBookRentDto.from(book));
     }
 
+    /* @Override
+    public Page<AdminBookRentDto> bookRentHistory(long memberSeq, Pageable pageable) {
+        return adminMemberRepositoryLdaew.findBookRentHistory(memberSeq, pa)
+    } */
 }

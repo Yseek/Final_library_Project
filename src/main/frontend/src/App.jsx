@@ -51,6 +51,7 @@ function App() {
 					<Route path="/admin/memberList" element={<AdminMemberList />}></Route>
 					<Route path="/admin/memberList/:page" element={<AdminMemberList />}></Route>
 					<Route path="/admin/memberList/content" element={<AdminMemberContent />}></Route>
+					<Route path="/admin/memberList/content/:page" element={<AdminMemberContent />}></Route>
 					<Route path="/admin/booklist" element={<AdminBookList />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />

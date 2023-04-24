@@ -28,7 +28,7 @@ public interface AdminMemberRepositoryLdaew extends JpaRepository<Member, Long> 
 			"from MEMBER mb join RENTCARD rc on mb.MEMBERSEQ = rc.MEMBER_MEMBERSEQ " +
 			"join BOOKRENT br on rc.RENTCARDSEQ = br.RENTCARD_RENTCARDSEQ " +
 			"join BOOK b on b.BOOKSEQ = br.BOOK_BOOKSEQ " +
-			"where MEMBERSEQ like %:memberSeq% and BOOKSTATUS = 3", nativeQuery = true)
+			"where MEMBERSEQ = :memberSeq and BOOKSTATUS = 3", nativeQuery = true)
 	Page<AdminBookRentVo> findBookRentList(@Param("memberSeq") long memberSeq, Pageable pageable);
 
 }
