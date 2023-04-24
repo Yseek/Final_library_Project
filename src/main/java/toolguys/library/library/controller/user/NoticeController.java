@@ -32,6 +32,7 @@ public class NoticeController {
 			output.put("content", noticeService.listNoticeByPage(input));
 			output.put("page", page);
 			output.put("size", size);
+			output.put("totalCount", totalCount);
 			output.put("totalPages", paginator.getTotalPageCount());
 		}else {
 			input.put("search", search);
