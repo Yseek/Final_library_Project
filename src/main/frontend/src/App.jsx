@@ -75,8 +75,8 @@ function App() {
 					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
 				</Routes>
 				</div>
+				<FooterLayout />
 			</BrowserRouter>
-			<FooterLayout />
 		</div>
 	);
 }

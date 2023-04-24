@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Ip from "../Ip";
+import "./securityCss/MyPage.css"
 
 export default function MyPage() {
 	const navi = useNavigate();
