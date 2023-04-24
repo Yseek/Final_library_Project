@@ -1,6 +1,9 @@
 package toolguys.library.library.service.admin;
 
+import org.springframework.transaction.annotation.Transactional;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookReserveDTO;
+
 import java.util.List;
 
 public interface AdminServicePKS {
@@ -16,9 +19,15 @@ public interface AdminServicePKS {
 
     List<BookDTO> selectBookInfo(String title, String writer, String pub);
 
+    List<BookReserveDTO>  allBookReserve();
+
+
     void updateBookInfo(BookDTO dto);
 
     void updateBookInfoDetail(BookDTO dto);
+
+    @Transactional
+    void updateByRent(long seq);
 
     void deleteBook(long seq);
 }

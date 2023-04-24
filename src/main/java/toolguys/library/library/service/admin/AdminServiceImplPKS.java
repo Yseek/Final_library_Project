@@ -2,7 +2,9 @@ package toolguys.library.library.service.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookReserveDTO;
 import toolguys.library.library.mapper.admin.AdminMapperPKS;
 
 import java.util.HashMap;
@@ -55,6 +57,11 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     }
 
     @Override
+    public List<BookReserveDTO> allBookReserve(){
+        return adminMapperPKS.allBookReserve();
+    }
+
+    @Override
     public void updateBookInfo(BookDTO dto){
         HashMap<String, Object> map = new HashMap<>();
         map.put("seq", dto.getBookSeq());
@@ -78,6 +85,13 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         map.put("bookImgPath", dto.getBookImgPath());
         map.put("boomImgOgn", dto.getBookImgOgn());
         adminMapperPKS.updateBookInfoDetail(map);
+    }
+
+    @Override
+    @Transactional
+    public void updateByRent(long seq){
+        adminMapperPKS.bookUpdateByRent(seq);
+        adminMapperPKS.statUpdateByRent(seq);
     }
 
     @Override

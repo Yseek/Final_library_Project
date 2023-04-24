@@ -84,6 +84,7 @@ export default function AdminBookUpdate() {
 
     return(
     <div>
+        ※대출가능한 도서만 삭제가 가능합니다※
         {bookList.map((book, bookSeq) => (
         <form method="post" name="e" key={bookSeq} autoComplete="off">
             <div className="row">
@@ -113,7 +114,7 @@ export default function AdminBookUpdate() {
             </div>
             <div className="row">
                 <button onClick={(e) => onSubmit(e)}>저장</button>
-                <button onClick={(e) => deleteBook(e, book.bookSeq, book.bookTitle, book.bookWriter, book.bookPub)}>삭제</button>
+                {book.bookStatus === 1 && <button onClick={(e) => deleteBook(e, book.bookSeq, book.bookTitle, book.bookWriter, book.bookPub)}>삭제</button>}
                 <button onClick={() => detail(book.bookSeq)}>상세정보수정</button>
             </div>
         </form>))}

@@ -171,7 +171,7 @@ export default function AdminBookList(){
                         <td>저자</td>
                         <td>출판사</td>
                         <td>소장권수</td>
-                        <td>대출중</td>
+                        <td>대출가능</td>
                     </tr>
                 </thead>
                 <tbody>

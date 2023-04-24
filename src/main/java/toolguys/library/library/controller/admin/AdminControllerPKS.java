@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookReserveDTO;
 import toolguys.library.library.service.admin.AdminServicePKS;
 
 @RestController
@@ -44,6 +45,16 @@ public class AdminControllerPKS {
     @GetMapping("booklist/update/title={title}&writer={writer}&pub={pub}")
     public ResponseEntity<List<BookDTO>> bookUpdate(@PathVariable("title") String title, @PathVariable("writer") String writer, @PathVariable("pub") String pub){
         return ResponseEntity.ok().body(adminServicePKS.selectBookInfo(title, writer, pub));
+    }
+
+    @GetMapping("reserved")
+    public ResponseEntity<List<BookReserveDTO>> allBookReserve(){
+        return ResponseEntity.ok().body(adminServicePKS.allBookReserve());
+    }
+
+    @PostMapping("reserved/{seq}")
+    public void updateByRent(@PathVariable long seq){
+        adminServicePKS.updateByRent(seq);
     }
 
     @PostMapping("booklist/update")

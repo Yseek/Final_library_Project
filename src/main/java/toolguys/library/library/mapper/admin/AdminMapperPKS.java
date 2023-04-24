@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import toolguys.library.library.domain.Book;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookReserveDTO;
 
 @Mapper
 @Repository
@@ -24,9 +25,15 @@ public interface AdminMapperPKS {
 
 	List<BookDTO> searchDetail(HashMap<String, Object> map);
 
+	List<BookReserveDTO> allBookReserve();
+
 	void updateBookInfo(HashMap<String, Object> map);
 
 	void updateBookInfoDetail(HashMap<String, Object> map);
+
+	void statUpdateByRent(long seq);
+
+	void bookUpdateByRent(long seq);
 
 	void deleteBook(long seq);
 }
