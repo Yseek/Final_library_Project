@@ -68,8 +68,21 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
         String category = searchData.get("category");
         String keyword = searchData.get("keyword");
         long memberSeq = Long.parseLong(searchData.get("memberSeq"));
-
-        return adminMemberRepositoryLdaew.findBookRentBySearchData(category, keyword, memberSeq, pageable);
+        switch(category){
+            case "책번호" : category = "BOOKSEQ";
+            case "제목" : category = "BOOKTITLE";
+            case "저자" : category = "BOOKWRITER";
+            case "출판사" : category = "BOOKPUB";
+            case "책상태" : category = "BOOKSTATUS";
         }
+
+        System.out.println("#### category: " + category);
+
+        Page<AdminBookRentDto> rentBooks = adminMemberRepositoryLdaew.findBookRentBySearchData(/* category, */ keyword, memberSeq, pageable)
+        .map(book -> AdminBookRentDto.from(book));
+
+        System.out.println("#### rentBooks: " + rentBooks);
+        
+        return rentBooks;
     }
 }
