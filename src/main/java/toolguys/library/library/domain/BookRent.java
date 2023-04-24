@@ -19,7 +19,7 @@ public class BookRent {
 	private long bookRentSeq;
 
 	@Column(name = "BOOKRENTRDATE")
-	private Date bookRentDate;
+	private Date bookRentRDate;
 
 	@Column(name = "BOOKRENTDDAY")
 	private Date bookRentDDay;

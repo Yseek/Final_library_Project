@@ -19,8 +19,24 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     }
 
     @Override
-    public List<BookDTO> listBySearch(String keyword) {
-        return adminMapperPKS.listBySearch(keyword);
+    public List<BookDTO> listBySearch(String option, String keyword) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        return adminMapperPKS.listBySearch(map);
+    }
+    @Override
+    public List<BookDTO> searchAll(String keyword){
+        return adminMapperPKS.searchAll(keyword);
+    }
+
+    @Override
+    public List<BookDTO> searchDetail(String title, String writer, String pub){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("writer", writer);
+        map.put("pub", pub);
+        return adminMapperPKS.searchDetail(map);
     }
 
     @Override
@@ -46,5 +62,20 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         map.put("pub", dto.getBookPub());
         map.put("status", dto.getBookStatus());
         adminMapperPKS.updateBookInfo(map);
+    }
+
+    @Override
+    public void updateBookInfoDetail(BookDTO dto){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("seq", dto.getBookSeq());
+        map.put("title", dto.getBookTitle());
+        map.put("writer", dto.getBookWriter());
+        map.put("pub", dto.getBookPub());
+        map.put("status", dto.getBookStatus());
+        map.put("bookStory", dto.getBookStory());
+        map.put("bookImgName", dto.getBookImgName());
+        map.put("bookImgPath", dto.getBookImgPath());
+        map.put("boomImgOgn", dto.getBookImgOgn());
+        adminMapperPKS.updateBookInfoDetail(map);
     }
 }

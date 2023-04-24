@@ -8,6 +8,8 @@ export default function AdminBookUpdate() {
     const [bookList, setBookList] = useState([]);
     const { state } = useLocation();
 
+    let link = "/admin/booklist";
+    
     useEffect(() => {
         const encodedTitle = encodeURIComponent(state[0]);
         const encodedWriter = encodeURIComponent(state[1]);
@@ -47,7 +49,7 @@ export default function AdminBookUpdate() {
         .then((data) => {
             console.log(data);
             alert("수정완료");
-            navigate("/admin/booklist");
+            navigate(link);
         })
         .catch((error) => console.error(error));
     }
@@ -63,7 +65,7 @@ export default function AdminBookUpdate() {
     return(
     <div>
         {bookList.map((book, bookSeq) => (
-        <form method="post" name="e" onSubmit={onSubmit} key={bookSeq} autocomplete="off">
+        <form method="post" name="e" onSubmit={onSubmit} key={bookSeq} autoComplete="off">
             <div className="row">
                 <div className="row-in">          
                     <h2>책번호</h2><input readOnly type="text" name="bookSeq" defaultValue={book.bookSeq}/>

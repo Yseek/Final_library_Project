@@ -31,7 +31,7 @@
     </resultMap>
     <resultMap id="bookrentDTO" type="toolguys.library.library.dto.admin.BookRentDTO">
         <id property="bookRentSeq" column="BOOKRENTSEQ"/>
-        <id property="bookRentDate" column="BOOKRENTDATE"/>
+        <id property="bookRentRDate" column="BOOKRENTDATE"/>
         <id property="bookRentDDay" column="BOOKRENTDDAY"/>
         <id property="bookRentReturn" column="BOOKRENTRETURN"/>
         <id property="bookRentCoin" column="BOOKRENTCOIN"/>
@@ -46,16 +46,45 @@
     <select id="searchByBookId" parameterType="long" resultType="bookDTO">
         select * from BOOK where BOOKSEQ=#{seq}
     </select>
-    <select id="listBySearch" parameterType="String" resultMap="bookDTO">
+    <select id="listBySearch" parameterType="hashMap" resultMap="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
         (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE and b2.BOOKWRITER=b1.BOOKWRITER and b1.BOOKPUB=b2.BOOKPUB group by b2.BOOKTITLE) as RENTCOUNT
-        from BOOK b1 where BOOKTITLE like CONCAT('%', #{keyword}, '%') group by BOOKTITLE, BOOKWRITER, BOOKPUB
+        from BOOK b1 where ${option} like CONCAT('%', #{keyword}, '%') group by BOOKTITLE, BOOKWRITER, BOOKPUB
+    </select>
+    <select id="searchAll" parameterType="String" resultMap="bookDTO">
+        select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
+        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE and b2.BOOKWRITER=b1.BOOKWRITER and b1.BOOKPUB=b2.BOOKPUB group by b2.BOOKTITLE) as RENTCOUNT
+        from BOOK b1 where BOOKTITLE LIKE CONCAT('%', #{keyword}, '%') OR BOOKWRITER LIKE CONCAT('%', #{keyword}, '%') OR BOOKPUB LIKE CONCAT('%', #{keyword}, '%')
+        group by BOOKTITLE, BOOKWRITER, BOOKPUB
+    </select>
+    <select id="searchDetail" parameterType="hashMap" resultMap="bookDTO">
+        select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
+        (select COUNT(case when BOOKSTATUS!=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE and b2.BOOKWRITER=b1.BOOKWRITER and b1.BOOKPUB=b2.BOOKPUB group by b2.BOOKTITLE) as RENTCOUNT
+        from BOOK b1 where
+        <if test='title != "none" and writer != "none" and pub != "none"'>
+            BOOKTITLE LIKE CONCAT('%', #{title}, '%') and BOOKWRITER LIKE CONCAT('%', #{writer}, '%') and BOOKPUB LIKE CONCAT('%', #{pub}, '%')
+        </if>
+        <if test='title == "none"'>
+            BOOKWRITER like CONCAT('%', #{writer}, '%') and BOOKPUB like CONCAT('%', #{pub}, '%')
+        </if>
+        <if test='writer == "none"'>
+            BOOKTITLE like CONCAT('%', #{title}, '%') and BOOKPUB like CONCAT('%', #{pub}, '%')
+        </if>
+        <if test='pub == "none"'>
+            BOOKTITLE like CONCAT('%', #{title}, '%') and BOOKWRITER like CONCAT('%', #{writer}, '%')
+        </if>
+        group by BOOKTITLE, BOOKWRITER, BOOKPUB
     </select>
     <select id="selectBookInfo" parameterType="hashMap" resultMap="bookDTO">
         select * from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
     </select>
     <update id="updateBookInfo" parameterType="hashMap">
         update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
+        where BOOKSEQ=#{seq}
+    </update>
+    <update id="updateBookInfoDetail" parameterType="hashMap">
+        update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status},
+        BOOKSTORY=#{bookStory}, BOOKIMGNAME=#{bookImgName}, BOOKIMGPATH=#{bookImgPath}, BOOKIMGOGN=#{boomImgOgn}
         where BOOKSEQ=#{seq}
     </update>
 </mapper>

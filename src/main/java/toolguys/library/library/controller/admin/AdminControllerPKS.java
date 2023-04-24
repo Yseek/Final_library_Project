@@ -20,27 +20,40 @@ public class AdminControllerPKS {
         return ResponseEntity.ok().body(adminServicePKS.selectAll());
     }
 
-    @GetMapping("booklist/title={keyword}")
-    public List<BookDTO> bookListBySearch(@PathVariable String keyword){
-        return adminServicePKS.listBySearch(keyword);
+    @GetMapping("booklist/{option}={keyword}")
+    public ResponseEntity<List<BookDTO>> bookListBySearch(@PathVariable String option, @PathVariable String keyword){
+        return ResponseEntity.ok().body(adminServicePKS.listBySearch(option, keyword));
     }
+
+    @GetMapping("booklist/search/{keyword}")
+    public ResponseEntity<List<BookDTO>> searchAllBooks(@PathVariable String keyword){
+        return ResponseEntity.ok().body(adminServicePKS.searchAll(keyword));
+    }
+
+    @GetMapping("booklist/search/detail/title={title}&writer={writer}&pub={pub}")
+    public ResponseEntity<List<BookDTO>> searchDetail(@PathVariable("title") String title, @PathVariable("writer") String writer, @PathVariable("pub") String pub){
+        return ResponseEntity.ok().body(adminServicePKS.searchDetail(title, writer, pub));
+    }
+
 
     @GetMapping("booklist/id={seq}")
     public ResponseEntity<BookDTO> bookSearch(@PathVariable long seq){
-        System.out.println("11111111111111" + adminServicePKS.searchByBookId(seq));
         return ResponseEntity.ok().body(adminServicePKS.searchByBookId(seq));
     }
 
     @GetMapping("booklist/update/title={title}&writer={writer}&pub={pub}")
     public ResponseEntity<List<BookDTO>> bookUpdate(@PathVariable("title") String title, @PathVariable("writer") String writer, @PathVariable("pub") String pub){
-        System.out.println("22222222222222" + adminServicePKS.selectBookInfo(title, writer, pub));
         return ResponseEntity.ok().body(adminServicePKS.selectBookInfo(title, writer, pub));
     }
 
     @PostMapping("booklist/update")
-    public void bookupdate(@RequestBody BookDTO dto){
-        System.out.println("33333333333333" + dto);
+    public void bookUpdate(@RequestBody BookDTO dto){
         adminServicePKS.updateBookInfo(dto);
+    }
+
+    @PostMapping("booklist/update/detail")
+    public void bookUpdateDetail(@RequestBody BookDTO dto){
+        adminServicePKS.updateBookInfoDetail(dto);
     }
 
     @GetMapping("bookinfo/title={title}&writer={writer}&pub={publisher}")
