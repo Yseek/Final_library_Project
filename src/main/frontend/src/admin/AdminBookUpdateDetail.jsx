@@ -49,8 +49,7 @@ export default function AdminBookUpdateDetail(){
             body: JSON.stringify({bookSeq, bookTitle, bookWriter, bookPub, bookStory, bookStatus, bookImgName, bookImgPath, bookImgOgn}),
         })
         .then(res => res.text())
-        .then((data) => {
-            console.log(data);
+        .then(() => {
             alert("수정완료");
             const a = [bookTitle,bookWriter,bookPub]
             navigate(`/admin/booklist/update`, {

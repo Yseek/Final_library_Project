@@ -13,7 +13,7 @@ export default function AdminBookList(){
     const bookTitleRef = useRef();
     const bookWriterRef = useRef();
     const bookPubRef = useRef();
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     /* useEffect(()=>{
 		fetch(`${Ip.url}/admin/booklist`,{
@@ -54,7 +54,7 @@ export default function AdminBookList(){
     function update(bookTitle, bookWriter, bookPub){  
         alert("수정 페이지로 이동합니다");
         const a = [bookTitle,bookWriter,bookPub]
-        history(`/admin/booklist/update`,{
+        navigate(`/admin/booklist/update`,{
             state: a
         });
     }

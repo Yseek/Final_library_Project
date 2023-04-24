@@ -48,6 +48,7 @@ public class AdminControllerPKS {
 
     @PostMapping("booklist/update")
     public void bookUpdate(@RequestBody BookDTO dto){
+        System.out.println("2222222222222222222222" + dto);
         adminServicePKS.updateBookInfo(dto);
     }
 
@@ -65,7 +66,6 @@ public class AdminControllerPKS {
         return null;
     }
 
-    @CrossOrigin
     @PostMapping("booklist/delete/{seq}")
     public void bookWishDelete(@PathVariable long seq){
         System.out.println(seq);
