@@ -1,13 +1,20 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import "./css/Notice.css";
+import Ip from "../Ip";
 
 export default function Notice() {
 	const params = useParams();
 	const [data, setData] = useState([]);
-	let url=`http://127.0.0.1:8080/notice/content/${params.noticeSeq}`
+	let url=`${Ip.url}/admin/notice/content/${params.noticeSeq}`
 	useEffect(()=>{
-		fetch(url)
+		fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+        })
 		.then(res => res.json())
 		.then(data => setData(data))
 	}, [url]);
@@ -22,19 +29,23 @@ export default function Notice() {
         const noticeTitle = titleRef.current.value;
 		const noticeContent = contentRef.current.value;
 		const noticeSeq = seqRef.current.value;
-        fetch(`http://127.0.0.1:8080/noticeAdmin/update.do`,{
+        fetch(`${Ip.url}/admin/noticeAdmin/update.do`,{
 			method:"POST",
 			headers : {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 			body: JSON.stringify({ noticeSeq, noticeTitle, noticeContent }),
 		})
-        .then(navigate(`/noticeAdmin/1`))
+        .then(navigate(`/admin/notice`))
     };
 
 	const fontWeight = {
         fontWeight:"500"
     }
+    const goBack = () => {
+        navigate(-1);
+    };
 
 	return (
 		<div className="NoticeContent">
@@ -47,7 +58,7 @@ export default function Notice() {
                         <tr>
                             <td width="30%" align="center" style={fontWeight}>Name</td>
                             {/* <td><input type="text" name="writer" readonly value='홍길동' size="80"/></td> */}
-                            <td align="left">홍길동</td>
+                            <td align="left"><label>{data.memberName}</label></td>
                         </tr>
                         <tr>
                             <td align="center" style={fontWeight}>Title</td>
@@ -61,7 +72,8 @@ export default function Notice() {
                         <tr>
                             <td></td>
                             <td align="center">
-                                <button>수정완료</button>
+                                <button>수정완료</button>&nbsp;&nbsp;&nbsp;
+                                <button type="button" className="profileB" onClick={goBack}>취소</button>
                             </td>
                         </tr>
                     </tbody>

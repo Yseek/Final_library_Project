@@ -1,7 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import moment from 'moment';
+import Ip from "../Ip";
 
 export default function Notice() {
 	const params = useParams();
@@ -14,25 +15,23 @@ export default function Notice() {
 	},[params]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/noticeAdmin?page=${params.page || 1}&size=10`)
+		fetch(`${Ip.url}/admin/noticeAdmin?page=${params.page || 1}&size=10`, {
+            method: "GET",
+            headers: {
+               "Content-Type": "application/json",
+               "Authorization": "Bearer " + localStorage.getItem("token"),
+      		},
+		})
 		.then(res => res.json())
 		.then(page => setPage(page))
 	}, [param]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+
 	
-	function del(noticeSeq) {
-		if (window.confirm("삭제하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/noticeAdmin/delete/${noticeSeq}`, {
-				method: "DELETE"
-			})
-			.then(res => {
-				if (res.ok) {
-					alert("삭제완료");
-					setParam({param});
-				}
-			});
-		}
+	const history = useNavigate();
+	function write(){
+		history('/admin/notice/write');
 	}
 
 	return (
@@ -44,16 +43,14 @@ export default function Notice() {
                         <th>작성자</th>
 						<th>공지제목</th>
 						<th>공지날짜</th>
-						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.noticeSeq}>
-                            <td width="15%">{res.member.memberName}</td>
-							<td width="50%"><Link to={`/noticeAdmin/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
-							<td width="25%">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
-							<td><button onClick={() => del(res.noticeSeq)}>삭제</button></td>
+                            <td width="20%">{res.member.memberName}</td>
+							<td width="60%"><Link to={`/admin/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
+							<td width="20%">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 						</tr>
 					))}
 				</tbody>
@@ -61,11 +58,11 @@ export default function Notice() {
 			<div className="page">
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/noticeAdmin/${res}`}>{res}</Link>
+						<Link to={`/admin/notice/${res}`}>{res}</Link>
 						{" "}
 					</span>
 				))}
-				<p><button><Link to={`/noticeAdmin/write`}>글쓰기</Link></button></p>
+				<p><button onClick={() => write()}>글쓰기</button></p>
 			</div>
 		</div>
 	);

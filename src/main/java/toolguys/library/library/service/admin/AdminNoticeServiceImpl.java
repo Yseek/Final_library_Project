@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import toolguys.library.library.domain.Notice;
+import toolguys.library.library.dto.admin.NoticeDTO;
 import toolguys.library.library.mapper.admin.AdminNoticeMapper;
 
 @Service
@@ -36,8 +37,8 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         noticeMapper.deleteNotice(noticeSeq);
     }
     @Override
-    public void insertNoticeS(Notice notice) {
-        noticeMapper.insertNotice(notice);
+    public void insertNoticeS(NoticeDTO noticeDTO) {
+        noticeMapper.insertNotice(noticeDTO);
     }
     @Override
     public void updateNoticeS(Notice notice) {
