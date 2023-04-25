@@ -138,8 +138,7 @@ export default function AdminReserveCheck(){
                         </td>
                     </tr>
                 ))}
-                </tbody>
-                
+                </tbody>      
             </table>
             <div>
                 <form name="e" autoComplete="off" onSubmit={searchKeyword}>

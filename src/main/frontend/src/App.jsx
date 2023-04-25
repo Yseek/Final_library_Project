@@ -35,6 +35,7 @@ import Mybookhope from "./user/dongwon/Mybookhope";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
+import AdminReserveCheck from './admin/AdminReserveCheck';
 
 function App() {
 	return (
