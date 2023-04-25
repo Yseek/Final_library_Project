@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Ip from "../Ip";
 import './css/AdminBookHope.css';
 import Pagination from "./Pagination";
+import { useNavigate } from "react-router";
 
 export default function AdminBookLost() {
 
@@ -9,6 +10,7 @@ export default function AdminBookLost() {
     const [limit, setLimit] = useState(5);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
+    const history = useNavigate();
 
     useEffect(() => {
         fetch(`${Ip.url}/admin/bookLost`, {
@@ -20,12 +22,19 @@ export default function AdminBookLost() {
 		    })
             .then(res => res.json())
             .then(data => setBookList(data))
-            .then(setLimit(5))
+            .then(setLimit(5)) //한페이지당 갯수
             .catch(error => console.error(error));
     }, [page]);
 
     function lost(bookSeq){  
         if(window.confirm(JSON.stringify({bookSeq})+" 책 분실을 확인하였습니까?")){
+            const updatedBookList = bookList.map(book => {
+                if (book.bookSeq === bookSeq) {
+                    book.bookStatus = 4; // 분실됨
+                }
+                return book;
+            });
+            setBookList(updatedBookList);
             fetch(`${Ip.url}/admin/bookLost/lost/${bookSeq}`, {
                 method: 'GET',
                 headers: {
@@ -33,14 +42,22 @@ export default function AdminBookLost() {
                     "Authorization": "Bearer " + localStorage.getItem("token"),
                 },
               })
-                .then(response => response.text())
-                .then(res => alert(res))
-                .catch(error => console.error(error));
-            alert("분실처리 되었습니다.");
+                .then(res => {
+					if (res.ok) {
+						alert("분실처리 되었습니다.");
+					}
+				});
         }
     }
     function returnBook(bookSeq){  
         if(window.confirm(JSON.stringify({bookSeq})+"책 반환을 확인하였습니까?")){
+            const updatedBookList = bookList.map(book => {
+                if (book.bookSeq === bookSeq) {
+                    book.bookStatus = 1; // 대출가능
+                }
+                return book;
+            });
+            setBookList(updatedBookList);
             fetch(`${Ip.url}/admin/bookLost/return/${bookSeq}`, {
                 method: 'GET',
                 headers: {
@@ -48,10 +65,11 @@ export default function AdminBookLost() {
                     "Authorization": "Bearer " + localStorage.getItem("token"),
                 },
               })
-                .then(response => response.text())
-                .then(res => alert(res))
-                .catch(error => console.error(error));
-            alert("반환처리 되었습니다.");
+                .then(res => {
+					if (res.ok) {
+						alert("반환처리 되었습니다.");
+					}
+				});
         }
     }
 
@@ -83,8 +101,8 @@ export default function AdminBookLost() {
                             </td>
                             <td>{book.member.memberSeq}</td>
                             <td>{book.member.memberName}</td>
-                            <td><button className="bookHopeButton" disabled={book.bookStatus !== 5} onClick={() => lost(book.bookSeq)} >분실</button></td>
-                            <td><button className="bookHopeButton bookHopeBtCc"  onClick={() => returnBook(book.bookSeq)}>반환</button></td>
+                            <td><button className="bookHopeButton bookHopeBtCc" disabled={book.bookStatus !== 5} onClick={() => lost(book.bookSeq)} >분실</button></td>
+                            <td><button className="bookHopeButton"  onClick={() => returnBook(book.bookSeq)}>반환</button></td>
                         </tr>
                     ))}
                 </tbody>
