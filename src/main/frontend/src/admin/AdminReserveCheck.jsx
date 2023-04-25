@@ -4,8 +4,8 @@ import Ip from "../Ip";
 import Pagination from "./Pagination";
 
 export default function AdminReserveCheck(){
-    const [reserveList, setreserveList] = useState([])
-    const [isListAll, setisListAll] = useState(true)
+    const [reserveList, setreserveList] = useState([]);
+    const [isListAll, setisListAll] = useState(true);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
