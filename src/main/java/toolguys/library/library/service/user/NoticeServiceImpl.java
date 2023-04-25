@@ -20,6 +20,10 @@ public class NoticeServiceImpl implements NoticeService {
         return noticeMapper.getTotalCount();
     }
     @Override
+    public long getTotalCountBySearchS(String search) {
+        return noticeMapper.getTotalCountBySearch(search);
+    }
+    @Override
     public List<Notice> listNoticeByPage(HashMap<String, Object> input) {
         return noticeMapper.getNoticeListByPage(input);
     }
