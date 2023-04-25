@@ -25,7 +25,6 @@ public class AdminAddBooks {
 	public ResponseEntity<String> addBooks(@RequestParam("data") List<String> data,
 			@RequestParam("file") MultipartFile file)
 			throws IOException {
-		System.out.println("옵니까");
 		addBooksService.addBooks(AdminAddBooksDto.builder()
 				.bookTitle(data.get(0))
 				.bookWriter(data.get(1))
