@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import Ip from "../../Ip";
 
 export default function Notice() {
 	const params = useParams();
@@ -24,10 +25,9 @@ export default function Notice() {
 	};
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=1&size=10&search=${params.userInput}`,{
+		fetch(`${Ip.url}/notice?page=1&size=10&search=${params.userInput}`,{
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
 		.then(res => res.json())
