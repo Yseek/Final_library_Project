@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.admin.AdminBookRentDto;
-import toolguys.library.library.dto.admin.AdminBookRentVo;
 import toolguys.library.library.dto.admin.AdminMemberDto;
 import toolguys.library.library.repository.admin.AdminMemberRepositoryLdaew;
 

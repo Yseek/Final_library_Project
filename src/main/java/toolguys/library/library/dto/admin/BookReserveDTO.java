@@ -1,12 +1,10 @@
 package toolguys.library.library.dto.admin;
 
-import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.sql.Date;
+
+import javax.persistence.Id;
+
+import lombok.Data;
 
 @Data
 public class BookReserveDTO {

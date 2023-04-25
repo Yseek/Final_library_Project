@@ -3,15 +3,11 @@ package toolguys.library.library.mapper.admin;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 
-import toolguys.library.library.domain.Book;
 import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
-import toolguys.library.library.dto.admin.RentCardDTO;
 
 @Mapper
 @Repository
