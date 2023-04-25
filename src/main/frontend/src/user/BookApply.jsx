@@ -17,7 +17,7 @@ function BookApply() {
   const [bookHope, setBookHope] = useState([]);
   const memberSeqRef = useRef(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`${Ip.url}/memberInfo`, {
       method: "POST",
       headers: {
@@ -26,7 +26,7 @@ function BookApply() {
     })
       .then(res => res.json())
       .then(res => setMemberSeqq(res.memberSeq));
-  },[])
+  }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -83,7 +83,7 @@ function BookApply() {
               <td className='font-bold BookDetailTd'>출판사</td>
               <td className='BookApplyTd'><input type="text" placeholder="출판사" value={bookHopePub} onChange={(e) => setBookHopePub(e.target.value)} /></td>
             </tr>
-            <input type="hidden" value={memberSeqq} ref={memberSeqRef}/>
+            <input type="hidden" value={memberSeqq} ref={memberSeqRef} />
           </tbody>
         </table>
         {/* 오늘날짜로 신청 */}
