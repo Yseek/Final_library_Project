@@ -4,9 +4,12 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import toolguys.library.library.domain.MyBooks;
 import toolguys.library.library.domain.dongwon.Paginator;
 import toolguys.library.library.service.user.MybooklistService;
 
@@ -32,5 +35,10 @@ public class MybookListController {
         output.put("totalCount", totalCount);
         output.put("totalPages", paginator.getTotalPageCount());
         return output;
+    }
+    @PostMapping("mybooklist/delete.do")
+    public void prolong(@RequestBody MyBooks mybooks){
+        // mybooklistService.prolongMybookrentS(mybooks);
+        System.out.println("myBookSeq: " + mybooks.getMyBooksSeq());
     }
 }

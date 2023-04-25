@@ -51,14 +51,15 @@ export default function Mybook() {
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	const deleteFromMybook = (myBooksSeq) => {
-		// fetch(`http://127.0.0.1:8080/user/mybooklist/delete.do`,{
-		// 	method:"POST",
+		fetch(`http://127.0.0.1:8080/user/mybooklist/delete.do`,{
+			method:"POST",
 		// 	headers : {
 		// 		"Content-Type": "application/json",
 		// 		"Authorization": "Bearer " + localStorage.getItem("token"),
 		// 	},
 		// 	body: JSON.stringify({ bookSeq }),
-		// }).then(window.location.reload())
+		})
+		// .then(window.location.reload())
 	};
 
 	return (
