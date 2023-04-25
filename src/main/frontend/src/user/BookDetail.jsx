@@ -13,8 +13,8 @@ const BookDetail = () => {
 		fetch(`${Ip.url}/user/bookDetail/` + bookSeq, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
-			},})
+			},
+		})
 			.then(res => res.json())
 			.then(res => {
 				setBook(res);
