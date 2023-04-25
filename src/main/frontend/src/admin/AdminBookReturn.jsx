@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
 import Pagination from "./Pagination";
 
-export default function AdminReserveCheck(){
-    const [reserveList, setreserveList] = useState([])
+export default function AdminBookReturn(){
+    const [rentList, setrentList] = useState([])
     const [isListAll, setisListAll] = useState(true)
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
@@ -22,7 +22,7 @@ export default function AdminReserveCheck(){
     }, [])
 
     function listAll(){
-        fetch(`${Ip.url}/admin/reserved`, {
+        fetch(`${Ip.url}/admin/return`, {
             method: "GET",
             headers:{
                 "Content-Type": "application/json",
@@ -30,7 +30,7 @@ export default function AdminReserveCheck(){
             },
         })
         .then(res => res.json())
-        .then(data => setreserveList(data))
+        .then(data => setrentList(data))
         .catch(error => console.error(error));
     };
 
@@ -54,7 +54,7 @@ export default function AdminReserveCheck(){
             alert("검색어를 입력해주세요")
             return;
         }
-        let url = `${Ip.url}/admin/reserved/search/${option}=${keyWord}`;
+        let url = `${Ip.url}/admin/return/search/${option}=${keyWord}`;
 
         fetch(url, {
             method: "GET",
@@ -64,13 +64,13 @@ export default function AdminReserveCheck(){
             },
         })
         .then(res => res.json())
-        .then(data => setreserveList(data))
+        .then(data => setrentList(data))
         .catch(error => console.log(error));
     }
 
     function reserveBook(e, bookReserveSeq, bookSeq, memberSeq){
         e.preventDefault();
-        if(window.confirm(`${bookSeq}번 도서를 대출처리합니다.`)){
+        if(window.confirm(`${bookSeq}번 도서를 반납처리합니다.`)){
             fetch(`${Ip.url}/admin/reserved/${bookReserveSeq}&${bookSeq}&${memberSeq}`, {
                 method: "POST",
                 headers: {
@@ -85,56 +85,31 @@ export default function AdminReserveCheck(){
         }
     }
 
-    function reserveCancel(e, bookReserveSeq, bookSeq){
-        e.preventDefault();
-        if(window.confirm(`${bookSeq}번 도서 예약을 취소처리합니다.`)){
-            fetch(`${Ip.url}/admin/reserved/cancel=${bookReserveSeq}&${bookSeq}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
-                }, 
-            })
-            .then(() => {
-                alert("처리가 완료되었습니다.");
-                window.location.reload();
-            })
-        }
-    }
-
     return(
     <>
         <div>
             <table>
                 <thead>
                     <tr>
-                        <td>예약번호</td>
-                        <td>예약자</td>
+                        <td>대출번호</td>
+                        <td>대출자</td>
                         <td>책번호</td>
-                        <td>제목</td>
-                        <td>예약일</td>
-                        <td>예약상태</td>
+                        <td>책제목</td>
+                        <td>대출일</td>
+                        <td>반납기한</td>
                     </tr>
                 </thead>
                 <tbody>
-                {reserveList.slice(offset, offset + limit).map((rsv, index) => (
+                {rentList.slice(offset, offset + limit).map((rsv, index) => (
                         <tr key={index}>
-                        <td>{rsv.bookReserveSeq}</td>
+                        <td>{rsv.bookRentSeq}</td>
                         <td>{rsv.memberName}</td>
                         <td>{rsv.bookSeq}</td>
                         <td>{rsv.bookTitle}</td>
-                        <td>{rsv.bookReservedDay}</td>
-                        <td>
-                            {rsv.bookReserveStatus === 1 && '예약완료'}
-                            {rsv.bookReserveStatus === 2 && '대출완료'}
-                            {rsv.bookReserveStatus === 3 && '예약취소(사용자취소)'}
-                            {rsv.bookReserveStatus === 4 && '예약취소(관리자취소)'}
-                        </td>
+                        <td>{rsv.bookRentRdate}</td>
+                        <td>{rsv.bookRentDday}</td>
                         <td>
                             <button onClick={(e) => reserveBook(e, rsv.bookReserveSeq, rsv.bookSeq, rsv.memberSeq)}>대출처리</button>
-                        </td>
-                        <td>
-                            <button onClick={(e) => reserveCancel(e, rsv.bookReserveSeq, rsv.bookSeq)}>예약취소</button>
                         </td>
                     </tr>
                 ))}
@@ -152,7 +127,7 @@ export default function AdminReserveCheck(){
             </div>
             <span>
                 <Pagination
-                    total={reserveList.length}
+                    total={rentList.length}
                     limit={limit}
                     page={page}
                     setPage={setPage}

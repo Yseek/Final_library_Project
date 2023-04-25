@@ -106,6 +106,9 @@
             BOOKRESERVESEQ=#{keyword} LIMIT 1
         </if>
     </select>
+    <select id="bookRentList" resultMap="bookrentDTO">
+        select BOOKRENTSEQ, BOOKRENTRDATE, BOOKRENTDDAY, (select MEMBERSEQ from MEMBER as m where b.MEMBER_MEMBERSEQ=
+    </select>
     <update id="updateBookInfo" parameterType="hashMap">
         update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
         where BOOKSEQ=#{seq}
