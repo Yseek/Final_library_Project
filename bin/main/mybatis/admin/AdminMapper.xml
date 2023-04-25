@@ -27,7 +27,7 @@
     </resultMap>
     <resultMap id="rentCardDTO" type="toolguys.library.library.dto.admin.RentCardDTO">
         <id property="rentCardSeq" column="RENTCARDSEQ"/>
-        <association property="toolguys.library.library.dto.admin.MemberDTO" resultMap="memberDTO"/>
+        <id property="memberSeq" column="MEMBERSEQ"/>
     </resultMap>
     <resultMap id="bookrentDTO" type="toolguys.library.library.dto.admin.BookRentDTO">
         <id property="bookRentSeq" column="BOOKRENTSEQ"/>
@@ -35,15 +35,17 @@
         <id property="bookRentDDay" column="BOOKRENTDDAY"/>
         <id property="bookRentReturn" column="BOOKRENTRETURN"/>
         <id property="bookRentCoin" column="BOOKRENTCOIN"/>
-        <association property="toolguys.library.library.dto.admin.RentCardDTO" resultMap="rentCardDTO"/>
-        <association property="toolguys.library.library.dto.admin.BookDTO" resultMap="bookDTO"/>
+        <id property="rentCardSeq" column="RENTCARDSEQ"/>
+        <id property="bookSeq" column="BOOKSEQ"/>
     </resultMap>
     <resultMap id="bookReserveDTO" type="toolguys.library.library.dto.admin.BookReserveDTO">
         <id property="bookReserveSeq" column="BOOKRESERVESEQ"/>
         <id property="bookReservedDay" column="BOOKRESERVEDDAY"/>
         <id property="bookReserveStatus" column="BOOKRESERVESTATUS"/>
-        <association property="toolguys.library.library.dto.admin.bookDTO" resultMap="bookDTO"/>
-        <association property="toolguys.library.library.dto.admin.memberDTO" resultMap="memberDTO"/>
+        <id property="memberSeq" column="MEMBERSEQ"/>
+        <id property="memberName" column="MEMBERNAME"/>
+        <id property="bookSeq" column="BOOKSEQ"/>
+        <id property="bookTitle" column="BOOKTITLE"/>
     </resultMap>
     <select id="selectAll" resultType="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
@@ -90,7 +92,19 @@
         select * from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
     </select>
     <select id="allBookReserve" resultMap="bookReserveDTO">
-        select * from BOOKRESERVE where BOOKRESERVESTATUS=1
+        select BOOKRESERVESEQ, BOOKRESERVEDDAY, BOOKRESERVESTATUS, (select MEMBERSEQ from MEMBER as m where b.MEMBER_MEMBERSEQ=m.MEMBERSEQ) MEMBERSEQ, (select MEMBERNAME from MEMBER as m where b.MEMBER_MEMBERSEQ=m.MEMBERSEQ) MEMBERNAME,
+        BOOK_BOOKSEQ BOOKSEQ, (select BOOKTITLE from BOOK as b2 where b.BOOK_BOOKSEQ=b2.BOOKSEQ) BOOKTITLE from BOOKRESERVE b where BOOKRESERVESTATUS=1
+    </select>
+    <select id="searchReserve" resultMap="bookReserveDTO">
+        select BOOKRESERVESEQ, BOOKRESERVEDDAY, BOOKRESERVESTATUS, (select MEMBERSEQ from MEMBER as m where b.MEMBER_MEMBERSEQ=m.MEMBERSEQ) MEMBERSEQ, (select MEMBERNAME from MEMBER as m where b.MEMBER_MEMBERSEQ=m.MEMBERSEQ) MEMBERNAME,
+        BOOK_BOOKSEQ BOOKSEQ, (select BOOKTITLE from BOOK as b2 where b.BOOK_BOOKSEQ=b2.BOOKSEQ) BOOKTITLE from BOOKRESERVE b
+        where BOOKRESERVESTATUS=1 and
+        <if test='option == "bookSeq"'>
+            BOOK_BOOKSEQ=#{keyword} LIMIT 1
+        </if>
+        <if test='option == "bookReserveSeq"'>
+            BOOKRESERVESEQ=#{keyword} LIMIT 1
+        </if>
     </select>
     <update id="updateBookInfo" parameterType="hashMap">
         update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
@@ -102,11 +116,23 @@
         where BOOKSEQ=#{seq}
     </update>
     <update id="statUpdateByRent" parameterType="long">
-        update BOOKRESERVE set BOOKRESERVESTATUS=2 where BOOKSEQ=#{seq}
+        update BOOKRESERVE set BOOKRESERVESTATUS=2 where BOOKRESERVESEQ=#{reserveSeq}
     </update>
     <update id="bookUpdateByRent" parameterType="long">
-        update BOOK set BOOKSTATUS=3 where BOOKSEQ=#{seq}
+        update BOOK set BOOKSTATUS=3 where BOOKSEQ=#{bookSeq}
     </update>
+    <update id="statUpdateByCancel" parameterType="long">
+        update BOOKRESERVE set BOOKRESERVESTATUS=4 where BOOKRESERVESEQ=#{reserveSeq}
+    </update>
+    <update id="bookUpdateByCancel" parameterType="long">
+        update BOOK set BOOKSTATUS=1 where BOOKSEQ=#{bookSeq}
+    </update>
+    <insert id="insertRentCard">
+        insert into RENTCARD values (0, #{memberSeq})
+    </insert>
+    <insert id="insertBookRent" parameterType="hashMap">
+        insert into BOOKRENT values (0, (select LAST_INSERT_ID() from RENTCARD LIMIT 1), #{bookSeq}, now(), (SELECT DATE_ADD(now(), INTERVAL 7 DAY)), null, 1)
+    </insert>
     <delete id="deleteBook" parameterType="long">
         delete from BOOK where BOOKSEQ=#{seq}
     </delete>

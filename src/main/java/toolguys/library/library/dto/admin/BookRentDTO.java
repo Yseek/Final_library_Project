@@ -30,9 +30,7 @@ public class BookRentDTO {
     @Column(name = "BOOKRENTCOIN")
     private byte bookRentCoin;
 
-    @ManyToOne
-    private RentCardDTO rentCardDTO;
+    private long rentCardSeq;
 
-    @ManyToOne
-    private BookDTO bookDTO;
+    private long bookSeq;
 }

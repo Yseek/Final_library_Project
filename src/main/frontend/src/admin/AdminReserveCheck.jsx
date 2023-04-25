@@ -4,16 +4,20 @@ import Ip from "../Ip";
 import Pagination from "./Pagination";
 
 export default function AdminReserveCheck(){
-    const [reservelist, setReservelist] = useState([])
+    const [reserveList, setreserveList] = useState([])
     const [isListAll, setisListAll] = useState(true)
-    const [limit, setLimit] = useState(5);
+    const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     const navigate = useNavigate();
 
+    let searchFlag = true;
+    
     useEffect(() => {
         if(isListAll){
             listAll();
+        }else if(!isListAll){
+            searchKeyword();
         }
     }, [])
 
@@ -26,25 +30,80 @@ export default function AdminReserveCheck(){
             },
         })
         .then(res => res.json())
-        .then(data => setReservelist(data))
+        .then(data => setreserveList(data))
         .catch(error => console.error(error));
     };
 
+    function optionCheck(value){
+        switch(value){
+            case "bookReserveSeq": setisListAll(false); break;
+            case "bookSeq": setisListAll(false); break;
+        }
+    }
+
+    function searchKeyword(e){
+        e.preventDefault();
+
+        let option = e.target.option.value;
+        if(option.length<1){
+            alert("검색어를 입력해주세요")
+            return;
+        }
+        let keyWord = e.target.keyWord.value;
+        if(keyWord.length<1){
+            alert("검색어를 입력해주세요")
+            return;
+        }
+        let url = `${Ip.url}/admin/reserved/search/${option}=${keyWord}`;
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+            },
+        })
+        .then(res => res.json())
+        .then(data => setreserveList(data))
+        .catch(error => console.log(error));
+    }
+
+    function reserveBook(e, bookReserveSeq, bookSeq, memberSeq){
+        e.preventDefault();
+        if(window.confirm(`${bookSeq}번 도서를 대출처리합니다.`)){
+            fetch(`${Ip.url}/admin/reserved/${bookReserveSeq}&${bookSeq}&${memberSeq}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+            })
+            .then(() => {
+                alert("처리가 완료되었습니다.");
+                window.location.reload();
+            })
+        }
+    }
+
+    function reserveCancel(e, bookReserveSeq, bookSeq){
+        e.preventDefault();
+        if(window.confirm(`${bookSeq}번 도서 예약을 취소처리합니다.`)){
+            fetch(`${Ip.url}/admin/reserved/cancel=${bookReserveSeq}&${bookSeq}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                }, 
+            })
+            .then(() => {
+                alert("처리가 완료되었습니다.");
+                window.location.reload();
+            })
+        }
+    }
+
     return(
     <>
-        <label>
-            표시할 예약도서 수:&nbsp;
-            <select
-                type="number"
-                value={limit}
-                onChange={({ target: { value } }) => setLimit(Number(value))}
-            >
-            <option value="5">5</option>
-            <option value="5">10</option>
-            <option value="5">50</option>
-            <option value="5">100</option>
-            </select>
-        </label>
         <div>
             <table>
                 <thead>
@@ -54,20 +113,52 @@ export default function AdminReserveCheck(){
                         <td>책번호</td>
                         <td>제목</td>
                         <td>예약일</td>
+                        <td>예약상태</td>
                     </tr>
                 </thead>
                 <tbody>
-                {reservelist.slice(offset, offset + limit).map((reserv, index) => (
+                {reserveList.slice(offset, offset + limit).map((rsv, index) => (
                         <tr key={index}>
-                        <td>{reserv.bookReserveSeq}</td>
-                        <td>{reserv.bookWriter}</td>
-                        <td>{reserv.bookPub}</td>
-                        <td>{reserv.bookCount}</td>
-                        <td>{reserv.rentCount}</td>
+                        <td>{rsv.bookReserveSeq}</td>
+                        <td>{rsv.memberName}</td>
+                        <td>{rsv.bookSeq}</td>
+                        <td>{rsv.bookTitle}</td>
+                        <td>{rsv.bookReservedDay}</td>
+                        <td>
+                            {rsv.bookReserveStatus === 1 && '예약완료'}
+                            {rsv.bookReserveStatus === 2 && '대출완료'}
+                            {rsv.bookReserveStatus === 3 && '예약취소(사용자취소)'}
+                            {rsv.bookReserveStatus === 4 && '예약취소(관리자취소)'}
+                        </td>
+                        <td>
+                            <button onClick={(e) => reserveBook(e, rsv.bookReserveSeq, rsv.bookSeq, rsv.memberSeq)}>대출처리</button>
+                        </td>
+                        <td>
+                            <button onClick={(e) => reserveCancel(e, rsv.bookReserveSeq, rsv.bookSeq)}>예약취소</button>
+                        </td>
                     </tr>
                 ))}
-                </tbody> 
+                </tbody>
+                
             </table>
+            <div>
+                <form name="e" autoComplete="off" onSubmit={searchKeyword}>
+                    <select name="option" onChange={({ target: { value } }) => optionCheck(value)}>
+                        <option value="bookReserveSeq">예약번호</option>
+                        <option value="bookSeq">책번호</option>
+                    </select>
+                    <input type="text" name="keyWord" placeholder=""></input>
+                    <button>검색</button>
+                </form>
+            </div>
+            <span>
+                <Pagination
+                    total={reserveList.length}
+                    limit={limit}
+                    page={page}
+                    setPage={setPage}
+                />
+            </span>
         </div>
     </>
     )

@@ -22,12 +22,17 @@ public interface AdminServicePKS {
     List<BookReserveDTO>  allBookReserve();
 
 
+    List<BookReserveDTO> searchReserve(String option, String keyword);
+
     void updateBookInfo(BookDTO dto);
 
     void updateBookInfoDetail(BookDTO dto);
 
     @Transactional
-    void updateByRent(long seq);
+    void updateByRent(long reserveSeq, long bookSeq, long memberSeq);
+
+    @Transactional
+    void updateByCancel(long reserveSeq, long bookSeq);
 
     void deleteBook(long seq);
 }
