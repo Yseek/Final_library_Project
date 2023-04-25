@@ -49,11 +49,14 @@ function App() {
 					<Route path="/notice/:page" element={<Notice />}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch />}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent />}></Route>
-					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
+					<Route path="/notice/search/:userInput/:page" element={<NoticeSearch/>}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/myPage/mybook" element={<Mybook/>}></Route>
+					<Route path="/myPage/mybook/:page" element={<Mybook/>}></Route>
 					<Route path="/myPage/mybookrent" element={<Mybookrent/>}></Route>
+					<Route path="/myPage/mybookrent/:page" element={<Mybookrent/>}></Route>
 					<Route path="/myPage/mybookhope" element={<Mybookhope/>}></Route>
+					<Route path="/myPage/mybookhope/:page" element={<Mybookhope/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>

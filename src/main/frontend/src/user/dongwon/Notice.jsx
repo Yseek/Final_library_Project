@@ -17,7 +17,7 @@ export default function Notice() {
 
 	const onClickSearchInput = (e) => {
 		e.preventDefault();
-		navigate(`/notice/search/${userInput}`);
+		navigate(`/notice/search/${userInput}/1`);
 	};
 
 	useEffect(()=>{

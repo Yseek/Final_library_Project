@@ -3,7 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toolguys.library.library.mapper.user.MybooklistMapper">
-    <select id="getMybooklist" resultType="Book" parameterType="long">
+    <select id="getMybooklist" resultType="Book" parameterType="java.util.HashMap">
         select * from BOOK where BOOKSEQ in (select BOOK_BOOKSEQ from MYBOOKS where MEMBER_MEMBERSEQ=#{memberSeq})
+        LIMIT #{offset}, #{size}
+    </select>
+    <select id="getTotalCount" resultType="long" parameterType="long">
+        select COUNT(*) from BOOK where BOOKSEQ in (select BOOK_BOOKSEQ from MYBOOKS where MEMBER_MEMBERSEQ=#{memberSeq})
     </select>
 </mapper>

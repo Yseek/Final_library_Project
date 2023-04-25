@@ -35,11 +35,14 @@ public class NoticeController {
 			output.put("totalCount", totalCount);
 			output.put("totalPages", paginator.getTotalPageCount());
 		}else {
+			long totalCountBySearch = noticeService.getTotalCountBySearchS(search);
+			Paginator paginatorBySearch = new Paginator(page, size, totalCountBySearch);
 			input.put("search", search);
 			output.put("content", noticeService.listNoticeByPageAndSearch(input));
 			output.put("page", page);
 			output.put("size", size);
-			output.put("totalPages", paginator.getTotalPageCount());
+			output.put("totalCount", totalCountBySearch);
+			output.put("totalPages", paginatorBySearch.getTotalPageCount());
 		}
 		return output;
 	}
