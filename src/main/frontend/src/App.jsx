@@ -35,6 +35,7 @@ import NoticeSearch from "./user/dongwon/NoticeSearch";
 import AdminBookHope from './admin/AdminBookHope';
 import AdminBookHopeOk from './admin/AdminBookHopeOk';
 import AdminReportOfLoss from './admin/AdminReportOfLoss';
+import AdminAddBooks from './admin/AdminAddBooks';
 
 function App() {
 	return (
@@ -93,10 +94,11 @@ function App() {
 					<Route path="/admin/reportOfLoss/:page" element={<AdminReportOfLoss />} />
 					<Route path="/admin/reportOfLoss" element={<AdminReportOfLoss />} />
 					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
+					<Route path="/admin/addBooks" element={<AdminAddBooks />} />
 				</Routes>
 				</div>
+				<FooterLayout />
 			</BrowserRouter>
-			<FooterLayout />
 		</div>
 	);
 }
