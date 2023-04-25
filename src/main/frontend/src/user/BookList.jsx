@@ -11,10 +11,9 @@ export default function BookList() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		fetch(`${Ip.url}/user/bookList?page=${params.page}`, {
+		fetch(`${Ip.url}/bookList?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
@@ -22,10 +21,9 @@ export default function BookList() {
 	}, [params]);
 
 	useEffect(() => {
-		fetch(`${Ip.url}/user/bookList?page=${params.page}`, {
+		fetch(`${Ip.url}/bookList?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
