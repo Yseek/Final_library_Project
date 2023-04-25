@@ -192,7 +192,7 @@ export default function HeaderLayout() {
 					<ul>
 						<li><Link to={`/notice/1`}>공지사항</Link></li>
 						<li><Link to={`/user/bookList`}>도서목록</Link></li>
-						<li><Link to={`/user/bookApply`}>희망도서신청(작업중)</Link></li>
+						<li><Link to={`/user/bookApply`}>희망도서신청</Link></li>
 					</ul>
 				</div>
 				<div className="adminNav">

@@ -1,16 +1,11 @@
 package toolguys.library.library.controller.user.hoya;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import toolguys.library.library.domain.Book;
 import toolguys.library.library.domain.BookHope;
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.user.BookApplyDTO;
@@ -34,6 +29,7 @@ public class UserBookHopeController {
 			bookHope.setBookHopeWriter(bookApplyDTO.getBookHopeWriter());
 			bookHope.setBookHopePub(bookApplyDTO.getBookHopePub());
 			bookHope.setBookHopeWantDay(bookApplyDTO.getBookHopeWantDay());
+			bookHope.setBookHopeStatus(bookApplyDTO.getBookHopeStatus());
 
 			Member member = new Member();
 			member.setMemberSeq(bookApplyDTO.getMemberSeq());

@@ -14,6 +14,7 @@ public class BookApplyDTO {
   private String bookHopeWriter;
   private String bookHopePub;
   private Date bookHopeWantDay;
+  private byte bookHopeStatus;
   private Long memberSeq;
   
 }

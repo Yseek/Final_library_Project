@@ -5,7 +5,7 @@
 
 
 .BookApplyTable {
-	width: 80%;
+	width: 70vw;
 	border-collapse: collapse;
 	border: 1px solid black;
 	margin : 5%;
@@ -29,3 +29,5 @@
 .ApplyFontBold{
 	font-weight: bold;
 }
+
+.hidden-col { display: none; }
