@@ -34,6 +34,9 @@ import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
 import BookApply from "./user/BookApply";
+import AdminBookHope from './admin/AdminBookHope';
+import AdminBookHopeOk from './admin/AdminBookHopeOk';
+import AdminAddBooks from './admin/AdminAddBooks';
 
 function App() {
 	return (
@@ -89,10 +92,11 @@ function App() {
 					<Route path="/admin/bookhopeOk/:bookHopeSeq" element={<AdminBookHopeOk />} />
 					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
 					<Route path="/user/bookApply" element={<BookApply />} />
+					<Route path="/admin/addBooks" element={<AdminAddBooks />} />
 				</Routes>
 				</div>
+				<FooterLayout />
 			</BrowserRouter>
-			<FooterLayout />
 		</div>
 	);
 }

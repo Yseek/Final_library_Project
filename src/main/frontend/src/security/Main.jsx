@@ -1,6 +1,8 @@
+import Ip from "../Ip"
 import "./securityCss/Main.css"
 
 export default function Main() {
+
 	return (
 		<div className="mainPage">
 			<div className="mainTop">

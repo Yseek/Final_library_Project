@@ -190,7 +190,7 @@ export default function HeaderLayout() {
 				<div className="userNav">
 					유저용
 					<ul>
-						<li><Link to={`/notice`}>공지사항</Link></li>
+						<li><Link to={`/notice/1`}>공지사항</Link></li>
 						<li><Link to={`/user/bookList`}>도서목록</Link></li>
 						<li><Link to={`/user/bookApply`}>희망도서신청(작업중)</Link></li>
 					</ul>
@@ -202,6 +202,7 @@ export default function HeaderLayout() {
 						<li><Link to={`/admin/bookhope`}>희망도서 승인</Link></li>
 						<li><Link to={`/admin/booklist`}>도서 목록</Link></li>
 						<li><Link to={`/admin/memberList`}>회원 목록</Link></li>
+						<li><Link to={`/admin/addBooks`}>도서 추가</Link></li>
 					</ul>
 				</div>
 

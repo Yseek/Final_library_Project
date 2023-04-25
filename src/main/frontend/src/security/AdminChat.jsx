@@ -137,29 +137,30 @@ export default function AdminChat() {
 	return (
 		<div className="adminChatBox">
 			<div className="adminChatRoom">
-				<div className="adminChatRoomList">
-					<ul>
-						{Object.values(chatList).map((res) => (
-							<li key={res.channelId}>{res.channelId == chatSelectNum ? <button type="button" value={res.channelId} onClick={disMount}>나가기</button> : <button type="button" value={res.channelId} onClick={didMount}>{res.writerId}</button>}</li>
-						))}
-					</ul>
-				</div>
-				{chatSelectNum == null ? "이미지로고?" : <div className="adminChatRoomView">
-					<div className="adminChatContentView">
-						{chatList.length == 0 ? "채팅요청이 없습니다." : <ul className="chatUl" ref={messageListRef}>
-							{msg.map((message) => (
-								<li key={`${name}${i++}`}>{message.writerId}이 보낸 메세지 : {message.chat}</li>
+				<div className="adminChatRoomInner">
+					<div className="adminChatRoomList">
+						<ul>
+							{Object.values(chatList).map((res) => (
+								<li key={res.channelId}>{res.channelId == chatSelectNum ? <button type="button" value={res.channelId} onClick={disMount}>나가기</button> : <button type="button" value={res.channelId} onClick={didMount}>{res.writerId}</button>}</li>
 							))}
-						</ul>}
+						</ul>
 					</div>
-				</div>}
-				{chatSelectNum == null ? "" : <div className="adminChatRoomType">
-					<form onSubmit={sendMsg}>
-						<input type="text" onChange={onChange} value={text}></input>
-						<button type="button" onClick={sendMsg}>전송</button>
-					</form>
-				</div>}
-
+					{chatSelectNum == null ? "이미지로고?" : <div className="adminChatRoomView">
+						<div className="adminChatContentView">
+							{chatList.length == 0 ? "채팅요청이 없습니다." : <ul className="chatUl" ref={messageListRef}>
+								{msg.map((message) => (
+									<li key={`${name}${i++}`}>{message.writerId}이 보낸 메세지 : {message.chat}</li>
+								))}
+							</ul>}
+						</div>
+					</div>}
+					{chatSelectNum == null ? "" : <div className="adminChatRoomType">
+						<form onSubmit={sendMsg}>
+							<input type="text" onChange={onChange} value={text}></input>
+							<button type="button" onClick={sendMsg}>전송</button>
+						</form>
+					</div>}
+				</div>
 			</div>
 		</div>
 	)
