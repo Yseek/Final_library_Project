@@ -36,6 +36,7 @@
         <id property="bookRentReturn" column="BOOKRENTRETURN"/>
         <id property="bookRentCoin" column="BOOKRENTCOIN"/>
         <id property="rentCardSeq" column="RENTCARDSEQ"/>
+        <id property="memberSeq" column="MEMBERSEQ"/>
         <id property="bookSeq" column="BOOKSEQ"/>
     </resultMap>
     <resultMap id="bookReserveDTO" type="toolguys.library.library.dto.admin.BookReserveDTO">
@@ -107,7 +108,7 @@
         </if>
     </select>
     <select id="bookRentList" resultMap="bookrentDTO">
-        select BOOKRENTSEQ, BOOKRENTRDATE, BOOKRENTDDAY, (select MEMBERSEQ from MEMBER as m where b.MEMBER_MEMBERSEQ=
+        select BOOKRENTSEQ, BOOKRENTRDATE, BOOKRENTDDAY, (select MEMBERSEQ_MEMBERSEQ from RENTCARD as r where b.RENTCARD_RENTCARDSEQ=r.RENTCARDSEQ) MEMBERSEQ,
     </select>
     <update id="updateBookInfo" parameterType="hashMap">
         update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
