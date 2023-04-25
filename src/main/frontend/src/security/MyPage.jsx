@@ -50,7 +50,6 @@ export default function MyPage() {
 			</div>
 			<div className="myPageInnerLink">
 				<a href="#" onClick={toChangPwd}>비밀번호 변경</a>
-				<p><Link to={`/user/messageCheck`}>쪽지확인</Link></p>
 				<p><Link to={`/mypage/mybook/1`}>내서재</Link></p>
 				<p><Link to={`/mypage/mybookhope/1`}>희망도서신청상태확인</Link></p>
 				<p><Link to={`/mypage/mybookrent/1`}>대여목록</Link></p>

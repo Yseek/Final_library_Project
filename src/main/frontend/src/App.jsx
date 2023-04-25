@@ -9,6 +9,7 @@ import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberContent from './admin/AdminMemberContent';
 import AdminMemberList from './admin/AdminMemberList';
+import AdminReserveCheck from './admin/AdminReserveCheck';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
@@ -27,15 +28,12 @@ import MyPage from './security/MyPage';
 import BookApply from "./user/BookApply";
 import BookDetail from './user/BookDetail';
 import BookList from './user/BookList';
-import MessageCheck from './user/MessageCheck';
-import MessageDetail from './user/MessageDetail';
 import Mybookrent from "./user/dongwon/MyBookrent";
 import Mybook from "./user/dongwon/Mybook";
 import Mybookhope from "./user/dongwon/Mybookhope";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
-import AdminReserveCheck from './admin/AdminReserveCheck';
 
 function App() {
 	return (
@@ -83,9 +81,6 @@ function App() {
 					<Route path="/user/bookList" element={<BookList />}></Route>
 					<Route path="/user/bookList/:page" element={<BookList />}></Route>
 					<Route path="/user/bookDetail/:bookSeq" element={<BookDetail />}></Route>
-					<Route path="/user/messageCheck" element={<MessageCheck />}></Route>
-					<Route path="/user/messageCheck/:page" element={<MessageCheck />}></Route>
-					<Route path="/user/messageDetail/:messageSeq" element={<MessageDetail />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 					<Route path="/adminChat" element={<AdminChat />} />
