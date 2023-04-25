@@ -1,28 +1,33 @@
-.BookHopeDiv{
+.BookApplyDiv{
 	display: grid;
 	place-items: center;
 }
 
 
-.BookHopeTable {
-	width: 80%;
+.BookApplyTable {
+	width: 70vw;
 	border-collapse: collapse;
 	border: 1px solid black;
 	margin : 5%;
 }
 
-.BookHopeTh{
+.BookApplyTh{
 	border: 1px solid black;
 	padding: 10px;
 	background-color: #0665A9;
 	color: white;
 }
 
-.BookHopeTd{
+.BookApplyTd{
 	border: 1px solid black;
 	padding: 10px;
 }
 
-.BookHopeA{
+.BookApplyA{
 	text-decoration: none;
 }
+.ApplyFontBold{
+	font-weight: bold;
+}
+
+.hidden-col { display: none; }
