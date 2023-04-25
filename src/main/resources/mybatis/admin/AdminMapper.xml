@@ -108,7 +108,7 @@
         </if>
     </select>
     <select id="bookRentList" resultMap="bookrentDTO">
-        select BOOKRENTSEQ, BOOKRENTRDATE, BOOKRENTDDAY, (select MEMBERSEQ_MEMBERSEQ from RENTCARD as r where b.RENTCARD_RENTCARDSEQ=r.RENTCARDSEQ) MEMBERSEQ,
+        select BOOKRENTSEQ, BOOKRENTRDATE, BOOKRENTDDAY, (select MEMBERNAME from MEMBER m where m.MEMBERSEQ=(select MEMBER_MEMBERSEQ from RENTCARD as r where b.RENTCARD_RENTCARDSEQ=r.RENTCARDSEQ)) MEMBERNAME,
     </select>
     <update id="updateBookInfo" parameterType="hashMap">
         update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
