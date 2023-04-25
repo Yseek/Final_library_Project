@@ -6,11 +6,6 @@ import Ip from "../Ip";
 
 export default function AdminMemberList() {
 
-    const memberStatusString = {
-        1: "일반 회원",
-        2: "블랙리스트"
-    }
-
     const navigate = useNavigate();
     const searchCategoryRef = useRef();
     const searchKeywordRef = useRef();
@@ -94,7 +89,6 @@ export default function AdminMemberList() {
                         <th>회원번호</th>
                         <th>이름</th>
                         <th>이메일</th>
-                        <th>블랙리스트 여부</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,7 +97,6 @@ export default function AdminMemberList() {
                             <td><Link to={`/admin/memberList/content`}  state={{ user: member.memberSeq }}>{member.memberSeq}</Link></td>
                             <td>{member.memberName}</td>
                             <td>{member.memberEmail}</td>
-                            <td>{memberStatusString[member.memberStatus]}</td>
                         </tr>
                     ))}
                 </tbody>
