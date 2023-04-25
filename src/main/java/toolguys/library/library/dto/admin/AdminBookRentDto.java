@@ -1,8 +1,10 @@
 package toolguys.library.library.dto.admin;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+@AllArgsConstructor
 @Builder
 @Data
 public class AdminBookRentDto {
