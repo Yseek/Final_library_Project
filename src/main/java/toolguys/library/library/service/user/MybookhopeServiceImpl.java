@@ -1,5 +1,6 @@
 package toolguys.library.library.service.user;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,11 @@ public class MybookhopeServiceImpl implements MybookhopeService{
 	MybookhopeMapper mybookhopeMapper;
 
     @Override
-    public List<BookHope> getMybookhopeS(long memberSeq){
-        return mybookhopeMapper.getMybookhope(memberSeq);
+    public List<BookHope> getMybookhopeS(HashMap<String, Object> input){
+        return mybookhopeMapper.getMybookhope(input);
+    }
+    @Override
+    public long getTotalCountS(long memberSeq) {
+        return mybookhopeMapper.getTotalCount(memberSeq);
     }
 }
