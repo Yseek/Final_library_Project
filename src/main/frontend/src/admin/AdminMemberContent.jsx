@@ -6,11 +6,6 @@ import Ip from "../Ip";
 
 export default function AdminMemberContent() {
 
-    const memberStatusString = {
-        1: "일반 회원",
-        2: "블랙리스트"
-    }
-
     const bookStatusString = {
         1: "대출가능",
         2: "예약중",
@@ -32,7 +27,7 @@ export default function AdminMemberContent() {
     const [memberSeq, setMemberSeq] = useState();
 
     useEffect(() => {
-        if (location.state.user) {
+        if (location.state!==null) {
             setMemberSeq(location.state.user);
         }
     }, [])
@@ -94,9 +89,6 @@ export default function AdminMemberContent() {
         }
     }
 
-    console.log("토큰: " + localStorage.getItem("token"));
-
-
     // 검색을 누를 경우
     function SearchInput(e) {
         e.preventDefault();
@@ -123,24 +115,9 @@ export default function AdminMemberContent() {
         }
     }
 
-    function addBlacklist() {
-        if (memberSeq !== undefined) {
-            fetch(`${Ip.url}/admin/addBlacklist`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + localStorage.getItem("token"),
-                },
-                body: JSON.stringify({ "memberSeq": memberSeq }),
-            })
-                .then(res => {
-                    if (res.ok) {
-                        alert("블랙리스트에 추가되었습니다");
-                        setMemberSeq(location.state.user);
-                    }
-                })
-        }
-    }
+    const onClickBack = () => {
+		navigate(-1);
+	};
 
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
@@ -160,8 +137,6 @@ export default function AdminMemberContent() {
                         <th>회원번호</th>
                         <th>이름</th>
                         <th>이메일</th>
-                        <th>블랙리스트 여부</th>
-                        <td>추가 버튼</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -169,9 +144,6 @@ export default function AdminMemberContent() {
                         <td>{member.memberSeq}</td>
                         <td>{member.memberName}</td>
                         <td>{member.memberEmail}</td>
-                        <td>{memberStatusString[member.memberStatus]}</td>
-                        <th><button className="adminMemberButton" disabled={member.memberStatus === 2}
-                            onClick={addBlacklist}>{member.memberStatus === 1 ? "추가" : "-"}</button></th>
                     </tr>
                 </tbody>
             </table><br />
@@ -223,7 +195,7 @@ export default function AdminMemberContent() {
                     ))}
                 </tbody>
             </table>
-            {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+            {pageList.length === 0 && isSearchList && <span>검색 결과가 없습니다</span>}
             {pageList.length !== 0 && <div className="page">
                 <span><Link to={`/admin/memberList/content/1`}>&laquo;</Link>&nbsp;</span>
                 <span><Link to={`/admin/memberList/content/${Math.max(1, page.number + 1 - pageWidth)}`}>&lt;</Link>&nbsp;</span>
@@ -246,6 +218,9 @@ export default function AdminMemberContent() {
                     <input type="text" size={30} ref={searchKeywordRef}></input>
                     <button className="adminMemberButton">검색</button>
                 </form>
+            </div>
+            <div>
+                <button className="adminMemberButton" onClick={onClickBack}>목록</button>
             </div>
         </center>
     );
