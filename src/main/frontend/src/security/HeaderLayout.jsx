@@ -33,10 +33,11 @@ export default function HeaderLayout() {
 					if (res.status == 500) {
 						alert("로그인 시간이 만료되었습니다.");
 						navi(`/logout`, { state: "logout" });
+					} else {
+						setName(res.memberName);
+						setMemberSeq(res.memberSeq);
+						setMemeberOrAdmin(res.memeberOrAdmin);
 					}
-					setName(res.memberName);
-					setMemberSeq(res.memberSeq);
-					setMemeberOrAdmin(res.memeberOrAdmin);
 				})
 		} else {
 			if (stomp != null) {
@@ -51,8 +52,9 @@ export default function HeaderLayout() {
 				stomp.disconnect(() => {
 					stomp.unsubscribe(memberSeq);
 				}, memberSeq);
+			} else {
+				setMemeberOrAdmin(0);
 			}
-			setMemeberOrAdmin(0);
 		}
 	}, [state]);
 
