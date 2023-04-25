@@ -16,4 +16,5 @@ public interface AdminMemberServiceLdaew {
 	Page<AdminBookRentDto> bookRentList(long memberSeq, Pageable pageable);
 	Page<AdminBookRentDto> bookRentHistory(long memberSeq, Pageable pageable);
 	Page<AdminBookRentDto> searchBookRent(HashMap<String, String> searchData, Pageable pageable);
+	void addBlacklist(long memberSeq);
 }

@@ -124,6 +124,25 @@ export default function AdminMemberContent() {
         }
     }
 
+    function addBlacklist() {
+        if (memberSeq !== undefined) {
+            fetch(`${Ip.url}/admin/addBlacklist`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({ "memberSeq": memberSeq }),
+            })
+                .then(res => {
+                    if (res.ok) {
+                        alert("블랙리스트에 추가되었습니다");
+                        setMember(location.state.user);
+                    }
+                })
+        }
+    }
+
 
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
@@ -153,7 +172,8 @@ export default function AdminMemberContent() {
                         <td>{member.memberName}</td>
                         <td>{member.memberEmail}</td>
                         <td>{memberStatusString[member.memberStatus]}</td>
-                        <th><button className="adminMemberButton" disabled={member.memberStatus === 2}>추가</button></th>
+                        <th><button className="adminMemberButton" disabled={member.memberStatus === 2}
+                            onClick={addBlacklist}>{member.memberStatus === 1 ? "추가" : "-"}</button></th>
                     </tr>
                 </tbody>
             </table><br />
@@ -224,10 +244,6 @@ export default function AdminMemberContent() {
                 <form onSubmit={SearchInput}>
                     <select ref={searchCategoryRef}>
                         <option>책번호</option>
-                        <option>제목</option>
-                        <option>저자</option>
-                        <option>출판사</option>
-                        <option>책상태</option>
                     </select>
                     <input type="text" size={30} ref={searchKeywordRef}></input>
                     <button className="adminMemberButton">검색</button>
