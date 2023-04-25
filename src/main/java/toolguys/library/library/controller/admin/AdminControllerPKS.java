@@ -59,7 +59,6 @@ public class AdminControllerPKS {
 
     @PostMapping("booklist/update")
     public void bookUpdate(@RequestBody BookDTO dto){
-        System.out.println("2222222222222222222222" + dto);
         adminServicePKS.updateBookInfo(dto);
     }
 

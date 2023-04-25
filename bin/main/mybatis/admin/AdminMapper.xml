@@ -43,7 +43,7 @@
         <id property="bookReservedDay" column="BOOKRESERVEDDAY"/>
         <id property="bookReserveStatus" column="BOOKRESERVESTATUS"/>
         <association property="toolguys.library.library.dto.admin.bookDTO" resultMap="bookDTO"/>
-        <association property="toolguys.library.library.dto.admin.MemberDTO" resultMap="memberDTO"/>
+        <association property="toolguys.library.library.dto.admin.memberDTO" resultMap="memberDTO"/>
     </resultMap>
     <select id="selectAll" resultType="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,

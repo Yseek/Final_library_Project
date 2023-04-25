@@ -1,7 +1,6 @@
 package toolguys.library.library.dto.admin;
 
 import lombok.Data;
-import org.apache.ibatis.annotations.Many;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,5 +25,5 @@ public class BookReserveDTO {
     private Date bookReservedDay;
 
     @Column(name = "BOOKRESERVESTATUS")
-    private int bookReserveStatus;
+    private byte bookReserveStatus;
 }
