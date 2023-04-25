@@ -1,45 +1,39 @@
 package toolguys.library.library.controller.user.hoya;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.BookHope;
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.dto.user.BookApplyDTO;
 import toolguys.library.library.repository.user.hoya.UserBookHopeRepository;
-import toolguys.library.library.service.user.hoya.UserBookHopeService;
-import toolguys.library.library.service.user.hoya.UserBookHopeServiceInterface;
+import toolguys.library.library.security.repository.SecurityMemberRepository;
 
 @RestController
 @RequestMapping("user")
 public class UserBookHopeController {
-  @Autowired
-	UserBookHopeServiceInterface bookHopeServiceInterface;
 
 	@Autowired
 	UserBookHopeRepository userBookHopeRepository;
 
 	@Autowired
-	UserBookHopeService userBookHopeService;
+	SecurityMemberRepository securityMemberRepository;
 
-	@GetMapping("bookHope")
-	public Page<BookHope> bookHopeCheck(
-			@PageableDefault(page = 0, size = 3, sort = "bookHopeSeq", direction = Sort.Direction.DESC) Pageable pageable,
-			Model model) {
-		Member member = bookHopeServiceInterface.findMember(1);
-		return bookHopeServiceInterface.listBookHopeByMember(member, pageable);
+	@PostMapping("bookApply")
+	public BookHope bookApply(@RequestBody BookApplyDTO bookApplyDTO) {
+			BookHope bookHope = new BookHope();
+			bookHope.setBookHopeTitle(bookApplyDTO.getBookHopeTitle());
+			bookHope.setBookHopeWriter(bookApplyDTO.getBookHopeWriter());
+			bookHope.setBookHopePub(bookApplyDTO.getBookHopePub());
+			bookHope.setBookHopeWantDay(bookApplyDTO.getBookHopeWantDay());
+			bookHope.setBookHopeStatus(bookApplyDTO.getBookHopeStatus());
+
+			Member member = new Member();
+			member.setMemberSeq(bookApplyDTO.getMemberSeq());
+			bookHope.setMember(member);
+			return userBookHopeRepository.save(bookHope);
 	}
-
-	@DeleteMapping("bookHope/delete/{bookHopeSeq}")
-	public void delete(@PathVariable long bookHopeSeq) {
-		bookHopeServiceInterface.deleteBookHope(bookHopeSeq);
-	} 
 }

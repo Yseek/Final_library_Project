@@ -41,4 +41,6 @@ public class BookHope {
 	
 	@ManyToOne
 	private Member member;
+
+
 }
