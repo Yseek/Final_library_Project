@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.admin.AdminBookRentDto;
-import toolguys.library.library.dto.admin.AdminBookRentVo;
 import toolguys.library.library.dto.admin.AdminMemberDto;
 import toolguys.library.library.repository.admin.AdminMemberRepositoryLdaew;
 
@@ -61,5 +60,24 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
     public Page<AdminBookRentDto> bookRentHistory(long memberSeq, Pageable pageable) {
         return adminMemberRepositoryLdaew.findBookRentHistory(memberSeq, pageable)
                 .map(book -> AdminBookRentDto.from(book));
+    }
+
+    @Override
+    public Page<AdminBookRentDto> searchBookRent(HashMap<String, String> searchData, Pageable pageable) {
+        String keyword = searchData.get("keyword");
+        long memberSeq = Long.parseLong(searchData.get("memberSeq"));
+
+        Page<AdminBookRentDto> rentBooks = adminMemberRepositoryLdaew
+                .findBookRentByBOOKSEQ(keyword, memberSeq, pageable)
+                .map(book -> AdminBookRentDto.from(book));
+
+        return rentBooks;
+    }
+
+    @Override
+    public void addBlacklist(long memberSeq) {
+        Member member = adminMemberRepositoryLdaew.findById(memberSeq).get();
+        member.setMemberStatus((byte)2);
+        adminMemberRepositoryLdaew.save(member);
     }
 }

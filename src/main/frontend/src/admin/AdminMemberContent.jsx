@@ -6,11 +6,6 @@ import Ip from "../Ip";
 
 export default function AdminMemberContent() {
 
-    const memberStatusString = {
-        1: "일반 회원",
-        2: "블랙리스트"
-    }
-
     const bookStatusString = {
         1: "대출가능",
         2: "예약중",
@@ -26,17 +21,16 @@ export default function AdminMemberContent() {
 
     const [member, setMember] = useState([]);
     const [page, setPage] = useState([]);
-    const [isBookSeq, setIsBookSeq] = useState(false);
     const [isSearchList, setIsSearchList] = useState(false);
 
     const [bookRentList, setBookRentList] = useState([]);
     const [memberSeq, setMemberSeq] = useState();
 
     useEffect(() => {
-        setMemberSeq(location.state.user);
+        if (location.state!==null) {
+            setMemberSeq(location.state.user);
+        }
     }, [])
-    // console.log("토큰: " + localStorage.getItem("token"));
-    console.log(`멤버 번호: ${memberSeq}`);
 
     // 선택한 회원 정보 가져오기
     useEffect(() => {
@@ -77,19 +71,22 @@ export default function AdminMemberContent() {
         } else {
             searchBookRent();
         }
-    }, [params]);
+    }, [params, memberSeq]);
 
     // 대출 기록 가져오기
     function getBookRentHistory() {
-        fetch(`${Ip.url}/admin/memberList/content?page=${params.page}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
-            },
-        })
-            .then(res => res.json())
-            .then(page => setPage(page))
+        if (memberSeq !== undefined) {
+            fetch(`${Ip.url}/admin/memberList/bookRentHistory?page=${params.page}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({ "memberSeq": memberSeq }),
+            })
+                .then(res => res.json())
+                .then(page => setPage(page))
+        }
     }
 
     // 검색을 누를 경우
@@ -104,28 +101,23 @@ export default function AdminMemberContent() {
         const category = searchCategoryRef.current.value;
         const keyword = searchKeywordRef.current.value;
 
-        fetch(`${Ip.url}/admin/searchMember?page=${params.page}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
-            },
-            body: JSON.stringify({ category, keyword }),
-        })
-            .then(res => res.json())
-            .then(page => setPage(page))
-    }
-
-    function checkSearchCategory() {
-        const category = searchCategoryRef.current.value;
-
-        switch (category) {
-            case "회원번호": setIsBookSeq(false); break;
-            case "이메일": setIsBookSeq(false); break
-            case "책번호": setIsBookSeq(true); break
-            default: setIsBookSeq(false);
+        if (memberSeq !== undefined) {
+            fetch(`${Ip.url}/admin/searchBookRent?page=${params.page}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
+                body: JSON.stringify({ category, keyword, "memberSeq": memberSeq }),
+            })
+                .then(res => res.json())
+                .then(page => setPage(page))
         }
     }
+
+    const onClickBack = () => {
+		navigate(-1);
+	};
 
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
@@ -145,8 +137,6 @@ export default function AdminMemberContent() {
                         <th>회원번호</th>
                         <th>이름</th>
                         <th>이메일</th>
-                        <th>블랙리스트 여부</th>
-                        <td>추가 버튼</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -154,8 +144,6 @@ export default function AdminMemberContent() {
                         <td>{member.memberSeq}</td>
                         <td>{member.memberName}</td>
                         <td>{member.memberEmail}</td>
-                        <td>{memberStatusString[member.memberStatus]}</td>
-                        <th><button className="adminMemberButton" disabled={member.memberStatus === 2}>추가</button></th>
                     </tr>
                 </tbody>
             </table><br />
@@ -196,7 +184,7 @@ export default function AdminMemberContent() {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.isArray(bookRentList.content) && bookRentList.content.map(book => (
+                    {Array.isArray(page.content) && page.content.map(book => (
                         <tr key={book.bookSeq}>
                             <td>{book.bookSeq}</td>
                             <td>{book.bookTitle}</td>
@@ -207,7 +195,7 @@ export default function AdminMemberContent() {
                     ))}
                 </tbody>
             </table>
-            {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+            {pageList.length === 0 && isSearchList && <span>검색 결과가 없습니다</span>}
             {pageList.length !== 0 && <div className="page">
                 <span><Link to={`/admin/memberList/content/1`}>&laquo;</Link>&nbsp;</span>
                 <span><Link to={`/admin/memberList/content/${Math.max(1, page.number + 1 - pageWidth)}`}>&lt;</Link>&nbsp;</span>
@@ -224,14 +212,15 @@ export default function AdminMemberContent() {
             </div>}
             <div>
                 <form onSubmit={SearchInput}>
-                    <select onChange={checkSearchCategory} ref={searchCategoryRef}>
-                        <option>회원번호</option>
-                        <option>이메일</option>
+                    <select ref={searchCategoryRef}>
                         <option>책번호</option>
                     </select>
-                    <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
+                    <input type="text" size={30} ref={searchKeywordRef}></input>
                     <button className="adminMemberButton">검색</button>
                 </form>
+            </div>
+            <div>
+                <button className="adminMemberButton" onClick={onClickBack}>목록</button>
             </div>
         </center>
     );
