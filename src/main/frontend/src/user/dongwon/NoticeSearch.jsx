@@ -3,6 +3,7 @@ import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import Ip from "../../Ip";
 
 export default function Notice() {
 	const params = useParams();
@@ -25,10 +26,9 @@ export default function Notice() {
 	};
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10&search=${params.userInput}`,{
+		fetch(`${Ip.url}/notice?page=${params.page}&size=10&search=${params.userInput}`,{
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
 		.then(res => res.json())
@@ -36,10 +36,9 @@ export default function Notice() {
 	}, [params]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10&search=${params.userInput}`,{
+		fetch(`${Ip.url}/notice?page=${params.page}&size=10&search=${params.userInput}`,{
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
 		.then(res => res.json())
@@ -65,7 +64,6 @@ export default function Notice() {
 						<tr key={res.noticeSeq}>
                             <td width="15%">{res.member.memberName}</td>
 							<td width="60%"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
-							{/* <td>{res.noticeRdate}</td> */}
 							<td>{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 						</tr>
 					))}

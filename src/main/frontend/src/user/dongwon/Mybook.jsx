@@ -50,6 +50,17 @@ export default function Mybook() {
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
+	const deleteFromMybook = (bookSeq) => {
+		fetch(`http://127.0.0.1:8080/user/mybookrent/prolong.do`,{
+			method:"POST",
+			headers : {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			},
+			body: JSON.stringify({ bookSeq }),
+		}).then(window.location.reload())
+	};
+
 	return (
 		<div className="Notice">
 			<div><h2>내 서재</h2></div>
@@ -61,6 +72,7 @@ export default function Mybook() {
                         <th>커버 이미지</th>
 						<th>저자</th>
 						<th>출판사</th>
+						<th>내서재에서 제거</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,6 +82,7 @@ export default function Mybook() {
 							<td>{res.bookImgPath}</td>
 							<td>{res.bookWriter}</td>
 							<td>{res.bookPub}</td>
+							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.bookSeq)}>제거</button></td>
 						</tr>
 					))}
 				</tbody>

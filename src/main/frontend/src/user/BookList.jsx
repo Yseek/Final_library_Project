@@ -11,10 +11,9 @@ export default function BookList() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		fetch(`${Ip.url}/user/bookList?page=${params.page}`, {
+		fetch(`${Ip.url}/bookList?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
@@ -22,10 +21,9 @@ export default function BookList() {
 	}, [params]);
 
 	useEffect(() => {
-		fetch(`${Ip.url}/user/bookList?page=${params.page}`, {
+		fetch(`${Ip.url}/bookList?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
@@ -35,9 +33,11 @@ export default function BookList() {
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	const bookStat = {
-		0: "분실",
-		1: "예약 가능",
-		2: "예약 불가"
+		1: "대출가능",
+		2: "예약중",
+		3: "대출중",
+		4: "분실됨",
+		5: "분실신고됨"
 	}
 
 	return (
@@ -50,6 +50,7 @@ export default function BookList() {
 						<th className='BookListTh'>출판사</th>
 						<th className='BookListTh'>상태</th>
 						<th className='BookListTh'>내용보기</th>
+						<th className='BookListTh'>예약하기</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -60,6 +61,7 @@ export default function BookList() {
 							<td className='BookListTd'>{res.bookPub}</td>
 							<td className='BookListTd'>{bookStat[res.bookStatus]}</td>
 							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
+							<td className='BookListTd'><button>예약</button></td>
 						</tr>
 					))}
 				</tbody>
