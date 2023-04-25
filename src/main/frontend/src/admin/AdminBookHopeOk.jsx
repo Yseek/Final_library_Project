@@ -68,6 +68,22 @@ export default function AdminBookHope() {
           history(`/admin/bookHope`)
     };
 
+    const [imageSrc, setImageSrc] = useState(null);
+
+    const onUpload = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+  
+        return new Promise(res => {
+           reader.onload = () => {
+              setImageSrc(reader.result || null);
+              //setFileImg(file);
+              res();
+           }
+        })
+     }
+
     return(
         <div>
             {Object.keys(data).length > 0 && (
@@ -94,17 +110,12 @@ export default function AdminBookHope() {
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <h2>책 이미지 파일명</h2><input type="text" ref={bookImgNameRef}/>
+                        <h2>책 이미지 파일</h2><input type="file" ref={bookImgNameRef} onChange={onUpload}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <h2>책 이미지 경로</h2><input type="text" ref={bookImgPathRef}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="row-in">          
-                        <h2>책 이미지 원본파일명</h2><input type="text" ref={bookImgOgnRef}/>
+                        <h2>이미지</h2><img src={imageSrc}></img>
                     </div>
                 </div>
                 <div className="row">
