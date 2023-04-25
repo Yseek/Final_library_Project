@@ -14,8 +14,7 @@ const BookDetail = () => {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
-			},
-		})
+			},})
 			.then(res => res.json())
 			.then(res => {
 				setBook(res);
