@@ -34,22 +34,22 @@ export default function AdminBookUpdateDetail(){
         const bookWriter = e.target.bookWriter.value;
         const bookPub = e.target.bookPub.value;
         const bookStatus = e.target.bookStatus.value;
+        const bookStory = e.target.bookStory.value;
         const bookImgName = e.target.bookImgName.value;
         const bookImgPath = e.target.bookImgPath.value;
         const bookImgOgn = e.target.bookImgOgn.value;
 
-        console.log(bookSeq, bookTitle, bookWriter, bookPub, bookStatus, bookImgName, bookImgPath, bookImgOgn);
-        fetch(`${Ip.url}/admin/booklist/update`, {
+        console.log(bookSeq, bookTitle, bookWriter, bookPub, bookStory, bookStatus, bookImgName, bookImgPath, bookImgOgn);
+        fetch(`${Ip.url}/admin/booklist/update/detail`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
-            body: JSON.stringify({bookSeq, bookTitle, bookWriter, bookPub, bookStatus, bookImgName, bookImgPath, bookImgOgn}),
+            body: JSON.stringify({bookSeq, bookTitle, bookWriter, bookPub, bookStory, bookStatus, bookImgName, bookImgPath, bookImgOgn}),
         })
         .then(res => res.text())
-        .then((data) => {
-            console.log(data);
+        .then(() => {
             alert("수정완료");
             const a = [bookTitle,bookWriter,bookPub]
             navigate(`/admin/booklist/update`, {
@@ -61,7 +61,7 @@ export default function AdminBookUpdateDetail(){
     return(
         <div>
              {Object.keys(bookData).length > 0 && (
-            <form method="post" name="e" onSubmit={onSubmit} autocomplete="off">
+            <form method="post" name="e" onSubmit={onSubmit} autoComplete="off">
                 <div className="row">
                     <div className="row-in">          
                         <h2>책번호</h2><input readOnly type="text" name="bookSeq" defaultValue={bookData.bookSeq}/>

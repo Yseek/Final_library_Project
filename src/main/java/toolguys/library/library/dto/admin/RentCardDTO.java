@@ -16,7 +16,6 @@ public class RentCardDTO {
     @Column(name = "RENTCARDSEQ")
     private long rentCardSeq;
 
-    @ManyToOne
-    private MemberDTO memberDTO;
+    private long memberSeq;
 }
 
