@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
 import './css/AdminBookHope.css';
 import Pagination from "./Pagination";
 
-export default function AdminReportOfLoss() {
+export default function AdminBookLost() {
 
     const [bookList, setBookList] = useState([]);
     const [limit, setLimit] = useState(5);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
-
-    const history = useNavigate();
 
     useEffect(() => {
         fetch(`${Ip.url}/admin/bookLost`, {
@@ -29,12 +26,12 @@ export default function AdminReportOfLoss() {
 
     function lost(bookSeq){  
         if(window.confirm(JSON.stringify({bookSeq})+" 책 분실을 확인하였습니까?")){
-            fetch(`${Ip.url}/admin/bookLost/lost`, {
-                method: 'POST',
+            fetch(`${Ip.url}/admin/bookLost/lost/${bookSeq}`, {
+                method: 'GET',
                 headers: {
-                  "Authorization": "Bearer " + localStorage.getItem("token"),
-                 },
-                body: formData
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
               })
                 .then(response => response.text())
                 .then(res => alert(res))
@@ -44,12 +41,12 @@ export default function AdminReportOfLoss() {
     }
     function returnBook(bookSeq){  
         if(window.confirm(JSON.stringify({bookSeq})+"책 반환을 확인하였습니까?")){
-            fetch(`${Ip.url}/admin/bookLost/return`, {
-                method: 'POST',
+            fetch(`${Ip.url}/admin/bookLost/return/${bookSeq}`, {
+                method: 'GET',
                 headers: {
-                  "Authorization": "Bearer " + localStorage.getItem("token"),
-                 },
-                body: formData
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                },
               })
                 .then(response => response.text())
                 .then(res => alert(res))

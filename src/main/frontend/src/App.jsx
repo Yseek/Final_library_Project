@@ -1,14 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import AdminAddBooks from './admin/AdminAddBooks';
-import AdminBookHope from './admin/AdminBookHope';
-import AdminBookHopeOk from './admin/AdminBookHopeOk';
 import AdminBookList from './admin/AdminBookList';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
-import AdminMemberContent from './admin/AdminMemberContent';
 import AdminMemberList from './admin/AdminMemberList';
+import AdminMemberContent from './admin/AdminMemberContent';
 import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
@@ -24,7 +21,6 @@ import LoginPage from './security/LoginPage';
 import Logout from './security/Logout';
 import Main from './security/Main';
 import MyPage from './security/MyPage';
-import BookApply from "./user/BookApply";
 import BookDetail from './user/BookDetail';
 import BookList from './user/BookList';
 import MessageCheck from './user/MessageCheck';
@@ -35,13 +31,10 @@ import Mybookhope from "./user/dongwon/Mybookhope";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
-<<<<<<< HEAD
 import AdminBookHope from './admin/AdminBookHope';
 import AdminBookHopeOk from './admin/AdminBookHopeOk';
 import AdminAddBooks from './admin/AdminAddBooks';
 import AdminBookLost from './admin/AdminBookLost';
-=======
->>>>>>> 30b8398d1698959911a3f3017997adb2ff5090a3
 
 function App() {
 	return (
@@ -96,7 +89,6 @@ function App() {
 					<Route path="/admin/bookhope/:page" element={<AdminBookHope />} />
 					<Route path="/admin/bookhopeOk/:bookHopeSeq" element={<AdminBookHopeOk />} />
 					<Route path="/admin/booklist/update/detail" element={<AdminBookUpdateDetail />} />
-					<Route path="/user/bookApply" element={<BookApply />} />
 					<Route path="/admin/addBooks" element={<AdminAddBooks />} />
 					<Route path="/admin/bookLost" element={<AdminBookLost />} />
 				</Routes>
