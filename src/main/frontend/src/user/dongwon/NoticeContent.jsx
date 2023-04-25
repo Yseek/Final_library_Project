@@ -1,11 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import "./css/Notice.css";
 import useFetch from "./useFetch";
+import Ip from "../../Ip";
 
 export default function Notice() {
 	const params = useParams();
 	const noticeList = useFetch(
-		`http://127.0.0.1:8080/user/notice/content/${params.noticeSeq}`
+		`${Ip.url}/notice/content/${params.noticeSeq}`
 		);
 	const navigate = useNavigate();
 
