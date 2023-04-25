@@ -17,7 +17,8 @@ out/
 ### VS Code ###
 .vscode/
 
-src/resources/application.properties
+src/main/resources/application.properties
+
 # react ignore
 
 # dependencies
