@@ -29,11 +29,31 @@ export default function AdminReportOfLoss() {
 
     function lost(bookSeq){  
         if(window.confirm(JSON.stringify({bookSeq})+" 책 분실을 확인하였습니까?")){
+            fetch(`${Ip.url}/admin/bookLost/lost`, {
+                method: 'POST',
+                headers: {
+                  "Authorization": "Bearer " + localStorage.getItem("token"),
+                 },
+                body: formData
+              })
+                .then(response => response.text())
+                .then(res => alert(res))
+                .catch(error => console.error(error));
             alert("분실처리 되었습니다.");
         }
     }
     function returnBook(bookSeq){  
         if(window.confirm(JSON.stringify({bookSeq})+"책 반환을 확인하였습니까?")){
+            fetch(`${Ip.url}/admin/bookLost/return`, {
+                method: 'POST',
+                headers: {
+                  "Authorization": "Bearer " + localStorage.getItem("token"),
+                 },
+                body: formData
+              })
+                .then(response => response.text())
+                .then(res => alert(res))
+                .catch(error => console.error(error));
             alert("반환처리 되었습니다.");
         }
     }
