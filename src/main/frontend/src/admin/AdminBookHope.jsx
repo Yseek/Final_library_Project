@@ -13,6 +13,8 @@ export default function AdminBookHope() {
     useEffect(() => {  // 페이지 이동용 
         setParam({ params })
     }, [params]);
+    useEffect(() => {  //신청상태가 바꼈을때 페이지도 새로고침되도록
+    }, [page.content]);
 
     useEffect(() => {
         fetch(`${Ip.url}/admin/bookHope?page=${params.page}&size=10`, {

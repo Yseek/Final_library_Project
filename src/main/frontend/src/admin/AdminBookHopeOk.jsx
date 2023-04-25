@@ -13,9 +13,8 @@ export default function AdminBookHope() {
     const bookHopeSeqRef = useRef();
     const bookHopeStatusRef = useRef();
     const bookStoryRef = useRef();
-    const bookImgNameRef = useRef();
-    const bookImgPathRef = useRef();
-    const bookImgOgnRef = useRef();
+    const fileRef = useRef();
+
     const history = useNavigate(); //취소버튼용
 
     useEffect(()=>{
@@ -33,42 +32,25 @@ export default function AdminBookHope() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // const formData = new FormData();
-        // formData.append('bookTitle', titleRef.current.value);
-        // formData.append('bookWriter', writerRef.current.value);
-        // formData.append('bookPub', pubRef.current.value);
-        // formData.append('bookStory', bookStoryRef.current.value);
-        // formData.append('bookImgName', bookImgNameRef.current.value);
-        // formData.append('bookImgPath', bookImgPathRef.current.value);
-        // formData.append('bookImgOgn', bookImgOgnRef.current.value);
-        // formData.append('bookHopeSeq', bookHopeSeqRef.current.value);
-        // formData.append('bookHopeStatus', bookHopeStatusRef.current.value);
+        const formData = new FormData();
+        formData.append('file', fileImg);
+        formData.append('data', [titleRef.current.value, writerRef.current.value, pubRef.current.value, bookStoryRef.current.value, bookHopeSeqRef.current.value, bookHopeStatusRef.current.value]);
 
-        const bookTitle = titleRef.current.value;
-        const bookWriter = writerRef.current.value;
-        const bookPub = pubRef.current.value;
-        const bookStory = bookStoryRef.current.value;
-        const bookImgName = bookImgNameRef.current.value;
-        const bookImgPath = bookImgPathRef.current.value;
-        const bookImgOgn = bookImgOgnRef.current.value;
-        const bookHopeSeq = bookHopeSeqRef.current.value;
-        const bookHopeStatus = bookHopeStatusRef.current.value;
-        
         fetch(`${Ip.url}/admin/bookHopeOk/Input`, {
           method: 'POST',
           headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token"),
            },
-          body: JSON.stringify({ bookTitle, bookWriter, bookPub, bookStory, bookImgName, bookImgPath, bookImgOgn, bookHopeSeq, bookHopeStatus }),
+          body: formData
         })
-          .then(response => response.json())
-          .then(data => console.log(data))
+          .then(response => response.text())
+          .then(res => alert(res))
           .catch(error => console.error(error));
           history(`/admin/bookHope`)
     };
 
     const [imageSrc, setImageSrc] = useState(null);
+    const [fileImg, setFileImg] = useState(null);
 
     const onUpload = (e) => {
         const file = e.target.files[0];
@@ -78,7 +60,7 @@ export default function AdminBookHope() {
         return new Promise(res => {
            reader.onload = () => {
               setImageSrc(reader.result || null);
-              //setFileImg(file);
+              setFileImg(file);
               res();
            }
         })
@@ -110,12 +92,12 @@ export default function AdminBookHope() {
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <h2>책 이미지 파일</h2><input type="file" ref={bookImgNameRef} onChange={onUpload}/>
+                        <h2>책 이미지 파일</h2><input multiple type="file" accept="image/*" onChange={e => onUpload(e)} ref={fileRef}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <h2>이미지</h2><img src={imageSrc}></img>
+                        <img src={imageSrc}></img>
                     </div>
                 </div>
                 <div className="row">
