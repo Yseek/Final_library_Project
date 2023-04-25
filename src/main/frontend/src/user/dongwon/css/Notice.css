@@ -3,12 +3,6 @@
 	place-items: center;
 }
 
-#NoticeTitle {
-	padding: 10px 30%;
-	border-bottom: 3px solid;
-	border-color:#03a9f47a;
-}
-
 #NoticeItems {
 	margin-right: 55%;
 }
@@ -53,4 +47,8 @@ a { text-decoration:none }
 	color: white;
 	background-color: grey;
 	margin-bottom: 1em;
+}
+
+#prolongBtn, #deleteFromMybookBtn {
+	width: 80px;
 }
