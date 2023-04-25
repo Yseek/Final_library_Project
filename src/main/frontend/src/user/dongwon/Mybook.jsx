@@ -50,15 +50,15 @@ export default function Mybook() {
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
-	const deleteFromMybook = (bookSeq) => {
-		fetch(`http://127.0.0.1:8080/user/mybookrent/prolong.do`,{
-			method:"POST",
-			headers : {
-				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
-			},
-			body: JSON.stringify({ bookSeq }),
-		}).then(window.location.reload())
+	const deleteFromMybook = (myBooksSeq) => {
+		// fetch(`http://127.0.0.1:8080/user/mybook/delete.do`,{
+		// 	method:"POST",
+		// 	headers : {
+		// 		"Content-Type": "application/json",
+		// 		"Authorization": "Bearer " + localStorage.getItem("token"),
+		// 	},
+		// 	body: JSON.stringify({ bookSeq }),
+		// }).then(window.location.reload())
 	};
 
 	return (
@@ -77,12 +77,13 @@ export default function Mybook() {
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
-						<tr key={res.bookSeq}>
-                            <td width="25%">{res.bookTitle}</td>
-							<td>{res.bookImgPath}</td>
-							<td>{res.bookWriter}</td>
-							<td>{res.bookPub}</td>
-							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.bookSeq)}>제거</button></td>
+						<tr key={res.myBooksSeq}>
+                            <td width="25%">{res.book.bookTitle}</td>
+							<td>{res.book.bookImgPath}</td>
+							<td>{res.book.bookWriter}</td>
+							<td>{res.book.bookPub}</td>
+							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
+							{/* <td><button id="deleteFromMybookBtn">제거</button></td> */}
 						</tr>
 					))}
 				</tbody>

@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import toolguys.library.library.domain.Book;
+import toolguys.library.library.dto.user.MybooksDTO;
 
 @Mapper
 public interface MybooklistMapper {
-    List<Book> getMybooklist(HashMap<String, Object> input);
+    List<MybooksDTO> getMybooklist(HashMap<String, Object> input);
     long getTotalCount(long memberSeq);
 }

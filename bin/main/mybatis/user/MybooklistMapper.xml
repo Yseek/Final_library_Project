@@ -3,8 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toolguys.library.library.mapper.user.MybooklistMapper">
-    <select id="getMybooklist" resultType="Book" parameterType="java.util.HashMap">
-        select * from BOOK where BOOKSEQ in (select BOOK_BOOKSEQ from MYBOOKS where MEMBER_MEMBERSEQ=#{memberSeq})
+    <resultMap type="Mybooks" id="BookMybooksMap">
+        <id property="myBooksSeq" column="myBooksSeq"/>
+        <association property="book" column="bookSeq" resultMap="BookMap"/>
+    </resultMap>
+    <resultMap type="Book" id="BookMap">
+        <id property="bookSeq" column="bookSeq" />
+        <result property="bookTitle" column="bookTitle" />
+        <result property="bookImgPath" column="bookImgPath" />
+        <result property="bookWriter" column="bookWriter" />
+        <result property="bookPub" column="bookPub" />
+    </resultMap>
+
+    <select id="getMybooklist" resultType="MybooksDTO" parameterType="java.util.HashMap" resultMap="BookMybooksMap">
+        select m.myBooksSeq, b.bookSeq, b.bookTitle, b.bookImgPath, b.bookWriter, b.bookPub from BOOK b join MYBOOKS m on b.BOOKSEQ=m.BOOK_BOOKSEQ
+        where m.MEMBER_MEMBERSEQ=#{memberSeq}
+        ORDER BY m.myBooksSeq desc
         LIMIT #{offset}, #{size}
     </select>
     <select id="getTotalCount" resultType="long" parameterType="long">

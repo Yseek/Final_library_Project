@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import toolguys.library.library.domain.Book;
+import toolguys.library.library.dto.user.MybooksDTO;
 import toolguys.library.library.mapper.user.MybooklistMapper;
 
 @Service
@@ -15,7 +15,7 @@ public class MybooklistServiceImpl implements MybooklistService{
 	MybooklistMapper mybooklistMapper;
 
     @Override
-    public List<Book> getMybooklistS(HashMap<String, Object> input){
+    public List<MybooksDTO> getMybooklistS(HashMap<String, Object> input){
         return mybooklistMapper.getMybooklist(input);
     }
     @Override
