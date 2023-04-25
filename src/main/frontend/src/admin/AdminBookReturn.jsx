@@ -107,7 +107,7 @@ export default function AdminBookReturn(){
                         <td>{rsv.bookSeq}</td>
                         <td>{rsv.bookTitle}</td>
                         <td>{rsv.bookRentRdate}</td>
-                        <td>{rsv.bookRentDday}</td>
+                        <td>{rsv.bookRentDDay}</td>
                         <td>
                             <button onClick={(e) => reserveBook(e, rsv.bookReserveSeq, rsv.bookSeq, rsv.memberSeq)}>대출처리</button>
                         </td>

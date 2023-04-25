@@ -108,7 +108,11 @@
         </if>
     </select>
     <select id="bookRentList" resultMap="bookrentDTO">
-        select BOOKRENTSEQ, BOOKRENTRDATE, BOOKRENTDDAY, (select MEMBERNAME from MEMBER m where m.MEMBERSEQ=(select MEMBER_MEMBERSEQ from RENTCARD as r where b.RENTCARD_RENTCARDSEQ=r.RENTCARDSEQ)) MEMBERNAME,
+        SELECT b.BOOKRENTSEQ, b.BOOK_BOOKSEQ AS BOOKSEQ, book.BOOKNAME, b.BOOKRENTRDATE, b.BOOKRENTDDAY, m.MEMBERNAME
+        FROM BOOKRENT b
+        JOIN BOOK book ON b.BOOK_BOOKSEQ = book.BOOKSEQ
+        JOIN MEMBER m ON b.RENTCARD_RENTCARDSEQ = m.MEMBERSEQ
+        WHERE (SELECT MAX(BOOKSTATUS) FROM BOOK) = 3;
     </select>
     <update id="updateBookInfo" parameterType="hashMap">
         update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
