@@ -95,7 +95,6 @@ export default function AdminMemberContent() {
     }
 
     console.log("토큰: " + localStorage.getItem("token"));
-    // console.log(`대출 기록: ${JSON.stringify(page)}`);
 
 
     // 검색을 누를 경우
@@ -137,12 +136,11 @@ export default function AdminMemberContent() {
                 .then(res => {
                     if (res.ok) {
                         alert("블랙리스트에 추가되었습니다");
-                        setMember(location.state.user);
+                        setMemberSeq(location.state.user);
                     }
                 })
         }
     }
-
 
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
