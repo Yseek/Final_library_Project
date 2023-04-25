@@ -61,4 +61,23 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
         return adminMemberRepositoryLdaew.findBookRentHistory(memberSeq, pageable)
                 .map(book -> AdminBookRentDto.from(book));
     }
+
+    @Override
+    public Page<AdminBookRentDto> searchBookRent(HashMap<String, String> searchData, Pageable pageable) {
+        String keyword = searchData.get("keyword");
+        long memberSeq = Long.parseLong(searchData.get("memberSeq"));
+
+        Page<AdminBookRentDto> rentBooks = adminMemberRepositoryLdaew
+                .findBookRentByBOOKSEQ(keyword, memberSeq, pageable)
+                .map(book -> AdminBookRentDto.from(book));
+
+        return rentBooks;
+    }
+
+    @Override
+    public void addBlacklist(long memberSeq) {
+        Member member = adminMemberRepositoryLdaew.findById(memberSeq).get();
+        member.setMemberStatus((byte)2);
+        adminMemberRepositoryLdaew.save(member);
+    }
 }
