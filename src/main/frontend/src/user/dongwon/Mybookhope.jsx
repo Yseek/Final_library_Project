@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 import "./css/Notice.css";
 
 export default function Mybookhope() {
-
+	const params = useParams();
 	const navi = useNavigate();
 	const { pathname } = useLocation();
 	const [info, setInfo] = useState({});
 	const [data, setData] = useState([]);
+	const [page, setPage] = useState([]);
 
 	useEffect(() => {
 		if (!localStorage.getItem("token")) {
@@ -26,15 +27,26 @@ export default function Mybookhope() {
 	}, []);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}`, {
+		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
 			.then(res => res.json())
-			.then(data => setData(data))
-	}, [info]);
+			.then(data => setData(data.content))
+	}, [info, params]);
+
+	useEffect(()=>{
+		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			}
+		})
+		.then(res => res.json())
+		.then(page => setPage(page))
+	}, [info, params]);
 
 	const bookHopeStat = {
 		1: "신청중",
@@ -43,9 +55,12 @@ export default function Mybookhope() {
 		4: "거부됨"
 	}
 
+	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+
 	return (
 		<div className="Notice">
 			<div><h2>나의 희망도서</h2></div>
+			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
 				<thead className="noticeTableHead">
 					<tr>
@@ -68,6 +83,14 @@ export default function Mybookhope() {
 					))}
 				</tbody>
 			</table>
+			<div className="page">
+				{pageList.map(res => (
+					<span key={res}>
+						<Link to={`/mypage/mybookhope/${res}`}>{res}</Link>
+						{" "}
+					</span>
+				))}
+			</div>
 		</div>
 	);
 }
