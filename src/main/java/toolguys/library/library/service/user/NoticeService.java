@@ -7,6 +7,7 @@ import toolguys.library.library.domain.Notice;
 
 public interface NoticeService {
     long getTotalCountS();
+    long getTotalCountBySearchS(String search);
     List<Notice> listNoticeByPage(HashMap<String, Object> input);
     List<Notice> listNoticeByPageAndSearch(HashMap<String, Object> input);
     Notice getNoticeContentS(long noticeSeq);
