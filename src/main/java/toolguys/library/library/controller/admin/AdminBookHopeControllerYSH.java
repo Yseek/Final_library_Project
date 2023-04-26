@@ -1,7 +1,6 @@
 package toolguys.library.library.controller.admin;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.Sort;
 
 import toolguys.library.library.domain.BookHope;
-import toolguys.library.library.dto.admin.BookHopeDTO;
 import toolguys.library.library.service.admin.AdminBookHopeServiceYSH;
 
 @RequestMapping("admin")
@@ -39,9 +36,10 @@ public class AdminBookHopeControllerYSH {
     }
 
     @PostMapping("bookHopeOk/Input")
-    public ResponseEntity<String> bookHopeOk(@RequestParam("data") List<String> data, @RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> bookHopeOk(@RequestParam("title") String title, @RequestParam("writer") String writer, @RequestParam("pub") String pub, 
+        @RequestParam("bookStory") String bookStory, @RequestParam("bookHopeSeq") long bookHopeSeq, @RequestParam("bookHopeStatus") byte bookHopeStatus, @RequestParam("file") MultipartFile file) throws IOException {
         try {
-            adminBookHopeServiceYSH.bookHopeConvertingByBook(data, file);
+            adminBookHopeServiceYSH.bookHopeConvertingByBook(title, writer, pub, bookStory, bookHopeSeq, bookHopeStatus, file);
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
