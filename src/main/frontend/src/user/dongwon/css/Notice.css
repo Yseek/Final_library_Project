@@ -18,6 +18,16 @@
 	border-top: 1px solid #444444;
 }
 
+.mypageTable {
+	width: 75%;
+	border-collapse: collapse;
+	border-top: 1px solid #444444;
+}
+
+#mypageItems {
+	margin-right: 65%;
+}
+
 .noticeTableHead {
 	background-color: beige;
 	height: 75px;

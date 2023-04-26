@@ -64,8 +64,8 @@ export default function Mybook() {
 	return (
 		<div className="Notice">
 			<div><h2>내 서재</h2></div>
-			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
-			<table className="noticeTable">
+			<p id="mypageItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+			<table className="mypageTable">
 				<thead className="noticeTableHead">
 					<tr>
                         <th>책 제목</th>

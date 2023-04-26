@@ -39,7 +39,7 @@ const BookDetail = () => {
 				<tbody>
 					<tr>
 						<td className='font-bold BookDetailTd'>책 표지</td>
-						<td className='BookDetailTd'><img src={`/bookImages/${book.bookImgName}`} width={`300px`} height={`300px`} /></td>
+						<td className='BookDetailTd'><img src={book.bookImgPath} width={`300px`} height={`300px`} /></td>
 					</tr>
 					<tr>
 						<td className='font-bold BookDetailTd'>제목</td>
