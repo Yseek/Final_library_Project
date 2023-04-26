@@ -130,8 +130,9 @@ export default function AdminMemberContent() {
 
     return (
         <center>
-            <h2>회원 상세 정보 페이지</h2>
-            <table className="adminMemberTable">
+            <h2>회원 상세 정보 페이지</h2><br/>
+            <h3>회원 정보</h3>
+            <table className="board-list">
                 <thead>
                     <tr>
                         <th>회원번호</th>
@@ -146,10 +147,10 @@ export default function AdminMemberContent() {
                         <td>{member.memberEmail}</td>
                     </tr>
                 </tbody>
-            </table><br />
+            </table><br/>
 
             <h3>대출 현황</h3>
-            <table className="adminMemberTable">
+            <table className="board-list">
                 <thead>
                     <tr>
                         <th>책 번호</th>
@@ -170,10 +171,10 @@ export default function AdminMemberContent() {
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </table><br/>
 
             <h3>대출 기록</h3>
-            <table className="adminMemberTable">
+            <table className="board-list">
                 <thead>
                     <tr>
                         <th>책 번호</th>
@@ -196,20 +197,20 @@ export default function AdminMemberContent() {
                 </tbody>
             </table>
             {pageList.length === 0 && isSearchList && <span>검색 결과가 없습니다</span>}
-            {pageList.length !== 0 && <div className="page">
-                <span><Link to={`/admin/memberList/content/1`}>&laquo;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/content/${Math.max(1, page.number + 1 - pageWidth)}`}>&lt;</Link>&nbsp;</span>
+            {pageList.length !== 0 && <div className="paging">
+                <span><Link to={`/admin/memberList/content/1`} className="btn-paging first">&laquo;</Link>&nbsp;</span>
+                <span><Link to={`/admin/memberList/content/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link>&nbsp;</span>
                 {pageList.map(res => (
                     <span key={res}>
                         <Link to={`/admin/memberList/content/${res}`}>
-                            {page.number + 1 === res ? <strong>{res}</strong> : res}
+                            {page.number + 1 === res ? <span className="tp">{res}</span> : res}
                         </Link>
                         {" "}
                     </span>
                 ))}
-                <span><Link to={`/admin/memberList/content/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`}>&gt;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/content/${page.totalPages}`}>&raquo;</Link></span>
-            </div>}
+                <span><Link to={`/admin/memberList/content/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link>&nbsp;</span>
+                <span><Link to={`/admin/memberList/content/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+            </div>}<br/>
             <div>
                 <form onSubmit={SearchInput}>
                     <select ref={searchCategoryRef}>

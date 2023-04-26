@@ -103,7 +103,7 @@ export default function AdminMemberList() {
             </table>
             {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
             {pageList.length !== 0 && <div className="paging">
-                <span><Link to={`/admin/memberList/1`}  className="btn-paging first">&laquo;</Link></span>&nbsp;
+                <span><Link to={`/admin/memberList/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
                 <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
                 {pageList.map(res => (
                     <span key={res}>
