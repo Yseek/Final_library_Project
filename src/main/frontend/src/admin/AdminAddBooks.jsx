@@ -66,7 +66,7 @@ export default function AdminAddBooks() {
 					</div>
 				</div>
 				<div>
-					책 상태: <input type="text" ref={statusRef} />
+					<input type="hidden" value={`1`} ref={statusRef} />
 				</div>
 				<div>
 					<button>등록</button>
