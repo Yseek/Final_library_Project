@@ -34,7 +34,11 @@ import Mybookhope from "./user/dongwon/Mybookhope";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
+<<<<<<< HEAD
 import BookReserv from './user/BookReserv';
+=======
+import AdminBookLost from './admin/AdminBookLost';
+>>>>>>> cd0218746dbfce60d5b84e5cb2ca850442287341
 
 function App() {
 	return (
@@ -94,6 +98,7 @@ function App() {
 					<Route path="/admin/addBooks" element={<AdminAddBooks />} />
 					<Route path="/user/bookReserv" element={<BookReserv />} />
 					<Route path="/user/bookReserv/:page" element={<BookReserv />} />
+					<Route path="/admin/bookLost" element={<AdminBookLost />} />
 				</Routes>
 				</div>
 				<FooterLayout />
