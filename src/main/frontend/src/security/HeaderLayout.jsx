@@ -203,6 +203,7 @@ export default function HeaderLayout() {
 						<li><Link to={`/admin/notice`}>공지사항 목록</Link></li>
 						<li><Link to={`/admin/bookhope`}>희망도서 승인</Link></li>
 						<li><Link to={`/admin/reserved`}>예약도서 목록</Link></li>
+						<li><Link to={`/admin/return`}>도서반납 처리</Link></li>
 						<li><Link to={`/admin/booklist`}>도서 목록</Link></li>
 						<li><Link to={`/admin/memberList`}>회원 목록</Link></li>
 						<li><Link to={`/admin/addBooks`}>도서 추가</Link></li>
