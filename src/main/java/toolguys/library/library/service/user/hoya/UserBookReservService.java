@@ -7,13 +7,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import toolguys.library.library.domain.BookReserve;
+import toolguys.library.library.repository.user.hoya.UserBookListRepository;
 import toolguys.library.library.repository.user.hoya.UserBookReservRepository;
+import toolguys.library.library.security.repository.SecurityMemberRepository;
 
 @Service
 @RequiredArgsConstructor
 public class UserBookReservService implements UserBookReservServiceInterface{
 
   public final UserBookReservRepository userBookReservRepository;
+
+	private final UserBookListRepository userBookListRepository;
+
+	private final SecurityMemberRepository securityMemberRepository;
 
   @Override
 	public Page<BookReserve> bookReservByBookReserve(Pageable pageable) {
