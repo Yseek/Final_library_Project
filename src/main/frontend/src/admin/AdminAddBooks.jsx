@@ -28,9 +28,16 @@ export default function AdminAddBooks() {
 	}
 
 	const addBooks = (e) => {
+		const data = {
+			"bookTitle": titleRef.current.value,
+			"bookWriter": writerRef.current.value,
+			"bookPub": pubRef.current.value,
+			"bookStory": storyRef.current.value,
+			"bookStatus": statusRef.current.value
+		};
 		const formData = new FormData();
 		formData.append(`file`, fileImg);
-		formData.append(`data`, [titleRef.current.value, writerRef.current.value, pubRef.current.value, storyRef.current.value, statusRef.current.value]);
+		formData.append(`data`, JSON.stringify(data));
 
 		fetch(`${Ip.url}/admin/addBooks`, {
 			method: "POST",
