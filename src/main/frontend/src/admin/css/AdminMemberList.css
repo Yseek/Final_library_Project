@@ -130,9 +130,12 @@
 }
 
 #btnSearch,
-.paging span.tp,
-.tnb .choiced a {
+.paging span.tp {
     border-color: #005bab !important;
     background-color: #005bab;
     color: white;
+}
+
+.paging a:visited {
+    color: #000;
 }
