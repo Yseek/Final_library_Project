@@ -31,7 +31,6 @@ import BookList from './user/BookList';
 import Mybookrent from "./user/dongwon/MyBookrent";
 import Mybook from "./user/dongwon/Mybook";
 import Mybookhope from "./user/dongwon/Mybookhope";
-import Mybookreserve from "./user/dongwon/Mybookreserve";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
@@ -59,7 +58,6 @@ function App() {
 					<Route path="/myPage/mybookrent/:page" element={<Mybookrent/>}></Route>
 					<Route path="/myPage/mybookhope" element={<Mybookhope/>}></Route>
 					<Route path="/myPage/mybookhope/:page" element={<Mybookhope/>}></Route>
-					<Route path="/myPage/mybookreserve" element={<Mybookreserve/>}></Route>
 					<Route path="/logout" element={<Logout />}></Route>
 					<Route path="/myPage" element={<MyPage />}></Route>
 					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>

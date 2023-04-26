@@ -53,7 +53,6 @@ export default function MyPage() {
 				<p><Link to={`/mypage/mybook/1`}>내서재</Link></p>
 				<p><Link to={`/mypage/mybookhope/1`}>희망도서신청상태확인</Link></p>
 				<p><Link to={`/mypage/mybookrent/1`}>대여목록</Link></p>
-				<p><Link to={`/mypage/mybookreserve`}>예약목록</Link></p>
 			</div>
 		</div>
 	)
