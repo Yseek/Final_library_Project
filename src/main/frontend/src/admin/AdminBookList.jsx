@@ -8,6 +8,7 @@ export default function AdminBookList(){
     const [bookList, setBookList] = useState([]);
     const [limit, setLimit] = useState(5);
     const [page, setPage] = useState(1);
+    const [pageRangeStart, setPageRangeStart] = useState(1);
     const [isListAll, setIsListAll] = useState(true);
     const [isSearchDetail, setIsSearchDetail] = useState(false);
     const offset = (page - 1) * limit;
