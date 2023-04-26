@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 function Pagination({ total, limit, page, setPage}){
     const numPages = Math.ceil(total/limit);
-
+    const startPages = Math.ceil(page/limit);
     return(
         <div>
             <Button onClick={() => setPage(page-1)} disabled={page === 1}>
