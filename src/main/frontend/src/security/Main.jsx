@@ -1,11 +1,25 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Ip from "../Ip";
 import "./securityCss/Main.css";
 
 export default function Main() {
 
+	const params = useParams();
+
+	const [data, setData] = useState([]);
 	const [searchedBooks, setSearchedBooks] = useState([]);
+
+	useEffect(() => {
+		fetch(`${Ip.url}/bookList?page=${params.page}`, {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then(res => res.json())
+			.then(data => { console.log(data); setData(data.content) })
+	}, [params]);
 
 	const search = (e) => {
 		const bookTitle = e.target.value;
@@ -46,6 +60,18 @@ export default function Main() {
 								</tr>
 							))}
 						</tbody>
+						<tbody>
+					{Array.isArray(data) && data.map(res => (
+						<tr key={res.bookSeq}>
+							<td className='BookListTd'>{res.bookTitle}</td>
+							<td className='BookListTd'>{res.bookWriter}</td>
+							<td className='BookListTd'>{res.bookPub}</td>
+							<td className='BookListTd'>{res.bookStatus}</td>
+							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
+							<td className='BookListTd'><button>예약</button></td>
+						</tr>
+					))}
+				</tbody>
 					</table>
 				</div>
 			</div>
