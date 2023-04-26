@@ -13,15 +13,15 @@ import toolguys.library.library.security.repository.SecurityMemberRepository;
 
 @Service
 @RequiredArgsConstructor
-public class UserBookReservService implements UserBookReservServiceInterface{
+public class UserBookReservService implements UserBookReservServiceInterface {
 
-  public final UserBookReservRepository userBookReservRepository;
+	public final UserBookReservRepository userBookReservRepository;
 
-	private final UserBookListRepository userBookListRepository;
+	public final UserBookListRepository userBookListRepository;
 
-	private final SecurityMemberRepository securityMemberRepository;
+	public final SecurityMemberRepository securityMemberRepository;
 
-  @Override
+	@Override
 	public Page<BookReserve> bookReservByBookReserve(Pageable pageable) {
 		return userBookReservRepository.findAll(pageable);
 	}
