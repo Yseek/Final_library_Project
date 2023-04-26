@@ -82,7 +82,7 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <h3>회원 목록 페이지</h3>
+            <h2>회원 목록 페이지</h2><br/>
             <table class="board-list">
                 <thead>
                     <tr>
@@ -115,7 +115,7 @@ export default function AdminMemberList() {
                 ))}
                 <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
                 <span><Link to={`/admin/memberList/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
-            </div>}
+            </div>}<br/>
             <div>
                 <form onSubmit={SearchInput}>
                     <select onChange={checkSearchCategory} ref={searchCategoryRef}>
