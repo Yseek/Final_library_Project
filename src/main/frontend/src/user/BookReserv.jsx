@@ -15,6 +15,7 @@ export default function BookReserv() {
 		fetch(`${Ip.url}/user/bookReserv?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
@@ -25,6 +26,7 @@ export default function BookReserv() {
 		fetch(`${Ip.url}/user/bookReserv?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
@@ -35,7 +37,7 @@ export default function BookReserv() {
 
 	function deleteBookReserve(bookReserveSeq) {
     if (window.confirm("취소하시겠습니까?")) {
-      fetch(`http://127.0.0.1:8080/user/bookReserv/${bookReserveSeq}`, {
+      fetch(`${Ip.url}/user/bookReserv/${bookReserveSeq}`, {
         method: "DELETE"
       })
         .then(res => {

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookReserveDTO {
+public class BookReservDTO {
 
   private Long bookSeq;
   private Long memberSeq;
