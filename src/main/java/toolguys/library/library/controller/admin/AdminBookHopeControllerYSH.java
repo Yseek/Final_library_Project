@@ -1,7 +1,6 @@
 package toolguys.library.library.controller.admin;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,9 +36,10 @@ public class AdminBookHopeControllerYSH {
     }
 
     @PostMapping("bookHopeOk/Input")
-    public ResponseEntity<String> bookHopeOk(@RequestParam("data") List<String> data, @RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<String> bookHopeOk(@RequestParam("title") String title, @RequestParam("writer") String writer, @RequestParam("pub") String pub, 
+        @RequestParam("bookStory") String bookStory, @RequestParam("bookHopeSeq") long bookHopeSeq, @RequestParam("bookHopeStatus") byte bookHopeStatus, @RequestParam("file") MultipartFile file) throws IOException {
         try {
-            adminBookHopeServiceYSH.bookHopeConvertingByBook(data, file);
+            adminBookHopeServiceYSH.bookHopeConvertingByBook(title, writer, pub, bookStory, bookHopeSeq, bookHopeStatus, file);
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
