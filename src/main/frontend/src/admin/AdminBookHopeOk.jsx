@@ -10,7 +10,6 @@ export default function AdminBookHope() {
     const titleRef = useRef();
     const writerRef = useRef();
     const pubRef = useRef();
-    const bookHopeSeqRef = useRef();
     const bookHopeStatusRef = useRef();
     const bookStoryRef = useRef();
     const fileRef = useRef();
@@ -34,7 +33,12 @@ export default function AdminBookHope() {
         event.preventDefault();
         const formData = new FormData();
         formData.append('file', fileImg);
-        formData.append('data', [titleRef.current.value, writerRef.current.value, pubRef.current.value, bookStoryRef.current.value, bookHopeSeqRef.current.value, bookHopeStatusRef.current.value]);
+        formData.append('title', titleRef.current.value);
+        formData.append('writer', writerRef.current.value);
+        formData.append('pub', pubRef.current.value);
+        formData.append('bookStory', bookStoryRef.current.value);
+        formData.append('bookHopeSeq', data.bookHopeSeq);
+        formData.append('bookHopeStatus', bookHopeStatusRef.current.value);
 
         fetch(`${Ip.url}/admin/bookHopeOk/Input`, {
           method: 'POST',
@@ -47,6 +51,7 @@ export default function AdminBookHope() {
           .then(res => alert(res))
           .catch(error => console.error(error));
           history(`/admin/bookHope`)
+          window.location.reload();
     };
 
     const [imageSrc, setImageSrc] = useState(null);
@@ -102,7 +107,7 @@ export default function AdminBookHope() {
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <input type="hidden" ref={bookHopeSeqRef} defaultValue={data.bookHopeSeq}/>
+                        <input type="hidden" defaultValue={data.bookHopeSeq}/>
                     </div>
                 </div>
                 <div className="row">
