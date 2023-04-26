@@ -38,7 +38,7 @@ export default function Main() {
 							{searchedBooks.map(res => (
 								<tr key={res.bookSeq} className="searchedBookListTr">
 									<Link to={`/user/bookDetail/${res.bookSeq}`}>
-										<td><img src={`/bookImages/${res.bookImgName}`} width={`50px`} height={`70px`} /></td>
+										<td><img src={res.bookImgPath} width={`50px`} height={`70px`} /></td>
 										<td>{res.bookTitle}</td>
 										<td>{res.bookWriter}</td>
 										<td>{res.bookPub}</td>
