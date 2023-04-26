@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Ip from "../Ip";
 import Pagination from "./Pagination";
+import styled from "styled-components";
 
 export default function AdminReserveCheck(){
     const [reserveList, setreserveList] = useState([]);
@@ -102,7 +103,7 @@ export default function AdminReserveCheck(){
     return(
     <>
         <div>
-            <table>
+            <Table>
                 <thead>
                     <tr>
                         <td>예약번호</td>
@@ -136,7 +137,7 @@ export default function AdminReserveCheck(){
                     </tr>
                 ))}
                 </tbody>      
-            </table>
+            </Table>
             <div>
                 <form name="e" autoComplete="off" onSubmit={searchKeyword}>
                     <select name="option" onChange={({ target: { value } }) => optionCheck(value)}>
@@ -159,3 +160,10 @@ export default function AdminReserveCheck(){
     </>
     )
 }
+
+const Table = styled.table`
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: auto;
+    `;
