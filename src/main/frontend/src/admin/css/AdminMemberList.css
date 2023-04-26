@@ -129,26 +129,10 @@
     right: 0;
 }
 
-/* 글쓰기(등록)버튼 */
-.pagingWrap+#pageSearch,
-.pagingWrap+form #pageSearch {
-    margin-top: 30px;
-}
-
-.themeBD3,
+#btnSearch,
 .paging span.tp,
 .tnb .choiced a {
     border-color: #005bab !important;
-}
-
-.themeColor,
-.themeBtn,
-.tB01,
-.tnb .choiced a,
-#virtSelect a,
-.paging span.tp,
-#btnSearchTop a,
-.number-list .num,
-.popupHeader {
-    background-color: #0068c3 !important;
+    background-color: #005bab;
+    color: white;
 }

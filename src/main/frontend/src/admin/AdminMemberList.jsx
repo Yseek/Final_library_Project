@@ -103,18 +103,18 @@ export default function AdminMemberList() {
             </table>
             {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
             {pageList.length !== 0 && <div className="paging">
-                <span><Link to={`/admin/memberList/1`}  className="btn-paging first">&laquo;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link>&nbsp;</span>
+                <span><Link to={`/admin/memberList/1`}  className="btn-paging first">&laquo;</Link></span>&nbsp;
+                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
                 {pageList.map(res => (
                     <span key={res}>
                         <Link to={`/admin/memberList/${res}`}>
-                            {page.number + 1 === res ? <strong>{res}</strong> : res}
+                            {page.number + 1 === res ? <span className="tp">{res}</span> : res}
                         </Link>
                         {" "}
                     </span>
                 ))}
-                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`}>&gt;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/${page.totalPages}`}>&raquo;</Link></span>
+                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;
+                <span><Link to={`/admin/memberList/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
             </div>}
             <div>
                 <form onSubmit={SearchInput}>
