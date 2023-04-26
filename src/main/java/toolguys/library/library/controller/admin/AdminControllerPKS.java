@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookRentDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
 import toolguys.library.library.service.admin.AdminServicePKS;
 
@@ -57,6 +58,12 @@ public class AdminControllerPKS {
     public ResponseEntity<List<BookReserveDTO>> searchReserve(@PathVariable String option, @PathVariable String keyword){
         System.out.println("2222222222222222" + adminServicePKS.searchReserve(option, keyword));
         return ResponseEntity.ok().body(adminServicePKS.searchReserve(option, keyword));
+    }
+
+    @GetMapping("return")
+    public ResponseEntity<List<BookRentDTO>> bookRentList(){
+        System.out.println("3333333333333333" + adminServicePKS.bookRentList());
+        return ResponseEntity.ok().body(adminServicePKS.bookRentList());
     }
 
     @PostMapping("reserved/{reserveSeq}&{bookSeq}&{memberSeq}")

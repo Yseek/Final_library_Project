@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
 import Pagination from "./Pagination";
 
@@ -9,9 +8,6 @@ export default function AdminBookReturn(){
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
-    const navigate = useNavigate();
-
-    let searchFlag = true;
     
     useEffect(() => {
         if(isListAll){
@@ -38,6 +34,7 @@ export default function AdminBookReturn(){
         switch(value){
             case "bookReserveSeq": setisListAll(false); break;
             case "bookSeq": setisListAll(false); break;
+            default: {setisListAll(true); setLimit(Number(10));}
         }
     }
 

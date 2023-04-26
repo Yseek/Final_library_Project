@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookRentDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
 
 @Mapper
@@ -27,6 +28,8 @@ public interface AdminMapperPKS {
 	List<BookReserveDTO> allBookReserve();
 
 	List<BookReserveDTO> searchReserve(String option, String keyword);
+
+	List<BookRentDTO> bookRentList();
 
 	void updateBookInfo(HashMap<String, Object> map);
 
