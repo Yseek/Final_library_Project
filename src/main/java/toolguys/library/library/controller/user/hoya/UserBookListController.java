@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Book;
-import toolguys.library.library.repository.user.hoya.UserBookListRepository;
-import toolguys.library.library.service.user.hoya.UserBookListService;
 import toolguys.library.library.service.user.hoya.UserBookListServiceInterface;
 
 @RestController
@@ -19,12 +17,6 @@ public class UserBookListController {
 
 	@Autowired
 	UserBookListServiceInterface userBookListServiceInterface;
-
-	@Autowired
-	UserBookListService userBookListService;
-
-	@Autowired
-	UserBookListRepository userBookListRepository;
 
 	@GetMapping("bookList")
 	public Page<Book> bookList(

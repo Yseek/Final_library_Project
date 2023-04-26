@@ -34,6 +34,7 @@ import Mybookhope from "./user/dongwon/Mybookhope";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
+import BookReserv from './user/BookReserv';
 
 function App() {
 	return (
@@ -91,6 +92,8 @@ function App() {
 					<Route path="/admin/reserved" element={<AdminReserveCheck />} />
 					<Route path="/user/bookApply" element={<BookApply />} />
 					<Route path="/admin/addBooks" element={<AdminAddBooks />} />
+					<Route path="/user/bookReserv" element={<BookReserv />} />
+					<Route path="/user/bookReserv/:page" element={<BookReserv />} />
 				</Routes>
 				</div>
 				<FooterLayout />

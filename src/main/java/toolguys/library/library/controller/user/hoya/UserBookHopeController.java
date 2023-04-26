@@ -10,7 +10,6 @@ import toolguys.library.library.domain.BookHope;
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.user.BookApplyDTO;
 import toolguys.library.library.repository.user.hoya.UserBookHopeRepository;
-import toolguys.library.library.security.repository.SecurityMemberRepository;
 
 @RestController
 @RequestMapping("user")
@@ -18,9 +17,6 @@ public class UserBookHopeController {
 
 	@Autowired
 	UserBookHopeRepository userBookHopeRepository;
-
-	@Autowired
-	SecurityMemberRepository securityMemberRepository;
 
 	@PostMapping("bookApply")
 	public BookHope bookApply(@RequestBody BookApplyDTO bookApplyDTO) {
