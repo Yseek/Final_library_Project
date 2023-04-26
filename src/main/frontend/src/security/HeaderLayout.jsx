@@ -153,7 +153,7 @@ export default function HeaderLayout() {
 				<div className="header__inner">
 					<div className="chatBox">
 						{memeberOrAdmin != 2 ? <div className="chatBtn">
-							<button type="button" onClick={openChat}>채팅</button>
+							<button type="button" onClick={openChat}>관리자 문의</button>
 						</div> : ""}
 						<div className="chatRoom" style={chatviewStyle}>
 							<div className="chatRoomView">
@@ -188,9 +188,8 @@ export default function HeaderLayout() {
 				</div>
 			</div>
 			<div className="sideBar">
-				<h2>여기가 사이드바</h2>
+				<h2>바로가기</h2>
 				{memeberOrAdmin == 2 ? <div className="adminNav">
-					관리자용
 					<ul>
 						<li><Link to={`/admin/notice`}>공지사항 목록</Link></li>
 						<li><Link to={`/admin/bookhope`}>희망도서 승인</Link></li>
@@ -203,7 +202,6 @@ export default function HeaderLayout() {
 					</ul>
 				</div>
 					: <div className="userNav">
-						유저용
 						<ul>
 							<li><Link to={`/notice/1`}>공지사항</Link></li>
 							<li><Link to={`/user/bookList`}>도서목록</Link></li>

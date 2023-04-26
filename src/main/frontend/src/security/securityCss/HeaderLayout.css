@@ -1,5 +1,7 @@
 .header {
-	background-color: grey;
+	background-color: #0665A9;
+	height: 10vh;
+	text-align: center;
 }
 
 nav {
@@ -22,6 +24,7 @@ ul {
 .logoImg {
 	text-decoration: none;
 	color: white;
+	margin-left: 25vw;
 }
 
 .link {
@@ -42,9 +45,14 @@ ul {
 }
 
 
-.chatBtn>button {
+.chatBtn button {
+	border-radius: 7px;
+	background-color: black;
 	margin-top: 8%;
-	width: 40%;
+	width: 7vw;
+	border : 1px solid black;
+	font-family: 메이플스토리;
+	font-size: large;
 }
 
 .chatRoom {
@@ -88,13 +96,37 @@ ul {
 }
 
 .sideBar {
+	border: 1px solid black;
 	float: left;
 	position: relative;
-	height: 600px;
-	background-color: gray;
+	height: 80vh;
+	background-color:white;
 	width: 200px;
 	z-index: 1;
+	text-align: center;
 	/* opacity: 0.6; */
+}
+
+.sideBar A{
+	text-decoration: none;
+	color: black;
+	font-size :larger;
+	font-family: 메이플스토리; 
+}
+
+.sideBar li{
+	border: 1px solid black;;
+	border-left: none;
+	border-right: none;
+}
+
+.sideBar h2{
+	text-decoration: none;
+	height: 10vh;
+	background-color: #257bb7;
+	color: white;
+	font-size : 35px;
+	font-family: 메이플스토리; 
 }
 
 .userNav>ul {

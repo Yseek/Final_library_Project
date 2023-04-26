@@ -1,6 +1,6 @@
 .mainPage{
 	width: 100%;
-	height: 100%;
+	height: 80vh;
 }
 
 .mainTop{
@@ -19,14 +19,13 @@
 	float: left;
 	width: 50%;
 	height: 100%;
-	border: 1px solid black;
+	
 }
 
 .mainRightBottom{
 	width: 50%;
 	height: 100%;
-	margin-left: 50%;
-	border: 1px solid black;
+	margin-left:50%;
 }
 
 .searchBookBoxInput{
@@ -36,7 +35,7 @@
 
 .searchBookBox{
 	width: 650px;
-	height: 450px;
+	height: 35vh;
 	margin: auto;
 	margin-top: 20px;
 	overflow: auto;
