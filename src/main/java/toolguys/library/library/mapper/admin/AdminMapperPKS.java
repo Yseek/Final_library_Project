@@ -6,7 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import toolguys.library.library.domain.BookRent;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookRentDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
 
 @Mapper
@@ -28,6 +30,10 @@ public interface AdminMapperPKS {
 
 	List<BookReserveDTO> searchReserve(String option, String keyword);
 
+	List<BookRentDTO> bookRentList();
+
+	List<BookRentDTO> searchRentList(String option, String keyword);
+
 	void updateBookInfo(HashMap<String, Object> map);
 
 	void updateBookInfoDetail(HashMap<String, Object> map);
@@ -35,6 +41,10 @@ public interface AdminMapperPKS {
 	void statUpdateByRent(long reserveSeq);
 
 	void bookUpdateByRent(long bookSeq);
+
+	void statUpdateByReturn(long bookRentSeq);
+
+	void bookUpdateByReturn(long bookSeq);
 
 	void statUpdateByCancel(long reserveSeq);
 

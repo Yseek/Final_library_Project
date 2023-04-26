@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookRentDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
 import toolguys.library.library.mapper.admin.AdminMapperPKS;
 
@@ -64,6 +65,23 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     @Override
     public List<BookReserveDTO> searchReserve(String option, String keyword){
         return adminMapperPKS.searchReserve(option, keyword);
+    }
+
+    @Override
+    public List<BookRentDTO> searchRentList(String option, String keyword){
+        return adminMapperPKS.searchRentList(option, keyword);
+    }
+
+    @Override
+    @Transactional
+    public void updateByReturn(long bookRentSeq, long bookSeq){
+        adminMapperPKS.bookUpdateByReturn(bookSeq);
+        adminMapperPKS.statUpdateByReturn(bookRentSeq);
+    }
+
+    @Override
+    public List<BookRentDTO> bookRentList(){
+        return adminMapperPKS.bookRentList();
     }
     @Override
     public void updateBookInfo(BookDTO dto){
