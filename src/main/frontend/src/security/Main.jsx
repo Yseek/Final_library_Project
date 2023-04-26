@@ -76,9 +76,7 @@ export default function Main() {
 							<td className='BookListTd'>{res.bookTitle}</td>
 							<td className='BookListTd'>{res.bookWriter}</td>
 							<td className='BookListTd'>{res.bookPub}</td>
-							<td className='BookListTd'>{res.bookStatus}</td>
 							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
-							<td className='BookListTd'><button>예약</button></td>
 						</tr>
 					))}
 				</div>
