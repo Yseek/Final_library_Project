@@ -1,15 +1,21 @@
 package toolguys.library.library.controller.admin;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.Sort;
 
 import toolguys.library.library.domain.BookHope;
@@ -33,10 +39,13 @@ public class AdminBookHopeControllerYSH {
     }
 
     @PostMapping("bookHopeOk/Input")
-    public void bookHopeOk(@RequestBody BookHopeDTO bookHopeDTO){
-        System.out.println("확인용");
-        System.out.println("확인용2"+bookHopeDTO);
-        adminBookHopeServiceYSH.bookHopeConvertingByBook(bookHopeDTO);
+    public ResponseEntity<String> bookHopeOk(@RequestParam("data") List<String> data, @RequestParam("file") MultipartFile file) throws IOException {
+        try {
+            adminBookHopeServiceYSH.bookHopeConvertingByBook(data, file);
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().body("등록완료");
     }
    
     @GetMapping("bookHope/deny/{bookHopeSeq}")
