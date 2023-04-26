@@ -79,6 +79,8 @@ export default function Mybookrent() {
                         <th>반납일</th>
 						<th>연장횟수</th>
 						<th>연장</th>
+						<th>분실신고</th>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -90,6 +92,8 @@ export default function Mybookrent() {
 							<td width="15%">{moment(res.bookRentReturn).format('YYYY-MM-DD')}</td>
 							<td>{res.bookRentCoin}</td>
 							<td><button id="prolongBtn" onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
+							{/* 수정중 */}
+							<td><button id="booklostBtn" onClick={() => booklostBtn(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
 						</tr>
 					))}
 				</tbody>
