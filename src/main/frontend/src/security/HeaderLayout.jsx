@@ -207,6 +207,7 @@ export default function HeaderLayout() {
 						<li><Link to={`/admin/booklist`}>도서 목록</Link></li>
 						<li><Link to={`/admin/memberList`}>회원 목록</Link></li>
 						<li><Link to={`/admin/addBooks`}>도서 추가</Link></li>
+						<li><Link to={`/admin/bookLost`}>도서 분실신고 처리</Link></li>
 					</ul>
 				</div>
 
