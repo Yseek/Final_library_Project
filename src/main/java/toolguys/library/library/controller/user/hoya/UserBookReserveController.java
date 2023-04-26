@@ -25,13 +25,13 @@ import toolguys.library.library.service.user.hoya.UserBookReservServiceInterface
 @RequestMapping("user")
 public class UserBookReserveController {
 
-  @Autowired
-  UserBookReservServiceInterface userBookReservServiceInterface;
+	@Autowired
+	UserBookReservServiceInterface userBookReservServiceInterface;
 
 	@Autowired
 	UserBookReservService userBookReservService;
 
-  @GetMapping("bookReserv")
+	@GetMapping("bookReserv")
 	public Page<BookReserve> bookReserv(
 			@PageableDefault(page = 0, size = 3, sort = "bookReserveSeq", direction = Sort.Direction.DESC) Pageable pageable,
 			Model model) {
@@ -39,11 +39,11 @@ public class UserBookReserveController {
 	}
 
 	@DeleteMapping("bookReserv/{bookReserveSeq}")
-  public ResponseEntity<?> deleteById(@PathVariable Long bookReserveSeq) {
-    return new ResponseEntity<>(userBookReservService.deleteBookReserve(bookReserveSeq), HttpStatus.OK);
-  }
+	public ResponseEntity<?> deleteById(@PathVariable Long bookReserveSeq) {
+		return new ResponseEntity<>(userBookReservService.deleteBookReserve(bookReserveSeq), HttpStatus.OK);
+	}
 
-	@PostMapping("bookReserv")
+	@PostMapping("bookList")
     public ResponseEntity<?> bookReserve(@RequestBody BookReservDTO bookReservDTO) {
         boolean result = userBookReservService.bookReserve(bookReservDTO.getBookSeq(), bookReservDTO.getMemberSeq()));
 
@@ -53,5 +53,4 @@ public class UserBookReserveController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-  
 }
