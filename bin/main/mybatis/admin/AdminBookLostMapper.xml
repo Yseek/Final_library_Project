@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toolguys.library.library.mapper.admin.AdminBookLostMapperYSH">
+    <resultMap id="adminBookLostDTO" type="toolguys.library.library.dto.admin.AdminBookLostDTO">
+        <id property="bookSeq" column="BOOKSEQ"/>
+        <result property="bookTitle" column="BOOKTITLE"/>
+        <result property="bookWriter" column="BOOKWRITER"/>
+        <result property="bookPub" column="BOOKPUB"/>
+        <result property="bookStory" column="BOOKSTORY"/>
+        <result property="bookImgName" column="BOOKIMGNAME"/>
+        <result property="bookImgPath" column="BOOKIMGPATH"/>
+        <result property="bookImgOgn" column="BOOKIMGOGN"/>
+        <result property="bookStatus" column="BOOKSTATUS"/>
+        <association property="member" column="memberSeq" resultMap="memberMap"/>
+    </resultMap>
+    <resultMap type="Member" id="memberMap">
+        <id property="memberSeq" column="memberSeq" />
+        <result property="memberName" column="memberName" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="adminBookLostDTO">
+        select BOOKSEQ, BOOKTITLE, BOOKWRITER, BOOKPUB, BOOKSTATUS, MEMBERSEQ, MEMBERNAME from BOOK b
+        join BOOKLOST bl on b.BOOKSEQ = bl.BOOK_BOOKSEQ 
+        join MEMBER m on bl.MEMBER_MEMBERSEQ = m.MEMBERSEQ
+        where BOOKSTATUS in (4, 5)
+        order by BOOKSEQ DESC
+    </select>
+</mapper>

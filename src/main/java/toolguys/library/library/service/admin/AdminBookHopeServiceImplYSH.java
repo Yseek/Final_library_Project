@@ -1,19 +1,28 @@
 package toolguys.library.library.service.admin;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import toolguys.library.library.domain.Book;
 import toolguys.library.library.domain.BookHope;
-import toolguys.library.library.dto.admin.BookHopeDTO;
 import toolguys.library.library.repository.admin.AdminBookHopeRepositoryYSH;
 import toolguys.library.library.repository.admin.AdminBookRepositoryYSH;
 
 @Service
 public class AdminBookHopeServiceImplYSH implements AdminBookHopeServiceYSH{
 
+    @Value("${file.dir}")
+	private String fileDir;
+    
     @Autowired
     private final AdminBookHopeRepositoryYSH adminBookHopeRepositoryYSH;
     @Autowired
@@ -35,22 +44,36 @@ public class AdminBookHopeServiceImplYSH implements AdminBookHopeServiceYSH{
     }
 
     @Override
-    public void bookHopeConvertingByBook(BookHopeDTO bookHopeDTO){
+    public Long bookHopeConvertingByBook(List<String> data, MultipartFile files) throws IOException{
+        if (files.isEmpty()) {
+			return null;
+		}
+        // 원래 파일 이름 추출
+		String origName = files.getOriginalFilename();
+		// 파일 이름으로 쓸 uuid 생성
+		String uuid = UUID.randomUUID().toString();
+		// 확장자 추출
+		String extension = origName.substring(origName.lastIndexOf("."));
+
+        String savedName = uuid + extension;
+
+		String savedPath = fileDir + savedName;
+
         Book book = new Book();
-        book.setBookTitle(bookHopeDTO.getBookTitle());
-        System.out.println("확인용3"+bookHopeDTO.getBookTitle());
-        book.setBookWriter(bookHopeDTO.getBookWriter());
-        System.out.println("확인용4"+bookHopeDTO.getBookWriter());
-        book.setBookPub(bookHopeDTO.getBookPub());
-        book.setBookStory(bookHopeDTO.getBookStory());
-        book.setBookImgName(bookHopeDTO.getBookImgName());
-        book.setBookImgPath(bookHopeDTO.getBookImgPath());
-        book.setBookImgOgn(bookHopeDTO.getBookImgOgn());
+        book.setBookTitle(data.get(0));
+        book.setBookWriter(data.get(1));
+        book.setBookPub(data.get(2));
+        book.setBookStory(data.get(3));
+        book.setBookImgName(savedName);
+        book.setBookImgPath(savedPath);
+        book.setBookImgOgn(origName);
         book.setBookStatus((byte)1);
+        files.transferTo(new File(savedPath));
         adminBookRepositoryYSH.save(book);
-        BookHope bookHope = adminBookHopeRepositoryYSH.findById(bookHopeDTO.getBookHopeSeq()).get();
-        bookHope.setBookHopeStatus(bookHopeDTO.getBookHopeStatus());
+        BookHope bookHope = adminBookHopeRepositoryYSH.findById(Long.valueOf(data.get(4))).get();
+        bookHope.setBookHopeStatus(Byte.valueOf(data.get(5)));
         adminBookHopeRepositoryYSH.save(bookHope);
+        return null;
     }
 
     @Override
