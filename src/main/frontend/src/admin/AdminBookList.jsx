@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
 import Pagination from "./Pagination";
+import styled from "styled-components";
 
 export default function AdminBookList(){
     const [bookList, setBookList] = useState([]);
@@ -163,8 +164,8 @@ export default function AdminBookList(){
             <option value="100">100</option>
             </select>
         </label>
-        <div className="BookWishDiv">
-            <table className="BookWishTable">
+        <div>
+            <Table>
                 <thead>
                     <tr>
                         <td>제목</td>
@@ -188,7 +189,7 @@ export default function AdminBookList(){
                     </tr>
                 ))}
                 </tbody>         
-            </table>
+            </Table>
             {isSearchDetail === false && <>
             <div>
                 <form name="e" autoComplete="off" onSubmit={searchKeyword}>
@@ -230,3 +231,10 @@ export default function AdminBookList(){
     </>
     )
 }
+
+const Table = styled.table`
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: auto;
+    `;
