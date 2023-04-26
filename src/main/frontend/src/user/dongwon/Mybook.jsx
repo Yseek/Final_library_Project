@@ -53,13 +53,12 @@ export default function Mybook() {
 	const deleteFromMybook = (myBooksSeq) => {
 		fetch(`http://127.0.0.1:8080/user/mybooklist/delete.do`,{
 			method:"POST",
-		// 	headers : {
-		// 		"Content-Type": "application/json",
-		// 		"Authorization": "Bearer " + localStorage.getItem("token"),
-		// 	},
-		// 	body: JSON.stringify({ bookSeq }),
-		})
-		// .then(window.location.reload())
+			headers : {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + localStorage.getItem("token"),
+			},
+			body: JSON.stringify({ myBooksSeq }),
+		}).then(window.location.reload())
 	};
 
 	return (

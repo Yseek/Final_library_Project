@@ -37,8 +37,7 @@ public class MybookListController {
         return output;
     }
     @PostMapping("mybooklist/delete.do")
-    public void prolong(@RequestBody MyBooks mybooks){
-        // mybooklistService.prolongMybookrentS(mybooks);
-        System.out.println("myBookSeq: " + mybooks.getMyBooksSeq());
+    public void deleteMybook(@RequestBody MyBooks mybooks){
+        mybooklistService.deleteMybookS(mybooks);
     }
 }
