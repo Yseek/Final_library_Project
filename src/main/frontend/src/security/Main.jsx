@@ -61,16 +61,6 @@ export default function Main() {
 							))}
 						</tbody>
 						<tbody>
-					{Array.isArray(data) && data.map(res => (
-						<tr key={res.bookSeq}>
-							<td className='BookListTd'>{res.bookTitle}</td>
-							<td className='BookListTd'>{res.bookWriter}</td>
-							<td className='BookListTd'>{res.bookPub}</td>
-							<td className='BookListTd'>{res.bookStatus}</td>
-							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
-							<td className='BookListTd'><button>예약</button></td>
-						</tr>
-					))}
 				</tbody>
 					</table>
 				</div>
@@ -81,6 +71,16 @@ export default function Main() {
 				</div>
 				<div className="mainRightBottom">
 					뭐가 있긴 하겠지
+					{Array.isArray(data) && data.map(res => (
+						<tr key={res.bookSeq}>
+							<td className='BookListTd'>{res.bookTitle}</td>
+							<td className='BookListTd'>{res.bookWriter}</td>
+							<td className='BookListTd'>{res.bookPub}</td>
+							<td className='BookListTd'>{res.bookStatus}</td>
+							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
+							<td className='BookListTd'><button>예약</button></td>
+						</tr>
+					))}
 				</div>
 			</div>
 		</div>
