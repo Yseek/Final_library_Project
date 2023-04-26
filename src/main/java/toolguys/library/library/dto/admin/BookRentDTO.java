@@ -18,7 +18,7 @@ public class BookRentDTO {
     private long bookRentSeq;
 
     @Column(name = "BOOKRENTRDATE")
-    private Date bookRentDate;
+    private Date bookRentRDate;
 
     @Column(name = "BOOKRENTDDAY")
     private Date bookRentDDay;
@@ -26,10 +26,13 @@ public class BookRentDTO {
     @Column(name = "BOOKRENTRETURN")
     private Date bookRentReturn;
 
-    @Column(name = "BOOKRENTCOIN")
-    private byte bookRentCoin;
+    private String bookTitle;
 
     private long rentCardSeq;
+
+    private String memberName;
+
+    private long memberSeq;
 
     private long bookSeq;
 }
