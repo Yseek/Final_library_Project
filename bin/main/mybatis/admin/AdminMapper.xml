@@ -31,11 +31,13 @@
     </resultMap>
     <resultMap id="bookrentDTO" type="toolguys.library.library.dto.admin.BookRentDTO">
         <id property="bookRentSeq" column="BOOKRENTSEQ"/>
-        <id property="bookRentRDate" column="BOOKRENTDATE"/>
+        <id property="bookRentRDate" column="BOOKRENTRDATE"/>
         <id property="bookRentDDay" column="BOOKRENTDDAY"/>
         <id property="bookRentReturn" column="BOOKRENTRETURN"/>
-        <id property="bookRentCoin" column="BOOKRENTCOIN"/>
+        <id property="bookTitle" column="BOOKTITLE"/>
         <id property="rentCardSeq" column="RENTCARDSEQ"/>
+        <id property="memberSeq" column="MEMBERSEQ"/>
+        <id property="memberName" column="MEMBERNAME"/>
         <id property="bookSeq" column="BOOKSEQ"/>
     </resultMap>
     <resultMap id="bookReserveDTO" type="toolguys.library.library.dto.admin.BookReserveDTO">
@@ -106,6 +108,22 @@
             BOOKRESERVESEQ=#{keyword} LIMIT 1
         </if>
     </select>
+    <select id="bookRentList" resultMap="bookrentDTO">
+        select BOOKRENTSEQ, BOOK_BOOKSEQ as BOOKSEQ, (select BOOKTITLE from BOOK as b1 where b1.BOOKSEQ=b.BOOK_BOOKSEQ) as BOOKTITLE, BOOKRENTRDATE, BOOKRENTDDAY, BOOKRENTRETURN,
+        (select MEMBERNAME from MEMBER m where m.MEMBERSEQ=(select MEMBER_MEMBERSEQ from RENTCARD as r where b.RENTCARD_RENTCARDSEQ=r.RENTCARDSEQ)) MEMBERNAME
+        from BOOKRENT b where BOOKRENTRETURN is null
+    </select>
+    <select id="searchRentList" resultMap="bookrentDTO">
+        select BOOKRENTSEQ, BOOK_BOOKSEQ as BOOKSEQ, (select BOOKTITLE from BOOK as b1 where b1.BOOKSEQ=b.BOOK_BOOKSEQ) as BOOKTITLE, BOOKRENTRDATE, BOOKRENTDDAY, BOOKRENTRETURN,
+        (select MEMBERNAME from MEMBER m where m.MEMBERSEQ=(select MEMBER_MEMBERSEQ from RENTCARD as r where b.RENTCARD_RENTCARDSEQ=r.RENTCARDSEQ)) MEMBERNAME
+        from BOOKRENT b where BOOKRENTRETURN is null and
+        <if test='option == "bookSeq"'>
+            BOOK_BOOKSEQ=#{keyword} LIMIT 1
+        </if>
+        <if test='option == "bookRentSeq"'>
+            BOOKRENTSEQ=#{keyword} LIMIT 1
+        </if>
+    </select>
     <update id="updateBookInfo" parameterType="hashMap">
         update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status}
         where BOOKSEQ=#{seq}
@@ -120,6 +138,12 @@
     </update>
     <update id="bookUpdateByRent" parameterType="long">
         update BOOK set BOOKSTATUS=3 where BOOKSEQ=#{bookSeq}
+    </update>
+    <update id="statUpdateByReturn" parameterType="long">
+        update BOOKRENT set BOOKRENTRETURN=now() where BOOKRENTSEQ=#{bookRentSeq}
+    </update>
+    <update id="bookUpdateByReturn" parameterType="long">
+        update BOOK set BOOKSTATUS=1 where BOOKSEQ=#{bookSeq}
     </update>
     <update id="statUpdateByCancel" parameterType="long">
         update BOOKRESERVE set BOOKRESERVESTATUS=4 where BOOKRESERVESEQ=#{reserveSeq}
