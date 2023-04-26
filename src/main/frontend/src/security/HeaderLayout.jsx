@@ -189,15 +189,7 @@ export default function HeaderLayout() {
 			</div>
 			<div className="sideBar">
 				<h2>여기가 사이드바</h2>
-				<div className="userNav">
-					유저용
-					<ul>
-						<li><Link to={`/notice/1`}>공지사항</Link></li>
-						<li><Link to={`/user/bookList`}>도서목록</Link></li>
-						<li><Link to={`/user/bookApply`}>희망도서신청</Link></li>
-					</ul>
-				</div>
-				<div className="adminNav">
+				{memeberOrAdmin == 2 ? <div className="adminNav">
 					관리자용
 					<ul>
 						<li><Link to={`/admin/notice`}>공지사항 목록</Link></li>
@@ -210,7 +202,14 @@ export default function HeaderLayout() {
 						<li><Link to={`/admin/bookLost`}>도서 분실신고 처리</Link></li>
 					</ul>
 				</div>
-
+					: <div className="userNav">
+						유저용
+						<ul>
+							<li><Link to={`/notice/1`}>공지사항</Link></li>
+							<li><Link to={`/user/bookList`}>도서목록</Link></li>
+							<li><Link to={`/user/bookApply`}>희망도서신청</Link></li>
+						</ul>
+					</div>}
 			</div>
 		</div>
 	);
