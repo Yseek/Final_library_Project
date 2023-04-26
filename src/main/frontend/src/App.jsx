@@ -5,6 +5,8 @@ import AdminAddBooks from './admin/AdminAddBooks';
 import AdminBookHope from './admin/AdminBookHope';
 import AdminBookHopeOk from './admin/AdminBookHopeOk';
 import AdminBookList from './admin/AdminBookList';
+import AdminBookLost from './admin/AdminBookLost';
+import AdminBookReturn from './admin/AdminBookReturn';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberContent from './admin/AdminMemberContent';
@@ -28,14 +30,13 @@ import MyPage from './security/MyPage';
 import BookApply from "./user/BookApply";
 import BookDetail from './user/BookDetail';
 import BookList from './user/BookList';
+import BookReserv from './user/BookReserv';
 import Mybookrent from "./user/dongwon/MyBookrent";
 import Mybook from "./user/dongwon/Mybook";
 import Mybookhope from "./user/dongwon/Mybookhope";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
-import AdminBookReturn from './admin/AdminBookReturn';
-import AdminBookLost from './admin/AdminBookLost';
 
 function App() {
 	return (
@@ -93,6 +94,8 @@ function App() {
 					<Route path="/admin/reserved" element={<AdminReserveCheck />} />
 					<Route path="/user/bookApply" element={<BookApply />} />
 					<Route path="/admin/addBooks" element={<AdminAddBooks />} />
+					<Route path="/user/bookReserv" element={<BookReserv />} />
+					<Route path="/user/bookReserv/:page" element={<BookReserv />} />
 					<Route path="/admin/return" element={<AdminBookReturn />} />
 					<Route path="/admin/bookLost" element={<AdminBookLost />} />
 				</Routes>
