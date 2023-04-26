@@ -68,6 +68,18 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     }
 
     @Override
+    public List<BookRentDTO> searchRentList(String option, String keyword){
+        return adminMapperPKS.searchRentList(option, keyword);
+    }
+
+    @Override
+    @Transactional
+    public void updateByReturn(long bookRentSeq, long bookSeq){
+        adminMapperPKS.bookUpdateByReturn(bookSeq);
+        adminMapperPKS.statUpdateByReturn(bookRentSeq);
+    }
+
+    @Override
     public List<BookRentDTO> bookRentList(){
         return adminMapperPKS.bookRentList();
     }

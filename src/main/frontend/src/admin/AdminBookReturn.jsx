@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Ip from "../Ip";
 import Pagination from "./Pagination";
+import moment from 'moment';
 
 export default function AdminBookReturn(){
     const [rentList, setrentList] = useState([])
@@ -65,10 +66,11 @@ export default function AdminBookReturn(){
         .catch(error => console.log(error));
     }
 
-    function reserveBook(e, bookReserveSeq, bookSeq, memberSeq){
+    function returnBook(e, bookRentSeq, bookSeq){
         e.preventDefault();
+
         if(window.confirm(`${bookSeq}번 도서를 반납처리합니다.`)){
-            fetch(`${Ip.url}/admin/reserved/${bookReserveSeq}&${bookSeq}&${memberSeq}`, {
+            fetch(`${Ip.url}/admin/return/${bookRentSeq}&${bookSeq}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -97,16 +99,16 @@ export default function AdminBookReturn(){
                     </tr>
                 </thead>
                 <tbody>
-                {rentList.slice(offset, offset + limit).map((rsv, index) => (
+                {rentList.slice(offset, offset + limit).map((rnt, index) => (
                         <tr key={index}>
-                        <td>{rsv.bookRentSeq}</td>
-                        <td>{rsv.memberName}</td>
-                        <td>{rsv.bookSeq}</td>
-                        <td>{rsv.bookTitle}</td>
-                        <td>{rsv.bookRentRdate}</td>
-                        <td>{rsv.bookRentDDay}</td>
+                        <td>{rnt.bookRentSeq}</td>
+                        <td>{rnt.memberName}</td>
+                        <td>{rnt.bookSeq}</td>
+                        <td>{rnt.bookTitle}</td>
+                        <td>{moment(rnt.bookRentRDate).format('YYYY-MM-DD HH:mm:ss')}</td>
+                        <td>{moment(rnt.bookRentDDay).format('YYYY-MM-DD HH:mm:ss')}</td>
                         <td>
-                            <button onClick={(e) => reserveBook(e, rsv.bookReserveSeq, rsv.bookSeq, rsv.memberSeq)}>대출처리</button>
+                            <button onClick={(e) => returnBook(e, rnt.bookRentSeq, rnt.bookSeq)}>반납</button>
                         </td>
                     </tr>
                 ))}
@@ -115,7 +117,7 @@ export default function AdminBookReturn(){
             <div>
                 <form name="e" autoComplete="off" onSubmit={searchKeyword}>
                     <select name="option" onChange={({ target: { value } }) => optionCheck(value)}>
-                        <option value="bookReserveSeq">예약번호</option>
+                        <option value="bookRentSeq">대출번호</option>
                         <option value="bookSeq">책번호</option>
                     </select>
                     <input type="text" name="keyWord" placeholder=""></input>

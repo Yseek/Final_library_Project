@@ -50,20 +50,28 @@ public class AdminControllerPKS {
 
     @GetMapping("reserved")
     public ResponseEntity<List<BookReserveDTO>> allBookReserve(){
-        System.out.println("1111111111111111" + adminServicePKS.allBookReserve());
         return ResponseEntity.ok().body(adminServicePKS.allBookReserve());
     }
 
     @GetMapping("reserved/search/{option}={keyword}")
     public ResponseEntity<List<BookReserveDTO>> searchReserve(@PathVariable String option, @PathVariable String keyword){
-        System.out.println("2222222222222222" + adminServicePKS.searchReserve(option, keyword));
         return ResponseEntity.ok().body(adminServicePKS.searchReserve(option, keyword));
     }
 
     @GetMapping("return")
     public ResponseEntity<List<BookRentDTO>> bookRentList(){
-        System.out.println("3333333333333333" + adminServicePKS.bookRentList());
+        System.out.println("111111111111111111" + adminServicePKS.bookRentList());
         return ResponseEntity.ok().body(adminServicePKS.bookRentList());
+    }
+
+    @GetMapping("return/search/{option}={keyword}")
+    public ResponseEntity<List<BookRentDTO>> searchRentList(@PathVariable String option, @PathVariable String keyword){
+        return ResponseEntity.ok().body(adminServicePKS.searchRentList(option, keyword));
+    }
+
+    @PostMapping("return/{bookRentSeq}&{bookSeq}")
+    public void updateByReturn(@PathVariable long bookRentSeq, @PathVariable long bookSeq){
+        adminServicePKS.updateByReturn(bookRentSeq, bookSeq);
     }
 
     @PostMapping("reserved/{reserveSeq}&{bookSeq}&{memberSeq}")

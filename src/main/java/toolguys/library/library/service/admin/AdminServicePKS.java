@@ -25,6 +25,11 @@ public interface AdminServicePKS {
 
     List<BookReserveDTO> searchReserve(String option, String keyword);
 
+    List<BookRentDTO> searchRentList(String option, String keyword);
+
+    @Transactional
+    void updateByReturn(long bookRentSeq, long bookSeq);
+
     List<BookRentDTO> bookRentList();
 
     void updateBookInfo(BookDTO dto);
