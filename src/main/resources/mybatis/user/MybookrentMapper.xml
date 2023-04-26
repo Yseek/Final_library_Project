@@ -17,7 +17,7 @@
     </resultMap>
 
     <select id="getMybookrent" resultType="Bookrent" parameterType="java.util.HashMap" resultMap="BookRentBookMap">
-        select * from BOOKRENT br join Book bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+        select * from BOOKRENT br join BOOK bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
         ORDER BY BOOKRENTSEQ desc
         LIMIT #{offset}, #{size}
     </select>
