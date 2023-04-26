@@ -83,7 +83,7 @@ export default function AdminMemberList() {
     return (
         <center>
             <h3>회원 목록 페이지</h3>
-            <table className="adminMemberTable">
+            <table class="board-list">
                 <thead>
                     <tr>
                         <th>회원번호</th>
@@ -102,9 +102,9 @@ export default function AdminMemberList() {
                 </tbody>
             </table>
             {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
-            {pageList.length !== 0 && <div className="page">
-                <span><Link to={`/admin/memberList/1`}>&laquo;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`}>&lt;</Link>&nbsp;</span>
+            {pageList.length !== 0 && <div className="paging">
+                <span><Link to={`/admin/memberList/1`}  className="btn-paging first">&laquo;</Link>&nbsp;</span>
+                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link>&nbsp;</span>
                 {pageList.map(res => (
                     <span key={res}>
                         <Link to={`/admin/memberList/${res}`}>
