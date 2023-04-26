@@ -6,11 +6,6 @@ import Ip from "../Ip";
 
 export default function AdminMemberList() {
 
-    const memberStatusString = {
-        1: "일반 회원",
-        2: "블랙리스트"
-    }
-
     const navigate = useNavigate();
     const searchCategoryRef = useRef();
     const searchKeywordRef = useRef();
@@ -87,22 +82,21 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <table>
+            <h3>회원 목록 페이지</h3>
+            <table className="adminMemberTable">
                 <thead>
                     <tr>
                         <th>회원번호</th>
                         <th>이름</th>
                         <th>이메일</th>
-                        <th>블랙리스트 여부</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
                         <tr key={member.memberSeq}>
-                            <td>{member.memberSeq}</td>
+                            <td><Link to={`/admin/memberList/content`}  state={{ user: member.memberSeq }}>{member.memberSeq}</Link></td>
                             <td>{member.memberName}</td>
                             <td>{member.memberEmail}</td>
-                            <td>{memberStatusString[member.memberStatus]}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -130,7 +124,7 @@ export default function AdminMemberList() {
                         <option>책번호</option>
                     </select>
                     <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
-                    <button>검색</button>
+                    <button className="adminMemberButton">검색</button>
                 </form>
             </div>
         </center>

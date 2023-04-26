@@ -3,6 +3,7 @@ import "./css/Notice.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import Ip from "../../Ip";
 
 export default function Notice() {
 	const params = useParams();
@@ -17,14 +18,13 @@ export default function Notice() {
 
 	const onClickSearchInput = (e) => {
 		e.preventDefault();
-		navigate(`/notice/search/${userInput}`);
+		navigate(`/notice/search/${userInput}/1`);
 	};
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`,{
+		fetch(`${Ip.url}/notice?page=${params.page}&size=10`,{
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
 		.then(res => res.json())
@@ -32,10 +32,9 @@ export default function Notice() {
 	}, [params]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/notice?page=${params.page}&size=10`,{
+		fetch(`${Ip.url}/notice?page=${params.page}&size=10`,{
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
 		.then(res => res.json())

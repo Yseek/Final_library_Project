@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import toolguys.library.library.domain.Notice;
+import toolguys.library.library.dto.admin.NoticeDTO;
 
 @Mapper
 public interface AdminNoticeMapper {
@@ -14,6 +15,6 @@ public interface AdminNoticeMapper {
     List<Notice> getNoticeListByPage(HashMap<String, Integer> input);
     Notice getNoticeContent(long noticeSeq);
     void deleteNotice(long noticeSeq);
-    void insertNotice(Notice notice);
+    void insertNotice(NoticeDTO noticeDTO);
     void updateNotice(Notice notice);
 }

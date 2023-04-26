@@ -18,6 +18,9 @@
     <select id="getTotalCount" resultType="long">
         select COUNT(*) from NOTICE
     </select>
+    <select id="getTotalCountBySearch" resultType="long" parameterType="String">
+        select COUNT(*) from NOTICE where NOTICETITLE like CONCAT('%', #{search}, '%')
+    </select>
     <select id="getNoticeListByPage" resultType="Notice" parameterType="java.util.HashMap" resultMap="noticeMemberMap">
         select * from NOTICE n join MEMBER m on n.member_memberSeq=m.memberSeq
         ORDER BY NOTICESEQ desc

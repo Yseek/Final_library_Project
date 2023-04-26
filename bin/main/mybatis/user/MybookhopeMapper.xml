@@ -3,7 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="toolguys.library.library.mapper.user.MybookhopeMapper">
-    <select id="getMybookhope" resultType="BookHope" parameterType="long">
-        select * from BOOKHOPE where MEMBER_MEMBERSEQ=#{memberSeq}
+    <select id="getMybookhope" resultType="BookHope" parameterType="java.util.HashMap">
+        select * from BOOKHOPE where MEMBER_MEMBERSEQ=#{memberSeq} ORDER BY BOOKHOPESEQ desc
+        LIMIT #{offset}, #{size}
+    </select>
+    <select id="getTotalCount" resultType="long" parameterType="long">
+        select COUNT(*) from BOOKHOPE where MEMBER_MEMBERSEQ=#{memberSeq}
     </select>
 </mapper>

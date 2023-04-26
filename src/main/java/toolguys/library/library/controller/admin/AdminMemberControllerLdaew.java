@@ -1,6 +1,7 @@
 package toolguys.library.library.controller.admin;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Member;
+import toolguys.library.library.domain.dongwon.Paginator;
+import toolguys.library.library.dto.admin.AdminBookRentDto;
 import toolguys.library.library.dto.admin.AdminMemberDto;
 import toolguys.library.library.service.admin.AdminMemberServiceLdaew;
 
@@ -36,5 +40,41 @@ public class AdminMemberControllerLdaew {
             @RequestBody HashMap<String, String> searchData) {
 
         return adminMemberServiceLdaew.searchMember(searchData, pageable);
+    }
+
+    @PostMapping("memberList/member")
+    public AdminMemberDto memberContent(@RequestBody HashMap<String, String> memberData) {
+        long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+        return adminMemberServiceLdaew.memberContent(memberSeq);
+    }
+
+    @PostMapping("memberList/bookRentList")
+    public Page<AdminBookRentDto> bookRentList(
+            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestBody HashMap<String, String> memberData) {
+        long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+        return adminMemberServiceLdaew.bookRentList(memberSeq, pageable);
+    }
+
+    @PostMapping("memberList/bookRentHistory")
+    public Page<AdminBookRentDto> bookRentHistory(
+            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestBody HashMap<String, String> memberData) {
+        long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+        return adminMemberServiceLdaew.bookRentHistory(memberSeq, pageable);
+    }
+
+    // 책 검색
+    @PostMapping("searchBookRent")
+    public Page<AdminBookRentDto> searchBookRent(
+        @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+        @RequestBody HashMap<String, String> searchData) {
+        return adminMemberServiceLdaew.searchBookRent(searchData, pageable);
+    }
+
+    @PostMapping("addBlacklist")
+    public void addBlacklist(@RequestBody HashMap<String, String> memberData){
+        long memberSeq = Long.parseLong(memberData.get("memberSeq"));
+        adminMemberServiceLdaew.addBlacklist(memberSeq);
     }
 }
