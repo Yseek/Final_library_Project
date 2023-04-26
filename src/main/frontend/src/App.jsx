@@ -5,6 +5,7 @@ import AdminAddBooks from './admin/AdminAddBooks';
 import AdminBookHope from './admin/AdminBookHope';
 import AdminBookHopeOk from './admin/AdminBookHopeOk';
 import AdminBookList from './admin/AdminBookList';
+import AdminBookLost from './admin/AdminBookLost';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberContent from './admin/AdminMemberContent';
@@ -28,17 +29,13 @@ import MyPage from './security/MyPage';
 import BookApply from "./user/BookApply";
 import BookDetail from './user/BookDetail';
 import BookList from './user/BookList';
+import BookReserv from './user/BookReserv';
 import Mybookrent from "./user/dongwon/MyBookrent";
 import Mybook from "./user/dongwon/Mybook";
 import Mybookhope from "./user/dongwon/Mybookhope";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
-<<<<<<< HEAD
-import BookReserv from './user/BookReserv';
-=======
-import AdminBookLost from './admin/AdminBookLost';
->>>>>>> cd0218746dbfce60d5b84e5cb2ca850442287341
 
 function App() {
 	return (
