@@ -2,7 +2,6 @@ package toolguys.library.library.service.admin;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class AdminBookHopeServiceImplYSH implements AdminBookHopeServiceYSH {
 	}
 
 	@Override
-	public Long bookHopeConvertingByBook(List<String> data, MultipartFile files) throws IOException {
+	public Long bookHopeConvertingByBook(String title, String writer, String pub, String bookStory, long bookHopeSeq, byte bookHopeStatus, MultipartFile files) throws IOException {
 
 		if (files.isEmpty()) {
 			return null;
@@ -80,17 +79,17 @@ public class AdminBookHopeServiceImplYSH implements AdminBookHopeServiceYSH {
 		String storeFileUrl = amazonS3Client.getUrl(bucket, savedName).toString();
 
 		Book book = new Book();
-		book.setBookTitle(data.get(0));
-		book.setBookWriter(data.get(1));
-		book.setBookPub(data.get(2));
-		book.setBookStory(data.get(3));
+		book.setBookTitle(title);
+		book.setBookWriter(writer);
+		book.setBookPub(pub);
+		book.setBookStory(bookStory);
 		book.setBookImgName(savedName);
 		book.setBookImgPath(storeFileUrl);
 		book.setBookImgOgn(origName);
 		book.setBookStatus((byte) 1);
 		adminBookRepositoryYSH.save(book);
-		BookHope bookHope = adminBookHopeRepositoryYSH.findById(Long.valueOf(data.get(4))).get();
-		bookHope.setBookHopeStatus(Byte.valueOf(data.get(5)));
+		BookHope bookHope = adminBookHopeRepositoryYSH.findById(Long.valueOf(bookHopeSeq)).get();
+		bookHope.setBookHopeStatus(Byte.valueOf(bookHopeStatus));
 		adminBookHopeRepositoryYSH.save(bookHope);
 		return null;
 	}
