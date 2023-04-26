@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 import Ip from "../Ip";
 import './css/BookList.css';
 
@@ -50,7 +51,7 @@ export default function BookList() {
 						<th className='BookListTh'>출판사</th>
 						<th className='BookListTh'>상태</th>
 						<th className='BookListTh'>내용보기</th>
-						<th className='BookListTh'>예약하기</th>
+						{/* <th className='BookListTh'>예약하기</th> */}
 					</tr>
 				</thead>
 				<tbody>
@@ -61,7 +62,7 @@ export default function BookList() {
 							<td className='BookListTd'>{res.bookPub}</td>
 							<td className='BookListTd'>{bookStat[res.bookStatus]}</td>
 							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
-							<td className='BookListTd'><button>예약</button></td>
+							{/* <td className='BookListTd'><button>예약</button></td> */}
 						</tr>
 					))}
 				</tbody>
