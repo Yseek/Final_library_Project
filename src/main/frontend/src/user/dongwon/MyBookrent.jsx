@@ -106,10 +106,10 @@ export default function Mybookrent() {
 							<td width="15%">{moment(res.bookRentDDay).format('YYYY-MM-DD')}</td>
 							<td width="15%">{moment(res.bookRentReturn).format('YYYY-MM-DD')}</td>
 							<td>{res.bookRentCoin}</td>
-							<td><button id="prolongBtn" disabled={res.bookStatus !== 3}
+							<td><button id="prolongBtn" disabled={res.book.bookStatus !== 3}
 								onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
-							<td><button id="bookLostBtn" disabled={res.bookStatus !== 3}
-								onClick={() => bookLostBtn(res.book.bookSeq, info.memberSeq)}>신고</button></td>
+							<td><button id="bookLostBtn" disabled={res.book.bookStatus !== 3}
+								onClick={() => bookLostBtn(res.book.bookSeq, info.memberSeq)}>{res.book.bookStatus !== 3 ? "-" : "신고"}</button></td>
 						</tr>
 					))}
 				</tbody>
