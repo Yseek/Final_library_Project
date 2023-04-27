@@ -55,7 +55,7 @@
         from BOOK b1 group by BOOKTITLE, BOOKWRITER, BOOKPUB
         order by BOOKTITLE
     </select>
-    <select id="bookDetail" resultMap="bookDTO">
+    <select id="bookDetail" parameterType="hashMap" resultMap="bookDTO">
         select BOOKSEQ, BOOKTITLE, BOOKWRITER, BOOKPUB, BOOKSTORY, BOOKIMGPATH, BOOKSTATUS
         from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
         order by BOOKSEQ
