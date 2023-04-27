@@ -31,11 +31,11 @@ public interface AdminMapperPKS {
 
 	List<BookReserveDTO> allBookReserve();
 
-	List<BookReserveDTO> searchReserve(String option, String keyword);
+	List<BookReserveDTO> searchReserve(HashMap<String, Object> map);
 
 	List<BookRentDTO> bookRentList();
 
-	List<BookRentDTO> searchRentList(String option, String keyword);
+	List<BookRentDTO> searchRentList(HashMap<String, Object> map);
 
 	void updateBookInfo(HashMap<String, Object> map);
 
@@ -59,7 +59,7 @@ public interface AdminMapperPKS {
 
 	void insertBookRent(long bookSeq);
 
-	void insertBookReserve(long memberSeq, long bookSeq);
+	void insertBookReserve(HashMap<String, Object> map);
 
 	void deleteBook(long seq);
 }
