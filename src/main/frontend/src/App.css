@@ -1,5 +1,10 @@
 .mainContents{
-	height: 80vh;
-	margin-left: 10%;
+	height: 74.8vh;
+	width: 65vw;
+	margin-left: 20%;
 	font-family: 메이플스토리;
+  display: flex;
+  justify-content : center;
+	text-align: center;
+	
 }

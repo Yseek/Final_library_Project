@@ -149,6 +149,17 @@ export default function HeaderLayout() {
 	let i = 0;
 	return (
 		<div className="allNavBox">
+			<div className='headerNav'>
+				<nav>
+					<ul>
+						{memeberOrAdmin == 2 ? <li><Link to={`/adminChat`} className="link">관리자채팅방</Link></li> : ""}
+						<li><Link to={`/myPage`} className="link">마이페이지</Link></li>
+						{localStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
+						<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
+						{localStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
+					</ul>
+				</nav>
+			</div>
 			<div className="header">
 				<div className="header__inner">
 					<div className="chatBox">
@@ -174,21 +185,12 @@ export default function HeaderLayout() {
 						</div>
 					</div>
 					<h1>
-						<Link className="logoImg" to={`/`} >로고</Link>
+						<Link className="logoImg" to={''} onClick={() => window.location.replace("/")} >로고</Link>
 					</h1>
-					<nav>
-						<ul>
-							{memeberOrAdmin == 2 ? <li><Link to={`/adminChat`} className="link">관리자채팅방</Link></li> : ""}
-							<li><Link to={`/myPage`} className="link">마이페이지</Link></li>
-							{localStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
-							<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
-							{localStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
-						</ul>
-					</nav>
 				</div>
 			</div>
 			<div className="sideBar">
-				<h2>바로가기</h2>
+				<div className='menuTitle'>메뉴</div>
 				{memeberOrAdmin == 2 ? <div className="adminNav">
 					<ul>
 						<li><Link to={`/admin/notice`}>공지사항 목록</Link></li>
@@ -203,9 +205,9 @@ export default function HeaderLayout() {
 				</div>
 					: <div className="userNav">
 						<ul>
-							<li><Link to={`/notice/1`}>공지사항</Link></li>
-							<li><Link to={`/user/bookList`}>도서목록</Link></li>
-							<li><Link to={`/user/bookApply`}>희망도서신청</Link></li>
+							<li className='sideBarLi1'><Link to={`/notice/1`}>공지사항</Link></li>
+							<li className='sideBarLi1'><Link to={`/user/bookList`}>도서목록</Link></li>
+							<li className='sideBarLi2'><Link to={`/user/bookApply`}>희망도서신청</Link></li>
 						</ul>
 					</div>}
 			</div>

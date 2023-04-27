@@ -45,7 +45,7 @@ export default function Main() {
 			<div className="mainTop">
 				<div className="searchBookBox">
 					<div className="searchBookBoxInput">
-						<input type="text" onChange={e => search(e)} />검색
+						<input type="text" onChange={e => search(e)} placeholder='책 제목을 입력하세요'/>
 					</div>
 					<table className='searchedBookList'>
 						<tbody>

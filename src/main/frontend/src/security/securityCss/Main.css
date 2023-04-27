@@ -1,25 +1,30 @@
 .mainPage{
 	width: 100%;
-	height: 80vh;
+	height: 75vh;
 }
 
 .mainTop{
 	width: 100%;
-	height: 50%;
-	border: 1px solid black;
+	height: 40vh;
+	border : 1px dotted gray;
+	border-left: none;
+	border-right: none;
+	border-top : none;
 }
 
 .mainBottom{
 	width: 100%;
-	height: 50%;
-	border: 1px solid black;
+	height: 30vh;
+	border: 1px dotted black;
+	border: none;
+	margin-top:2vh;
 }
 
 .mainLeftBottom{
 	float: left;
 	width: 50%;
 	height: 100%;
-	
+
 }
 
 .mainRightBottom{
@@ -31,6 +36,14 @@
 .searchBookBoxInput{
 	text-align: center;
 	margin-bottom: 10px;
+}
+
+.searchBookBoxInput input{
+	height: 4vh;
+	width: 30vw;
+	font-size: 20px;
+	font-family: 메이플스토리;
+	color: gray;
 }
 
 .searchBookBox{
