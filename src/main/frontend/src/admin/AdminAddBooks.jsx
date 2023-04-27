@@ -28,9 +28,16 @@ export default function AdminAddBooks() {
 	}
 
 	const addBooks = (e) => {
+		const data = {
+			"bookTitle": titleRef.current.value,
+			"bookWriter": writerRef.current.value,
+			"bookPub": pubRef.current.value,
+			"bookStory": storyRef.current.value,
+			"bookStatus": statusRef.current.value
+		};
 		const formData = new FormData();
 		formData.append(`file`, fileImg);
-		formData.append(`data`, [titleRef.current.value, writerRef.current.value, pubRef.current.value, storyRef.current.value, statusRef.current.value]);
+		formData.append(`data`, JSON.stringify(data));
 
 		fetch(`${Ip.url}/admin/addBooks`, {
 			method: "POST",
@@ -39,7 +46,9 @@ export default function AdminAddBooks() {
 			},
 			body: formData
 		}).then(res => res.text())
-			.then(res => alert(res));
+			.then(res => {
+				alert(res);
+			});
 	}
 
 	return (
@@ -69,7 +78,7 @@ export default function AdminAddBooks() {
 					<input type="hidden" value={`1`} ref={statusRef} />
 				</div>
 				<div>
-					<button>등록</button>
+					<button type="button" onClick={e => addBooks(e)}>등록</button>
 				</div>
 			</form>
 		</div>
