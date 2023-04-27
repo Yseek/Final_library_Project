@@ -71,6 +71,10 @@ export default function AdminMemberList() {
         }
     }
 
+    function memberContentLink(memberSeq) {
+        navigate(`/admin/memberList/content`, { state: { user: memberSeq } });
+    }
+
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
     var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
@@ -82,7 +86,7 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <h2>회원 목록 페이지</h2><br/>
+            <h2>회원 목록 페이지</h2><br />
             <table class="board-list">
                 <thead>
                     <tr>
@@ -93,8 +97,8 @@ export default function AdminMemberList() {
                 </thead>
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
-                        <tr key={member.memberSeq}>
-                            <td><Link to={`/admin/memberList/content`}  state={{ user: member.memberSeq }}>{member.memberSeq}</Link></td>
+                        <tr key={member.memberSeq} onClick={() => memberContentLink(member.memberSeq)} className="memberRow">
+                            <td>{member.memberSeq}</td>
                             <td>{member.memberName}</td>
                             <td>{member.memberEmail}</td>
                         </tr>
@@ -115,7 +119,7 @@ export default function AdminMemberList() {
                 ))}
                 <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
                 <span><Link to={`/admin/memberList/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
-            </div>}<br/>
+            </div>}<br />
             <div>
                 <form onSubmit={SearchInput}>
                     <select onChange={checkSearchCategory} ref={searchCategoryRef}>
