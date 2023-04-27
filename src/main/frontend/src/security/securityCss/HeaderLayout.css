@@ -1,15 +1,19 @@
 .header {
 	/* background-color: #0665A9; */
-	background-color: white;
+	background-color: #f6f6f6
 ;	height: 10vh;
 	text-align: center;
-	border: 1px dotted gray;
+	border: 1px solid gray;
+	border-top:none;
+	border-left:none;
+	border-right:none;
 }
 
 .headerNav {
 	background-color: #0665A9;
 	height: 5vh;
 	text-align: center;
+
 }
 
 nav {
@@ -32,7 +36,12 @@ ul {
 .logoImg {
 	text-decoration: none;
 	color: black;
-	margin-left: 5vw;
+	font-size: larger;
+	float: left;
+	margin-left: 50%;
+	margin-top: 2%;
+	/* margin-left: 5vw; */
+	
 }
 
 .link {
@@ -47,51 +56,62 @@ ul {
 
 .chatBox {
 	position: absolute;
-	float: left;
 	width: 10%;
 	z-index: 2;
+	margin-left: 90%;
+	margin-top: 1.5%;
 }
 
 
 .chatBtn button {
 	border-radius: 7px;
 	background-color: black;
-	margin-top: 15%;
 	width: 7vw;
 	border : 1px solid black;
 	font-family: 메이플스토리;
 	font-size: 100%;
+
 }
 
 .chatRoom {
-	border: 1px solid black;
-	margin-left: 5%;
-	width: 400px;
-	height: 500px;
+	margin-left: -70%;
+	margin-top:7%;
+	width: 16.5vw;
+	height: 50vh;
 	
 }
 
 .chatRoomView {
-	border: 1px solid black;
-	height: 89%;
-	background-color: white;
+	border: 2px solid gray;
+	border-radius: 7px;
+	height: 60.7vh;
+	background-color: #f6f6f6;
 }
 
 .chatRoomType>textarea {
 	float: left;
-	width: 88.5%;
+	width: 80.5%;
 	resize: none;
 	border: none;
 }
 
 .chatRoomType{
-	background-color: beige;
+	margin-top: 1.5px;
+	border: 2px solid gray;
+	border-radius: 7px;
+	background-color: #257bb7;
+	height: 15%;
 }
 
-.chatRoomType>button {
-	width: 10%;
-	height: 50px;
-	float: right;
+.chatRoomType button {
+	width: 25%;
+	height: 25%;
+	margin-top:2.5vh;
+	margin-left: 15px;
+	background-color: #f6f6f6;
+	color: black;
+	border-radius: 5px;
+	border: 1px solid black;
 }
 
 .chatUl {
@@ -105,7 +125,8 @@ ul {
 
 .sideBar {
 	float: left;
-	height: 70vh;
+	padding-left: 10vw;
+	height: 64.8vh;
 	background-color:white;
 	width: 200px;
 	z-index: 1;
@@ -138,15 +159,18 @@ ul {
 }
 
 .menuTitle{
-	border: 1px solid #257bb7;
+	/* border: 1px solid #257bb7; */
+	border: 3px solid #0665A9;
 	border-left: none;
 	border-right: none;
-	border-top: none;
+	border-bottom: none;
+	border-radius: 7px;
 	height: 10vh;
-	margin-top: 2vh;
+	margin-top: 2.1vh;
 	margin-bottom: 5vh;
-	background-color: #257bb7;
-	color: white;
+	/* background-color: #257bb7; */
+	background-color: #f6f6f6;
+	color: black;
 	font-size : 30px;
 	font-family: 메이플스토리; 
 	justify-content: center;

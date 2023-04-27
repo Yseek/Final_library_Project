@@ -1,4 +1,25 @@
 .footer{
 	background-color: #0665A9;
-	height: 10vh;
+	font-family: 메이플스토리;
+	height: 15vh;
+}
+
+.footer_top{
+	border : 1px solid gray;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	background-color: #f6f6f6;
+	height: 5vh;
+}
+
+.footer_bottom{
+	background-color:#0665A9;
+	border : 1px solid #0665A9;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	height: 5vh;
+	color: white;
+
 }
