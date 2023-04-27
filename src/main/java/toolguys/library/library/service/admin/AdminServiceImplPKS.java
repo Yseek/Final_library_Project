@@ -23,7 +23,11 @@ public class AdminServiceImplPKS implements AdminServicePKS{
 
     @Override
     public List<BookDTO> bookDetail(String title, String writer, String pub){
-        return adminMapperPKS.bookDetail(title, writer, pub);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("writer", writer);
+        map.put("pub", pub);
+        return adminMapperPKS.bookDetail(map);
     }
 
     @Override
