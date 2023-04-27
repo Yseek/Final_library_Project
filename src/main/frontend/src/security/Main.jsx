@@ -56,6 +56,7 @@ export default function Main() {
 										<td>{res.bookTitle}</td>
 										<td>{res.bookWriter}</td>
 										<td>{res.bookPub}</td>
+										<td>{res.bookEnable}/{res.bookCount}권</td>
 									</Link>
 								</tr>
 							))}

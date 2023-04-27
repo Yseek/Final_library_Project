@@ -26,10 +26,8 @@ public class AdminAddBooks {
 	public ResponseEntity<String> addBooks(@RequestParam("data") String data,
 			@RequestParam("file") MultipartFile file)
 			throws IOException {
-		System.out.println("@@@@@@@@@@@@@" + data);
 		ObjectMapper mapper = new ObjectMapper();
 		AdminAddBooksDto adminAddBooksDto = mapper.readValue(data, AdminAddBooksDto.class);
-		System.out.println(adminAddBooksDto);
 		addBooksService.addBooks(adminAddBooksDto, file);
 		return ResponseEntity.ok().body("등록완료");
 	}

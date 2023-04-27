@@ -46,7 +46,9 @@ export default function AdminAddBooks() {
 			},
 			body: formData
 		}).then(res => res.text())
-			.then(res => alert(res));
+			.then(res => {
+				alert(res);
+			});
 	}
 
 	return (
@@ -76,7 +78,7 @@ export default function AdminAddBooks() {
 					<input type="hidden" value={`1`} ref={statusRef} />
 				</div>
 				<div>
-					<button>등록</button>
+					<button type="button" onClick={e => addBooks(e)}>등록</button>
 				</div>
 			</form>
 		</div>
