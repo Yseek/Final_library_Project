@@ -4,6 +4,15 @@ import "./css/Notice.css";
 import moment from 'moment';
 
 export default function Mybookrent() {
+	
+	const bookStatusString = {
+        1: "대출가능",
+        2: "예약중",
+        3: "대출중",
+        4: "분실됨",
+        5: "분실신고중"
+    }
+
 	const params = useParams();
 	const navi = useNavigate();
 	const { pathname } = useLocation();
@@ -92,10 +101,10 @@ export default function Mybookrent() {
 						<th>대여일</th>
 						<th>반납예정일</th>
 						<th>반납일</th>
+						<th>책 상태</th>
 						<th>연장횟수</th>
 						<th>연장</th>
 						<th>분실신고</th>
-
 					</tr>
 				</thead>
 				<tbody>
@@ -105,9 +114,10 @@ export default function Mybookrent() {
 							<td width="15%">{moment(res.bookRentRdate).format('YYYY-MM-DD')}</td>
 							<td width="15%">{moment(res.bookRentDDay).format('YYYY-MM-DD')}</td>
 							<td width="15%">{moment(res.bookRentReturn).format('YYYY-MM-DD')}</td>
+							<td width="10%">{bookStatusString[res.book.bookStatus]}</td>
 							<td>{res.bookRentCoin}</td>
 							<td><button id="prolongBtn" disabled={res.book.bookStatus !== 3}
-								onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
+								onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>{res.book.bookStatus !== 3 ? "-" : "연장"}</button></td>
 							<td><button id="bookLostBtn" disabled={res.book.bookStatus !== 3}
 								onClick={() => bookLostBtn(res.book.bookSeq, info.memberSeq)}>{res.book.bookStatus !== 3 ? "-" : "신고"}</button></td>
 						</tr>
