@@ -10,7 +10,8 @@ export default function AdminMemberContent() {
         1: "대출가능",
         2: "예약중",
         3: "대출중",
-        4: "분실됨"
+        4: "분실됨",
+        5: "분실신고중"
     }
 
     const location = useLocation();

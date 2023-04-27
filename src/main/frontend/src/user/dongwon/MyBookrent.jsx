@@ -27,35 +27,35 @@ export default function Mybookrent() {
 		}
 	}, []);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+	useEffect(() => {
+		fetch(`http://127.0.0.1:8080/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
-		.then(res => res.json())
-		.then(data => setData(data.content))
+			.then(res => res.json())
+			.then(data => setData(data.content))
 	}, [info, params]);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+	useEffect(() => {
+		fetch(`http://127.0.0.1:8080/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
-		.then(res => res.json())
-		.then(page => setPage(page))
+			.then(res => res.json())
+			.then(page => setPage(page))
 	}, [info, params]);
 
 	const prolong = (bookRentSeq, bookRentDDay, bookRentCoin) => {
-		if(bookRentCoin === 1) {
+		if (bookRentCoin === 1) {
 			alert("이미 연장하셨습니다");
-		}else {
-			fetch(`http://127.0.0.1:8080/user/mybookrent/prolong.do`,{
-				method:"POST",
-				headers : {
+		} else {
+			fetch(`http://127.0.0.1:8080/user/mybookrent/prolong.do`, {
+				method: "POST",
+				headers: {
 					"Content-Type": "application/json",
 					"Authorization": "Bearer " + localStorage.getItem("token"),
 				},
@@ -63,6 +63,22 @@ export default function Mybookrent() {
 			}).then(window.location.reload())
 		}
 	};
+
+	const bookLostBtn = (bookSeq, memberSeq) => {
+		console.log(`page: ${JSON.stringify(page)}`);
+		console.log(`memberSeq: ${memberSeq}`);
+		if (window.confirm("분실신고 하시겠습니까?")) {
+			fetch(`http://127.0.0.1:8080/user/mybookrent/reportBookLost`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": "Bearer " + localStorage.getItem("token"),
+				},
+				body: JSON.stringify({ bookSeq, memberSeq }),
+			}).then(window.location.reload())
+		}
+	};
+	console.log(`토큰: ${localStorage.getItem("token")}`);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
@@ -74,9 +90,9 @@ export default function Mybookrent() {
 				<thead className="noticeTableHead">
 					<tr>
 						<th>책 제목</th>
-                        <th>대여일</th>
+						<th>대여일</th>
 						<th>반납예정일</th>
-                        <th>반납일</th>
+						<th>반납일</th>
 						<th>연장횟수</th>
 						<th>연장</th>
 						<th>분실신고</th>
@@ -87,13 +103,14 @@ export default function Mybookrent() {
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookRentSeq}>
 							<td width="30%">{res.book.bookTitle}</td>
-                            <td width="15%">{moment(res.bookRentRdate).format('YYYY-MM-DD')}</td>
+							<td width="15%">{moment(res.bookRentRdate).format('YYYY-MM-DD')}</td>
 							<td width="15%">{moment(res.bookRentDDay).format('YYYY-MM-DD')}</td>
 							<td width="15%">{moment(res.bookRentReturn).format('YYYY-MM-DD')}</td>
 							<td>{res.bookRentCoin}</td>
-							<td><button id="prolongBtn" onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
-							{/* 수정중 */}
-							<td><button id="booklostBtn" onClick={() => booklostBtn(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
+							<td><button id="prolongBtn" disabled={res.bookStatus !== 3}
+								onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
+							<td><button id="bookLostBtn" disabled={res.bookStatus !== 3}
+								onClick={() => bookLostBtn(res.book.bookSeq, info.memberSeq)}>신고</button></td>
 						</tr>
 					))}
 				</tbody>
