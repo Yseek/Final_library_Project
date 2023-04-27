@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import Ip from "../Ip";
+import Pagination from '../admin/Pagination';
 import './css/BookList.css';
+import styled from 'styled-components';
 
 export default function BookList() {
+	const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
+	const [bookList, setBookList] = useState([]);
+	const offset = (page - 1) * limit;
+	const navigate = useNavigate();
 
-	const params = useParams();
-
-	const [data, setData] = useState([]);
-	const [page, setPage] = useState([]);
-
-	useEffect(() => {
+	/* useEffect(() => {
 		fetch(`${Ip.url}/bookList?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
@@ -29,16 +30,52 @@ export default function BookList() {
 		})
 			.then(res => res.json())
 			.then(page => { setPage(page) })
-	}, [params]);
+	}, [params]); */
 
-	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+	useEffect(()=>{
+		fetch(`${Ip.url}/bookList`,{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+		.then(res => res.json())
+		.then(data => setBookList(data))
+    }, [])
 
-	const bookStat = {
+	/* const { state } = useLocation();
+    const [memberSeq, setMemberSeq] = useState(""); */
+
+	/* const bookStat = {
 		1: "대출가능",
 		2: "예약중",
 		3: "대출중",
 		4: "분실됨",
 		5: "분실신고됨"
+	} */
+
+	/* function reserveBook(e, bookSeq, bookTitle){
+		e.preventDefault();
+
+		if(window.confirm(`'${bookTitle}' 도서를 예약합니다`)){
+			fetch(`${Ip.url}/user/bookreserve/${memberSeq}&${bookSeq}`,{
+				method: "POST",
+				headers : {
+					"Content-Type": "application/json",
+					"Authorization": "Bearer " + localStorage.getItem("token"),
+				},
+			})
+			.then(() =>{
+				alert("예약이 완료되었습니다. 1일 이내에 방문하여 책을 수령해주세요")
+				window.location.reload();
+			})
+		}
+	} */
+	function bookDetail(bookTitle, bookWriter, bookPub){
+		const a = [bookTitle, bookWriter, bookPub]
+		navigate(`/user/bookDetail`, {
+			state: a
+		});
 	}
 
 	return (
@@ -51,29 +88,36 @@ export default function BookList() {
 						<th className='BookListTh'>출판사</th>
 						<th className='BookListTh'>상태</th>
 						<th className='BookListTh'>내용보기</th>
-						{/* <th className='BookListTh'>예약하기</th> */}
 					</tr>
 				</thead>
 				<tbody>
-					{Array.isArray(data) && data.map(res => (
-						<tr key={res.bookSeq}>
+				{bookList.slice(offset, offset + limit).map((res, index) => (
+						<tr key={index}>
 							<td className='BookListTd'>{res.bookTitle}</td>
 							<td className='BookListTd'>{res.bookWriter}</td>
 							<td className='BookListTd'>{res.bookPub}</td>
-							<td className='BookListTd'>{bookStat[res.bookStatus]}</td>
-							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
-							{/* <td className='BookListTd'><button>예약</button></td> */}
+							<td className='BookListTd'>
+								{res.rentCount === 0 && "예약불가"}
+								{res.rentCount !== 0 && `예약가능 (총 ${res.bookCount}권 중 ${res.rentCount}권)`}
+							</td>
+							<td className='BookListTd'><A onClick={() => bookDetail(res.bookTitle, res.bookWriter, res.bookPub)} className='BookListA'>보기</A></td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-			<div className="page">
-				{pageList.map(res => (
-					<span key={res}>
-						<Link to={`/user/bookList/${res}`}>{res}</Link>
-					</span>
-				))}
-			</div>
+			<span>
+                <Pagination
+                    total={bookList.length}
+                    limit={limit}
+                    page={page}
+                    setPage={setPage}
+                />
+            </span>
 		</div>
 	);
 }
+
+const A = styled.a`
+	color: -webkit-link;
+	cursor: pointer;
+`;
