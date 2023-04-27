@@ -103,11 +103,21 @@ ul {
 	height: 15%;
 }
 
+.chatRoomType input {
+	width: 60%;
+	height: 3vh;
+	margin-left: 0px;
+	margin-top: 2vh;
+	background-color: #f6f6f6;
+	color: black;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
 .chatRoomType button {
-	width: 25%;
-	height: 25%;
-	margin-top:2.5vh;
-	margin-left: 15px;
+	width: 20%;
+	height: 3.5vh;
+	margin-left: 1vw;
 	background-color: #f6f6f6;
 	color: black;
 	border-radius: 5px;

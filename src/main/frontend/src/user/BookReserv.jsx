@@ -50,13 +50,14 @@ export default function BookReserv() {
 
 	return (
 		<div className='BookReservDiv'>
+			<h2>예약내역 확인</h2>
 			<table className='BookReservTable'>
 				<thead>
 					<tr>
 						<th className='BookReservTh'>제목</th>
 						<th className='BookReservTh'>저자</th>
 						<th className='BookReservTh'>출판사</th>
-						<th className='BookReservTh'>예약취소</th>
+						<th className='BookReservThC'>예약취소</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,7 +66,7 @@ export default function BookReserv() {
 							<td className='BookReservTd'>{res.bookTitle}</td>
 							<td className='BookReservTd'>{res.bookWriter}</td>
 							<td className='BookReservTd'>{res.bookPub}</td>
-							<td className='BookReservTd'><button onClick={() => deleteBookReserve(bookReserveSeq)}>취소</button></td>
+							<td className='BookReservTd'><button className='BookReservBtn' onClick={() => deleteBookReserve(bookReserveSeq)}>취소</button></td>
 						</tr>
 					))}
 				</tbody>
