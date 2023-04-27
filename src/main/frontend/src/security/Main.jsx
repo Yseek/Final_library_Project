@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Ip from "../Ip";
@@ -10,6 +10,7 @@ export default function Main() {
 
 	const [data, setData] = useState([]);
 	const [searchedBooks, setSearchedBooks] = useState([]);
+	const navi = useNavigate();
 
 	useEffect(() => {
 		fetch(`${Ip.url}/bookList?page=${params.page}`, {
@@ -40,6 +41,13 @@ export default function Main() {
 		}
 	}
 
+	function bookDetail(bookTitle, bookWriter, bookPub) {
+		const a = [bookTitle, bookWriter, bookPub]
+		navi(`/user/bookDetail`, {
+			state: a
+		});
+	}
+
 	return (
 		<div className="mainPage">
 			<div className="mainTop">
@@ -51,18 +59,18 @@ export default function Main() {
 						<tbody>
 							{searchedBooks.map(res => (
 								<tr key={res.bookSeq} className="searchedBookListTr">
-									<Link to={`/user/bookDetail/${res.bookSeq}`}>
+									<a onClick={() => bookDetail(res.bookTitle, res.bookWriter, res.bookPub)} style={{cursor:"pointer"}}>
 										<td><img src={res.bookImgPath} width={`50px`} height={`70px`} /></td>
 										<td>{res.bookTitle}</td>
 										<td>{res.bookWriter}</td>
 										<td>{res.bookPub}</td>
-										<td>{res.bookEnable}/{res.bookCount}권</td>
-									</Link>
+										<td>{res.bookEnable == NaN ? res.bookEnable : 0}/{res.bookCount}권</td>
+									</a>
 								</tr>
 							))}
 						</tbody>
 						<tbody>
-				</tbody>
+						</tbody>
 					</table>
 				</div>
 			</div>
