@@ -6,7 +6,7 @@ import styled from "styled-components";
 export default function AdminReserveCheck(){
     const [reserveList, setreserveList] = useState([]);
     const [isListAll, setisListAll] = useState(true);
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(5);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     
@@ -35,7 +35,7 @@ export default function AdminReserveCheck(){
         switch(value){
             case "bookReserveSeq": setisListAll(false); break;
             case "bookSeq": setisListAll(false); break;
-            default: setisListAll(true); setLimit(Number(10));
+            default: setisListAll(true); setLimit(Number(5));
         }
     }
 
