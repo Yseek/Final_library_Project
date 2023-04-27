@@ -45,14 +45,16 @@ public class AdminMemberControllerLdaew {
         return adminMemberServiceLdaew.memberContent(memberSeq);
     }
 
+    // 대출 현황
     @PostMapping("memberList/bookRentList")
     public Page<AdminBookRentDto> bookRentList(
-            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(page = 0, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestBody HashMap<String, String> memberData) {
         long memberSeq = Long.parseLong(memberData.get("memberSeq"));
         return adminMemberServiceLdaew.bookRentList(memberSeq, pageable);
     }
 
+    // 대출 기록
     @PostMapping("memberList/bookRentHistory")
     public Page<AdminBookRentDto> bookRentHistory(
             @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,

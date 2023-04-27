@@ -8,6 +8,12 @@ import toolguys.library.library.dto.admin.BookReserveDTO;
 import java.util.List;
 
 public interface AdminServicePKS {
+    List<BookDTO> bookList();
+
+    List<BookDTO> bookDetail(String title, String writer, String pub);
+
+    void bookReserve(long bookSeq, long memberSeq);
+
     List<BookDTO> selectAll();
 
     List<BookDTO> listBySearch(String option, String keyword);

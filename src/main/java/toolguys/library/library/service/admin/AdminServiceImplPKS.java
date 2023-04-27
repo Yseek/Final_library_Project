@@ -17,6 +17,30 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     AdminMapperPKS adminMapperPKS;
 
     @Override
+    public List<BookDTO> bookList(){
+        return adminMapperPKS.bookList();
+    }
+
+    @Override
+    public List<BookDTO> bookDetail(String title, String writer, String pub){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("writer", writer);
+        map.put("pub", pub);
+        return adminMapperPKS.bookDetail(map);
+    }
+
+    @Override
+    @Transactional
+    public void bookReserve(long memberSeq, long bookSeq){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("memberSeq", memberSeq);
+        map.put("bookSeq", bookSeq);
+        adminMapperPKS.bookUpdateByReserve(bookSeq);
+        adminMapperPKS.insertBookReserve(map);
+    }
+
+    @Override
     public List<BookDTO> selectAll(){
         return adminMapperPKS.selectAll();
     }
@@ -64,12 +88,18 @@ public class AdminServiceImplPKS implements AdminServicePKS{
 
     @Override
     public List<BookReserveDTO> searchReserve(String option, String keyword){
-        return adminMapperPKS.searchReserve(option, keyword);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        return adminMapperPKS.searchReserve(map);
     }
 
     @Override
     public List<BookRentDTO> searchRentList(String option, String keyword){
-        return adminMapperPKS.searchRentList(option, keyword);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        return adminMapperPKS.searchRentList(map);
     }
 
     @Override

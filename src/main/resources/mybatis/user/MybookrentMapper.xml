@@ -14,6 +14,7 @@
     <resultMap type="Book" id="BookMap">
         <id property="bookSeq" column="bookSeq" />
         <result property="bookTitle" column="bookTitle" />
+        <result property="bookStatus" column="bookStatus" />
     </resultMap>
 
     <select id="getMybookrent" resultType="Bookrent" parameterType="java.util.HashMap" resultMap="BookRentBookMap">

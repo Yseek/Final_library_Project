@@ -21,5 +21,5 @@ public class BookLost {
 	private Book book;
 
 	@ManyToOne
-	private Member memeber;
+	private Member member;
 }

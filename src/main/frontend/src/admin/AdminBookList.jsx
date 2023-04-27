@@ -43,8 +43,8 @@ export default function AdminBookList(){
         fetch(`${Ip.url}/admin/booklist`,{
                 method: "GET",
                 headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token"),
                 },
             })
         .then(res => res.json())
