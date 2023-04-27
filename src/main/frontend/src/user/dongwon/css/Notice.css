@@ -49,6 +49,6 @@ a { text-decoration:none }
 	margin-bottom: 1em;
 }
 
-#prolongBtn, #deleteFromMybookBtn {
+#prolongBtn, #deleteFromMybookBtn, #bookLostBtn {
 	width: 80px;
 }
