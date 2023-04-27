@@ -16,7 +16,7 @@ import toolguys.library.library.dto.admin.BookReserveDTO;
 public interface AdminMapperPKS {
 	List<BookDTO> bookList();
 
-	List<BookDTO> bookDetail(String title, String writer, String pub);
+	List<BookDTO> bookDetail(HashMap<String, Object> map);
 
 	List<BookDTO> selectAll();
 
