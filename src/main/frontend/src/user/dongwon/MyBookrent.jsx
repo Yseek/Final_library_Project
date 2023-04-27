@@ -78,7 +78,6 @@ export default function Mybookrent() {
 			}).then(window.location.reload())
 		}
 	};
-	console.log(`토큰: ${localStorage.getItem("token")}`);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
