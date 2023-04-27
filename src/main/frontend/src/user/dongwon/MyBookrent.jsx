@@ -82,33 +82,33 @@ export default function Mybookrent() {
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
-		<div className="Notice">
-			<div><h2>나의 대여목록</h2></div>
-			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+		<div className="NoticeDiv">
+			<h2>나의 대여목록</h2>
+			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
-				<thead className="noticeTableHead">
+				<thead>
 					<tr>
-						<th>책 제목</th>
-						<th>대여일</th>
-						<th>반납예정일</th>
-						<th>반납일</th>
-						<th>연장횟수</th>
-						<th>연장</th>
-						<th>분실신고</th>
+						<th className='noticeTableTh'>책 제목</th>
+						<th className='noticeTableTh'>대여일</th>
+						<th className='noticeTableTh'>반납예정일</th>
+						<th className='noticeTableTh'>반납일</th>
+						<th className='noticeTableTh'>연장횟수</th>
+						<th className='noticeTableTh'>연장하기</th>
+						<th className='noticeTableTh'>분실신고</th>
 
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookRentSeq}>
-							<td width="30%">{res.book.bookTitle}</td>
-							<td width="15%">{moment(res.bookRentRdate).format('YYYY-MM-DD')}</td>
-							<td width="15%">{moment(res.bookRentDDay).format('YYYY-MM-DD')}</td>
-							<td width="15%">{moment(res.bookRentReturn).format('YYYY-MM-DD')}</td>
-							<td>{res.bookRentCoin}</td>
-							<td><button id="prolongBtn" disabled={res.book.bookStatus !== 3}
+							<td className='noticeTableTd'>{res.book.bookTitle}</td>
+							<td className='noticeTableTd'>{moment(res.bookRentRdate).format('YYYY-MM-DD')}</td>
+							<td className='noticeTableTd'>{moment(res.bookRentDDay).format('YYYY-MM-DD')}</td>
+							<td className='noticeTableTd'>{moment(res.bookRentReturn).format('YYYY-MM-DD')}</td>
+							<td className='noticeTableTd'>{res.bookRentCoin}</td>
+							<td className='noticeTableTd'><button  className='noticeRentBtn' id="prolongBtn" disabled={res.book.bookStatus !== 3}
 								onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
-							<td><button id="bookLostBtn" disabled={res.book.bookStatus !== 3}
+							<td className='noticeTableTd'><button className='noticeLostBtn' id="bookLostBtn" disabled={res.book.bookStatus !== 3}
 								onClick={() => bookLostBtn(res.book.bookSeq, info.memberSeq)}>{res.book.bookStatus !== 3 ? "-" : "신고"}</button></td>
 						</tr>
 					))}
