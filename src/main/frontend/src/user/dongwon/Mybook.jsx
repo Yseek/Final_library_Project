@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
+import Ip from "../../Ip";
 
 export default function Mybook() {
 	const params = useParams();
@@ -14,7 +15,7 @@ export default function Mybook() {
 		if (!localStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
-			fetch(`http://127.0.0.1:8080/memberInfo`, {
+			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -26,26 +27,26 @@ export default function Mybook() {
 		}
 	}, []);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+	useEffect(() => {
+		fetch(`${Ip.url}/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
-		.then(res => res.json())
-		.then(data => setData(data.content))
+			.then(res => res.json())
+			.then(data => setData(data.content))
 	}, [info, params]);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+	useEffect(() => {
+		fetch(`${Ip.url}/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
 			}
 		})
-		.then(res => res.json())
-		.then(page => setPage(page))
+			.then(res => res.json())
+			.then(page => setPage(page))
 	}, [info, params]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
@@ -68,8 +69,8 @@ export default function Mybook() {
 			<table className="noticeTable">
 				<thead className="noticeTableHead">
 					<tr>
-                        <th>책 제목</th>
-                        <th>커버 이미지</th>
+						<th>책 제목</th>
+						<th>커버 이미지</th>
 						<th>저자</th>
 						<th>출판사</th>
 						<th>내서재에서 제거</th>
@@ -78,8 +79,8 @@ export default function Mybook() {
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.myBooksSeq}>
-                            <td width="25%">{res.book.bookTitle}</td>
-							<td>{res.book.bookImgPath}</td>
+							<td width="25%">{res.book.bookTitle}</td>
+							<td><img src={res.book.bookImgPath} width={`100px`} height={`140px`} /></td>
 							<td>{res.book.bookWriter}</td>
 							<td>{res.book.bookPub}</td>
 							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>

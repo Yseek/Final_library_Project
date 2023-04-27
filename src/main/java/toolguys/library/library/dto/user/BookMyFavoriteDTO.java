@@ -7,5 +7,5 @@ public class BookMyFavoriteDTO {
 	private String bookTitle;
 	private String bookWriter;
 	private String bookPub;
-	private int info;
+	private long info;
 }

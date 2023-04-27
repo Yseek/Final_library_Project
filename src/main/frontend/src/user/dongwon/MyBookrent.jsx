@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 import "./css/Notice.css";
 import moment from 'moment';
+import Ip from "../../Ip";
 
 export default function Mybookrent() {
 	const params = useParams();
@@ -15,7 +16,7 @@ export default function Mybookrent() {
 		if (!localStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
-			fetch(`http://127.0.0.1:8080/memberInfo`, {
+			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -28,7 +29,7 @@ export default function Mybookrent() {
 	}, []);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
+		fetch(`${Ip.url}user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
@@ -39,7 +40,7 @@ export default function Mybookrent() {
 	}, [info, params]);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
+		fetch(`${Ip.url}/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
@@ -53,7 +54,7 @@ export default function Mybookrent() {
 		if (bookRentCoin === 1) {
 			alert("이미 연장하셨습니다");
 		} else {
-			fetch(`http://127.0.0.1:8080/user/mybookrent/prolong.do`, {
+			fetch(`${Ip.url}/user/mybookrent/prolong.do`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -68,7 +69,7 @@ export default function Mybookrent() {
 		console.log(`page: ${JSON.stringify(page)}`);
 		console.log(`memberSeq: ${memberSeq}`);
 		if (window.confirm("분실신고 하시겠습니까?")) {
-			fetch(`http://127.0.0.1:8080/user/mybookrent/reportBookLost`, {
+			fetch(`${Ip.url}/user/mybookrent/reportBookLost`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
