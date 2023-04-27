@@ -6,7 +6,7 @@ import './css/BookList.css';
 import styled from 'styled-components';
 
 export default function BookList() {
-	const [limit, setLimit] = useState(10);
+	const [limit, setLimit] = useState(4);
     const [page, setPage] = useState(1);
 	const [bookList, setBookList] = useState([]);
 	const offset = (page - 1) * limit;
@@ -83,6 +83,7 @@ export default function BookList() {
 			<table className='BookListTable'>
 				<thead>
 					<tr>
+						<th className='BookListTh'></th>
 						<th className='BookListTh'>제목</th>
 						<th className='BookListTh'>저자</th>
 						<th className='BookListTh'>출판사</th>
@@ -93,6 +94,8 @@ export default function BookList() {
 				<tbody>
 				{bookList.slice(offset, offset + limit).map((res, index) => (
 						<tr key={index}>
+							<td className='BookListTd'>
+							<img src={res.bookImgPath} width={`100px`} height={`100px`}></img></td>
 							<td className='BookListTd'>{res.bookTitle}</td>
 							<td className='BookListTd'>{res.bookWriter}</td>
 							<td className='BookListTd'>{res.bookPub}</td>
