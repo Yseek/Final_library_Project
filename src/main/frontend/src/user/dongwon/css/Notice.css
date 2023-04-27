@@ -13,14 +13,38 @@
 }
 
 .noticeTable {
-	width: 65%;
-	border-collapse: collapse;
-	border-top: 1px solid #444444;
+	width: 50vw;
+	border: 1px solid gray;
+	border-radius: 5px;
+	font-size: larger;
+	margin-top: 6vh;
+	margin-left: 3vw;
+	margin-bottom: 10px;
 }
 
-.noticeTableHead {
-	background-color: beige;
-	height: 75px;
+
+.noticeTableTh{
+	border : 1px solid gray;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: #0665A9;
+	color: white;
+}
+
+.noticeTableTd{
+	padding : 0px;
+	border : 1px solid gray;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-color: #f6f6f6;
 }
 
 .contentColumnName {
@@ -29,14 +53,6 @@
 
 #contentContent {
 	height: 200px;
-	/* text-align: left;
-	padding-left: 15px; */
-}
-
-.noticeTable > thead > tr, .noticeTable > tbody > tr, .noticeTable > tr {
-	height: 50px;
-	border-bottom: 1px solid black;
-	padding: 10px;
 }
 
 a { text-decoration:none }
