@@ -5,22 +5,43 @@
 
 
 .BookApplyTable {
-	width: 70vw;
-	border-collapse: collapse;
-	border: 1px solid black;
+	width: 50vw;
 	margin : 5%;
+	border: 1px solid gray;
+	border-radius: 5px;
+	font-size: larger;
 }
 
 .BookApplyTh{
-	border: 1px solid black;
+	border : 1px solid gray;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
 	padding: 10px;
 	background-color: #0665A9;
 	color: white;
 }
 
 .BookApplyTd{
-	border: 1px solid black;
-	padding: 10px;
+	padding : 0px;
+	border : 1px solid gray;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-color: #f6f6f6;
+}
+
+.BookApplyTable input{
+	width: 99%;
+	height: 4vh;
+	border: 1px solid gray;
+	margin : 0px;
+	border-radius: 5px;
 }
 
 .BookApplyA{

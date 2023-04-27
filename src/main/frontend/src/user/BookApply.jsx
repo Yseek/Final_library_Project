@@ -83,11 +83,11 @@ function BookApply() {
 							<td className='BookApplyTd'><input type="text" placeholder="제목" value={bookHopeTitle} onChange={(e) => setBookHopeTitle(e.target.value)} /></td>
 						</tr>
 						<tr>
-							<td className='font-bold BookApplylTd'>저자</td>
+							<td className='font-bold BookApplyTd'>저자</td>
 							<td className='BookApplyTd'><input type="text" placeholder="저자" value={bookHopeWriter} onChange={(e) => setBookHopeWriter(e.target.value)} /></td>
 						</tr>
 						<tr>
-							<td className='font-bold BookDetailTd'>출판사</td>
+							<td className='font-bold BookApplyTd'>출판사</td>
 							<td className='BookApplyTd'><input type="text" placeholder="출판사" value={bookHopePub} onChange={(e) => setBookHopePub(e.target.value)} /></td>
 						</tr>
 						<input type="hidden" value={memberSeqq} ref={memberSeqRef} />
