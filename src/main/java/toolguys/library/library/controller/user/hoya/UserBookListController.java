@@ -15,18 +15,9 @@ import toolguys.library.library.service.admin.AdminServicePKS;
 @RestController
 public class UserBookListController {
 
-//	@Autowired
-//	UserBookListServiceInterface userBookListServiceInterface;
-
 	@Autowired
 	AdminServicePKS adminServicePKS;
 
-//	@GetMapping("bookList")
-//	public Page<Book> bookList(
-//			@PageableDefault(page = 0, size = 3, sort = "bookSeq", direction = Sort.Direction.DESC) Pageable pageable,
-//			Model model) {
-//		return userBookListServiceInterface.bookListByBook(pageable);
-//	}
 	@GetMapping("bookList")
 	public ResponseEntity<List<BookDTO>> bookList(){
 		return ResponseEntity.ok().body(adminServicePKS.bookList());
