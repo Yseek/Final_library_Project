@@ -69,6 +69,7 @@ function BookApply() {
 
 	return (
 		<div className='BookApplyDiv'>
+			<h2>희망도서 신청</h2>
 			<form onSubmit={handleSubmit}>
 				<table className='BookApplyTable'>
 					<thead>
@@ -95,7 +96,7 @@ function BookApply() {
 				</table>
 				{/* 오늘날짜로 신청 */}
 				<input className='hidden-col' id="date" type="date" value={bookHopeWantDay} onChange={(e) => setBookHopeWantDay(e.target.value)} />
-				<button type="submit">신청</button>
+				<button className='BookApplyBtn' type="submit">신청</button>
 			</form>
 		</div>
 	);
