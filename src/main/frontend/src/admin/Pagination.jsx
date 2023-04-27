@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 
 function Pagination({ total, limit, page, setPage}){
     const numPages = Math.ceil(total / limit);
