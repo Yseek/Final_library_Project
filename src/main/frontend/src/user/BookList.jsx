@@ -6,7 +6,7 @@ import './css/BookList.css';
 import styled from 'styled-components';
 
 export default function BookList() {
-	const [limit, setLimit] = useState(4);
+	const [limit, setLimit] = useState(5);
     const [page, setPage] = useState(1);
 	const [bookList, setBookList] = useState([]);
 	const offset = (page - 1) * limit;
