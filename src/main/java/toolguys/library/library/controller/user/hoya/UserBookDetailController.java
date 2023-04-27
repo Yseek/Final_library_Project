@@ -29,7 +29,7 @@ public class UserBookDetailController {
     @GetMapping("bookDetail/{title}&{writer}&{pub}")
     public ResponseEntity<List<BookDTO>> bookDetail(@PathVariable String title, @PathVariable String writer, @PathVariable String pub){
         System.out.println("title: " + title + ", writer: " + writer + ", pub: " + pub);
-        System.out.println("111111111111111" + adminServicePKS.bookDetail(title, writer, pub));
+        System.out.println("11111111111111" + adminServicePKS.bookDetail(title, writer, pub));
         return ResponseEntity.ok().body(adminServicePKS.bookDetail(title, writer, pub));
     }
 }
