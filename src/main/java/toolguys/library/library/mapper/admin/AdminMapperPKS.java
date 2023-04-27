@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import toolguys.library.library.domain.BookRent;
 import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.dto.admin.BookRentDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
