@@ -71,6 +71,10 @@ export default function AdminMemberList() {
         }
     }
 
+    function memberContentLink(memberSeq) {
+        navigate(`/admin/memberList/content`, { state: { user: memberSeq } });
+    }
+
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
     var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
@@ -93,12 +97,10 @@ export default function AdminMemberList() {
                 </thead>
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
-                        <tr key={member.memberSeq}>
-                            <Link to={`/admin/memberList/content`} state={{ user: member.memberSeq }}>
-                                <td>{member.memberSeq}</td>
-                                <td>{member.memberName}</td>
-                                <td>{member.memberEmail}</td>
-                            </Link>
+                        <tr key={member.memberSeq} onClick={() => memberContentLink(member.memberSeq)} className="memberRow">
+                            <td>{member.memberSeq}</td>
+                            <td>{member.memberName}</td>
+                            <td>{member.memberEmail}</td>
                         </tr>
                     ))}
                 </tbody>

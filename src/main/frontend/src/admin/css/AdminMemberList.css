@@ -49,6 +49,11 @@
     vertical-align: middle;
 }
 
+.memberRow:hover {
+    cursor: pointer;
+    color: #005bab;
+}
+
 /* paging */
 .paging {
     overflow: hidden;

@@ -24,16 +24,17 @@ public class AdminMemberControllerLdaew {
     @Autowired
     AdminMemberServiceLdaew adminMemberServiceLdaew;
 
+    // 회원 목록
     @GetMapping("memberList")
     public Page<Member> memberList(
-            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable) {
+            @PageableDefault(page = 0, size = 10, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable) {
 
         return adminMemberServiceLdaew.memberList(pageable);
     }
 
     @PostMapping("searchMember")
     public Page<AdminMemberDto> searchMember(
-            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(page = 0, size = 10, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestBody HashMap<String, String> searchData) {
 
         return adminMemberServiceLdaew.searchMember(searchData, pageable);
@@ -57,7 +58,7 @@ public class AdminMemberControllerLdaew {
     // 대출 기록
     @PostMapping("memberList/bookRentHistory")
     public Page<AdminBookRentDto> bookRentHistory(
-            @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+            @PageableDefault(page = 0, size = 10, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestBody HashMap<String, String> memberData) {
         long memberSeq = Long.parseLong(memberData.get("memberSeq"));
         return adminMemberServiceLdaew.bookRentHistory(memberSeq, pageable);
