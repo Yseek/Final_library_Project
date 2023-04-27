@@ -14,6 +14,10 @@ import toolguys.library.library.dto.admin.BookReserveDTO;
 @Mapper
 @Repository
 public interface AdminMapperPKS {
+	List<BookDTO> bookList();
+
+	List<BookDTO> bookDetail(String title, String writer, String pub);
+
 	List<BookDTO> selectAll();
 
 	List<BookDTO> listBySearch(HashMap<String, Object> map);
@@ -50,9 +54,13 @@ public interface AdminMapperPKS {
 
 	void bookUpdateByCancel(long bookSeq);
 
+	void bookUpdateByReserve(long bookSeq);
+
 	void insertRentCard(long memberSeq);
 
 	void insertBookRent(long bookSeq);
+
+	void insertBookReserve(long memberSeq, long bookSeq);
 
 	void deleteBook(long seq);
 }

@@ -17,6 +17,26 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     AdminMapperPKS adminMapperPKS;
 
     @Override
+    public List<BookDTO> bookList(){
+        return adminMapperPKS.bookList();
+    }
+
+    @Override
+    public List<BookDTO> bookDetail(String title, String writer, String pub){
+        return adminMapperPKS.bookDetail(title, writer, pub);
+    }
+
+    @Override
+    @Transactional
+    public void bookReserve(long memberSeq, long bookSeq){
+//        HashMap<String, Object> map = new HashMap<>();
+//        map.put("memberSeq", memberSeq);
+//        map.put("bookSeq", bookSeq);
+        adminMapperPKS.bookUpdateByReserve(bookSeq);
+        adminMapperPKS.insertBookReserve(memberSeq, bookSeq);
+    }
+
+    @Override
     public List<BookDTO> selectAll(){
         return adminMapperPKS.selectAll();
     }

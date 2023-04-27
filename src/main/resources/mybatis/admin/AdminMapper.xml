@@ -49,6 +49,17 @@
         <id property="bookSeq" column="BOOKSEQ"/>
         <id property="bookTitle" column="BOOKTITLE"/>
     </resultMap>
+    <select id="bookList" resultMap="bookDTO">
+        select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
+        (select COUNT(case when BOOKSTATUS=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE and b2.BOOKWRITER=b1.BOOKWRITER and b1.BOOKPUB=b2.BOOKPUB group by b2.BOOKTITLE) as RENTCOUNT
+        from BOOK b1 group by BOOKTITLE, BOOKWRITER, BOOKPUB
+        order by BOOKTITLE
+    </select>
+    <select id="bookDetail" resultMap="bookDTO">
+        select BOOKSEQ, BOOKTITLE, BOOKWRITER, BOOKPUB, BOOKSTORY, BOOKIMGPATH, BOOKSTATUS
+        from BOOK where BOOKTITLE=#{title} and BOOKWRITER=#{writer} and BOOKPUB=#{pub}
+        order by BOOKSEQ
+    </select>
     <select id="selectAll" resultType="bookDTO">
         select BOOKTITLE, BOOKWRITER, BOOKPUB, COUNT(BOOKSEQ) as BOOKCOUNT,
         (select COUNT(case when BOOKSTATUS=1 then BOOKSEQ end) from BOOK b2 where b2.BOOKTITLE=b1.BOOKTITLE and b2.BOOKWRITER=b1.BOOKWRITER and b1.BOOKPUB=b2.BOOKPUB group by b2.BOOKTITLE) as RENTCOUNT
@@ -151,11 +162,17 @@
     <update id="bookUpdateByCancel" parameterType="long">
         update BOOK set BOOKSTATUS=1 where BOOKSEQ=#{bookSeq}
     </update>
+    <update id="bookUpdateByReserve">
+        update BOOK set BOOKSTATUS=2 where BOOKSEQ=#{bookSeq}
+    </update>
     <insert id="insertRentCard">
         insert into RENTCARD values (0, #{memberSeq})
     </insert>
     <insert id="insertBookRent" parameterType="hashMap">
         insert into BOOKRENT values (0, (select LAST_INSERT_ID() from RENTCARD LIMIT 1), #{bookSeq}, now(), (SELECT DATE_ADD(now(), INTERVAL 7 DAY)), null, 1)
+    </insert>
+    <insert id="insertBookReserve" parameterType="hashMap">
+        insert into BOOKRESERVE values (0, (select MEMBERSEQ from MEMBER where MEMBERSEQ=#{memberSeq}), #{bookSeq}, now(), 1)
     </insert>
     <delete id="deleteBook" parameterType="long">
         delete from BOOK where BOOKSEQ=#{seq}
