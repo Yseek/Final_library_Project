@@ -43,4 +43,8 @@ public class UserMyBooksService {
 	public Member findMember(long memberSeq){
 		return userMemberRepository.findById(memberSeq).get();
 	}
+
+	public void deleteFavorite(long myBooksSeq){
+		userMyBooksRepository.delete(userMyBooksRepository.findById(myBooksSeq).get());
+	}
 }
