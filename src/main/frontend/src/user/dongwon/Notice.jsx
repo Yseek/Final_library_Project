@@ -44,9 +44,9 @@ export default function Notice() {
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
-		<div className="Notice">
+		<div className="NoticeDiv">
 			<h2>공지사항</h2>
-			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
 				<thead>
 					<tr>
@@ -76,7 +76,7 @@ export default function Notice() {
 				))}
 			</div>
 			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
-				<button id="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
+				<button className="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
 		</div>
 	);
 }
