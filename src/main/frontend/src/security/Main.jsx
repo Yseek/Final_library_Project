@@ -80,7 +80,7 @@ export default function Main() {
 					뭐가 있긴 하겠지
 				</div>
 				<div className="mainRightBottom">
-					뭐가 있긴 하겠지
+					추천 도서 목록
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookSeq}>
 							<td className='BookListTd'>{res.bookTitle}</td>
