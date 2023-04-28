@@ -144,6 +144,11 @@
         BOOKSTORY=#{bookStory}, BOOKIMGNAME=#{bookImgName}, BOOKIMGPATH=#{bookImgPath}, BOOKIMGOGN=#{boomImgOgn}
         where BOOKSEQ=#{seq}
     </update>
+    <update id="updateBookInfoDetail2" parameterType="hashMap">
+        update BOOK set BOOKTITLE=#{title}, BOOKWRITER=#{writer}, BOOKPUB=#{pub}, BOOKSTATUS=#{status},
+        BOOKSTORY=#{bookStory}
+        where BOOKSEQ=#{seq}
+    </update>
     <update id="statUpdateByRent" parameterType="long">
         update BOOKRESERVE set BOOKRESERVESTATUS=2 where BOOKRESERVESEQ=#{reserveSeq}
     </update>

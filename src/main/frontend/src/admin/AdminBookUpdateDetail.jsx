@@ -35,31 +35,50 @@ export default function AdminBookUpdateDetail(){
         const bookPub = e.target.bookPub.value;
 
         const formData = new FormData();
-        formData.append('file', fileImg);
         formData.append('bookSeq', e.target.bookSeq.value);
-        formData.append('bookTitle', e.target.bookTitle.value);
-        formData.append('bookWriter', e.target.bookWriter.value);
-        formData.append('bookPub', e.target.bookPub.value);
+        formData.append('bookTitle', bookTitle);
+        formData.append('bookWriter', bookWriter);
+        formData.append('bookPub', bookPub);
         formData.append('bookStatus', e.target.bookStatus.value);
-        formData.append('bookStory', e.target.bookStory.value);
+        formData.append('bookStory', e.target.bookStory.value)
 
-        fetch(`${Ip.url}/admin/booklist/update/detail`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-            body: formData 
-        })
-        .then(res => res.text())
-        .then(() => {
-            alert("수정완료");
-            const a = [bookTitle,bookWriter,bookPub]
-            navigate(`/admin/booklist/update`, {
-                state: a
+        if(fileImg != null){
+            formData.append('file', fileImg);
+            fetch(`${Ip.url}/admin/booklist/update/detail/1`, {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+                body: formData 
             })
-        })
-        .catch((error) => console.error(error))
+            .then(res => res.text())
+            .then(() => {
+                alert("수정완료");
+                const a = [bookTitle,bookWriter,bookPub]
+                navigate(`/admin/booklist/update`, {
+                    state: a
+                })
+            })
+            .catch((error) => console.error(error))
+        }else{
+            fetch(`${Ip.url}/admin/booklist/update/detail/2`, {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+                body: formData 
+            })
+            .then(res => res.text())
+            .then(() => {
+                alert("수정완료");
+                const a = [bookTitle,bookWriter,bookPub]
+                navigate(`/admin/booklist/update`, {
+                    state: a
+                })
+            })
+            .catch((error) => console.error(error))
+        }
+        
     }
 
     const [imageSrc, setImageSrc] = useState(null);
@@ -78,6 +97,7 @@ export default function AdminBookUpdateDetail(){
            }
         })
     }
+    console.log(imageSrc)
     return(
         <div>
              {Object.keys(bookData).length > 0 && (
@@ -114,7 +134,8 @@ export default function AdminBookUpdateDetail(){
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <img src={imageSrc} width={`300px`} height={`300px`} ></img>
+                        {imageSrc !== null && <img src={imageSrc} width={`300px`} height={`300px`} ></img>}
+                        {imageSrc === null && <img src={bookData.bookImgPath} width={`300px`} height={`300px`}></img> }
                     </div>
                 </div>
                 <div className="row">
