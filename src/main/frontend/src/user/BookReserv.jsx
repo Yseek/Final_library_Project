@@ -63,9 +63,9 @@ export default function BookReserv() {
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookReserveSeq}>
-							<td className='BookReservTd'>{res.bookTitle}</td>
-							<td className='BookReservTd'>{res.bookWriter}</td>
-							<td className='BookReservTd'>{res.bookPub}</td>
+							<td className='BookReservTd'>{res.book.bookTitle}</td>
+							<td className='BookReservTd'>{res.book.bookWriter}</td>
+							<td className='BookReservTd'>{res.book.bookPub}</td>
 							<td className='BookReservTd'><button className='BookReservBtn' onClick={() => deleteBookReserve(bookReserveSeq)}>취소</button></td>
 						</tr>
 					))}

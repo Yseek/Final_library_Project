@@ -29,7 +29,7 @@ export default function Mybookrent() {
 	}, []);
 
 	useEffect(() => {
-		fetch(`${Ip.url}user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
+		fetch(`${Ip.url}/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
@@ -105,9 +105,9 @@ export default function Mybookrent() {
 							<td className='noticeTableTd'>{res.book.bookTitle}</td>
 							<td className='noticeTableTd'>{moment(res.bookRentRdate).format('YYYY-MM-DD')}</td>
 							<td className='noticeTableTd'>{moment(res.bookRentDDay).format('YYYY-MM-DD')}</td>
-							<td className='noticeTableTd'>{moment(res.bookRentReturn).format('YYYY-MM-DD')}</td>
+							<td className='noticeTableTd'>{res.bookRentReturn != null ? moment(res.bookRentReturn).format('YYYY-MM-DD') : "반납전"}</td>
 							<td className='noticeTableTd'>{res.bookRentCoin}</td>
-							<td className='noticeTableTd'><button  className='noticeRentBtn' id="prolongBtn" disabled={res.book.bookStatus !== 3}
+							<td className='noticeTableTd'><button className='noticeRentBtn' id="prolongBtn" disabled={res.book.bookStatus !== 3}
 								onClick={() => prolong(res.bookRentSeq, res.bookRentDDay, res.bookRentCoin)}>연장</button></td>
 							<td className='noticeTableTd'><button className='noticeLostBtn' id="bookLostBtn" disabled={res.book.bookStatus !== 3}
 								onClick={() => bookLostBtn(res.book.bookSeq, info.memberSeq)}>{res.book.bookStatus !== 3 ? "-" : "신고"}</button></td>
