@@ -83,7 +83,6 @@ export default function Mybook() {
 							<td>{res.book.bookWriter}</td>
 							<td>{res.book.bookPub}</td>
 							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
-							{/* <td><button id="deleteFromMybookBtn">제거</button></td> */}
 						</tr>
 					))}
 				</tbody>
