@@ -87,7 +87,7 @@ export default function AdminMemberList() {
     return (
         <center>
             <h2>회원 목록 페이지</h2><br />
-            <table class="board-list">
+            <table className="board-list">
                 <thead>
                     <tr>
                         <th>회원번호</th>
