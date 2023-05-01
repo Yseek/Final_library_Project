@@ -7,7 +7,7 @@ function Pagination({ total, limit, page, setPage}){
     const pages = [...Array(endPage - startPage + 1)].map((_, i) => startPage + i);
   
     return (
-      <div>
+      <div style={{paddingLeft:'8%'}}>
       <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
         &lt;
       </Button>
@@ -40,9 +40,10 @@ const Button = styled.button`
   border-radius: 8px;
   padding: 8px;
   margin: 0;
-  background: black;
+  background: #0665A9;
   color: white;
   font-size: 1rem;
+  margin-left : 5px;
 
   &:hover {
     background: tomato;
@@ -57,7 +58,9 @@ const Button = styled.button`
   }
 
   &[aria-current] {
-    background: grey;
+    border : 1px solid #0665A9;
+    background: white;
+    color : #0665A9;
     font-weight: bold;
     cursor: revert;
     transform: revert;
