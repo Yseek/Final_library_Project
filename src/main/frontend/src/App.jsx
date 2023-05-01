@@ -1,25 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css';
 import AdminAddBooks from './admin/AdminAddBooks';
 import AdminBookHope from './admin/AdminBookHope';
 import AdminBookHopeOk from './admin/AdminBookHopeOk';
 import AdminBookList from './admin/AdminBookList';
-<<<<<<< HEAD
-import Notice from "./user/dongwon/Notice"
-import NoticeSearch from "./user/dongwon/NoticeSearch"
-import NoticeContent from "./user/dongwon/NoticeContent"
-import Mybook from "./user/dongwon/Mybook"
-import Mybookrent from "./user/dongwon/MyBookrent"
-import Mybookhope from "./user/dongwon/Mybookhope"
-import MyPage from './security/MyPage';
-import ChangePwd from './security/ChangePwd';
-import BookRentCheck from './user/BookRentCheck';
-
-=======
-import AdminBookLost from './admin/AdminBookLost';
-import AdminBookReturn from './admin/AdminBookReturn';
->>>>>>> 066f77cb16588f8e6d72c10a536cddba4622fb2a
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberContent from './admin/AdminMemberContent';
@@ -29,6 +13,7 @@ import NoticeAdmin from './admin/NoticeAdmin';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
+import './App.css';
 import AdminChat from './security/AdminChat';
 import ChangePwd from './security/ChangePwd';
 import FindEmail from './security/FindEmail';
@@ -43,13 +28,16 @@ import MyPage from './security/MyPage';
 import BookApply from "./user/BookApply";
 import BookDetail from './user/BookDetail';
 import BookList from './user/BookList';
+import BookRentCheck from './user/BookRentCheck';
 import BookReserv from './user/BookReserv';
-import Mybookrent from "./user/dongwon/MyBookrent";
 import Mybook from "./user/dongwon/Mybook";
 import Mybookhope from "./user/dongwon/Mybookhope";
+import Mybookrent from "./user/dongwon/MyBookrent";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
+import AdminBookReturn from "./admin/AdminBookReturn";
+import AdminBookLost from "./admin/AdminBookLost";
 
 function App() {
 	return (
@@ -97,7 +85,6 @@ function App() {
 					<Route path="/user/bookList" element={<BookList />}></Route>
 					<Route path="/user/bookList/:page" element={<BookList />}></Route>
 					<Route path="/user/bookDetail" element={<BookDetail />}></Route>
-					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
 					<Route path="/bookrentcheck" element={<BookRentCheck />} ></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 					<Route path="/adminChat" element={<AdminChat />} />
