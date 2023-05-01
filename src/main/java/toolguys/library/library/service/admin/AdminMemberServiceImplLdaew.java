@@ -90,7 +90,7 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
             case "출판사":
                 category = "BOOKPUB";
                 break;
-            case "책상태":
+            case "책상태(코드)":
                 category = "BOOKSTATUS";
                 break;
             default:
