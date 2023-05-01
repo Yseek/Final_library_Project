@@ -56,6 +56,7 @@ export default function Notice() {
 					</tr>
 				</thead>
 				<tbody>
+			
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.noticeSeq}>
 							<td className="noticeTableTd">{res.member.memberName}</td>
