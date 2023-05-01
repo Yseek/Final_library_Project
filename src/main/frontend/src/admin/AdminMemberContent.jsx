@@ -28,15 +28,11 @@ export default function AdminMemberContent() {
     const [memberSeq, setMemberSeq] = useState();
 
     useEffect(() => {
-        if (location.state!==null) {
+        if (location.state) {
             sessionStorage.setItem("memberSeq", location.state.user);
             setMemberSeq(location.state.user);
-            console.log(`location.state의 memberSeq`);
         }else if(sessionStorage.getItem("memberSeq")){
             setMemberSeq(sessionStorage.getItem("memberSeq"));
-            console.log(`세션스토리지의 memberSeq`);
-        }else{
-            // 로그인 페이지로 연결. 다시 돌아오도록
         }
     }, [])
 

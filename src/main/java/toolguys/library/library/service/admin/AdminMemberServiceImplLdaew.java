@@ -104,13 +104,11 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
         input.put("keyword", keyword);
         input.put("category", category);
 
-        // 위 리스트와 아래 페이지 코드 하나로 합친다
         Page<AdminBookRentDto> searchedRentBooks = new PageImpl<AdminBookRentDto>(
                 adminMemberMapper.searchBookRent(input).stream()
                         .map(bookRentStream -> AdminBookRentDto.from(bookRentStream)).toList(),
                 pageable,
                 adminMemberMapper.getTotalCount(memberSeq));
-        System.out.println("$$$$ searchedRentBooks: " + searchedRentBooks.getContent());
 
         return searchedRentBooks;
     }
