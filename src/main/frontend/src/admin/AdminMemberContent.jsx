@@ -117,7 +117,7 @@ export default function AdminMemberContent() {
     }
 
     const onClickBack = () => {
-		navigate(-1);
+		navigate('/admin/memberList');
 	};
 
     // 한 화면에 보여줄 페이지 수 계산
