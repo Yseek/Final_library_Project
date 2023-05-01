@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./css/Notice.css";
 import useFetch from "./useFetch";
 import Ip from "../../Ip";
+import moment from 'moment';
 
 export default function Notice() {
 	const params = useParams();
@@ -32,11 +33,11 @@ export default function Notice() {
 					</tr>
 					<tr>
 						<td className="contentColumnName" align='center'>내용</td>
-						<td id="contentContent">{noticeList.noticeContent}</td>
+						<td id="contentContent" valign="top"><div id="scroll_box">{noticeList.noticeContent}</div></td>
 					</tr>
 					<tr>
 						<td className="contentColumnName" align='center'>작성날짜</td>
-						<td>{noticeList.noticeRdate}</td>
+						<td>{moment(noticeList.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 					</tr>
 				</tbody>
 			</table>
