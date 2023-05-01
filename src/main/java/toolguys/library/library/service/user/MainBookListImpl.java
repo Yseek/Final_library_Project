@@ -20,6 +20,6 @@ public class MainBookListImpl implements MainBookService {
 
     @Override
     public List<Book> booklist() {
-        return mainbooklistrepository.findTop2ByOrderByBookSeqDesc();
+        return mainbooklistrepository.findTop5ByOrderByBookWriterDesc();
     }
 }
