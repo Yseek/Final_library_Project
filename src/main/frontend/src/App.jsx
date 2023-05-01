@@ -67,6 +67,7 @@ function App() {
 					<Route path="/findEmail" element={<FindEmail />}></Route>
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<Main />}></Route>
+					<Route path="/:page" element={<Main />}></Route>
 					<Route path="/notice" element={<Notice />}></Route>
 					<Route path="/notice/:page" element={<Notice />}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
