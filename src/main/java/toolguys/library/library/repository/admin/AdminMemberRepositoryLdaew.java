@@ -40,14 +40,4 @@ public interface AdminMemberRepositoryLdaew extends JpaRepository<Member, Long> 
 			"where MEMBERSEQ = :memberSeq", nativeQuery = true)
 	Page<AdminBookRentVo> findBookRentHistory(@Param("memberSeq") long memberSeq, Pageable pageable);
 
-	// 대출 기록에서 책번호 검색
-	@Query(value = "select BOOKSEQ, BOOKTITLE, BOOKWRITER, BOOKPUB, BOOKSTATUS " +
-			"from MEMBER mb join RENTCARD rc on mb.MEMBERSEQ = rc.MEMBER_MEMBERSEQ " +
-			"join BOOKRENT br on rc.RENTCARDSEQ = br.RENTCARD_RENTCARDSEQ " +
-			"join BOOK b on b.BOOKSEQ = br.BOOK_BOOKSEQ " +
-			"where MEMBERSEQ = :memberSeq and BOOKSEQ = :keyword", nativeQuery = true)
-	Page<AdminBookRentVo> findBookRentByBOOKSEQ(
-			@Param("keyword") String keyword,
-			@Param("memberSeq") long memberSeq,
-			Pageable pageable);
 }
