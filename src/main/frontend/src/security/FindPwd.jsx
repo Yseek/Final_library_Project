@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
+import "./securityCss/FindPwd.css"
 
 export default function FindPwd() {
 
@@ -29,18 +30,18 @@ export default function FindPwd() {
 	}
 
 	return (
-		<div className="findPwd">
-			<div><h3>비밀번호 찾기</h3></div>
+		<div className="findPwdDiv">
+			<h2>비밀번호 찾기</h2>
 			<form onSubmit={sendMail}>
-				<div className="findPwd_Email">
-					<label htmlFor="findPwd_Email_id">이메일</label>
-					<input id="findPwd_Email_id" type="text" ref={findPwdEmailRef} placeholder="가입시 등록한 이메일을 입력하세요."/>
+				<div className="findPwdInput">
+					<span>이메일</span>
+					<input className='findPwdEmail' type="text" ref={findPwdEmailRef} placeholder="가입시 등록한 이메일을 입력하세요."/>
 				</div>
-				<div className="findPwd_Name">
-					<label htmlFor="findPwd_Name_id">이름</label>
-					<input id="findPwd_Name_id" type="text" ref={findPwdNameRef} placeholder="가입시 등록한 이름을 입력하세요."/>
+				<div className="findPwdInput">
+					<span>이름</span>
+					<input className='findPwdName' type="text" ref={findPwdNameRef} placeholder="가입시 등록한 이름을 입력하세요."/>
 				</div>
-				<button>비밀번호찾기</button>
+				<button className='findPwdBtn'>비밀번호찾기</button>
 			</form>
 		</div>
 	)
