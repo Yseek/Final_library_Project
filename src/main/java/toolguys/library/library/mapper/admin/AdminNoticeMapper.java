@@ -12,7 +12,9 @@ import toolguys.library.library.dto.admin.NoticeDTO;
 public interface AdminNoticeMapper {
 	List<Notice> getNoticeList();
     long getTotalCount();
-    List<Notice> getNoticeListByPage(HashMap<String, Integer> input);
+    long getTotalCountBySearch(String search);
+    List<Notice> getNoticeListByPage(HashMap<String, Object> input);
+    List<Notice> getNoticeListByPageAndSearch(HashMap<String, Object> input);
     Notice getNoticeContent(long noticeSeq);
     void deleteNotice(long noticeSeq);
     void insertNotice(NoticeDTO noticeDTO);
