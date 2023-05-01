@@ -27,7 +27,7 @@ export default function LoginPage() {
 					alert(res);
 					return false;
 				}
-				localStorage.setItem("token", res);
+				sessionStorage.setItem("token", res);
 				if (state) {
 					navi(state, { state: emailRef });
 				} else {
