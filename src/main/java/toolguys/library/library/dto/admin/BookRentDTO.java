@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -19,7 +18,7 @@ public class BookRentDTO {
     private long bookRentSeq;
 
     @Column(name = "BOOKRENTRDATE")
-    private Date bookRentDate;
+    private Date bookRentRDate;
 
     @Column(name = "BOOKRENTDDAY")
     private Date bookRentDDay;
@@ -27,12 +26,13 @@ public class BookRentDTO {
     @Column(name = "BOOKRENTRETURN")
     private Date bookRentReturn;
 
-    @Column(name = "BOOKRENTCOIN")
-    private byte bookRentCoin;
+    private String bookTitle;
 
-    @ManyToOne
-    private RentCardDTO rentCardDTO;
+    private long rentCardSeq;
 
-    @ManyToOne
-    private BookDTO bookDTO;
+    private String memberName;
+
+    private long memberSeq;
+
+    private long bookSeq;
 }

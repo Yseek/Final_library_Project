@@ -3,7 +3,6 @@ package toolguys.library.library.dto.admin;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -16,7 +15,6 @@ public class RentCardDTO {
     @Column(name = "RENTCARDSEQ")
     private long rentCardSeq;
 
-    @ManyToOne
-    private MemberDTO memberDTO;
+    private long memberSeq;
 }
 

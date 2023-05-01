@@ -2,7 +2,10 @@ package toolguys.library.library.service.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import toolguys.library.library.dto.admin.BookDTO;
+import toolguys.library.library.dto.admin.BookRentDTO;
+import toolguys.library.library.dto.admin.BookReserveDTO;
 import toolguys.library.library.mapper.admin.AdminMapperPKS;
 
 import java.util.HashMap;
@@ -14,14 +17,55 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     AdminMapperPKS adminMapperPKS;
 
     @Override
+    public List<BookDTO> bookList(){
+        return adminMapperPKS.bookList();
+    }
+
+    @Override
+    public List<BookDTO> bookDetail(String title, String writer, String pub){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("writer", writer);
+        map.put("pub", pub);
+        return adminMapperPKS.bookDetail(map);
+    }
+
+    @Override
+    @Transactional
+    public void bookReserve(long memberSeq, long bookSeq){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("memberSeq", memberSeq);
+        map.put("bookSeq", bookSeq);
+        adminMapperPKS.bookUpdateByReserve(bookSeq);
+        adminMapperPKS.insertBookReserve(map);
+    }
+
+    @Override
     public List<BookDTO> selectAll(){
         return adminMapperPKS.selectAll();
     }
 
     @Override
-    public List<BookDTO> listBySearch(String keyword) {
-        return adminMapperPKS.listBySearch(keyword);
+    public List<BookDTO> listBySearch(String option, String keyword) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        return adminMapperPKS.listBySearch(map);
     }
+    @Override
+    public List<BookDTO> searchAll(String keyword){
+        return adminMapperPKS.searchAll(keyword);
+    }
+
+    @Override
+    public List<BookDTO> searchDetail(String title, String writer, String pub){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("title", title);
+        map.put("writer", writer);
+        map.put("pub", pub);
+        return adminMapperPKS.searchDetail(map);
+    }
+
 
     @Override
     public BookDTO searchByBookId(long seq){
@@ -38,6 +82,38 @@ public class AdminServiceImplPKS implements AdminServicePKS{
     }
 
     @Override
+    public List<BookReserveDTO> allBookReserve(){
+        return adminMapperPKS.allBookReserve();
+    }
+
+    @Override
+    public List<BookReserveDTO> searchReserve(String option, String keyword){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        return adminMapperPKS.searchReserve(map);
+    }
+
+    @Override
+    public List<BookRentDTO> searchRentList(String option, String keyword){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        return adminMapperPKS.searchRentList(map);
+    }
+
+    @Override
+    @Transactional
+    public void updateByReturn(long bookRentSeq, long bookSeq){
+        adminMapperPKS.bookUpdateByReturn(bookSeq);
+        adminMapperPKS.statUpdateByReturn(bookRentSeq);
+    }
+
+    @Override
+    public List<BookRentDTO> bookRentList(){
+        return adminMapperPKS.bookRentList();
+    }
+    @Override
     public void updateBookInfo(BookDTO dto){
         HashMap<String, Object> map = new HashMap<>();
         map.put("seq", dto.getBookSeq());
@@ -46,5 +122,41 @@ public class AdminServiceImplPKS implements AdminServicePKS{
         map.put("pub", dto.getBookPub());
         map.put("status", dto.getBookStatus());
         adminMapperPKS.updateBookInfo(map);
+    }
+
+    @Override
+    public void updateBookInfoDetail(BookDTO dto){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("seq", dto.getBookSeq());
+        map.put("title", dto.getBookTitle());
+        map.put("writer", dto.getBookWriter());
+        map.put("pub", dto.getBookPub());
+        map.put("status", dto.getBookStatus());
+        map.put("bookStory", dto.getBookStory());
+        map.put("bookImgName", dto.getBookImgName());
+        map.put("bookImgPath", dto.getBookImgPath());
+        map.put("boomImgOgn", dto.getBookImgOgn());
+        adminMapperPKS.updateBookInfoDetail(map);
+    }
+
+    @Override
+    @Transactional
+    public void updateByRent(long reserveSeq, long bookSeq, long memberSeq){
+        adminMapperPKS.insertRentCard(memberSeq);
+        adminMapperPKS.insertBookRent(bookSeq);
+        adminMapperPKS.bookUpdateByRent(bookSeq);
+        adminMapperPKS.statUpdateByRent(reserveSeq);
+    }
+
+    @Override
+    @Transactional
+    public void updateByCancel(long reserveSeq, long bookSeq){
+        adminMapperPKS.bookUpdateByCancel(bookSeq);
+        adminMapperPKS.statUpdateByCancel(reserveSeq);
+    }
+
+    @Override
+    public void deleteBook(long seq){
+        adminMapperPKS.deleteBook(seq);
     }
 }

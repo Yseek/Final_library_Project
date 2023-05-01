@@ -6,11 +6,6 @@ import Ip from "../Ip";
 
 export default function AdminMemberList() {
 
-    const memberStatusString = {
-        1: "일반 회원",
-        2: "블랙리스트"
-    }
-
     const navigate = useNavigate();
     const searchCategoryRef = useRef();
     const searchKeywordRef = useRef();
@@ -76,6 +71,10 @@ export default function AdminMemberList() {
         }
     }
 
+    function memberContentLink(memberSeq) {
+        navigate(`/admin/memberList/content`, { state: { user: memberSeq } });
+    }
+
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
     var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
@@ -87,41 +86,40 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <table>
+            <h2>회원 목록 페이지</h2><br />
+            <table class="board-list">
                 <thead>
                     <tr>
                         <th>회원번호</th>
                         <th>이름</th>
                         <th>이메일</th>
-                        <th>블랙리스트 여부</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
-                        <tr key={member.memberSeq}>
+                        <tr key={member.memberSeq} onClick={() => memberContentLink(member.memberSeq)} className="memberRow">
                             <td>{member.memberSeq}</td>
                             <td>{member.memberName}</td>
                             <td>{member.memberEmail}</td>
-                            <td>{memberStatusString[member.memberStatus]}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
             {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
-            {pageList.length !== 0 && <div className="page">
-                <span><Link to={`/admin/memberList/1`}>&laquo;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`}>&lt;</Link>&nbsp;</span>
+            {pageList.length !== 0 && <div className="paging">
+                <span><Link to={`/admin/memberList/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
                 {pageList.map(res => (
                     <span key={res}>
                         <Link to={`/admin/memberList/${res}`}>
-                            {page.number + 1 === res ? <strong>{res}</strong> : res}
+                            {page.number + 1 === res ? <span className="tp">{res}</span> : res}
                         </Link>
                         {" "}
                     </span>
                 ))}
-                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`}>&gt;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/${page.totalPages}`}>&raquo;</Link></span>
-            </div>}
+                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+                <span><Link to={`/admin/memberList/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+            </div>}<br />
             <div>
                 <form onSubmit={SearchInput}>
                     <select onChange={checkSearchCategory} ref={searchCategoryRef}>
@@ -130,7 +128,7 @@ export default function AdminMemberList() {
                         <option>책번호</option>
                     </select>
                     <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
-                    <button>검색</button>
+                    <button className="adminMemberButton">검색</button>
                 </form>
             </div>
         </center>

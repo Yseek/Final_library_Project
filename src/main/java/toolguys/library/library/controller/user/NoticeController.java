@@ -5,14 +5,12 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.domain.Notice;
 import toolguys.library.library.domain.dongwon.Paginator;
 import toolguys.library.library.service.user.NoticeService;
 
-@RequestMapping("user")
 @RestController
 public class NoticeController {
 
@@ -35,11 +33,14 @@ public class NoticeController {
 			output.put("totalCount", totalCount);
 			output.put("totalPages", paginator.getTotalPageCount());
 		}else {
+			long totalCountBySearch = noticeService.getTotalCountBySearchS(search);
+			Paginator paginatorBySearch = new Paginator(page, size, totalCountBySearch);
 			input.put("search", search);
 			output.put("content", noticeService.listNoticeByPageAndSearch(input));
 			output.put("page", page);
 			output.put("size", size);
-			output.put("totalPages", paginator.getTotalPageCount());
+			output.put("totalCount", totalCountBySearch);
+			output.put("totalPages", paginatorBySearch.getTotalPageCount());
 		}
 		return output;
 	}

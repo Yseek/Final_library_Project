@@ -121,4 +121,9 @@ public class SecurityController {
 	public ResponseEntity<String> test() {
 		return ResponseEntity.ok().body("권한이 없습니다");
 	}
+
+	@PostMapping("/admin/findChatList")
+	public ResponseEntity<Object> findChatList(){
+		return ResponseEntity.ok().body(ChatController.userSet);
+	}
 }

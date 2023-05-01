@@ -1,0 +1,89 @@
+.mainPage{
+	width: 100%;
+	height: 75vh;
+}
+
+.mainTop{
+	width: 100%;
+	height: 35vh;
+	border : 1px dotted gray;
+	border-left: none;
+	border-right: none;
+	border-top : none;
+}
+
+.mainBottom{
+	width: 100%;
+	height: 30vh;
+	margin-top:2vh;
+}
+
+.mainLeftBottom{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+
+.mainRightBottom{
+	width: 50%;
+	height: 100%;
+	margin-left:50%;
+}
+
+
+.searchBookBoxInput{
+	text-align: center;
+	margin-bottom: 10px;
+	border : 3px solid #0665A9;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	border-radius: 7px;
+	height: 10vh;
+	background-color: #f6f6f6
+}
+
+.searchBookBoxInput input{
+	height: 4vh;
+	width: 25vw;
+	font-size: 20px;
+	font-family: 메이플스토리;
+	color: gray;
+	margin-top: 25px;
+	margin-left: 0px;
+}
+
+.searchBookBox{
+	width: 650px;
+	height: 33vh;
+	margin: auto;
+	margin-top: 20px;
+	overflow: auto;
+}
+.searchedBookList{
+	border: 1px solid black;
+	width: 100%;
+	border-collapse: collapse;
+	border-left: 0;
+	border-right: 0;
+
+}
+.searchedBookListTr{
+	background-color: beige;
+	border-bottom: 1px solid black;
+}
+.searchedBookListTr>a{
+	color: black;
+}
+.searchedBookListTr>a>td{
+	width: 200px;
+}
+
+.searchedBookListTr img{
+	transition: all 0.2s linear;
+}
+
+.searchedBookListTr:hover img{
+	background-color: gray;
+	transform: scale(2.0);
+}

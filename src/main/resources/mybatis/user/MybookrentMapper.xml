@@ -14,12 +14,18 @@
     <resultMap type="Book" id="BookMap">
         <id property="bookSeq" column="bookSeq" />
         <result property="bookTitle" column="bookTitle" />
+        <result property="bookStatus" column="bookStatus" />
     </resultMap>
 
-    <select id="getMybookrent" resultType="Bookrent" parameterType="long" resultMap="BookRentBookMap">
-        select * from BOOKRENT br join Book bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+    <select id="getMybookrent" resultType="Bookrent" parameterType="java.util.HashMap" resultMap="BookRentBookMap">
+        select * from BOOKRENT br join BOOK bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+        ORDER BY BOOKRENTSEQ desc
+        LIMIT #{offset}, #{size}
     </select>
     <update id="prolongMybookrent" parameterType="BookRent">
         update BOOKRENT set BOOKRENTDDAY=DATE_ADD(#{bookRentDDay}, INTERVAL 7 DAY), BOOKRENTCOIN=1 where BOOKRENTSEQ=#{bookRentSeq}
     </update>
+    <select id="getTotalCount" resultType="long" parameterType="long">
+        select COUNT(*) from BOOKRENT where RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+    </select>
 </mapper>

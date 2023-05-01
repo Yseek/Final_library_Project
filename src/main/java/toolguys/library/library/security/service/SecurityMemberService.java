@@ -19,7 +19,7 @@ public class SecurityMemberService {
 	@Value("${jwt.secret}")
 	private String secretKey;
 
-	private Long expiredMs = 1000 * 60 * 60L;
+	private Long expiredMs = 10000 * 60 * 60L;
 
 	public SecurityMemberService(SecurityMemberRepository securityMemberRepository,
 			BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -77,5 +77,4 @@ public class SecurityMemberService {
 		member.setMemberPwd(bCryptPasswordEncoder.encode(tempoPwd));
 		securityMemberRepository.save(member);
 	}
-
 }
