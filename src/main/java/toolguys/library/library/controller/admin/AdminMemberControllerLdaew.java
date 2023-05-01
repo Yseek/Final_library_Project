@@ -67,7 +67,7 @@ public class AdminMemberControllerLdaew {
     // 책 검색
     @PostMapping("searchBookRent")
     public Page<AdminBookRentDto> searchBookRent(
-        @PageableDefault(page = 0, size = 2, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
+        @PageableDefault(page = 0, size = 10, sort = "memberSeq", direction = Sort.Direction.DESC) Pageable pageable,
         @RequestBody HashMap<String, String> searchData) {
         return adminMemberServiceLdaew.searchBookRent(searchData, pageable);
     }
