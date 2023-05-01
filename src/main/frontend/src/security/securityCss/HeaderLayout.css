@@ -67,9 +67,11 @@ ul {
 	border-radius: 7px;
 	background-color: black;
 	width: 7vw;
+	height: 4vh;
 	border : 1px solid black;
 	font-family: 메이플스토리;
-	font-size: 100%;
+	font-size: larger;
+	color: white;
 
 }
 
