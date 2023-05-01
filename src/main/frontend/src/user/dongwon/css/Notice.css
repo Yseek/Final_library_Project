@@ -39,8 +39,9 @@
 
 #contentContent {
 	height: 200px;
-	/* text-align: left;
-	padding-left: 15px; */
+	padding-top: 10px;
+	white-space: pre-wrap;
+	overflow-y: scroll;
 }
 
 .noticeTable > thead > tr, .noticeTable > tbody > tr, .noticeTable > tr {

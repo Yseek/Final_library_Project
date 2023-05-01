@@ -33,11 +33,10 @@ export default function Notice() {
 					</tr>
 					<tr>
 						<td className="contentColumnName" align='center'>내용</td>
-						<td id="contentContent">{noticeList.noticeContent}</td>
+						<td id="contentContent" valign="top">{noticeList.noticeContent}</td>
 					</tr>
 					<tr>
 						<td className="contentColumnName" align='center'>작성날짜</td>
-						{/* <td>{noticeList.noticeRdate}</td> */}
 						<td>{moment(noticeList.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 					</tr>
 				</tbody>
