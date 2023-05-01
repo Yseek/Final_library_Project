@@ -192,53 +192,53 @@ export default function JoinPage() {
 	}
 
 	return (
-		<div className="joinPage">
+		<div className="joinPageDiv">
 			<h2>회원가입</h2>
 			<form onSubmit={onSubmit}>
-				<div className="joinPage_content_InputBox">
-					<div className="joinInputDiv">
-						<span>이름</span>
-						<input className='joinInput' type="text" ref={nameRef} placeholder="성명" />
-					</div>
-					<div className="joinInputDiv">
-						<span>이메일</span>
-						<input className='joinInput' type="text" ref={emailRef} placeholder="ex@example.com" />
-						<button className='joinBtn' type="button" onClick={duplicateCheck}>중복체크</button>
-						<button className='joinBtn' type="button" onClick={sendMail}>이메일 인증</button>
-					</div>
-					<div style={emailCertidis}>
-						<span>인증번호 확인</span>
-						<input className='joinInput' type="text" onKeyUp={certi} ref={certiPwdRef} />
-						<br />
-						<span>{checkMsg.length != 0 ? checkMsg : "인증번호를 입력해주세요"}</span>
-					</div>
-					<div className="joinInputDiv">
-						<span>비밀번호</span>
-						<input className='joinInput' type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
-					</div>
-					<div className="joinInputDiv">
-						<span>비밀번호확인</span><input type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
-						<br />
-						<span>{pwdInCheck}</span>
-					</div>
-					<div className="joinInputDiv">
-						<span>휴대폰</span>
-						<input className='joinInput' type="text" ref={phoneRef} placeholder="010-0000-0000" />
-						<button className='joinBtn' type="button" onClick={phoneCheck}>중복체크</button>
-					</div>
-					<div className="joinInputDiv">
-						<span>생년월일</span>
-						<input className='joinInput' type="date" min="1920-01-01" max="2023-01-01" ref={birthRef} />
-					</div>
-					<div className="joinInputDiv">
-						<span>우편번호</span><input type="text" value={zipCodeValue} ref={zipRef} />
-						<br />
-						<span>주소</span>
-						<input className='joinInput' type="text" value={addressValue} ref={addrRef} />
-						<span>상세주소</span>
-						<input className='joinInput' type="text" ref={detailAddrRef} />
-						<button className='joinBtn' type="button" onClick={findPost}>주소찾기</button>
-					</div>
+				<div className="joinInputDiv">
+					<span>이름</span>
+					<input className='joinInput2' type="text" ref={nameRef} placeholder="성명" />
+				</div>
+				<div className="joinInputDiv">
+					<span>이메일</span>
+					<input className='joinInput3' type="text" ref={emailRef} placeholder="ex@example.com" />
+					<button className='joinBtn' type="button" onClick={duplicateCheck}>중복체크</button>
+					<button className='joinBtn' type="button" onClick={sendMail}>이메일 인증</button>
+				</div>
+				<div style={emailCertidis}>
+					<span>인증번호확인</span>
+					<input className='joinInput6' type="text" onKeyUp={certi} ref={certiPwdRef} />
+					<br />
+					<span>{checkMsg.length != 0 ? checkMsg : "인증번호를 입력해주세요"}</span>
+				</div>
+				<div className="joinInputDiv">
+					<span>비밀번호</span>
+					<input className='joinInput4' type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
+				</div>
+				<div className="joinInputDiv">
+					<span>비밀번호확인</span>
+					<input  className='joinInput6' type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
+					<br />
+					<p>{pwdInCheck}</p>
+				</div>
+				<div className="joinInputDiv">
+					<span>휴대폰</span>
+					<input className='joinInput3' type="text" ref={phoneRef} placeholder="010-0000-0000" />
+					<button className='joinBtn' type="button" onClick={phoneCheck}>중복체크</button>
+				</div>
+				<div className="joinInputDiv">
+					<span>생년월일</span>
+					<input className='joinInput4' type="date" min="1920-01-01" max="2023-01-01" ref={birthRef} />
+				</div>
+				<div className="joinInputDiv">
+					<span>우편번호</span>
+					<input  className='joinInput4' type="text" value={zipCodeValue} ref={zipRef} />
+					<br />
+					<span>주소</span>
+					<input className='joinInput2' type="text" value={addressValue} ref={addrRef} />
+					<span>상세주소</span>
+					<input className='joinInput4' type="text" ref={detailAddrRef} />
+					<button className='joinBtn' type="button" onClick={findPost}>주소찾기</button>
 				</div>
 				<div className="postApi">
 					<DaumPostcode style={postCodeStyle} onComplete={onCompletePost} autoClose={false}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
-import "./css/Notice.css";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Ip from "../../Ip";
+import "./css/Notice.css";
 
 export default function Mybookhope() {
 	const params = useParams();
@@ -61,15 +61,9 @@ export default function Mybookhope() {
 	return (
 		<div className="NoticeDiv">
 			<div><h2>나의 희망도서</h2></div>
-<<<<<<< HEAD
 			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
 				<thead>
-=======
-			<p id="mypageItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
-			<table className="mypageTable">
-				<thead className="noticeTableHead">
->>>>>>> 18ee77da8020f36d107e345742cfbb8ccade38bd
 					<tr>
 						<th className="noticeTableTh">책 제목</th>
 						<th className="noticeTableTh">저자</th>

@@ -56,16 +56,16 @@ export default function ChangePwd() {
 	}
 
 	return (
-		<div className="changePwd">
+		<div className="changePwdDiv">
 			<h2>비밀번호변경</h2>
 			<form onSubmit={changePwdInfo}>
-				<div className="joinInput">
+				<div className="changeInput">
 					<span>비밀번호</span>
-					<input className='inputPwd'  type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
+					<input className='changePwd'  type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
 				</div>
-				<div className="joinInput">
+				<div className="changeInput">
 					<span>비밀번호확인</span>
-					<input className='inputPwdd' type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
+					<input className='changePwdd' type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
 					<p>{pwdInCheck}</p>
 				</div>
 				<button className='changePwdBtn'>변경</button>
