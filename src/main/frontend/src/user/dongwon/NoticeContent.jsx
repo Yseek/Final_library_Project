@@ -33,7 +33,7 @@ export default function Notice() {
 					</tr>
 					<tr>
 						<td className="contentColumnName" align='center'>내용</td>
-						<td id="contentContent" valign="top">{noticeList.noticeContent}</td>
+						<td id="contentContent" valign="top"><div id="scroll_box">{noticeList.noticeContent}</div></td>
 					</tr>
 					<tr>
 						<td className="contentColumnName" align='center'>작성날짜</td>

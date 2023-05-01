@@ -61,6 +61,10 @@
 	overflow-y: scroll;
 }
 
+#scroll_box {
+	max-height: 350px;
+}
+
 a { text-decoration:none }
 
 .noticeSearchBtn{
