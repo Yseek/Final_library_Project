@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import Ip from "../Ip";
+import "./securityCss/FindEmail.css"
 
 export default function FindEmail() {
 
@@ -27,22 +28,22 @@ export default function FindEmail() {
 	}
 
 	return (
-		<div className="findEmail">
-			<div><h3>이메일찾기</h3></div>
+		<div className="findEmailDiv">
+			<h2>이메일찾기</h2>
 			<form onSubmit={onSubmit}>
-				<div className="findEmail__phone">
-					<label htmlFor="findEmail__phone_id">연락처</label>
-					<input id="findEmail__phone_id" type="text" placeholder="ex) 010-1234-5678" ref={findEmailPhoneRef} />
+				<div className="findEmailInput">
+					<span>연락처</span>
+					<input className='findEmailPhone' type="text" placeholder="ex) 010-1234-5678" ref={findEmailPhoneRef} />
 				</div>
-				<div className="findEmail__name">
-					<label htmlFor="findEmail__name_id">성명</label>
-					<input id="findEmail__name_id" type="text" ref={findEmailNameRef} />
+				<div className="findEmailInput">
+					<span>성명</span>
+					<input className='findEmailName' type="text" ref={findEmailNameRef} />
 				</div>
-				<div className="findEmail__birth">
-					<label htmlFor="findEmail__birth_id">생년월일</label>
-					<input id="findEmail__birth_id" type="text" placeholder="ex) 20001010" ref={findEmailBirthRef} />
+				<div className="findEmailInput">
+					<span>생년월일</span>
+					<input className='findEmailBirth' type="text" placeholder="ex) 20001010" ref={findEmailBirthRef} />
 				</div>
-				<button>이메일찾기</button>
+				<button className='findEmailBtn'>이메일찾기</button>
 			</form>
 		</div>
 	)

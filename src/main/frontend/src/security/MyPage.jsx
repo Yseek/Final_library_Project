@@ -31,30 +31,46 @@ export default function MyPage() {
 
 	return (
 		<div className="MyPage">
-			<div className="userInfo">
-				<div>
-					이름 : {info.memberName}
-				</div>
-				<div>
-					이메일 : {info.memberEmail}
-				</div>
-				<div>
-					연락처 : {info.memberPhone}
-				</div>
-				<div>
-					{info.memberAddr}
-				</div>
-				<div>
-					생년월일 : {info.memberBirth}
-				</div>
-			</div>
+			<h2>마이페이지</h2>
 			<div className="myPageInnerLink">
-				<a href="#" onClick={toChangPwd}>비밀번호 변경</a>
-				<p><Link to={`/mypage/mybook/1`}>내서재</Link></p>
-				<p><Link to={`/mypage/mybookhope/1`}>희망도서신청상태확인</Link></p>
-				<p><Link to={`/user/bookReserv`}>예약내역 확인</Link></p>
-				<p><Link to={`/mypage/mybookrent/1`}>대여목록</Link></p>
+				<button><a href="#" onClick={toChangPwd}>비밀번호 변경</a></button>
+				<button><Link to={`/mypage/mybook/1`}>내서재</Link></button>
+				<button><Link to={`/mypage/mybookhope/1`}>희망도서신청상태확인</Link></button>
+				<button><Link to={`/user/bookReserv`}>예약내역 확인</Link></button>
+				<button><Link to={`/mypage/mybookrent/1`}>대여목록</Link></button>
 			</div>
+			<hr />
+			<table className='myPageTable'>
+				<thead>
+					<tr>
+						<th className='myPageTh'>구분</th>
+						<th className='myPageTh'>내정보</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td className='myPageTd'>이름</td>
+						<td className='myPageTd'>{info.memberName}</td>
+					</tr>
+					<tr>
+						<td className='myPageTd'>이메일</td>
+						<td className='myPageTd'>{info.memberEmail}</td>
+					</tr>
+					<tr>
+						<td className='myPageTd'>연락처</td>
+						<td className='myPageTd'>{info.memberPhone}</td>
+					</tr>
+					<tr>
+						<td className='myPageTd'>주소</td>
+						<td className='myPageTd'>{info.memberAddr}</td>
+					</tr>
+					<tr>
+						<td className='myPageTd'>생년월일</td>
+						<td className='myPageTd'>{info.memberBirth}</td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
 	)
 }
