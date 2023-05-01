@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
-import "./css/Notice.css";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Ip from "../../Ip";
+import "./css/Notice.css";
 
 export default function Mybookhope() {
 	const params = useParams();
@@ -59,27 +59,27 @@ export default function Mybookhope() {
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
-		<div className="Notice">
+		<div className="NoticeDiv">
 			<div><h2>나의 희망도서</h2></div>
-			<p id="mypageItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
-			<table className="mypageTable">
-				<thead className="noticeTableHead">
+			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+			<table className="noticeTable">
+				<thead>
 					<tr>
-						<th>책 제목</th>
-						<th>저자</th>
-						<th>출판사</th>
-						<th>신청일</th>
-						<th>신청상태</th>
+						<th className="noticeTableTh">책 제목</th>
+						<th className="noticeTableTh">저자</th>
+						<th className="noticeTableTh">출판사</th>
+						<th className="noticeTableTh">신청일</th>
+						<th className="noticeTableTh">신청상태</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookHopeSeq}>
-							<td width="25%">{res.bookHopeTitle}</td>
-							<td>{res.bookHopeWriter}</td>
-							<td>{res.bookHopePub}</td>
-							<td>{res.bookHopeWantDay}</td>
-							<td>{bookHopeStat[res.bookHopeStatus]}</td>
+							<td className="noticeTableTd">{res.bookHopeTitle}</td>
+							<td className="noticeTableTd">{res.bookHopeWriter}</td>
+							<td className="noticeTableTd">{res.bookHopePub}</td>
+							<td className="noticeTableTd">{res.bookHopeWantDay}</td>
+							<td className="noticeTableTd">{bookHopeStat[res.bookHopeStatus]}</td>
 						</tr>
 					))}
 				</tbody>
