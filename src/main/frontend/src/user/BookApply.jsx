@@ -21,13 +21,13 @@ function BookApply() {
 	const memberSeqRef = useRef(null);
 
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
-					"Authorization": "Bearer " + localStorage.getItem("token")
+					"Authorization": "Bearer " + sessionStorage.getItem("token")
 				}
 			})
 				.then(res => res.json())
@@ -50,7 +50,7 @@ function BookApply() {
 		axios.post('/user/bookApply', data, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 		})
 			.then(response => {

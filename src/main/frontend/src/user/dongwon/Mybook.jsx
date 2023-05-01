@@ -12,14 +12,14 @@ export default function Mybook() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 			})
 				.then(res => res.json())
@@ -31,7 +31,7 @@ export default function Mybook() {
 		fetch(`${Ip.url}/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
 			.then(res => res.json())
@@ -42,7 +42,7 @@ export default function Mybook() {
 		fetch(`${Ip.url}/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
 			.then(res => res.json())
@@ -56,7 +56,7 @@ export default function Mybook() {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 			body: JSON.stringify({ myBooksSeq }),
 		}).then(res => res.text())

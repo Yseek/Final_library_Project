@@ -32,14 +32,14 @@ export default function BookList() {
 	}
 
 	function bookMyFavorite(bookTitle, bookWriter, bookPub) {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navigate("/loginPage", { state: pathname });
 		} else {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 			})
 				.then(res => res.json())
@@ -49,7 +49,7 @@ export default function BookList() {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
-							"Authorization": "Bearer " + localStorage.getItem("token"),
+							"Authorization": "Bearer " + sessionStorage.getItem("token"),
 						},
 						body: JSON.stringify({bookTitle, bookWriter, bookPub, info})
 					})

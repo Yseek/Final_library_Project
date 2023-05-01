@@ -21,13 +21,13 @@ export default function AdminBookHope() {
             method: "GET",
             headers: {
                "Content-Type": "application/json",
-               "Authorization": "Bearer " + localStorage.getItem("token"),
+               "Authorization": "Bearer " + sessionStorage.getItem("token"),
       		},
 		    })
         .then(res => res.json())
         .then(data => setData(data))
 	}, [bookHopeSeq]);
-    console.log("토큰값"+localStorage.getItem("token"));
+    console.log("토큰값"+sessionStorage.getItem("token"));
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -43,7 +43,7 @@ export default function AdminBookHope() {
         fetch(`${Ip.url}/admin/bookHopeOk/Input`, {
           method: 'POST',
           headers: {
-            "Authorization": "Bearer " + localStorage.getItem("token"),
+            "Authorization": "Bearer " + sessionStorage.getItem("token"),
            },
           body: formData
         })
