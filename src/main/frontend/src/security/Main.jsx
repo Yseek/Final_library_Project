@@ -12,6 +12,7 @@ export default function Main() {
 	const [data, setData] = useState([]);
 	const [searchedBooks, setSearchedBooks] = useState([]);
 	const navi = useNavigate();
+	const [page, setPage] = useState([]);
 
 
 
@@ -23,6 +24,16 @@ export default function Main() {
 		})
 			.then(res => res.json())
 			.then(data => { console.log(data); setData(data.content) })
+	}, [params]);
+
+	useEffect(() => {
+		fetch(`${Ip.url}/notice?page=${params.page}&size=10`, {
+			headers: {
+				"Content-Type": "application/json",
+			}
+		})
+			.then(res => res.json())
+			.then(page => setPage(page))
 	}, [params]);
 
 	const search = (e) => {
@@ -82,7 +93,7 @@ export default function Main() {
 			<div className="mainBottom">
 				<div className="mainLeftBottom">
 					뭐가 있긴 하겠지
-					{Array.isArray(data) && data.map(res => (
+					{Array.isArray(page) && page.map(res => (
 						<tr key={res.noticeSeq}>
 							<td className="noticeTableTd">{res.member.memberName}</td>
 							<td className="noticeTableTd"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
