@@ -28,8 +28,11 @@ export default function AdminMemberContent() {
     const [memberSeq, setMemberSeq] = useState();
 
     useEffect(() => {
-        if (location.state!==null) {
+        if (location.state) {
+            sessionStorage.setItem("memberSeq", location.state.user);
             setMemberSeq(location.state.user);
+        }else if(sessionStorage.getItem("memberSeq")){
+            setMemberSeq(sessionStorage.getItem("memberSeq"));
         }
     }, [])
 
@@ -107,7 +110,7 @@ export default function AdminMemberContent() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
                 },
                 body: JSON.stringify({ category, keyword, "memberSeq": memberSeq }),
             })
@@ -216,6 +219,10 @@ export default function AdminMemberContent() {
                 <form onSubmit={SearchInput}>
                     <select ref={searchCategoryRef}>
                         <option>책번호</option>
+                        <option>제목</option>
+                        <option>저자</option>
+                        <option>출판사</option>
+                        <option>책상태(코드)</option>
                     </select>
                     <input type="text" size={30} ref={searchKeywordRef}></input>
                     <button className="adminMemberButton">검색</button>
