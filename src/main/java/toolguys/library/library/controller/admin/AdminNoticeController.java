@@ -34,11 +34,11 @@ public class AdminNoticeController {
 		HashMap<String, Object> output = new HashMap<String, Object>();
 
 		if(search == null) {
-		output.put("content", noticeService.listNoticeByPage(input));
-		output.put("page", page);
-		output.put("size", size);
-		output.put("totalCount", totalCount);
-		output.put("totalPages", paginator.getTotalPageCount());
+			output.put("content", noticeService.listNoticeByPage(input));
+			output.put("page", page);
+			output.put("size", size);
+			output.put("totalCount", totalCount);
+			output.put("totalPages", paginator.getTotalPageCount());
 		}else {
 			long totalCountBySearch = noticeService.getTotalCountBySearchS(search);
 			Paginator paginatorBySearch = new Paginator(page, size, totalCountBySearch);

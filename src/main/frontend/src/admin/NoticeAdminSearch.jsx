@@ -23,7 +23,7 @@ export default function Notice() {
 
 	const onClickSearchInput = (e) => {
 		e.preventDefault();
-		navigate(`/admin/notice/search/${userInput}/1`);
+		navigate(`/admin/notice/search/${userInput}`);
 	};
 	const onClickList = (e) => {
 		e.preventDefault();
@@ -47,7 +47,7 @@ export default function Notice() {
 	return (
 		<div className="Notice">
 			<h2>공지사항</h2>
-			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+			<p id="NoticeItems">총 {page.totalCount}건, {page.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
 				<thead className="noticeTableHead">
 					<tr>

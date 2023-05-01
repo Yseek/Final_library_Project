@@ -15,7 +15,7 @@ export default function Notice() {
 	},[params]);
 
 	useEffect(()=>{
-		fetch(`${Ip.url}/admin/noticeAdmin?page=${params.page || 1}&size=10`, {
+		fetch(`${Ip.url}/admin/notice?page=${params.page || 1}&size=10`, {
             method: "GET",
             headers: {
                "Content-Type": "application/json",
@@ -47,6 +47,7 @@ export default function Notice() {
 	return (
 		<div className="Notice">
             <h2>공지사항</h2>
+			<p className="NoticeItems">총 {page.totalCount}건, {page.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
 				<thead className="noticeTableHead">
 					<tr>
