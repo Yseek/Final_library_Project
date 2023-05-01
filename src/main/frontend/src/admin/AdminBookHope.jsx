@@ -51,34 +51,34 @@ export default function AdminBookHope() {
 		<div className="AdminBookHope">
 			<h2>희망 책 신청 승인페이지</h2>
 			<table className="AdminBookHopeTable">
-				<thead className="AdminBookHopeTableHead">
+				<thead>
 					<tr>
-						<th>책제목</th>
-						<th>저자</th>
-						<th>출판사</th>
-						<th>신청날짜</th>
-						<th>신청상태</th>
-						<th>신청자</th>
-						<th>승인</th>
-						<th>거절</th>
+						<th className="AdminBookHopeTableTh">책제목</th>
+						<th className="AdminBookHopeTableTh">저자</th>
+						<th className="AdminBookHopeTableTh">출판사</th>
+						<th className="AdminBookHopeTableTh">신청날짜</th>
+						<th className="AdminBookHopeTableTh">신청상태</th>
+						<th className="AdminBookHopeTableTh">신청자</th>
+						<th className="AdminBookHopeTableTh">승인</th>
+						<th className="AdminBookHopeTableTh">거절</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.bookHopeSeq}>
-							<td>{res.bookHopeTitle}</td>
-							<td>{res.bookHopeWriter}</td>
-							<td>{res.bookHopePub}</td>
-							<td>{res.bookHopeWantDay}</td>
-							<td>
+							<td className="AdminBookHopeTableTd">{res.bookHopeTitle}</td>
+							<td className="AdminBookHopeTableTd">{res.bookHopeWriter}</td>
+							<td className="AdminBookHopeTableTd">{res.bookHopePub}</td>
+							<td className="AdminBookHopeTableTd">{res.bookHopeWantDay}</td>
+							<td className="AdminBookHopeTableTd">
 								{res.bookHopeStatus === 1 && '신청중'}
 								{res.bookHopeStatus === 2 && '입고완료'}
 								{res.bookHopeStatus === 3 && '취소됨'}
 								{res.bookHopeStatus === 4 && '거부됨'}
 							</td>
-							<td>{res.member.memberName}</td>
-							<td><button className="bookHopeButton" disabled={res.bookHopeStatus !== 1} onClick={() => history(`/admin/bookHopeOk/${res.bookHopeSeq}`)}>승인</button></td>
-							<td><button className="bookHopeButton bookHopeBtCc" disabled={res.bookHopeStatus !== 1} onClick={() => deny(res.bookHopeSeq)}>거부</button></td>
+							<td className="AdminBookHopeTableTd">{res.member.memberName}</td>
+							<td className="AdminBookHopeTableTd"><button className="bookHopeButton" disabled={res.bookHopeStatus !== 1} onClick={() => history(`/admin/bookHopeOk/${res.bookHopeSeq}`)}>승인</button></td>
+							<td className="AdminBookHopeTableTd"><button className="bookHopeButton bookHopeBtCc" disabled={res.bookHopeStatus !== 1} onClick={() => deny(res.bookHopeSeq)}>거부</button></td>
 						</tr>
 					))}
 				</tbody>
