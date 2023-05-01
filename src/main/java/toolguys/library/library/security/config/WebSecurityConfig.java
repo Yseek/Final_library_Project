@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import lombok.RequiredArgsConstructor;
 import toolguys.library.library.security.exception.CustomAccessDeniedHandler;
+import toolguys.library.library.security.service.RedisService;
 import toolguys.library.library.security.service.SecurityMemberService;
 import toolguys.library.library.security.utils.JwtFilter;
 
@@ -22,6 +23,8 @@ public class WebSecurityConfig {
 
 	@Autowired
 	private final SecurityMemberService securityMemberService;
+	@Autowired
+	private final RedisService redisService;
 
 	@Value("${jwt.secret}")
 	private String secretKey;
@@ -32,10 +35,11 @@ public class WebSecurityConfig {
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/memberInfo").hasAnyRole("USER", "ADMIN"));
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/*").hasAnyRole("USER", "ADMIN"));
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/admin/*").hasRole("ADMIN"));
-		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/bookList","/user/bookDetail/*").permitAll());
+		httpSecurity.authorizeHttpRequests(
+				request -> request.antMatchers("/user/bookList", "/user/bookDetail/*").permitAll());
 		httpSecurity.exceptionHandling(handling -> handling.accessDeniedHandler(new CustomAccessDeniedHandler()));
 		httpSecurity.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-		httpSecurity.addFilterBefore(new JwtFilter(securityMemberService, secretKey),
+		httpSecurity.addFilterBefore(new JwtFilter(securityMemberService, redisService, secretKey),
 				UsernamePasswordAuthenticationFilter.class);
 		return httpSecurity.build();
 	}

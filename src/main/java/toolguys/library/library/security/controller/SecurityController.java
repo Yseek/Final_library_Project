@@ -23,6 +23,7 @@ import toolguys.library.library.security.dto.PhoneDuplicateCheckRequest;
 import toolguys.library.library.security.dto.SendEmailRequest;
 import toolguys.library.library.security.exception.AppException;
 import toolguys.library.library.security.exception.ErrorCode;
+import toolguys.library.library.security.service.RedisService;
 import toolguys.library.library.security.service.SecurityMemberService;
 import toolguys.library.library.security.utils.MailSenderRunner;
 
@@ -35,6 +36,9 @@ public class SecurityController {
 
 	@Autowired
 	MailSenderRunner mailSenderRunner;
+
+	@Autowired
+	RedisService redisService;
 
 	private Map<String, String> key = new HashMap<>();
 
@@ -53,6 +57,7 @@ public class SecurityController {
 
 	@PostMapping("/logout.do")
 	public ResponseEntity<Object> logout(Authentication authentication) {
+		redisService.deleteValues(authentication.getName());
 		return ResponseEntity.ok().body(securityMemberService.memberInfo(authentication.getName()));
 	}
 

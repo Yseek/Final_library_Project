@@ -41,4 +41,10 @@ public class RedisController {
 	public ResponseEntity<Set<String>> getSets(@RequestBody RedisGetValueDTO dto){
 		return ResponseEntity.ok().body(redisService.getSets(dto.getTestKey()));
 	}
+
+	@RequestMapping("deleteValue")
+	public ResponseEntity<String> deleteValue(@RequestBody RedisGetValueDTO dto){
+		redisService.deleteValues(dto.getTestKey());
+		return ResponseEntity.ok().body("삭제완료");
+	}
 }

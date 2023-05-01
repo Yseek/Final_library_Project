@@ -1,7 +1,9 @@
 package toolguys.library.library.security.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -15,11 +17,13 @@ public class SecurityMemberService {
 
 	private final SecurityMemberRepository securityMemberRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	RedisService redisService;
 
 	@Value("${jwt.secret}")
 	private String secretKey;
 
-	private Long expiredMs = 10000 * 60 * 60L;
+	private Long expiredMs = 100 * 20 * 20L;
 
 	public SecurityMemberService(SecurityMemberRepository securityMemberRepository,
 			BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -33,7 +37,9 @@ public class SecurityMemberService {
 		if (!bCryptPasswordEncoder.matches(insertPwd, member.getMemberPwd())) {
 			throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드를 잘못 입력했습니다");
 		}
-		return JwtUtil.createJwt(memberEmail, secretKey, expiredMs);
+		List<String> tokens = JwtUtil.createJwt(memberEmail, secretKey, expiredMs);
+		redisService.setSets(memberEmail, "atk"+tokens.get(0), "rtk"+tokens.get(1));
+		return tokens.get(0);
 	}
 
 	public void join(Member member) {

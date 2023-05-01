@@ -31,4 +31,8 @@ public class RedisService {
 	public Set<String> getSets(String key){
 		return redisTemplate.opsForSet().members(key);
 	}
+
+	public void deleteValues(String key){
+		redisTemplate.delete(key);
+	}
 }
