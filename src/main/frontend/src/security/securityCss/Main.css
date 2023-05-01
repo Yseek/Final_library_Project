@@ -30,6 +30,11 @@
 	margin-left:50%;
 }
 
+.BookListTable2 { /* 추천도서목록 */
+	width: 50%;
+	border-collapse: collapse;
+	margin-left:50%;
+}
 
 .searchBookBoxInput{
 	text-align: center;
