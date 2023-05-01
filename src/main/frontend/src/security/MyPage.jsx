@@ -32,29 +32,33 @@ export default function MyPage() {
 	return (
 		<div className="MyPage">
 			<h2>마이페이지</h2>
+			<div className="myPageInnerLink">
+	
+				<hr />
+				<button><a href="#" onClick={toChangPwd}>비밀번호 변경</a></button>
+				<button><Link to={`/mypage/mybook/1`}>내서재</Link></button>
+				<button><Link to={`/mypage/mybookhope/1`}>희망도서신청상태확인</Link></button>
+				<button><Link to={`/user/bookReserv`}>예약내역 확인</Link></button>
+				<button><Link to={`/mypage/mybookrent/1`}>대여목록</Link></button>
+			</div>
 			<div className="userInfo">
-				<div>
+				<h2>내 정보</h2>
+				<hr />
+				<div className='userLabel'>
 					이름 : {info.memberName}
 				</div>
-				<div>
+				<div className='userLabel'>
 					이메일 : {info.memberEmail}
 				</div>
-				<div>
+				<div className='userLabel'>
 					연락처 : {info.memberPhone}
 				</div>
-				<div>
+				<div className='userLabel'>
 					{info.memberAddr}
 				</div>
-				<div>
+				<div className='userLabel'>
 					생년월일 : {info.memberBirth}
 				</div>
-			</div>
-			<div className="myPageInnerLink">
-				<a  href="#" onClick={toChangPwd}>비밀번호 변경</a>
-				<p><Link to={`/mypage/mybook/1`}>내서재</Link></p>
-				<p><Link to={`/mypage/mybookhope/1`}>희망도서신청상태확인</Link></p>
-				<p><Link to={`/user/bookReserv`}>예약내역 확인</Link></p>
-				<p><Link to={`/mypage/mybookrent/1`}>대여목록</Link></p>
 			</div>
 		</div>
 	)

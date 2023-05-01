@@ -84,18 +84,18 @@ export default function Mybook() {
 						<th className="noticeTableTh">표지</th>
 						<th className="noticeTableTh">저자</th>
 						<th className="noticeTableTh">출판사</th>
+						<th className="noticeTableTh">내용 보기</th>
 						<th className="noticeTableTh">내서재에서 제거</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.myBooksSeq}>
-							<a onClick={() => bookDetail(res.book.bookTitle, res.book.bookWriter, res.book.bookPub)}>
-								<td className="noticeTableTd">{res.book.bookTitle}</td>
-							</a>
+							<td className="noticeTableTd">{res.book.bookTitle}</td>
 							<td className="noticeTableTd"><img src={res.book.bookImgPath} width={`100px`} height={`140px`} /></td>
 							<td className="noticeTableTd">{res.book.bookWriter}</td>
 							<td className="noticeTableTd">{res.book.bookPub}</td>
+							<td className="noticeTableTd"><a onClick={() => bookDetail(res.book.bookTitle, res.book.bookWriter, res.book.bookPub)}>보기</a></td>
 							<td className="noticeTableTd"><button className="noticeLostBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
 						</tr>
 					))}
