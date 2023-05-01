@@ -25,7 +25,7 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
         return noticeMapper.getTotalCount();
     }
     @Override
-    public List<Notice> listNoticeByPage(HashMap<String, Integer> input) {
+    public List<Notice> listNoticeByPage(HashMap<String, Object> input) {
         return noticeMapper.getNoticeListByPage(input);
     }
     @Override
@@ -43,5 +43,13 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
     @Override
     public void updateNoticeS(Notice notice) {
         noticeMapper.updateNotice(notice);
+    }
+    @Override
+    public long getTotalCountBySearchS(String search) {
+        return noticeMapper.getTotalCountBySearch(search);
+    }
+    @Override
+    public List<Notice> listNoticeByPageAndSearch(HashMap<String, Object> input) {
+        return noticeMapper.getNoticeListByPageAndSearch(input);
     }
 }
