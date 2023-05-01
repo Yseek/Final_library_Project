@@ -20,7 +20,7 @@ export default function AdminChat() {
 		fetch(`${Ip.url}/admin/findChatList`, {
 			method: "POST",
 			headers: {
-				"Authorization": "Bearer " + localStorage.getItem("token")
+				"Authorization": "Bearer " + sessionStorage.getItem("token")
 			}
 		})
 			.then(res => res.json())

@@ -42,7 +42,7 @@ export default function AdminAddBooks() {
 		fetch(`${Ip.url}/admin/addBooks`, {
 			method: "POST",
 			headers: {
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 			body: formData
 		}).then(res => res.text())

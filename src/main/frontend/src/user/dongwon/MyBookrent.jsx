@@ -22,14 +22,14 @@ export default function Mybookrent() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 			})
 				.then(res => res.json())
@@ -41,7 +41,7 @@ export default function Mybookrent() {
 		fetch(`${Ip.url}/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
 			.then(res => res.json())
@@ -52,7 +52,7 @@ export default function Mybookrent() {
 		fetch(`${Ip.url}/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
 			.then(res => res.json())
@@ -69,7 +69,7 @@ export default function Mybookrent() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 				body: JSON.stringify({ bookRentSeq, bookRentDDay }),
 			}).then(window.location.reload())
@@ -84,7 +84,7 @@ export default function Mybookrent() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 				body: JSON.stringify({ bookSeq, memberSeq }),
 			}).then(window.location.reload())

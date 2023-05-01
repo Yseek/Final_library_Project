@@ -6,7 +6,7 @@ export default function () {
 	const { pathname } = useLocation();
 
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		}
 	}, []);
