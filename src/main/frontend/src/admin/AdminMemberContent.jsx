@@ -107,7 +107,7 @@ export default function AdminMemberContent() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + localStorage.getItem("token"),
+                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
                 },
                 body: JSON.stringify({ category, keyword, "memberSeq": memberSeq }),
             })

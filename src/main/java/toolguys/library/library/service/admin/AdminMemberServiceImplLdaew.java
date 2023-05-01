@@ -1,11 +1,13 @@
 package toolguys.library.library.service.admin;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import toolguys.library.library.domain.BookRent;
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.admin.AdminBookRentDto;
 import toolguys.library.library.dto.admin.AdminMemberDto;
@@ -76,12 +78,15 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
         Page<AdminBookRentDto> rentBooks = adminMemberRepositoryLdaew
                 .findBookRentByBOOKSEQ(keyword, memberSeq, pageable)
                 .map(book -> AdminBookRentDto.from(book));
-
-        // HashMap<String, Object> input = new HashMap<String, Object>();
-        // input.put("memberSeq", memberSeq);
-        // input.put("offset", (page - 1) * size);
-        // input.put("size", size);
-        // List<BookRent> bookRent = adminMemberMapper.searchBookRent(null);
+        
+        System.out.println("$$$$ pageable.getPageNumber(): " + pageable.getPageNumber());
+        System.out.println("$$$$ pageable.getPageSize(): " + pageable.getPageSize());
+        HashMap<String, Object> input = new HashMap<String, Object>();
+        input.put("memberSeq", memberSeq);
+        input.put("offset", (pageable.getPageNumber() +1 - 1) * pageable.getPageSize());
+        input.put("size", pageable.getPageSize());
+        List<BookRent> bookRent = adminMemberMapper.searchBookRent(null);
+        System.out.println("$$$$ bookRent: " + bookRent);
 
         return rentBooks;
     }
