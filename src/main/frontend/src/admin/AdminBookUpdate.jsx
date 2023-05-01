@@ -21,7 +21,7 @@ export default function AdminBookUpdate() {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 },
             }
         )
@@ -43,7 +43,7 @@ export default function AdminBookUpdate() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
+                Authorization: "Bearer " + sessionStorage.getItem("token"),
             },
             body: JSON.stringify({bookSeq, bookTitle, bookWriter, bookPub, bookStatus}),
         })
@@ -71,7 +71,7 @@ export default function AdminBookUpdate() {
 				method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 },
             })
 			.then(() => {

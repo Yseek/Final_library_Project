@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./css/Notice.css";
+import Ip from "../../Ip";
 
 export default function Mybook() {
 	const params = useParams();
@@ -11,14 +12,14 @@ export default function Mybook() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
-			fetch(`http://127.0.0.1:8080/memberInfo`, {
+			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 			})
 				.then(res => res.json())
@@ -26,40 +27,51 @@ export default function Mybook() {
 		}
 	}, []);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+	useEffect(() => {
+		fetch(`${Ip.url}/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
-		.then(res => res.json())
-		.then(data => setData(data.content))
+			.then(res => res.json())
+			.then(data => setData(data.content))
 	}, [info, params]);
 
-	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+	useEffect(() => {
+		fetch(`${Ip.url}/user/mybooklist?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
-		.then(res => res.json())
-		.then(page => setPage(page))
+			.then(res => res.json())
+			.then(page => setPage(page))
 	}, [info, params]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	const deleteFromMybook = (myBooksSeq) => {
-		fetch(`http://127.0.0.1:8080/user/mybooklist/delete.do`,{
-			method:"POST",
-			headers : {
+		fetch(`${Ip.url}/user/mybook/delete.do`, {
+			method: "POST",
+			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 			body: JSON.stringify({ myBooksSeq }),
-		}).then(window.location.reload())
+		}).then(res => res.text())
+			.then(res => {
+				alert(res);
+				window.location.reload();
+			})
 	};
+
+	function bookDetail(bookTitle, bookWriter, bookPub) {
+		const a = [bookTitle, bookWriter, bookPub]
+		navi(`/user/bookDetail`, {
+			state: a
+		});
+	}
 
 	return (
 		<div className="Notice">
@@ -68,8 +80,8 @@ export default function Mybook() {
 			<table className="mypageTable">
 				<thead className="noticeTableHead">
 					<tr>
-                        <th>책 제목</th>
-                        <th>커버 이미지</th>
+						<th>책 제목</th>
+						<th>커버 이미지</th>
 						<th>저자</th>
 						<th>출판사</th>
 						<th>내서재에서 제거</th>
@@ -78,8 +90,10 @@ export default function Mybook() {
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.myBooksSeq}>
-                            <td width="25%">{res.book.bookTitle}</td>
-							<td>{res.book.bookImgPath}</td>
+							<a onClick={() => bookDetail(res.book.bookTitle, res.book.bookWriter, res.book.bookPub)} style={{ cursor: "pointer" }}>
+								<td width="25%">{res.book.bookTitle}</td>
+							</a>
+							<td><img src={res.book.bookImgPath} width={`100px`} height={`140px`} /></td>
 							<td>{res.book.bookWriter}</td>
 							<td>{res.book.bookPub}</td>
 							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
@@ -95,6 +109,6 @@ export default function Mybook() {
 					</span>
 				))}
 			</div>
-		</div>
+		</div >
 	);
 }

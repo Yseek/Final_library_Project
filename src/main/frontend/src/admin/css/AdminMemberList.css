@@ -1,14 +1,132 @@
-.adminMemberTable {
-    border-collapse: collapse;
+.adminMemberButton {
+    width: 4rem;
+    height: 30px;
+    margin-bottom: 1em;
 }
 
-.adminMemberTable td {
-    height: 2rem;
+/* basic board list */
+.board-list {
+    table-layout: fixed;
+    border-top: 2px solid #555;
+    border-bottom: 1px solid #c9c9c9;
+    empty-cells: show;
+}
+
+.board-list th,
+.board-list td {
+    padding: 10px 1px;
+    text-align: center;
+    border-top: 1px solid #e2e2e2;
+}
+
+.board-list thead tr:first-child th {
+    border-top: 0;
+}
+
+.board-list tbody tr:first-child td {
+    border-top: 1px solid #555;
+}
+
+.board-list td.title,
+.board-list td.ta_l {
+    padding: 10px 5px;
+    text-align: left;
+}
+
+.board-list td.title a {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 90%;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.board-list td.title img,
+.board-list td.title b {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.memberRow:hover {
+    cursor: pointer;
+    color: #005bab;
+}
+
+/* paging */
+.paging {
+    overflow: hidden;
+    position: relative;
+    min-height: 27px;
+    margin-top: 20px;
+    padding: 4px 0;
     text-align: center;
 }
 
-.adminMemberButton {
-    width: 4rem;
-	height: 30px;
-	margin-bottom: 1em;
+.paging img {
+    vertical-align: top;
+}
+
+.paging span,
+.paging a {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.paging span.tp {
+    color: #fff;
+}
+
+.paging a:hover,
+.paging a:focus,
+.paging a:active {
+    background-color: #f5f5f5;
+}
+
+.paging .btn-paging {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #e1e1e1;
+}
+
+.paging .btn-paging.first {
+    background-position: 0 0;
+}
+
+.paging .btn-paging.prev {
+    margin-right: 5px;
+    background-position: 0 -25px;
+}
+
+.paging .btn-paging.next {
+    margin-left: 5px;
+    background-position: 0 -50px;
+}
+
+.paging .btn-paging.last {
+    background-position: 0 -75px;
+}
+
+.paging .btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#btnSearch,
+.paging span.tp {
+    border-color: #005bab !important;
+    background-color: #005bab;
+    color: white;
+}
+
+.paging a:visited {
+    color: #000;
 }

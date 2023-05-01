@@ -21,48 +21,48 @@ export default function Notice() {
 		navigate(`/notice/search/${userInput}/1`);
 	};
 
-	useEffect(()=>{
-		fetch(`${Ip.url}/notice?page=${params.page}&size=10`,{
+	useEffect(() => {
+		fetch(`${Ip.url}/notice?page=${params.page}&size=10`, {
 			headers: {
 				"Content-Type": "application/json",
 			}
 		})
-		.then(res => res.json())
-		.then(data => setData(data.content))
+			.then(res => res.json())
+			.then(data => setData(data.content))
 	}, [params]);
 
-	useEffect(()=>{
-		fetch(`${Ip.url}/notice?page=${params.page}&size=10`,{
+	useEffect(() => {
+		fetch(`${Ip.url}/notice?page=${params.page}&size=10`, {
 			headers: {
 				"Content-Type": "application/json",
 			}
 		})
-		.then(res => res.json())
-		.then(page => setPage(page))
+			.then(res => res.json())
+			.then(page => setPage(page))
 	}, [params]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
-		<div className="Notice">
-			<div id="NoticeTitle"><h2>공지사항</h2></div>
-			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+		<div className="NoticeDiv">
+			<h2>공지사항</h2>
+			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
-				<thead className="noticeTableHead">
+				<thead>
 					<tr>
-                        <th>작성자</th>
-						<th>공지 제목</th>
-						<th>공지날짜</th>
+						<th className="noticeTableTh">작성자</th>
+						<th className="noticeTableTh">공지 제목</th>
+						<th className="noticeTableTh">공지날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.noticeSeq}>
-                            <td width="15%">{res.member.memberName}</td>
-							<td width="60%"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
+							<td className="noticeTableTd">{res.member.memberName}</td>
+							<td className="noticeTableTd"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
 							{/* <td>{res.noticeRdate}</td> */}
-							<td>{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
-							
+							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
+
 						</tr>
 					))}
 				</tbody>
@@ -75,8 +75,8 @@ export default function Notice() {
 					</span>
 				))}
 			</div>
-			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25"/>&nbsp;
-			<button id="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
+			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
+				<button className="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
 		</div>
 	);
 }

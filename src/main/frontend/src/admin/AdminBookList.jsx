@@ -16,19 +16,6 @@ export default function AdminBookList(){
     const bookPubRef = useRef();
     const navigate = useNavigate();
 
-    /* useEffect(()=>{
-		fetch(`${Ip.url}/admin/booklist`,{
-            method: "GET",
-            headers: {
-               "Content-Type": "application/json",
-               "Authorization": "Bearer " + localStorage.getItem("token"),
-            },
-         })
-		.then(res => res.json())
-		.then(data => setBookList(data))
-        .catch(error => console.error(error));
-	}, []); */
-
     useEffect(()=>{
         if(isListAll){
             listAll(); 
@@ -43,8 +30,8 @@ export default function AdminBookList(){
         fetch(`${Ip.url}/admin/booklist`,{
                 method: "GET",
                 headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
                 },
             })
         .then(res => res.json())
@@ -99,7 +86,7 @@ export default function AdminBookList(){
             method: "GET",
             headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token"),
+            "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
         .then(res => res.json())
@@ -140,7 +127,7 @@ export default function AdminBookList(){
             method: "GET",
             headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token"),
+            "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
         .then(res => res.json())

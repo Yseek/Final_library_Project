@@ -21,13 +21,13 @@ function BookApply() {
 	const memberSeqRef = useRef(null);
 
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
-					"Authorization": "Bearer " + localStorage.getItem("token")
+					"Authorization": "Bearer " + sessionStorage.getItem("token")
 				}
 			})
 				.then(res => res.json())
@@ -50,7 +50,7 @@ function BookApply() {
 		axios.post('/user/bookApply', data, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 		})
 			.then(response => {
@@ -69,6 +69,7 @@ function BookApply() {
 
 	return (
 		<div className='BookApplyDiv'>
+			<h2>희망도서 신청</h2>
 			<form onSubmit={handleSubmit}>
 				<table className='BookApplyTable'>
 					<thead>
@@ -83,11 +84,11 @@ function BookApply() {
 							<td className='BookApplyTd'><input type="text" placeholder="제목" value={bookHopeTitle} onChange={(e) => setBookHopeTitle(e.target.value)} /></td>
 						</tr>
 						<tr>
-							<td className='font-bold BookApplylTd'>저자</td>
+							<td className='font-bold BookApplyTd'>저자</td>
 							<td className='BookApplyTd'><input type="text" placeholder="저자" value={bookHopeWriter} onChange={(e) => setBookHopeWriter(e.target.value)} /></td>
 						</tr>
 						<tr>
-							<td className='font-bold BookDetailTd'>출판사</td>
+							<td className='font-bold BookApplyTd'>출판사</td>
 							<td className='BookApplyTd'><input type="text" placeholder="출판사" value={bookHopePub} onChange={(e) => setBookHopePub(e.target.value)} /></td>
 						</tr>
 						<input type="hidden" value={memberSeqq} ref={memberSeqRef} />
@@ -95,7 +96,7 @@ function BookApply() {
 				</table>
 				{/* 오늘날짜로 신청 */}
 				<input className='hidden-col' id="date" type="date" value={bookHopeWantDay} onChange={(e) => setBookHopeWantDay(e.target.value)} />
-				<button type="submit">신청</button>
+				<button className='BookApplyBtn' type="submit">신청</button>
 			</form>
 		</div>
 	);

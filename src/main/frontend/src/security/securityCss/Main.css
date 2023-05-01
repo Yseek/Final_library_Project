@@ -1,42 +1,61 @@
 .mainPage{
 	width: 100%;
-	height: 100%;
+	height: 75vh;
 }
 
 .mainTop{
 	width: 100%;
-	height: 50%;
-	border: 1px solid black;
+	height: 35vh;
+	border : 1px dotted gray;
+	border-left: none;
+	border-right: none;
+	border-top : none;
 }
 
 .mainBottom{
 	width: 100%;
-	height: 50%;
-	border: 1px solid black;
+	height: 30vh;
+	margin-top:2vh;
 }
 
 .mainLeftBottom{
 	float: left;
 	width: 50%;
 	height: 100%;
-	border: 1px solid black;
 }
 
 .mainRightBottom{
 	width: 50%;
 	height: 100%;
-	margin-left: 50%;
-	border: 1px solid black;
+	margin-left:50%;
 }
+
 
 .searchBookBoxInput{
 	text-align: center;
 	margin-bottom: 10px;
+	border : 3px solid #0665A9;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	border-radius: 7px;
+	height: 10vh;
+	background-color: #f6f6f6
+}
+
+.searchBookBoxInput input{
+	height: 4vh;
+	width: 25vw;
+	font-size: 20px;
+	font-family: 메이플스토리;
+	color: gray;
+	margin-top: 25px;
+	margin-left: 0px;
 }
 
 .searchBookBox{
 	width: 650px;
-	height: 450px;
+	height: 33vh;
 	margin: auto;
 	margin-top: 20px;
 	overflow: auto;

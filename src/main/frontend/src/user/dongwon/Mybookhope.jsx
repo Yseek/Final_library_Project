@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 import "./css/Notice.css";
+import Ip from "../../Ip";
 
 export default function Mybookhope() {
 	const params = useParams();
@@ -11,14 +12,14 @@ export default function Mybookhope() {
 	const [page, setPage] = useState([]);
 
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
-			fetch(`http://127.0.0.1:8080/memberInfo`, {
+			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 			})
 				.then(res => res.json())
@@ -27,10 +28,10 @@ export default function Mybookhope() {
 	}, []);
 
 	useEffect(() => {
-		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
+		fetch(`${Ip.url}/user/mybookhope?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
 			.then(res => res.json())
@@ -38,10 +39,10 @@ export default function Mybookhope() {
 	}, [info, params]);
 
 	useEffect(()=>{
-		fetch(`http://127.0.0.1:8080/user/mybookhope?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
+		fetch(`${Ip.url}/user/mybookhope?memberSeq=${info.memberSeq}&page=${params.page}&size=5`,{
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			}
 		})
 		.then(res => res.json())

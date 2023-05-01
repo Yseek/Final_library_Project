@@ -7,7 +7,7 @@ import styled from "styled-components";
 export default function AdminBookReturn(){
     const [rentList, setrentList] = useState([])
     const [isListAll, setisListAll] = useState(true)
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(5);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     
@@ -24,7 +24,7 @@ export default function AdminBookReturn(){
             method: "GET",
             headers:{
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
         .then(res => res.json())
@@ -59,7 +59,7 @@ export default function AdminBookReturn(){
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
         .then(res => res.json())
@@ -75,7 +75,7 @@ export default function AdminBookReturn(){
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 },
             })
             .then(() => {

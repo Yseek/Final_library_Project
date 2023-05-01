@@ -29,7 +29,7 @@ export default function AdminMemberList() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
             .then(res => res.json())
@@ -52,7 +52,7 @@ export default function AdminMemberList() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
             body: JSON.stringify({ category, keyword }),
         })
@@ -71,6 +71,10 @@ export default function AdminMemberList() {
         }
     }
 
+    function memberContentLink(memberSeq) {
+        navigate(`/admin/memberList/content`, { state: { user: memberSeq } });
+    }
+
     // 한 화면에 보여줄 페이지 수 계산
     var pageWidth = 10;
     var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
@@ -82,8 +86,8 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <h3>회원 목록 페이지</h3>
-            <table className="adminMemberTable">
+            <h2>회원 목록 페이지</h2><br />
+            <table class="board-list">
                 <thead>
                     <tr>
                         <th>회원번호</th>
@@ -93,8 +97,8 @@ export default function AdminMemberList() {
                 </thead>
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
-                        <tr key={member.memberSeq}>
-                            <td><Link to={`/admin/memberList/content`}  state={{ user: member.memberSeq }}>{member.memberSeq}</Link></td>
+                        <tr key={member.memberSeq} onClick={() => memberContentLink(member.memberSeq)} className="memberRow">
+                            <td>{member.memberSeq}</td>
                             <td>{member.memberName}</td>
                             <td>{member.memberEmail}</td>
                         </tr>
@@ -102,20 +106,20 @@ export default function AdminMemberList() {
                 </tbody>
             </table>
             {pageList.length === 0 && <span>검색 결과가 없습니다</span>}
-            {pageList.length !== 0 && <div className="page">
-                <span><Link to={`/admin/memberList/1`}>&laquo;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`}>&lt;</Link>&nbsp;</span>
+            {pageList.length !== 0 && <div className="paging">
+                <span><Link to={`/admin/memberList/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+                <span><Link to={`/admin/memberList/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
                 {pageList.map(res => (
                     <span key={res}>
                         <Link to={`/admin/memberList/${res}`}>
-                            {page.number + 1 === res ? <strong>{res}</strong> : res}
+                            {page.number + 1 === res ? <span className="tp">{res}</span> : res}
                         </Link>
                         {" "}
                     </span>
                 ))}
-                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`}>&gt;</Link>&nbsp;</span>
-                <span><Link to={`/admin/memberList/${page.totalPages}`}>&raquo;</Link></span>
-            </div>}
+                <span><Link to={`/admin/memberList/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+                <span><Link to={`/admin/memberList/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+            </div>}<br />
             <div>
                 <form onSubmit={SearchInput}>
                     <select onChange={checkSearchCategory} ref={searchCategoryRef}>
