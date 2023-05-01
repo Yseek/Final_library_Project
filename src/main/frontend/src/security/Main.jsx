@@ -12,8 +12,9 @@ export default function Main() {
 	const [searchedBooks, setSearchedBooks] = useState([]);
 	const navi = useNavigate();
 
+	console.log("확인용"+JSON.stringify(data));
 	useEffect(() => {
-		fetch(`${Ip.url}/bookList`, {
+		fetch(`${Ip.url}/mainbooklist`, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json",
