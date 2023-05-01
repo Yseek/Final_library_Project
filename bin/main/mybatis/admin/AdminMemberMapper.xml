@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="toolguys.library.library.mapper.user.AdminMemberMapper">
+<mapper namespace="toolguys.library.library.mapper.admin.AdminMemberMapper">
     <resultMap type="BookRent" id="BookRentBookMap">
         <id property="bookRentSeq" column="bookRentSeq"/>
         <result property="bookRentRdate" column="bookRentRdate"/>
@@ -18,7 +18,9 @@
     </resultMap>
 
     <select id="searchBookRent" resultType="Bookrent" parameterType="java.util.HashMap" resultMap="BookRentBookMap">
-        select * from BOOKRENT br join BOOK bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+        select * from BOOKRENT br join BOOK bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ
+        where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+        and ${category} = #{keyword}
         ORDER BY BOOKRENTSEQ desc
         LIMIT #{offset}, #{size}
     </select>

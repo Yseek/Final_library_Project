@@ -10,4 +10,5 @@ import toolguys.library.library.domain.BookRent;
 @Mapper
 public interface AdminMemberMapper {
     List<BookRent> searchBookRent(HashMap<String, Object> input);
+    long getTotalCount(long memberSeq);
 }

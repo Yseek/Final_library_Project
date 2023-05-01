@@ -216,6 +216,10 @@ export default function AdminMemberContent() {
                 <form onSubmit={SearchInput}>
                     <select ref={searchCategoryRef}>
                         <option>책번호</option>
+                        <option>제목</option>
+                        <option>저자</option>
+                        <option>출판사</option>
+                        <option>책상태</option>
                     </select>
                     <input type="text" size={30} ref={searchKeywordRef}></input>
                     <button className="adminMemberButton">검색</button>
