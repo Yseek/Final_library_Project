@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.admin.AdminBookRentDto;
 import toolguys.library.library.dto.admin.AdminMemberDto;
+import toolguys.library.library.mapper.admin.AdminMemberMapper;
 import toolguys.library.library.repository.admin.AdminMemberRepositoryLdaew;
 
 public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
@@ -16,8 +17,13 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
     @Autowired
     private final AdminMemberRepositoryLdaew adminMemberRepositoryLdaew;
 
-    public AdminMemberServiceImplLdaew(AdminMemberRepositoryLdaew adminMemberRepositoryLdaew) {
+    @Autowired
+    private final AdminMemberMapper adminMemberMapper;
+
+    public AdminMemberServiceImplLdaew(AdminMemberRepositoryLdaew adminMemberRepositoryLdaew,
+            AdminMemberMapper adminMemberMapper) {
         this.adminMemberRepositoryLdaew = adminMemberRepositoryLdaew;
+        this.adminMemberMapper = adminMemberMapper;
     }
 
     @Override
@@ -71,13 +77,19 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
                 .findBookRentByBOOKSEQ(keyword, memberSeq, pageable)
                 .map(book -> AdminBookRentDto.from(book));
 
+        // HashMap<String, Object> input = new HashMap<String, Object>();
+        // input.put("memberSeq", memberSeq);
+        // input.put("offset", (page - 1) * size);
+        // input.put("size", size);
+        // List<BookRent> bookRent = adminMemberMapper.searchBookRent(null);
+
         return rentBooks;
     }
 
     @Override
     public void addBlacklist(long memberSeq) {
         Member member = adminMemberRepositoryLdaew.findById(memberSeq).get();
-        member.setMemberStatus((byte)2);
+        member.setMemberStatus((byte) 2);
         adminMemberRepositoryLdaew.save(member);
     }
 }
