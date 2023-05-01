@@ -1,31 +1,33 @@
-.joinPage {
-	margin: 10%;
+.joinPage{
+	width: 100%;
+	height: 75vh;
+}
+
+.joinInputDiv{
+	margin-top:1vh;
+}
+
+.joinInputDiv span{
+	margin-right: 1vw;
+}
+
+.joinInput{
 	border: 1px solid black;
-	padding: 2%;
+	border-radius: 3px;
+	margin-left: 0px;
 }
 
-.joinInput {
-	padding-bottom: 1%;
-	text-align: left;
+.joinBtn{
+	background-color: #0665A9;
+	border-radius: 3px;
+	border : 1px solid #0665A9;
+	font-family: 메이플스토리;
+	font-size: large;
+	width: 4vw;
+	height: 3vh;
+	margin-left: 1vw;
 }
 
-.postApi {
-	display: inline-block;
-}
-
-.joinPage_content {
-	border: 1px solid black;
-	width: 50%;
-	margin: auto;
-}
-
-.joinPage_content_InputBox {
-	margin-left: 3%;
-}
-
-.joinInput>button {
-	color: white;
-	height: 10%;
-	width: 20%;
-	margin-left: 2%;
+p{
+	margin-left: 5.5vw;
 }

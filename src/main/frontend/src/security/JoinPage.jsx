@@ -193,56 +193,62 @@ export default function JoinPage() {
 
 	return (
 		<div className="joinPage">
-			<div className="joinPage_content">
-				<div><h3>회원가입</h3></div>
-				<form onSubmit={onSubmit}>
-					<div className="joinPage_content_InputBox">
-						<div className="joinInput">
-							이름 : <input type="text" ref={nameRef} placeholder="성명" />
-						</div>
-						<div className="joinInput">
-							이메일 : <input type="text" ref={emailRef} placeholder="ex@example.com" />
-							<button type="button" onClick={duplicateCheck}>중복체크</button>
-							<button type="button" onClick={sendMail}>이메일 인증</button>
-						</div>
-						<div style={emailCertidis}>
-							인증번호 확인 : <input type="text" onKeyUp={certi} ref={certiPwdRef} />
-							<br />
-							<span>{checkMsg.length != 0 ? checkMsg : "인증번호를 입력해주세요"}</span>
-						</div>
-						<div className="joinInput">
-							비밀번호 : <input type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
-						</div>
-						<div className="joinInput">
-							비밀번호확인 : <input type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
-							<br />
-							<span>{pwdInCheck}</span>
-						</div>
-						<div className="joinInput">
-							휴대폰 : <input type="text" ref={phoneRef} placeholder="010-0000-0000" />
-							<button type="button" onClick={phoneCheck}>중복체크</button>
-						</div>
-						<div className="joinInput">
-							생년월일 : <input type="date" min="1920-01-01" max="2023-01-01" ref={birthRef} />
-						</div>
-						<div className="joinInput">
-							우편번호 : <input type="text" value={zipCodeValue} ref={zipRef} />
-							<br />
-							주소 : <input type="text" value={addressValue} ref={addrRef} />
-							상세주소 : <input type="text" ref={detailAddrRef} />
-							<button type="button" onClick={findPost}>주소찾기</button>
-						</div>
+			<h2>회원가입</h2>
+			<form onSubmit={onSubmit}>
+				<div className="joinPage_content_InputBox">
+					<div className="joinInputDiv">
+						<span>이름</span>
+						<input className='joinInput' type="text" ref={nameRef} placeholder="성명" />
 					</div>
-					<div className="postApi">
-						<DaumPostcode style={postCodeStyle} onComplete={onCompletePost} autoClose={false}>
-						</DaumPostcode>
+					<div className="joinInputDiv">
+						<span>이메일</span>
+						<input className='joinInput' type="text" ref={emailRef} placeholder="ex@example.com" />
+						<button className='joinBtn' type="button" onClick={duplicateCheck}>중복체크</button>
+						<button className='joinBtn' type="button" onClick={sendMail}>이메일 인증</button>
 					</div>
-					<input type="hidden" name="" ref={statusRef} value={1} />
-					<input type="hidden" name="" ref={adminRef} value={userOrAdmin} />
-					<br />
-					<button disabled={submitBtn}>{!submitBtn ? "가입" : "정보입력필요"}</button>
-				</form>
-			</div>
+					<div style={emailCertidis}>
+						<span>인증번호 확인</span>
+						<input className='joinInput' type="text" onKeyUp={certi} ref={certiPwdRef} />
+						<br />
+						<span>{checkMsg.length != 0 ? checkMsg : "인증번호를 입력해주세요"}</span>
+					</div>
+					<div className="joinInputDiv">
+						<span>비밀번호</span>
+						<input className='joinInput' type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
+					</div>
+					<div className="joinInputDiv">
+						<span>비밀번호확인</span><input type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
+						<br />
+						<span>{pwdInCheck}</span>
+					</div>
+					<div className="joinInputDiv">
+						<span>휴대폰</span>
+						<input className='joinInput' type="text" ref={phoneRef} placeholder="010-0000-0000" />
+						<button className='joinBtn' type="button" onClick={phoneCheck}>중복체크</button>
+					</div>
+					<div className="joinInputDiv">
+						<span>생년월일</span>
+						<input className='joinInput' type="date" min="1920-01-01" max="2023-01-01" ref={birthRef} />
+					</div>
+					<div className="joinInputDiv">
+						<span>우편번호</span><input type="text" value={zipCodeValue} ref={zipRef} />
+						<br />
+						<span>주소</span>
+						<input className='joinInput' type="text" value={addressValue} ref={addrRef} />
+						<span>상세주소</span>
+						<input className='joinInput' type="text" ref={detailAddrRef} />
+						<button className='joinBtn' type="button" onClick={findPost}>주소찾기</button>
+					</div>
+				</div>
+				<div className="postApi">
+					<DaumPostcode style={postCodeStyle} onComplete={onCompletePost} autoClose={false}>
+					</DaumPostcode>
+				</div>
+				<input type="hidden" name="" ref={statusRef} value={1} />
+				<input type="hidden" name="" ref={adminRef} value={userOrAdmin} />
+				<br />
+				<button className='joinBtn' disabled={submitBtn}>{!submitBtn ? "가입" : "정보입력필요"}</button>
+			</form>
 		</div>
 	)
 }
