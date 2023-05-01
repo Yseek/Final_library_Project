@@ -9,7 +9,9 @@ import toolguys.library.library.dto.admin.NoticeDTO;
 public interface AdminNoticeService {
 	List<Notice> listNotice();
     long getTotalCountS();
-    List<Notice> listNoticeByPage(HashMap<String, Integer> input);
+    long getTotalCountBySearchS(String search);
+    List<Notice> listNoticeByPage(HashMap<String, Object> input);
+    List<Notice> listNoticeByPageAndSearch(HashMap<String, Object> input);
     Notice getNoticeContentS(long noticeSeq);
     void deleteNoticeS(long noticeSeq);
     void insertNoticeS(NoticeDTO noticeDTO);
