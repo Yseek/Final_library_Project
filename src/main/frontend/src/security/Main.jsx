@@ -94,7 +94,6 @@ export default function Main() {
 					공지사항
 					<thead>
 					<tr>
-						<th className="noticeTableTh">작성자</th>
 						<th className="noticeTableTh">공지 제목</th>
 						<th className="noticeTableTh">공지날짜</th>
 					</tr>
@@ -102,7 +101,6 @@ export default function Main() {
 		
 					{Array.isArray(page) && page.map(res => (
 						<tr key={res.noticeSeq}>
-							<td className="noticeTableTd">{res.member.memberName}</td>
 							<td className="noticeTableTd"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle.length > 5 ? res.noticeTitle.slice(0, 5) + "..." : res.noticeTitle}</Link></td>
 							{/* <td>{res.noticeRdate}</td> */}
 							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
