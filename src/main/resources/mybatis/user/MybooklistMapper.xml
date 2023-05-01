@@ -24,4 +24,7 @@
     <select id="getTotalCount" resultType="long" parameterType="long">
         select COUNT(*) from BOOK where BOOKSEQ in (select BOOK_BOOKSEQ from MYBOOKS where MEMBER_MEMBERSEQ=#{memberSeq})
     </select>
+    <delete id="deleteMybook" parameterType="Mybooks">
+        delete from MYBOOKS where MYBOOKSSEQ=#{myBooksSeq}
+    </delete>
 </mapper>
