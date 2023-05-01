@@ -9,5 +9,5 @@ import toolguys.library.library.domain.Book;
 
 @Repository
 public interface MainBookListRepository extends JpaRepository<Book, Long>{
-    List<Book> findTop2ByOrderByBookSeqDesc();
+    List<Book> findTop5ByOrderByBookWriterDesc();
 }
