@@ -74,29 +74,29 @@ export default function Mybook() {
 	}
 
 	return (
-		<div className="Notice">
-			<div><h2>내 서재</h2></div>
-			<p id="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+		<div className="NoticeDiv">
+			<h2>내 서재</h2>
+			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
-				<thead className="noticeTableHead">
+				<thead>
 					<tr>
-						<th>책 제목</th>
-						<th>커버 이미지</th>
-						<th>저자</th>
-						<th>출판사</th>
-						<th>내서재에서 제거</th>
+						<th className="noticeTableTh">제목</th>
+						<th className="noticeTableTh">표지</th>
+						<th className="noticeTableTh">저자</th>
+						<th className="noticeTableTh">출판사</th>
+						<th className="noticeTableTh">내서재에서 제거</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.myBooksSeq}>
-							<a onClick={() => bookDetail(res.book.bookTitle, res.book.bookWriter, res.book.bookPub)} style={{ cursor: "pointer" }}>
-								<td width="25%">{res.book.bookTitle}</td>
+							<a onClick={() => bookDetail(res.book.bookTitle, res.book.bookWriter, res.book.bookPub)}>
+								<td className="noticeTableTd">{res.book.bookTitle}</td>
 							</a>
-							<td><img src={res.book.bookImgPath} width={`100px`} height={`140px`} /></td>
-							<td>{res.book.bookWriter}</td>
-							<td>{res.book.bookPub}</td>
-							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
+							<td className="noticeTableTd"><img src={res.book.bookImgPath} width={`100px`} height={`140px`} /></td>
+							<td className="noticeTableTd">{res.book.bookWriter}</td>
+							<td className="noticeTableTd">{res.book.bookPub}</td>
+							<td className="noticeTableTd"><button className="noticeLostBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
 						</tr>
 					))}
 				</tbody>

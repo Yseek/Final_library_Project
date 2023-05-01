@@ -31,6 +31,7 @@ export default function MyPage() {
 
 	return (
 		<div className="MyPage">
+			<h2>마이페이지</h2>
 			<div className="userInfo">
 				<div>
 					이름 : {info.memberName}

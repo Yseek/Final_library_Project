@@ -1,9 +1,6 @@
 .changePwd{
-	margin-top: 10%;
-	margin-left: 15%;
-	width: 60%;
-	height: 60%;
-	border: 1px solid black;
+	width: 100%;
+	height: 75vh;
 }
 
 .changePwd>form{
