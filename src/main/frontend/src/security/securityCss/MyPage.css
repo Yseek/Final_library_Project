@@ -3,24 +3,14 @@
 	height: 83vh;
 }
 
-.userInfo{
-	border: 1px dotted black;
-	border-left: none;
-	border-right: none;
-	border-bottom: none;
-	float: left;
-	width: 50%;
-	height: 100%;
+
+h2{
+	margin-bottom: 6.5vh;
 }
 
-.myPageInnerLink{
-}
-
-.userLabel{
-	text-align: left;
-	margin-left: 8vw;
-	margin-top: 20px;
-	font-size: larger;
+hr{
+	width: 59vw;
+	margin-bottom: 5vh;
 }
 
 .myPageInnerLink button{
@@ -32,10 +22,44 @@
 	border-radius: 3px;
 	width: 10vw;
 	height: 5vh;
+	margin-right: 1vw;
+	margin-left: 1.2vw;
+	font-size: larger;
+
 }
 
 .myPageInnerLink button>a{
 	color: black;
-	font-size: larger;
 	font-family: 메이플스토리;
+}
+
+.myPageTable {
+	width: 59vw;
+	height: 30vh;
+	border: 1px solid gray;
+	border-radius: 5px;
+	margin-bottom: 2vh;
+	margin-left: 4.5vw;
+	font-size: larger;
+}
+
+.myPageTh{
+	border : 1px solid gray;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: #0665A9;
+	color: white;
+}
+
+.myPageTd{
+	border : 1px solid gray;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding-left: 2px;
+	background-color: #f6f6f6;
 }

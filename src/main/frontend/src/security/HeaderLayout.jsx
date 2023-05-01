@@ -165,7 +165,7 @@ export default function HeaderLayout() {
 						<span className="logoImg"><Link to={''} onClick={() => window.location.replace("/")} >로고</Link></span>
 					<div className="chatBox">
 						{memeberOrAdmin != 2 ? <div className="chatBtn">
-							<button type="button" onClick={openChat}>관리자 문의</button>
+							<button type="button" onClick={openChat}>관리자 문의 Chat</button>
 						</div> : ""}
 						<div className="chatRoom" style={chatviewStyle}>
 							<div className="chatRoomView">
