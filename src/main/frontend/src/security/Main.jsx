@@ -79,10 +79,21 @@ export default function Main() {
 				<div className="mainLeftBottom">
 					뭐가 있긴 하겠지
 				</div>
-				<div className="mainRightBottom">
+				<div className="BookListTable2">
 					추천 도서 목록
+					<thead>
+					<tr>
+						<th className='BookListTh'>사진</th>
+						<th className='BookListTh'>제목</th>
+						<th className='BookListTh'>저자</th>
+						<th className='BookListTh'>출판사</th>
+						<th className='BookListTh'>내용</th>
+					</tr>
+				</thead>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.bookSeq}>
+							<td className='BookListTd'>
+								<img src={res.bookImgPath} width={`60px`} height={`75px`}></img></td>
 							<td className='BookListTd'>{res.bookTitle}</td>
 							<td className='BookListTd'>{res.bookWriter}</td>
 							<td className='BookListTd'>{res.bookPub}</td>

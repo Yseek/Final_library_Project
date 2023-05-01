@@ -29,7 +29,7 @@ export default function Mybookrent() {
 	}, []);
 
 	useEffect(() => {
-		fetch(`${Ip.url}user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
+		fetch(`${Ip.url}/user/mybookrent?memberSeq=${info.memberSeq}&page=${params.page}&size=5`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "Bearer " + localStorage.getItem("token"),
