@@ -13,7 +13,7 @@ export default function Notice() {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 		})
 		.then(res => res.json())
@@ -34,7 +34,7 @@ export default function Notice() {
 				method: "DELETE",
 				headers: {
 				   "Content-Type": "application/json",
-				   "Authorization": "Bearer " + localStorage.getItem("token"),
+				   "Authorization": "Bearer " + sessionStorage.getItem("token"),
 			 	},
 			})
 			.then(res => {
@@ -50,11 +50,11 @@ export default function Notice() {
     const [loginSeq, setLoginSeq] = useState("");
 
 	useEffect(() => {
-		if (localStorage.getItem("token")) {
+		if (sessionStorage.getItem("token")) {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
-					"Authorization": "Bearer " + localStorage.getItem("token")
+					"Authorization": "Bearer " + sessionStorage.getItem("token")
 				}
 			})
 				.then(res => res.json())

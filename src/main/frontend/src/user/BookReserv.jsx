@@ -15,7 +15,7 @@ export default function BookReserv() {
 		fetch(`${Ip.url}/user/bookReserv?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
@@ -26,7 +26,7 @@ export default function BookReserv() {
 		fetch(`${Ip.url}/user/bookReserv?page=${params.page}`, {
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 		})
 			.then(res => res.json())
