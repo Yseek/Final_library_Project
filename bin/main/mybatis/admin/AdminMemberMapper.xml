@@ -20,7 +20,7 @@
     <select id="searchBookRent" resultType="Bookrent" parameterType="java.util.HashMap" resultMap="BookRentBookMap">
         select * from BOOKRENT br join BOOK bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ
         where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
-        and ${category} = #{keyword}
+        and ${category} like CONCAT('%', #{keyword}, '%')
         ORDER BY BOOKRENTSEQ desc
         LIMIT #{offset}, #{size}
     </select>

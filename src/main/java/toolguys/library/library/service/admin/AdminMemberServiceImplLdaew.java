@@ -81,8 +81,17 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
             case "책번호":
                 category = "BOOKSEQ";
                 break;
+            case "제목":
+                category = "BOOKTITLE";
+                break;
             case "저자":
                 category = "BOOKWRITER";
+                break;
+            case "출판사":
+                category = "BOOKPUB";
+                break;
+            case "책상태":
+                category = "BOOKSTATUS";
                 break;
             default:
                 category = "";
