@@ -34,6 +34,16 @@ export default function Notice() {
 		history('/admin/notice/write');
 	}
 
+	const [userInput, setUserInput] = useState('');
+	const getValue = (e) => {
+		setUserInput(e.target.value.toLowerCase())
+	};
+
+	const onClickSearchInput = (e) => {
+		e.preventDefault();
+		history(`/admin/notice/search/${userInput}`);
+	};
+
 	return (
 		<div className="Notice">
             <h2>공지사항</h2>
@@ -55,6 +65,8 @@ export default function Notice() {
 					))}
 				</tbody>
 			</table>
+			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
+				<button className="AdminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
 			<div className="page">
 				{pageList.map(res => (
 					<span key={res}>

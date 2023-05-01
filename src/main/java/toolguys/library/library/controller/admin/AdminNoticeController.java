@@ -25,17 +25,30 @@ public class AdminNoticeController {
 	AdminNoticeService noticeService;
 
 	@GetMapping("notice")
-	public HashMap<String, Object> notice(@RequestParam(value="page" ,defaultValue = "1") int page, int size) {
+	public HashMap<String, Object> notice(@RequestParam(value="page" ,defaultValue = "1") int page, int size, String search) {
 		long totalCount = noticeService.getTotalCountS();
 		Paginator paginator = new Paginator(page, size, totalCount);
-		HashMap<String, Integer> input = new HashMap<String, Integer>();
+		HashMap<String, Object> input = new HashMap<String, Object>();
 		input.put("offset", (page-1)*size);
         input.put("size", size);
 		HashMap<String, Object> output = new HashMap<String, Object>();
+
+		if(search == null) {
 		output.put("content", noticeService.listNoticeByPage(input));
 		output.put("page", page);
 		output.put("size", size);
+		output.put("totalCount", totalCount);
 		output.put("totalPages", paginator.getTotalPageCount());
+		}else {
+			long totalCountBySearch = noticeService.getTotalCountBySearchS(search);
+			Paginator paginatorBySearch = new Paginator(page, size, totalCountBySearch);
+			input.put("search", search);
+			output.put("content", noticeService.listNoticeByPageAndSearch(input));
+			output.put("page", page);
+			output.put("size", size);
+			output.put("totalCount", totalCountBySearch);
+			output.put("totalPages", paginatorBySearch.getTotalPageCount());
+		}
 		return output;
 	}
 	@GetMapping("notice/content/{noticeSeq}")
@@ -53,7 +66,7 @@ public class AdminNoticeController {
 	public HashMap<String, Object> noticeAdmin(int page, int size) {
 		long totalCount = noticeService.getTotalCountS();
 		Paginator paginator = new Paginator(page, size, totalCount);
-		HashMap<String, Integer> input = new HashMap<String, Integer>();
+		HashMap<String, Object> input = new HashMap<String, Object>();
 		input.put("offset", (page-1)*size);
         input.put("size", size);
 		HashMap<String, Object> output = new HashMap<String, Object>();
