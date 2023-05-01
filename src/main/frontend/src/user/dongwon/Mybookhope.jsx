@@ -87,7 +87,7 @@ export default function Mybookhope() {
 			<div className="page">
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/mypage/mybookhope/${res}`}>{res}</Link>
+						<Link to={`/mypage/mybookhope/${res}`}>{res}</Link> 
 						{" "}
 					</span>
 				))}
