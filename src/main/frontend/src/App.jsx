@@ -13,6 +13,7 @@ import AdminMemberContent from './admin/AdminMemberContent';
 import AdminMemberList from './admin/AdminMemberList';
 import AdminReserveCheck from './admin/AdminReserveCheck';
 import NoticeAdmin from './admin/NoticeAdmin';
+import NoticeAdminSearch from './admin/NoticeAdminSearch';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
@@ -71,6 +72,7 @@ function App() {
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/admin/notice" element={<NoticeAdmin />}></Route>
 					<Route path="/admin/notice/:page" element={<NoticeAdmin />}></Route>
+					<Route path="/admin/notice/search/:userInput" element={<NoticeAdminSearch />}></Route>
 					<Route path="/admin/notice/content" element={<NoticeAdminContent />}></Route>
 					<Route path="/admin/notice/content/:noticeSeq" element={<NoticeAdminContent />}></Route>
 					<Route path="/admin/notice/update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
