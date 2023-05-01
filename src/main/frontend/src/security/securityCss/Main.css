@@ -24,6 +24,21 @@
 	height: 100%;
 }
 
+.mainnoticeTable{
+	width: 10%;
+	padding : 0px;
+	border : 1px solid gray;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-color: #f6f6f6;
+}
+
+
 .mainRightBottom{
 	width: 50%;
 	height: 100%;

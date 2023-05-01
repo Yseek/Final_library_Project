@@ -102,9 +102,8 @@ export default function Main() {
 		
 					{Array.isArray(page) && page.map(res => (
 						<tr key={res.noticeSeq}>
-							<td className="noticeTableTd"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle.length > 5 ? res.noticeTitle.slice(0, 5) + "..." : res.noticeTitle}</Link></td>
-							{/* <td>{res.noticeRdate}</td> */}
-							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
+							<td className="mainnoticeTable"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle.length > 5 ? res.noticeTitle.slice(0, 5) + "..." : res.noticeTitle}</Link></td>
+							<td className="mainnoticeTable">{moment(res.noticeRdate).format('YYYY-MM-DD')}</td>
 						</tr>
 					))}
 				</div>
