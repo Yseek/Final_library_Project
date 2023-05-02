@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
 import Pagination from "./Pagination";
 import styled from "styled-components";
+import './css/AdminBookList.css';
 
 export default function AdminBookList(){
     const [bookList, setBookList] = useState([]);
@@ -136,7 +137,8 @@ export default function AdminBookList(){
     }
 
     return (
-    <>
+    <div className='adminBookListDiv'>
+        <h2>도서 목록</h2>
         <label>
             페이지 당 표시할 게시물 수:&nbsp;
             <select
@@ -152,43 +154,44 @@ export default function AdminBookList(){
             </select>
         </label>
         <div>
-            <Table>
+            <table className='adminBookListTable'>
                 <thead>
                     <tr>
-                        <td>제목</td>
-                        <td>저자</td>
-                        <td>출판사</td>
-                        <td>소장권수</td>
-                        <td>대출가능</td>
+                        <th className='adminBookListTableTh'>제목</th>
+                        <th className='adminBookListTableTh'>저자</th>
+                        <th className='adminBookListTableTh'>출판사</th>
+                        <th className='adminBookListTableTh'>소장권수</th>
+                        <th className='adminBookListTableTh'>대출가능</th>
+                        <th className='adminBookListTableTh'>내용가능</th>
                     </tr>
                 </thead>
                 <tbody>
                 {bookList.slice(offset, offset + limit).map((book, index) => (
                         <tr key={index}>
-                        <td>{book.bookTitle}</td>
-                        <td>{book.bookWriter}</td>
-                        <td>{book.bookPub}</td>
-                        <td>{book.bookCount}</td>
-                        <td>{book.rentCount}</td>
-                        <td>
-                            <button onClick={() => update(book.bookTitle, book.bookWriter, book.bookPub)}>수정</button>
+                        <td className='adminBookListTableTd'>{book.bookTitle}</td>
+                        <td className='adminBookListTableTd'>{book.bookWriter}</td>
+                        <td className='adminBookListTableTd'>{book.bookPub}</td>
+                        <td className='adminBookListTableTd'>{book.bookCount}</td>
+                        <td className='adminBookListTableTd'>{book.rentCount}</td>
+                        <td className='adminBookListTableTd'>
+                            <button className='adminBookListUptBtn' onClick={() => update(book.bookTitle, book.bookWriter, book.bookPub)}>수정</button>
                         </td>
                     </tr>
                 ))}
                 </tbody>         
-            </Table>
+            </table>
             {isSearchDetail === false && <>
             <div>
                 <form name="e" autoComplete="off" onSubmit={searchKeyword}>
-                    <select name="option" onChange={({ target: { value } }) => optionCheck(value)}>
+                    <select className='adminBookListSelect' name="option" onChange={({ target: { value } }) => optionCheck(value)}>
                         <option value="bookAll">전체</option>
                         <option value="bookSeq">책번호</option>
                         <option value="bookTitle">책제목</option>
                         <option value="bookWriter">저자</option>
                         <option value="optionSearchDetail">상세검색</option>
                     </select>
-                    <input type="text" name="keyWord" placeholder=""></input>
-                    <button>검색</button>
+                    <input  className='adminBookListSearchInput' type="text" name="keyWord" placeholder="검색어를 입력해주세요"></input>
+                    <button className='adminBookListSearchBtn'>검색</button>
                 </form>
             </div></>}
             {isSearchDetail === true && <>
@@ -215,7 +218,7 @@ export default function AdminBookList(){
                 />
             </span>
         </div>
-    </>
+    </div>
     )
 }
 

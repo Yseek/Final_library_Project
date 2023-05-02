@@ -1,0 +1,71 @@
+.adminBookRentSearchDiv{
+  margin-bottom: 20px;
+  
+}
+
+.adminBookRentSearchInput{
+  margin-left: 5px;
+  font-family: 메이플스토리;
+  height: 31px;
+  font-size: 15px;
+}
+
+.adminBookRentSearchSelect{
+  height: 35px;
+  font-family: 메이플스토리;
+  font-size: 15px;
+}
+
+
+.adminBookReturnTable {
+	width: 60vw;
+	border: 1px solid gray;
+	border-radius: 5px;
+	margin-bottom: 2vh;
+	margin-left: 3vw;
+	font-size: larger;
+	text-align: center;
+}
+
+.adminBookReturnTableTh{
+	border : 1px solid gray;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: #0665A9;
+	color: white;
+}
+
+.adminBookReturnTableTd{
+	border : 1px solid gray;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding-left: 2px;
+	background-color: #f6f6f6;
+  height: 4vh;
+}
+
+.adminBookReturnSearchBtn{
+	background-color: #0665A9;
+	border-radius: 3px;
+	border : 1px solid #0665A9;
+	font-family: 메이플스토리;
+  font-size: 15px;
+	width: 80px;
+	height: 35px;
+  color: white;
+  margin-left: 5px;
+  padding: 0px;
+}
+
+.adminBookReturnBtn{
+  border: none;
+	font-size: large;
+  background-color: #f6f6f6;
+  font-family: 메이플스토리;
+	width: 100%;
+}
