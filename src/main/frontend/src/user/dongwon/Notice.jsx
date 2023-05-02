@@ -17,9 +17,14 @@ export default function Notice() {
 	};
 
 	const onClickSearchInput = (e) => {
-		e.preventDefault();
+		//e.preventDefault();
 		navigate(`/notice/search/${userInput}/1`);
 	};
+	const enterkey = (e) => {
+		if (e.key == 'Enter') {
+			onClickSearchInput();
+		}
+	}
 
 	useEffect(() => {
 		fetch(`${Ip.url}/notice?page=${params.page}&size=10`, {
@@ -60,9 +65,7 @@ export default function Notice() {
 						<tr key={res.noticeSeq}>
 							<td className="noticeTableTd">{res.member.memberName}</td>
 							<td className="noticeTableTd"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
-							{/* <td>{res.noticeRdate}</td> */}
 							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
-
 						</tr>
 					))}
 				</tbody>
@@ -75,7 +78,7 @@ export default function Notice() {
 					</span>
 				))}
 			</div>
-			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
+			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} onKeyUp={enterkey} size="25" />&nbsp;
 				<button className="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
 		</div>
 	);

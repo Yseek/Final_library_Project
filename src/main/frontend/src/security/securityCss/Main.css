@@ -24,6 +24,27 @@
 	height: 100%;
 }
 
+.mainNoticeTable{
+	position: relative;
+	top: 10px;
+}
+
+.mainNoticeTableTdTitle{
+	text-decoration: none;
+	position: relative;
+	top: 15px;
+	width: 80%;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding-left: 2px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align : left;
+}
+
+
 .mainRightBottom{
 	width: 50%;
 	height: 100%;
