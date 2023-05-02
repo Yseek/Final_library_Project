@@ -37,6 +37,16 @@ function BookApply() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		if(bookHopeTitle == "") {
+			alert("제목을 입력하세요");
+			return false;
+		}else if(bookHopeWriter == "") {
+			alert("저자를 입력하세요");
+			return false;
+		}else if(bookHopePub == "") {
+			alert("출판사를 입력하세요");
+			return false;
+		}
 		const memberSeq = memberSeqRef.current.value;
 		const data = {
 			bookHopeStatus,
@@ -62,6 +72,9 @@ function BookApply() {
 				setBookHopeWantDay('');
 				setMemberSeqq('');
 			})
+			.then(
+				alert("희망 도서를 신청하였습니다")
+			)
 			.catch(error => {
 				console.error(error);
 			});

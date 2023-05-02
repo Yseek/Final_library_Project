@@ -57,7 +57,7 @@ export default function ChangePwd() {
 
 	return (
 		<div className="changePwdDiv">
-			<h2>비밀번호변경</h2>
+			<h2>비밀번호 변경</h2>
 			<form onSubmit={changePwdInfo}>
 				<div className="changeInput">
 					<span>비밀번호</span>

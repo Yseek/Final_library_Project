@@ -10,27 +10,24 @@ export default function Notice() {
 	const [param, setParam] = useState(useParams());
 	const [page, setPage] = useState([]);
 
-	useEffect(()=>{
-		setParam({params})
-	},[params]);
+	useEffect(() => {
+		setParam({ params })
+	}, [params]);
 
-	useEffect(()=>{
+	useEffect(() => {
 		fetch(`${Ip.url}/admin/notice?page=${params.page || 1}&size=10`, {
-            method: "GET",
-            headers: {
-               "Content-Type": "application/json",
-               "Authorization": "Bearer " + sessionStorage.getItem("token"),
-      		},
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
+			},
 		})
-		.then(res => res.json())
-		.then(page => setPage(page))
+			.then(res => res.json())
+			.then(page => setPage(page))
 	}, [param]);
 
-	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
-
-	
 	const history = useNavigate();
-	function write(){
+	function write() {
 		history('/admin/notice/write');
 	}
 
@@ -51,41 +48,57 @@ export default function Notice() {
         }
     };
 
+	// 한 화면에 보여줄 페이지 수 계산
+	var pageWidth = 10;
+	var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
+	var startPage = 1 + pageWidthNumber * pageWidth;
+	var endPage = pageWidthNumber * pageWidth + pageWidth;
+	if (endPage > page.totalPages) endPage = page.totalPages;
+
+	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+	
+
+
 	return (
-		<div className="Notice">
-            <h2>공지사항</h2>
+		<center>
+			<h2>공지사항</h2>
 			<p className="NoticeItems">총 {page.totalCount}건, {page.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
-				<thead className="noticeTableHead">
+				<thead>
 					<tr>
-                        <th>작성자</th>
-						<th>공지제목</th>
-						<th>공지날짜</th>
+						<th className="noticeTableTh">작성자</th>
+						<th className="noticeTableTh">공지제목</th>
+						<th className="noticeTableTh">공지날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.noticeSeq}>
-                            <td width="20%">{res.member.memberName}</td>
-							<td width="60%"><Link to={`/admin/notice/content/${res.noticeSeq}`} className="noticeNoColor">{res.noticeTitle}</Link></td>
-							<td width="20%">{moment(res.noticeRdate).format('YYYY-MM-DD')}</td>
+							<td className="noticeTableTd">{res.member.memberName}</td>
+							<td className="noticeTableTd"><Link to={`/admin/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
+							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-			<span>
-				<input type="text" placeholder="공지사항 제목 검색" onChange={getValue} onKeyDown={onKeyDownSearchInput} size="25" />&nbsp;
-				<button className="AdminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button>
-			</span>
-			<div className="page">
+			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} onKeyDown={onKeyDownSearchInput} size="25" />&nbsp;
+				<button className="adminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
+			<button className="adminNoticeWriteBtn" onClick={() => write()}>글쓰기</button>
+			{pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+			{pageList.length !== 0 && <div className="paging">
+				<span><Link to={`/admin/notice/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+				<span><Link to={`/admin/notice/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/admin/notice/${res}`}>{res}</Link>
+						<Link to={`/admin/notice/${res}`}>
+							{page.number + 1 === res ? <span className="tp">{res}</span> : res}
+						</Link>
 						{" "}
 					</span>
 				))}
-				<p><button onClick={() => write()}>글쓰기</button></p>
-			</div>
-		</div>
+				<span><Link to={`/admin/notice/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+				<span><Link to={`/admin/notice/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+			</div>}<br />
+		</center>
 	);
 }
