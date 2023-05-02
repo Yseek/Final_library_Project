@@ -1,14 +1,12 @@
 package toolguys.library.library.service.admin;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import toolguys.library.library.domain.BookRent;
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.admin.AdminBookRentDto;
 import toolguys.library.library.dto.admin.AdminMemberDto;
@@ -41,7 +39,7 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
 
         switch (category) {
             case "회원번호":
-                return adminMemberRepositoryLdaew.findByMemberSeqContaining(keyword, pageable)
+                return adminMemberRepositoryLdaew.findByMemberSeqLike(Long.parseLong(keyword), pageable)
                         .map(member -> AdminMemberDto.from(member));
             case "이메일":
                 return adminMemberRepositoryLdaew.findByMemberEmailContaining(keyword, pageable)
