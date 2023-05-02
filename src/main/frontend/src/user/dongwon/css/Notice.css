@@ -131,3 +131,80 @@ input{
 	margin-bottom: 2vh;
 	color: white;
 }
+
+/* paging */
+.paging {
+	overflow: hidden;
+	position: relative;
+	min-height: 27px;
+	margin-top: 20px;
+	padding: 4px 0;
+	text-align: center;
+}
+
+.paging img {
+	vertical-align: top;
+}
+
+.paging span,
+.paging a {
+	display: inline-block;
+	width: 27px;
+	height: 27px;
+	font-weight: 600;
+	line-height: 27px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.paging span.tp {
+	color: #fff;
+}
+
+.paging a:hover,
+.paging a:focus,
+.paging a:active {
+	background-color: #f5f5f5;
+}
+
+.paging .btn-paging {
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	border: 1px solid #e1e1e1;
+}
+
+.paging .btn-paging.first {
+	background-position: 0 0;
+}
+
+.paging .btn-paging.prev {
+	margin-right: 5px;
+	background-position: 0 -25px;
+}
+
+.paging .btn-paging.next {
+	margin-left: 5px;
+	background-position: 0 -50px;
+}
+
+.paging .btn-paging.last {
+	background-position: 0 -75px;
+}
+
+.paging .btn {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+#btnSearch,
+.paging span.tp {
+	border-color: #005bab !important;
+	background-color: #005bab;
+	color: white;
+}
+
+.paging a:visited {
+	color: #000;
+}
