@@ -21,10 +21,17 @@ export default function Notice() {
 		setUserInput(e.target.value.toLowerCase())
 	};
 
+	// 검색 버튼 클릭 이벤트 처리
 	const onClickSearchInput = (e) => {
 		e.preventDefault();
 		navigate(`/admin/notice/search/${userInput}`);
 	};
+	// 엔터 키 입력 이벤트 처리
+    const onKeyDownSearchInput = (e) => {
+        if (e.keyCode === 13 && userInput.length > 0) {
+            onClickSearchInput(e);
+        }
+    };
 	const onClickList = (e) => {
 		e.preventDefault();
 		navigate(`/admin/notice`);
@@ -35,7 +42,7 @@ export default function Notice() {
             method: "GET",
             headers: {
                "Content-Type": "application/json",
-               "Authorization": "Bearer " + localStorage.getItem("token"),
+               "Authorization": "Bearer " + sessionStorage.getItem("token"),
       		},
 		})
 		.then(res => res.json())
@@ -60,13 +67,13 @@ export default function Notice() {
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.noticeSeq}>
 							<td width="15%">{res.member.memberName}</td>
-							<td width="60%"><Link to={`/admin/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
+							<td width="60%"><Link to={`/admin/notice/content/${res.noticeSeq}`} className="noticeNoColor">{res.noticeTitle}</Link></td>
 							<td>{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-            <span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
+            <span><input type="text" placeholder="공지사항 제목 검색" onChange={getValue} onKeyDown={onKeyDownSearchInput} size="25" />&nbsp;
 				<button className="AdminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button>&nbsp;</span>
 			<div className="page">
 				{pageList.map(res => (

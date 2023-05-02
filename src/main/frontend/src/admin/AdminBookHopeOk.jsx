@@ -75,47 +75,47 @@ export default function AdminBookHope() {
         <div>
             {Object.keys(data).length > 0 && (
             <form method="post" onSubmit={handleSubmit}>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <h2>제목</h2><input type="text" ref={titleRef} defaultValue={data.bookHopeTitle}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <h2>저자</h2><input type="text" ref={writerRef} defaultValue={data.bookHopeWriter}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <h2>출판사</h2><input type="text" ref={pubRef} defaultValue={data.bookHopePub}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <h2>줄거리</h2><textarea className="bookStory" ref={bookStoryRef}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <h2>책 이미지 파일</h2><input multiple type="file" accept="image/*" onChange={e => onUpload(e)} ref={fileRef}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <img src={imageSrc} width={`300px`} height={`300px`} ></img>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <input type="hidden" defaultValue={data.bookHopeSeq}/>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="row-in">          
+                <div>
+                    <div>          
                         <input type="hidden" ref={bookHopeStatusRef} defaultValue="2"/>
                     </div>
                 </div>
-                <div className="row">
+                <div>
                     <button type="submit">입력</button>
 				</div>
             </form>)}
