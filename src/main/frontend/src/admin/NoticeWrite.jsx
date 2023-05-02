@@ -16,7 +16,7 @@ export default function NoticeWrite() {
 			method:"POST",
 			headers : {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + localStorage.getItem("token"),
+				"Authorization": "Bearer " + sessionStorage.getItem("token"),
 			},
 			body: JSON.stringify({ memberSeq, noticeTitle, noticeContent }),
 		})
@@ -36,11 +36,11 @@ export default function NoticeWrite() {
 
 
 	useEffect(() => {
-		if (localStorage.getItem("token")) {
+		if (sessionStorage.getItem("token")) {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
-					"Authorization": "Bearer " + localStorage.getItem("token")
+					"Authorization": "Bearer " + sessionStorage.getItem("token")
 				}
 			})
 				.then(res => res.json())

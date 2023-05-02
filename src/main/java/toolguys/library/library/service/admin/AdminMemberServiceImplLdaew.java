@@ -1,14 +1,18 @@
 package toolguys.library.library.service.admin;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import toolguys.library.library.domain.BookRent;
 import toolguys.library.library.domain.Member;
 import toolguys.library.library.dto.admin.AdminBookRentDto;
 import toolguys.library.library.dto.admin.AdminMemberDto;
+import toolguys.library.library.mapper.admin.AdminMemberMapper;
 import toolguys.library.library.repository.admin.AdminMemberRepositoryLdaew;
 
 public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
@@ -16,8 +20,13 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
     @Autowired
     private final AdminMemberRepositoryLdaew adminMemberRepositoryLdaew;
 
-    public AdminMemberServiceImplLdaew(AdminMemberRepositoryLdaew adminMemberRepositoryLdaew) {
+    @Autowired
+    private final AdminMemberMapper adminMemberMapper;
+
+    public AdminMemberServiceImplLdaew(AdminMemberRepositoryLdaew adminMemberRepositoryLdaew,
+            AdminMemberMapper adminMemberMapper) {
         this.adminMemberRepositoryLdaew = adminMemberRepositoryLdaew;
+        this.adminMemberMapper = adminMemberMapper;
     }
 
     @Override
@@ -64,20 +73,50 @@ public class AdminMemberServiceImplLdaew implements AdminMemberServiceLdaew {
 
     @Override
     public Page<AdminBookRentDto> searchBookRent(HashMap<String, String> searchData, Pageable pageable) {
-        String keyword = searchData.get("keyword");
         long memberSeq = Long.parseLong(searchData.get("memberSeq"));
+        String keyword = searchData.get("keyword");
+        String category = searchData.get("category");
 
-        Page<AdminBookRentDto> rentBooks = adminMemberRepositoryLdaew
-                .findBookRentByBOOKSEQ(keyword, memberSeq, pageable)
-                .map(book -> AdminBookRentDto.from(book));
+        switch (category) {
+            case "책번호":
+                category = "BOOKSEQ";
+                break;
+            case "제목":
+                category = "BOOKTITLE";
+                break;
+            case "저자":
+                category = "BOOKWRITER";
+                break;
+            case "출판사":
+                category = "BOOKPUB";
+                break;
+            case "책상태(코드)":
+                category = "BOOKSTATUS";
+                break;
+            default:
+                category = "";
+        }
 
-        return rentBooks;
+        HashMap<String, Object> input = new HashMap<String, Object>();
+        input.put("memberSeq", memberSeq);
+        input.put("offset", pageable.getOffset());
+        input.put("size", pageable.getPageSize());
+        input.put("keyword", keyword);
+        input.put("category", category);
+
+        Page<AdminBookRentDto> searchedRentBooks = new PageImpl<AdminBookRentDto>(
+                adminMemberMapper.searchBookRent(input).stream()
+                        .map(bookRentStream -> AdminBookRentDto.from(bookRentStream)).toList(),
+                pageable,
+                adminMemberMapper.getTotalCount(memberSeq));
+
+        return searchedRentBooks;
     }
 
     @Override
     public void addBlacklist(long memberSeq) {
         Member member = adminMemberRepositoryLdaew.findById(memberSeq).get();
-        member.setMemberStatus((byte)2);
+        member.setMemberStatus((byte) 2);
         adminMemberRepositoryLdaew.save(member);
     }
 }

@@ -29,7 +29,7 @@ export default function AdminBookUpdateDetail(){
 
     function onSubmit(e){
         e.preventDefault();
-        
+
         const bookTitle = e.target.bookTitle.value;
         const bookWriter = e.target.bookWriter.value;
         const bookPub = e.target.bookPub.value;
@@ -49,7 +49,7 @@ export default function AdminBookUpdateDetail(){
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 },
-                body: formData 
+                body: formData
             })
             .then(res => res.text())
             .then(() => {
@@ -66,7 +66,7 @@ export default function AdminBookUpdateDetail(){
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                 },
-                body: formData 
+                body: formData
             })
             .then(res => res.text())
             .then(() => {
@@ -78,7 +78,7 @@ export default function AdminBookUpdateDetail(){
             })
             .catch((error) => console.error(error))
         }
-        
+
     }
 
     const [imageSrc, setImageSrc] = useState(null);
@@ -88,7 +88,7 @@ export default function AdminBookUpdateDetail(){
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-  
+
         return new Promise(res => {
            reader.onload = () => {
               setImageSrc(reader.result || null);

@@ -29,7 +29,7 @@ export default function AdminMemberList() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
             .then(res => res.json())
@@ -52,7 +52,7 @@ export default function AdminMemberList() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
             body: JSON.stringify({ category, keyword }),
         })
@@ -87,7 +87,7 @@ export default function AdminMemberList() {
     return (
         <center>
             <h2>회원 목록 페이지</h2><br />
-            <table class="board-list">
+            <table className="board-list">
                 <thead>
                     <tr>
                         <th>회원번호</th>

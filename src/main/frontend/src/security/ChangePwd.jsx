@@ -41,7 +41,7 @@ export default function ChangePwd() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"Authorization": "Bearer " + localStorage.getItem("token"),
+					"Authorization": "Bearer " + sessionStorage.getItem("token"),
 				},
 				body: JSON.stringify({ changePwdEmail, changePwdPwd }),
 			})
@@ -56,18 +56,19 @@ export default function ChangePwd() {
 	}
 
 	return (
-		<div className="changePwd">
-			<h3>비밀번호변경</h3>
+		<div className="changePwdDiv">
+			<h2>비밀번호변경</h2>
 			<form onSubmit={changePwdInfo}>
-				<div className="joinInput">
-					비밀번호 : <input type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
+				<div className="changeInput">
+					<span>비밀번호</span>
+					<input className='changePwd'  type="password" onKeyUp={pwdCheck} ref={pwdRef} placeholder="8-20 영문,숫자,특수기호" />
 				</div>
-				<div className="joinInput">
-					비밀번호확인 : <input type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
-					<br />
-					<span>{pwdInCheck}</span>
+				<div className="changeInput">
+					<span>비밀번호확인</span>
+					<input className='changePwdd' type="password" onKeyUp={pwdCheck} ref={pwdCheckRef} />
+					<p>{pwdInCheck}</p>
 				</div>
-				<button>변경</button>
+				<button className='changePwdBtn'>변경</button>
 			</form>
 		</div>
 	)

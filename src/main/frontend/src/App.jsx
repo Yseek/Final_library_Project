@@ -1,21 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css';
 import AdminAddBooks from './admin/AdminAddBooks';
 import AdminBookHope from './admin/AdminBookHope';
 import AdminBookHopeOk from './admin/AdminBookHopeOk';
 import AdminBookList from './admin/AdminBookList';
-import AdminBookLost from './admin/AdminBookLost';
-import AdminBookReturn from './admin/AdminBookReturn';
 import AdminBookUpdate from './admin/AdminBookUpdate';
 import AdminBookUpdateDetail from './admin/AdminBookUpdateDetail';
 import AdminMemberContent from './admin/AdminMemberContent';
 import AdminMemberList from './admin/AdminMemberList';
 import AdminReserveCheck from './admin/AdminReserveCheck';
 import NoticeAdmin from './admin/NoticeAdmin';
+import NoticeAdminSearch from './admin/NoticeAdminSearch';
 import NoticeAdminContent from './admin/NoticeAdminContent';
 import NoticeAdminUpdate from './admin/NoticeAdminUpdate';
 import NoticeWrite from './admin/NoticeWrite';
+import './App.css';
 import AdminChat from './security/AdminChat';
 import ChangePwd from './security/ChangePwd';
 import FindEmail from './security/FindEmail';
@@ -30,13 +29,16 @@ import MyPage from './security/MyPage';
 import BookApply from "./user/BookApply";
 import BookDetail from './user/BookDetail';
 import BookList from './user/BookList';
+import BookRentCheck from './user/BookRentCheck';
 import BookReserv from './user/BookReserv';
-import Mybookrent from "./user/dongwon/MyBookrent";
 import Mybook from "./user/dongwon/Mybook";
 import Mybookhope from "./user/dongwon/Mybookhope";
+import Mybookrent from "./user/dongwon/MyBookrent";
 import Notice from "./user/dongwon/Notice";
 import NoticeContent from "./user/dongwon/NoticeContent";
 import NoticeSearch from "./user/dongwon/NoticeSearch";
+import AdminBookReturn from "./admin/AdminBookReturn";
+import AdminBookLost from "./admin/AdminBookLost";
 
 function App() {
 	return (
@@ -65,12 +67,14 @@ function App() {
 					<Route path="/findEmail" element={<FindEmail />}></Route>
 					<Route path="/findPwd" element={<FindPwd />}></Route>
 					<Route path="/" element={<Main />}></Route>
+					<Route path="/:page" element={<Main />}></Route>
 					<Route path="/notice" element={<Notice />}></Route>
 					<Route path="/notice/:page" element={<Notice />}></Route>
 					<Route path="/notice/search/:userInput" element={<NoticeSearch/>}></Route>
 					<Route path="/notice/content/:noticeSeq" element={<NoticeContent/>}></Route>
 					<Route path="/admin/notice" element={<NoticeAdmin />}></Route>
 					<Route path="/admin/notice/:page" element={<NoticeAdmin />}></Route>
+					<Route path="/admin/notice/search/:userInput" element={<NoticeAdminSearch />}></Route>
 					<Route path="/admin/notice/content" element={<NoticeAdminContent />}></Route>
 					<Route path="/admin/notice/content/:noticeSeq" element={<NoticeAdminContent />}></Route>
 					<Route path="/admin/notice/update/:noticeSeq" element={<NoticeAdminUpdate />}></Route>
@@ -84,7 +88,7 @@ function App() {
 					<Route path="/user/bookList" element={<BookList />}></Route>
 					<Route path="/user/bookList/:page" element={<BookList />}></Route>
 					<Route path="/user/bookDetail" element={<BookDetail />}></Route>
-					<Route path="/myPage/changePwd" element={<ChangePwd />}></Route>
+					<Route path="/bookrentcheck" element={<BookRentCheck />} ></Route>
 					<Route path="/admin/booklist/update" element={<AdminBookUpdate />} />
 					<Route path="/adminChat" element={<AdminChat />} />
 					<Route path="/admin/bookhope" element={<AdminBookHope />} />

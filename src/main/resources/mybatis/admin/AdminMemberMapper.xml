@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="toolguys.library.library.mapper.admin.AdminMemberMapper">
+    <resultMap type="BookRent" id="BookRentBookMap">
+        <id property="bookRentSeq" column="bookRentSeq"/>
+        <result property="bookRentRdate" column="bookRentRdate"/>
+        <result property="bookRentDDay" column="bookRentDDay"/>
+        <result property="bookRentReturn" column="bookRentReturn"/>
+        <result property="bookRentCoin" column="bookRentCoin"/>
+        <association property="book" column="bookSeq" resultMap="BookMap"/>
+    </resultMap>
+    <resultMap type="Book" id="BookMap">
+        <id property="bookSeq" column="bookSeq" />
+        <result property="bookTitle" column="bookTitle" />
+        <result property="bookWriter" column="bookWriter" />
+        <result property="bookPub" column="bookPub" />
+        <result property="bookStatus" column="bookStatus" />
+    </resultMap>
+
+    <select id="searchBookRent" resultType="Bookrent" parameterType="java.util.HashMap" resultMap="BookRentBookMap">
+        select * from BOOKRENT br join BOOK bk on br.BOOK_BOOKSEQ=bk.BOOKSEQ
+        where br.RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+        and ${category} like CONCAT('%', #{keyword}, '%')
+        ORDER BY BOOKRENTSEQ desc
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <select id="getTotalCount" resultType="long" parameterType="long">
+        select COUNT(*) from BOOKRENT where RENTCARD_RENTCARDSEQ in (select RENTCARDSEQ from RENTCARD where MEMBER_MEMBERSEQ=#{memberSeq})
+    </select>
+</mapper>

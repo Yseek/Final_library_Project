@@ -4,7 +4,7 @@
 }
 
 .NoticeItems {
-	margin-right: 78%;
+	margin-right: 76.5%;
 	margin-top:3vh;
 	margin-bottom: 10px;
 	padding : 0px;
@@ -57,6 +57,12 @@
 
 #contentContent {
 	height: 200px;
+	white-space: pre-wrap;
+	overflow-y: scroll;
+}
+
+#scroll_box {
+	max-height: 350px;
 }
 
 a { text-decoration:none }
@@ -71,16 +77,6 @@ a { text-decoration:none }
 	height: 3vh;
 	margin-left: 1vw;
 }
-
-/* .noticeRentBtn{
-	background-color: white;
-	color: black;
-	border-radius: 3px;
-	border : 1px solid #0665A9;
-	font-family: 메이플스토리;
-	font-size: large;
-	margin-bottom: 0px;
-} */
 
 .noticeRentBtn{
 	background-color: #f6f6f6;

@@ -42,7 +42,7 @@ export default function Notice() {
 	}, [params]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
-
+	console.log("확인용"+JSON.stringify(params));
 	return (
 		<div className="NoticeDiv">
 			<h2>공지사항</h2>

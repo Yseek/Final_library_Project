@@ -21,11 +21,11 @@ export default function HeaderLayout() {
 	const messageListRef = useRef(null);
 	const navi = useNavigate();
 	useEffect(() => {
-		if (localStorage.getItem("token")) {
+		if (sessionStorage.getItem("token")) {
 			fetch(`${Ip.url}/memberInfo`, {
 				method: "POST",
 				headers: {
-					"Authorization": "Bearer " + localStorage.getItem("token")
+					"Authorization": "Bearer " + sessionStorage.getItem("token")
 				}
 			})
 				.then(res => res.json())
@@ -66,7 +66,7 @@ export default function HeaderLayout() {
 
 	function openChat(e) {
 		e.preventDefault();
-		if (!localStorage.getItem("token")) {
+		if (!sessionStorage.getItem("token")) {
 			navi("/loginPage", { state: pathname });
 		} else {
 			if (chatview == false) {
@@ -154,9 +154,9 @@ export default function HeaderLayout() {
 					<ul>
 						{memeberOrAdmin == 2 ? <li><Link to={`/adminChat`} className="link">관리자채팅방</Link></li> : ""}
 						<li><Link to={`/myPage`} className="link">마이페이지</Link></li>
-						{localStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
-						<li><Link to={localStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{localStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
-						{localStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
+						{sessionStorage.getItem("token") ? <li className="link">{name}님 환영합니다</li> : ""}
+						<li><Link to={sessionStorage.getItem("token") ? `/logout` : `/loginPage`} className="link">{sessionStorage.getItem("token") ? "로그아웃" : "로그인"}</Link></li>
+						{sessionStorage.getItem("token") ? "" : <li><Link to={`/joinPage`} className="link">회원가입</Link></li>}
 					</ul>
 				</nav>
 			</div>
@@ -165,7 +165,7 @@ export default function HeaderLayout() {
 						<span className="logoImg"><Link to={''} onClick={() => window.location.replace("/")} >로고</Link></span>
 					<div className="chatBox">
 						{memeberOrAdmin != 2 ? <div className="chatBtn">
-							<button type="button" onClick={openChat}>관리자 문의</button>
+							<button type="button" onClick={openChat}>관리자 문의 Chat</button>
 						</div> : ""}
 						<div className="chatRoom" style={chatviewStyle}>
 							<div className="chatRoomView">

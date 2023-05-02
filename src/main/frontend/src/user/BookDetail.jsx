@@ -34,7 +34,7 @@ export default function BookDetail() {
 	function bookReserve(e) {
 		e.preventDefault();
 		if (window.confirm(`'${book[0].bookTitle}' 도서를 예약하시겠습니까?`)) {
-			if (!localStorage.getItem("token")) {
+			if (!sessionStorage.getItem("token")) {
 				alert("로그인 후 이용해주세요")
 				//navigate("/loginPage", { state: pathname });
 			}
@@ -42,7 +42,7 @@ export default function BookDetail() {
 				fetch(`${Ip.url}/memberInfo`, {
 					method: "POST",
 					headers: {
-						"Authorization": "Bearer " + localStorage.getItem("token")
+						"Authorization": "Bearer " + sessionStorage.getItem("token")
 					}
 				})
 				.then(res => res.json())
@@ -51,7 +51,7 @@ export default function BookDetail() {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
-							"Authorization": "Bearer " + localStorage.getItem("token"),
+							"Authorization": "Bearer " + sessionStorage.getItem("token"),
 						},
 					})
 					.then(() => {
@@ -67,7 +67,7 @@ export default function BookDetail() {
 		<>
 			{book.length > 0 &&
 				<div className='BookDetailDiv'>
-					<button onClick={onClickBack}>목록으로</button>
+					<h2>상세내용</h2>
 					<table className="BookDetailTable">
 						<thead>
 							<tr>
@@ -114,7 +114,8 @@ export default function BookDetail() {
 							</tr>
 						</tbody>
 					</table>
-					<button onClick={(e) => bookReserve(e)}>예약하기</button>
+					<button className='BookDetailBtn' onClick={onClickBack}>목록으로</button>
+					<button className='BookDetailBtn' onClick={(e) => bookReserve(e)}>예약하기</button>
 				</div>
 			}</>
 	)

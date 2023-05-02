@@ -27,7 +27,7 @@ export default function LoginPage() {
 					alert(res);
 					return false;
 				}
-				localStorage.setItem("token", res);
+				sessionStorage.setItem("token", res);
 				if (state) {
 					navi(state, { state: emailRef });
 				} else {
@@ -37,22 +37,22 @@ export default function LoginPage() {
 	}
 
 	return (
-		<div className="loginPage">
+		<div className="loginPageDiv">
 			<div><h3>로그인</h3></div>
 			<form onSubmit={onSubmit}>
 				<div className="loginInput">
-					<label htmlFor="id">아이디</label>
-					<input id="id" type="text" placeholder="email입력" ref={emailRef} />
+					<span>아이디</span>
+					<input className='loginInputId' type="text" placeholder="email입력" ref={emailRef} />
 				</div>
 				<div className="loginInput">
-					<label htmlFor="pwd">비밀번호</label>
-					<input id="text" type="password" placeholder="비밀번호입력" ref={pwdRef} />
+					<span>비밀번호</span>
+					<input className='loginInputPwd' type="password" placeholder="비밀번호입력" ref={pwdRef} />
 				</div>
-				<button>로그인</button>
+				<button className='loginPageBtn' >로그인</button>
 			</form>
 			<div>
-				<Link to={`/findEmail`} className="loginBottomButton">이메일찾기</Link>
-				<Link to={`/findPwd`} className="loginBottomButton">비밀번호찾기</Link>
+				<Link to={`/findEmail`} className="loginBottomButton">이메일찾기</Link>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<Link to={`/findPwd`} className="loginBottomButton">비밀번호찾기</Link>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 				<Link to={`/joinPage`} className="loginBottomButton">회원가입</Link>
 			</div>
 

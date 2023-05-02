@@ -23,7 +23,7 @@ export default function AdminReserveCheck(){
             method: "GET",
             headers:{
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
         .then(res => res.json())
@@ -58,7 +58,7 @@ export default function AdminReserveCheck(){
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Authorization": "Bearer " + sessionStorage.getItem("token"),
             },
         })
         .then(res => res.json())
@@ -73,7 +73,7 @@ export default function AdminReserveCheck(){
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 },
             })
             .then(() => {
@@ -90,7 +90,7 @@ export default function AdminReserveCheck(){
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 }, 
             })
             .then(() => {
