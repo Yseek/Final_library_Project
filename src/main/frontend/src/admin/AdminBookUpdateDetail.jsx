@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Ip from "../Ip";
@@ -9,6 +9,7 @@ export default function AdminBookUpdateDetail(){
 
     const bookSeq = encodeURIComponent(state)
     const [bookData, setbookData] = useState([]);
+    const fileRef = useRef();
 
     useEffect(() => {
         fetch(`${Ip.url}/admin/booklist/id=${bookSeq}`, {
@@ -29,35 +30,74 @@ export default function AdminBookUpdateDetail(){
     function onSubmit(e){
         e.preventDefault();
 
-        const bookSeq = e.target.bookSeq.value;
         const bookTitle = e.target.bookTitle.value;
         const bookWriter = e.target.bookWriter.value;
         const bookPub = e.target.bookPub.value;
-        const bookStatus = e.target.bookStatus.value;
-        const bookStory = e.target.bookStory.value;
-        const bookImgName = e.target.bookImgName.value;
-        const bookImgPath = e.target.bookImgPath.value;
-        const bookImgOgn = e.target.bookImgOgn.value;
 
-        console.log(bookSeq, bookTitle, bookWriter, bookPub, bookStory, bookStatus, bookImgName, bookImgPath, bookImgOgn);
-        fetch(`${Ip.url}/admin/booklist/update/detail`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + sessionStorage.getItem("token"),
-            },
-            body: JSON.stringify({bookSeq, bookTitle, bookWriter, bookPub, bookStory, bookStatus, bookImgName, bookImgPath, bookImgOgn}),
-        })
-        .then(res => res.text())
-        .then(() => {
-            alert("수정완료");
-            const a = [bookTitle,bookWriter,bookPub]
-            navigate(`/admin/booklist/update`, {
-                state: a
+        const formData = new FormData();
+        formData.append('bookSeq', e.target.bookSeq.value);
+        formData.append('bookTitle', bookTitle);
+        formData.append('bookWriter', bookWriter);
+        formData.append('bookPub', bookPub);
+        formData.append('bookStatus', e.target.bookStatus.value);
+        formData.append('bookStory', e.target.bookStory.value)
+
+        if(fileImg != null){
+            formData.append('file', fileImg);
+            fetch(`${Ip.url}/admin/booklist/update/detail/1`, {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
+                },
+                body: formData
             })
-        })
-        .catch((error) => console.error(error))
+            .then(res => res.text())
+            .then(() => {
+                alert("수정완료");
+                const a = [bookTitle,bookWriter,bookPub]
+                navigate(`/admin/booklist/update`, {
+                    state: a
+                })
+            })
+            .catch((error) => console.error(error))
+        }else{
+            fetch(`${Ip.url}/admin/booklist/update/detail/2`, {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
+                },
+                body: formData
+            })
+            .then(res => res.text())
+            .then(() => {
+                alert("수정완료");
+                const a = [bookTitle,bookWriter,bookPub]
+                navigate(`/admin/booklist/update`, {
+                    state: a
+                })
+            })
+            .catch((error) => console.error(error))
+        }
+
     }
+
+    const [imageSrc, setImageSrc] = useState(null);
+    const [fileImg, setFileImg] = useState(null);
+
+    const onUpload = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        return new Promise(res => {
+           reader.onload = () => {
+              setImageSrc(reader.result || null);
+              setFileImg(file);
+              res();
+           }
+        })
+    }
+    console.log(imageSrc)
     return(
         <div>
              {Object.keys(bookData).length > 0 && (
@@ -89,17 +129,13 @@ export default function AdminBookUpdateDetail(){
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <h2>이미지명</h2><input type="text" name="bookImgName"  defaultValue={bookData.bookImgName}/>
+                        <h2>책 이미지 파일</h2><input multiple type="file" accept="image/*" onChange={e => onUpload(e)} ref={fileRef}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <h2>이미지경로</h2><input type="text" name="bookImgPath"  defaultValue={bookData.bookImgPath}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="row-in">          
-                        <h2>이미지원본명</h2><input type="text" name="bookImgOgn"  defaultValue={bookData.bookImgOgn}/>
+                        {imageSrc !== null && <img src={imageSrc} width={`300px`} height={`300px`} ></img>}
+                        {imageSrc === null && <img src={bookData.bookImgPath} width={`300px`} height={`300px`}></img> }
                     </div>
                 </div>
                 <div className="row">

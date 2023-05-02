@@ -1,31 +1,96 @@
-.joinPage {
-	margin: 10%;
+.joinPageDiv{
+	width: 100%;
+	height: 75vh;
+}
+
+.joinInputDiv{
+	margin-top:2vh;
+  margin-left: 24.5vw;
+  text-align: left;
+}
+
+.joinInputName{
 	border: 1px solid black;
-	padding: 2%;
+	border-radius: 3px;
+	margin-left: 65px;
 }
 
-.joinInput {
-	padding-bottom: 1%;
-	text-align: left;
-}
-
-.postApi {
-	display: inline-block;
-}
-
-.joinPage_content {
+.joinInputEmail{
 	border: 1px solid black;
-	width: 50%;
-	margin: auto;
+	border-radius: 3px;
+	margin-left: 50px;
 }
 
-.joinPage_content_InputBox {
-	margin-left: 3%;
+.joinInputEmailCheck{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 11px;
+	margin-bottom: 10px;
 }
 
-.joinInput>button {
+.joinInputPwd{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 38px;
+}
+
+.joinInputPwdd{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 10px;
+}
+
+.joinInputPhone{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 54px;
+}
+
+.joinInputBirth{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 37px;
+}
+
+.joinInputAddrNum{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 40px;
+}
+
+.joinInputAddr{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 69px;
+	margin-top:2vh;
+}
+
+.joinInputAddrDetail{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 41px;
+	margin-top:2vh;
+}
+
+.joinBtn{
+	background-color: #0665A9;
+	border-radius: 3px;
+	border : 1px solid #0665A9;
+	font-family: 메이플스토리;
 	color: white;
-	height: 10%;
-	width: 20%;
-	margin-left: 2%;
+	width: 5.8vw;
+	height: 3vh;
+	margin-left: 1vw;
+}
+
+p{
+	margin-left: 0vw;
+}
+
+.postApi{
+	margin-left: 800px;
+}
+
+.joinInputEmailCheckk{
+	margin-left: 95px;
 }

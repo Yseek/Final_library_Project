@@ -73,42 +73,56 @@ export default function Mybook() {
 		});
 	}
 
+	// 한 화면에 보여줄 페이지 수 계산
+	var pageWidth = 10;
+	var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
+	var startPage = 1 + pageWidthNumber * pageWidth;
+	var endPage = pageWidthNumber * pageWidth + pageWidth;
+	if (endPage > page.totalPages) endPage = page.totalPages;
+
 	return (
-		<div className="Notice">
-			<div><h2>내 서재</h2></div>
-			<p id="mypageItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
-			<table className="mypageTable">
-				<thead className="noticeTableHead">
+		<div className="NoticeDiv">
+			<h2>내 서재</h2>
+			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
+			<table className="noticeTable">
+				<thead>
 					<tr>
-						<th>책 제목</th>
-						<th>커버 이미지</th>
-						<th>저자</th>
-						<th>출판사</th>
-						<th>내서재에서 제거</th>
+						<th className="noticeTableTh">제목</th>
+						<th className="noticeTableTh">표지</th>
+						<th className="noticeTableTh">저자</th>
+						<th className="noticeTableTh">출판사</th>
+						<th className="noticeTableTh">내용 보기</th>
+						<th className="noticeTableTh">내서재에서 제거</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(data) && data.map(res => (
 						<tr key={res.myBooksSeq}>
-							<a onClick={() => bookDetail(res.book.bookTitle, res.book.bookWriter, res.book.bookPub)} style={{ cursor: "pointer" }}>
-								<td width="25%">{res.book.bookTitle}</td>
-							</a>
-							<td><img src={res.book.bookImgPath} width={`100px`} height={`140px`} /></td>
-							<td>{res.book.bookWriter}</td>
-							<td>{res.book.bookPub}</td>
-							<td><button id="deleteFromMybookBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
+							<td className="noticeTableTd">{res.book.bookTitle}</td>
+							<td className="noticeTableTd"><img src={res.book.bookImgPath} width={`100px`} height={`140px`} /></td>
+							<td className="noticeTableTd">{res.book.bookWriter}</td>
+							<td className="noticeTableTd">{res.book.bookPub}</td>
+							<td className="noticeTableTd"><a onClick={() => bookDetail(res.book.bookTitle, res.book.bookWriter, res.book.bookPub)}>보기</a></td>
+							<td className="noticeTableTd"><button className="noticeLostBtn" onClick={() => deleteFromMybook(res.myBooksSeq)}>제거</button></td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-			<div className="page">
+			{pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+			{pageList.length !== 0 && <div className="paging">
+				<span><Link to={`/mypage/mybook/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+				<span><Link to={`/mypage/mybook/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/mypage/mybook/${res}`}>{res}</Link>
+						<Link to={`/mypage/mybook/${res}`}>
+							{page.number + 1 === res ? <span className="tp">{res}</span> : res}
+						</Link>
 						{" "}
 					</span>
 				))}
-			</div>
+				<span><Link to={`/mypage/mybook/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+				<span><Link to={`/mypage/mybook/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+			</div>}<br />
 		</div >
 	);
 }

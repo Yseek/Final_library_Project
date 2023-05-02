@@ -1,3 +1,61 @@
+.adminMemberListTable {
+	border: 1px solid gray;
+	border-radius: 5px;
+	margin-bottom: 2vh;
+	margin-left: 2vw;
+	font-size: larger;
+    width: 50vw;
+    text-align: center;
+}
+
+.adminMemberListBtn{
+	background-color: #0665A9;
+	border-radius: 3px;
+	border : 1px solid #0665A9;
+	font-family: 메이플스토리;
+	font-size: 15px;
+	width: 3vw;
+	height: 34.5px;
+	margin-left: 5px;
+	color: white;
+}
+
+.adminMemberListTableTh{
+	border : 1px solid gray;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: #0665A9;
+	color: white;
+}
+
+.adminMemberListTableTd{
+	border : 1px solid gray;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	border-radius: 5px;
+    padding: 1.2%;
+	background-color: #f6f6f6;
+    
+}
+
+.adminMemberListInput{
+    margin-left: 5px;
+    font-family: 메이플스토리;
+    height: 31px;
+    font-size: 15px;
+  }
+  
+  .adminMemberListSelect{
+    height: 35px;
+    font-family: 메이플스토리;
+    font-size: 15px;
+  }
+  
+
 .adminMemberButton {
     width: 4rem;
     height: 30px;

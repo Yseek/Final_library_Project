@@ -1,27 +1,40 @@
-.loginPage {
-	margin: 10%;
+.loginPageDiv{
+	width: 100%;
+	height: 75vh;
+}
+
+.loginInput{
+	margin-top:3vh;
+  margin-left: 24.5vw;
+  text-align: left;
+}
+
+
+.loginInputId{
 	border: 1px solid black;
-	padding: 2%;
+	border-radius: 3px;
+	margin-left: 25px;
+  width: 12vw;
 }
 
-.loginInput {
-	padding-bottom: 2%;
-
+.loginInputPwd{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 14px;
+  width: 12vw;
 }
 
-.loginBottomButton {
-	color: black;
-	padding-left: 1em;
-}
-
-button {
-	width: 200px;
-	height: 40px;
+.loginPageBtn{
+	border-radius: 3px;
+	background-color: #0665A9;
+	border-radius: 3px;
+	border : 1px solid #0665A9;
+	font-family: 메이플스토리;
+	font-size: large;
 	color: white;
-	background-color: grey;
-	margin-bottom: 1em;
+	width: 110px;
+	height: 3vh;
+	margin-top: 3vh;
+	margin-bottom: 3vh;
 }
 
-button:hover {
-	cursor: pointer;
-}

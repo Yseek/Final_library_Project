@@ -63,6 +63,7 @@ export default function BookList() {
 
 	return (
 		<div className='BookListDiv'>
+			<h2>도서 목록</h2>
 			<table className='BookListTable'>
 				<thead>
 					<tr>

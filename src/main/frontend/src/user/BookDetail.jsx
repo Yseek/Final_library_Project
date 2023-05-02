@@ -67,7 +67,7 @@ export default function BookDetail() {
 		<>
 			{book.length > 0 &&
 				<div className='BookDetailDiv'>
-					<button onClick={onClickBack}>목록으로</button>
+					<h2>상세내용</h2>
 					<table className="BookDetailTable">
 						<thead>
 							<tr>
@@ -114,7 +114,8 @@ export default function BookDetail() {
 							</tr>
 						</tbody>
 					</table>
-					<button onClick={(e) => bookReserve(e)}>예약하기</button>
+					<button className='BookDetailBtn' onClick={onClickBack}>목록으로</button>
+					<button className='BookDetailBtn' onClick={(e) => bookReserve(e)}>예약하기</button>
 				</div>
 			}</>
 	)

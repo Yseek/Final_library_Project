@@ -91,6 +91,13 @@ export default function Mybookrent() {
 		}
 	};
 
+	// 한 화면에 보여줄 페이지 수 계산
+	var pageWidth = 10;
+	var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
+	var startPage = 1 + pageWidthNumber * pageWidth;
+	var endPage = pageWidthNumber * pageWidth + pageWidth;
+	if (endPage > page.totalPages) endPage = page.totalPages;
+
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
 
 	return (
@@ -126,14 +133,21 @@ export default function Mybookrent() {
 					))}
 				</tbody>
 			</table>
-			<div className="page">
+			{pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+			{pageList.length !== 0 && <div className="paging">
+				<span><Link to={`/mypage/mybookrent/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+				<span><Link to={`/mypage/mybookrent/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/mypage/mybookrent/${res}`}>{res}</Link>
+						<Link to={`/mypage/mybookrent/${res}`}>
+							{page.number + 1 === res ? <span className="tp">{res}</span> : res}
+						</Link>
 						{" "}
 					</span>
 				))}
-			</div>
+				<span><Link to={`/mypage/mybookrent/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+				<span><Link to={`/mypage/mybookrent/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+			</div>}<br />
 		</div>
 	);
 }

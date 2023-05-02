@@ -17,13 +17,18 @@ export default function Notice() {
 	};
 
 	const onClickSearchInput = (e) => {
-		e.preventDefault();
+		//e.preventDefault();
 		navigate(`/notice/search/${userInput}/1`);
 	};
 	const onClickList = (e) => {
 		e.preventDefault();
 		navigate(`/notice/1`);
 	};
+	const enterkey = (e) => {
+		if (e.key == 'Enter') {
+			onClickSearchInput();
+		}
+	}
 
 	useEffect(() => {
 		fetch(`${Ip.url}/notice?page=${params.page}&size=10&search=${params.userInput}`, {
@@ -77,7 +82,7 @@ export default function Notice() {
 					</span>
 				))}
 			</div>
-			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
+			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} onKeyUp={enterkey} size="25" />&nbsp;
 				<button id="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button>&nbsp;
 				<button id="noticeSearchBtn" onClick={onClickList}>전체목록</button></span>
 		</div>

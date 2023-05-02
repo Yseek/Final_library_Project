@@ -17,9 +17,14 @@ export default function Notice() {
 	};
 
 	const onClickSearchInput = (e) => {
-		e.preventDefault();
+		//e.preventDefault();
 		navigate(`/notice/search/${userInput}/1`);
 	};
+	const enterkey = (e) => {
+		if (e.key == 'Enter') {
+			onClickSearchInput();
+		}
+	}
 
 	useEffect(() => {
 		fetch(`${Ip.url}/notice?page=${params.page}&size=10`, {
@@ -42,9 +47,18 @@ export default function Notice() {
 	}, [params]);
 
 	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
-	console.log("확인용"+JSON.stringify(params));
+
+	console.log("확인용" + JSON.stringify(params));
+
+	// 한 화면에 보여줄 페이지 수 계산
+	var pageWidth = 10;
+	var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
+	var startPage = 1 + pageWidthNumber * pageWidth;
+	var endPage = pageWidthNumber * pageWidth + pageWidth;
+	if (endPage > page.totalPages) endPage = page.totalPages;
+
 	return (
-		<div className="NoticeDiv">
+		<center>
 			<h2>공지사항</h2>
 			<p className="NoticeItems">총 {page.totalCount}건, {params.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
@@ -60,23 +74,28 @@ export default function Notice() {
 						<tr key={res.noticeSeq}>
 							<td className="noticeTableTd">{res.member.memberName}</td>
 							<td className="noticeTableTd"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle}</Link></td>
-							{/* <td>{res.noticeRdate}</td> */}
 							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
-
 						</tr>
 					))}
 				</tbody>
 			</table>
-			<div className="page">
+			{pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+			{pageList.length !== 0 && <div className="paging">
+				<span><Link to={`/notice/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+				<span><Link to={`/notice/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/notice/${res}`}>{res}</Link>
+						<Link to={`/notice/${res}`}>
+							{page.number + 1 === res ? <span className="tp">{res}</span> : res}
+						</Link>
 						{" "}
 					</span>
 				))}
-			</div>
-			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
+				<span><Link to={`/notice/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+				<span><Link to={`/notice/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+			</div>}<br />
+			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} onKeyUp={enterkey} size="25" />&nbsp;
 				<button className="noticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
-		</div>
+		</center>
 	);
 }

@@ -14,8 +14,9 @@ export default function Main() {
 	const navi = useNavigate();
 	const [page, setPage] = useState([]);
 
+	console.log("확인용"+JSON.stringify(data));
 	useEffect(() => {
-		fetch(`${Ip.url}/bookList`, {
+		fetch(`${Ip.url}/mainbooklist`, {
 			method: 'GET',
 			headers: {
 				"Content-Type": "application/json",
@@ -68,7 +69,7 @@ export default function Main() {
 			<div className="mainTop">
 				<div className="searchBookBox">
 					<div className="searchBookBoxInput">
-						<input type="text" onChange={e => search(e)} />검색
+						<input type="text" onChange={e => search(e)} placeholder='책 제목을 입력해주세요' />
 					</div>
 					<table className='searchedBookList'>
 						<tbody>
@@ -91,44 +92,22 @@ export default function Main() {
 			</div>
 			<div className="mainBottom">
 				<div className="mainLeftBottom">
-					공지사항
-					<thead>
-					<tr>
-						<th className="noticeTableTh">작성자</th>
-						<th className="noticeTableTh">공지 제목</th>
-						<th className="noticeTableTh">공지날짜</th>
-					</tr>
-				</thead>
-		
-					{Array.isArray(page) && page.map(res => (
-						<tr key={res.noticeSeq}>
-							<td className="noticeTableTd">{res.member.memberName}</td>
-							<td className="noticeTableTd"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle.length > 5 ? res.noticeTitle.slice(0, 5) + "..." : res.noticeTitle}</Link></td>
-							{/* <td>{res.noticeRdate}</td> */}
-							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
-						</tr>
-					))}
+					<div className="mainNoticeTable">
+						공지사항
+						{Array.isArray(page) && page.map(res => (
+							<tr key={res.noticeSeq}>
+								<td	className="mainNoticeTableTdTitle">  <a href={`/notice/content/${res.noticeSeq}`} style={{ color: 'black' }}> {res.noticeTitle.length > 20 ? res.noticeTitle.slice(0, 20) + "..." : res.noticeTitle} </a></td>
+							</tr>
+						))}
+					</div>
 				</div>
 				<div className="BookListTable2">
 					추천 도서 목록
-					<thead>
-					<tr>
-						<th className='BookListTh'>사진</th>
-						<th className='BookListTh'>제목</th>
-						<th className='BookListTh'>저자</th>
-						<th className='BookListTh'>출판사</th>
-						<th className='BookListTh'>내용</th>
-					</tr>
-				</thead>
 					{Array.isArray(data) && data.map(res => (
-						<tr key={res.bookSeq}>
-							<td className='BookListTd'>
-								<img src={res.bookImgPath} width={`60px`} height={`75px`}></img></td>
-							<td className='BookListTd'>{res.bookTitle}</td>
-							<td className='BookListTd'>{res.bookWriter}</td>
-							<td className='BookListTd'>{res.bookPub}</td>
-							<td className='BookListTd'><Link to={`/user/bookDetail/${res.bookSeq}`} className='BookListA'>보기</Link></td>
-						</tr>
+						<td key={res.bookSeq}>
+							<td className='BookListTable2'>
+								<img src={res.bookImgPath} width={`100px`} height={`180px`}></img></td>
+						</td>
 					))}
 				</div>
 			</div>
