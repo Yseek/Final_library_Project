@@ -1,10 +1,12 @@
 package toolguys.library.library.controller.admin;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.dto.admin.BookRentDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
@@ -89,9 +91,16 @@ public class AdminControllerPKS {
         adminServicePKS.updateBookInfo(dto);
     }
 
-    @PostMapping("booklist/update/detail")
-    public void bookUpdateDetail(@RequestBody BookDTO dto){
-        adminServicePKS.updateBookInfoDetail(dto);
+    @PostMapping("booklist/update/detail/1")
+    public void bookUpdateDetail(@RequestParam("bookTitle") String title, @RequestParam("bookWriter") String writer, @RequestParam("bookPub") String pub, @RequestParam("bookStory") String bookStory, @RequestParam("bookSeq") long seq, @RequestParam("bookStatus") byte status, @RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("11111111111111111111: " + file);
+        adminServicePKS.updateBookInfoDetail(title, writer, pub, bookStory, seq, status, file);
+    }
+
+    @PostMapping("booklist/update/detail/2")
+    public void bookUpdateDetail(@RequestParam("bookTitle") String title, @RequestParam("bookWriter") String writer, @RequestParam("bookPub") String pub, @RequestParam("bookStory") String bookStory, @RequestParam("bookSeq") long seq, @RequestParam("bookStatus") byte status) {
+        System.out.println("22222222222222222222");
+        adminServicePKS.updateBookInfoDetail2(title, writer, pub, bookStory, seq, status);
     }
 
     @GetMapping("bookinfo/title={title}&writer={writer}&pub={publisher}")
@@ -99,7 +108,6 @@ public class AdminControllerPKS {
         System.out.println("title: " + title);
         System.out.println("writer: " + writer);
         System.out.println("publisher: " + publisher);
-        //adminServicePKS.bookInfo(title, writer, publisher);
         return null;
     }
 
