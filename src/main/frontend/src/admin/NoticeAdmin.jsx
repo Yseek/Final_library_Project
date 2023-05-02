@@ -68,7 +68,7 @@ export default function Notice() {
 						<tr key={res.noticeSeq}>
                             <td width="20%">{res.member.memberName}</td>
 							<td width="60%"><Link to={`/admin/notice/content/${res.noticeSeq}`} className="noticeNoColor">{res.noticeTitle}</Link></td>
-							<td width="20%">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
+							<td width="20%">{moment(res.noticeRdate).format('YYYY-MM-DD')}</td>
 						</tr>
 					))}
 				</tbody>

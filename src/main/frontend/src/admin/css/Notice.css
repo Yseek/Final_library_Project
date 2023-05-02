@@ -15,7 +15,7 @@
 }
 
 .noticeTableHead {
-	background-color: skyblue;
+	background-color: beige;
 	height: 75px;
 }
 
@@ -50,9 +50,4 @@ a { text-decoration:none }
 	width: 5vw;
 	height: 3.5vh;
 	margin-left: 1vw;
-}
-
-.noticeNoColor{
-	text-decoration: none;
-	color: black;
 }
