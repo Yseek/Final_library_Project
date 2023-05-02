@@ -14,10 +14,10 @@ export default function AdminBookLost() {
         fetch(`${Ip.url}/admin/bookLost`, {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + sessionStorage.getItem("token"),
-            },
-        })
+               "Content-Type": "application/json",
+               "Authorization": "Bearer " + sessionStorage.getItem("token"),
+      		},
+		    })
             .then(res => res.json())
             .then(data => {
                 setBookList(data);
@@ -26,8 +26,8 @@ export default function AdminBookLost() {
             .catch(error => console.error(error));
     }, [page]);
 
-    function lost(bookSeq) {
-        if (window.confirm(JSON.stringify({ bookSeq }) + " 책 분실을 확인하였습니까?")) {
+    function lost(bookSeq){  
+        if(window.confirm(JSON.stringify({bookSeq})+" 책 분실을 확인하였습니까?")){
             const updatedBookList = bookList.map(book => {
                 if (book.bookSeq === bookSeq) {
                     book.bookStatus = 4; // 분실됨
@@ -41,34 +41,34 @@ export default function AdminBookLost() {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + sessionStorage.getItem("token"),
                 },
-            })
+              })
                 .then(res => {
-                    if (res.ok) {
-                        alert("분실처리 되었습니다.");
-                    }
-                });
+					if (res.ok) {
+						alert("분실처리 되었습니다.");
+					}
+				});
         }
     }
-    function returnBook(bookSeq) {
-        if (window.confirm(JSON.stringify({ bookSeq }) + "책 반환을 확인하였습니까?")) {
+    function returnBook(bookSeq){  
+        if(window.confirm(JSON.stringify({bookSeq})+"책 반환을 확인하였습니까?")){
             fetch(`${Ip.url}/admin/bookLost/return/${bookSeq}`, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + sessionStorage.getItem("token"),
                 },
-            })
+              })
                 .then(res => {
-                    if (res.ok) {
-                        alert("반환처리 되었습니다.");
+					if (res.ok) {
+						alert("반환처리 되었습니다.");
                         window.location.reload();
-                    }
-                });
+					}
+				});
         }
     }
 
     return (
-        <center>
+        <div className="AdminBookHope">
             <h2>도서 분실신고 처리 페이지</h2>
             <table className="AdminBookHopeTable">
                 <thead>
@@ -96,7 +96,7 @@ export default function AdminBookLost() {
                             <td className="AdminBookHopeTableTd">{book.member.memberSeq}</td>
                             <td className="AdminBookHopeTableTd">{book.member.memberName}</td>
                             <td className="AdminBookHopeTableTd"><button className="bookHopeButton bookHopeBtCc" disabled={book.bookStatus !== 5} onClick={() => lost(book.bookSeq)} >분실</button></td>
-                            <td className="AdminBookHopeTableTd"><button className="bookHopeButton" onClick={() => returnBook(book.bookSeq)}>반환</button></td>
+                            <td className="AdminBookHopeTableTd"><button className="bookHopeButton"  onClick={() => returnBook(book.bookSeq)}>반환</button></td>
                         </tr>
                     ))}
                 </tbody>
@@ -109,6 +109,6 @@ export default function AdminBookLost() {
                     setPage={setPage}
                 />
             </span>
-        </center>
+        </div>
     );
 }

@@ -26,9 +26,6 @@ export default function Notice() {
 			.then(page => setPage(page))
 	}, [param]);
 
-	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
-
-
 	const history = useNavigate();
 	function write() {
 		history('/admin/notice/write');
@@ -43,6 +40,17 @@ export default function Notice() {
 		e.preventDefault();
 		history(`/admin/notice/search/${userInput}`);
 	};
+
+	// 한 화면에 보여줄 페이지 수 계산
+	var pageWidth = 10;
+	var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
+	var startPage = 1 + pageWidthNumber * pageWidth;
+	var endPage = pageWidthNumber * pageWidth + pageWidth;
+	if (endPage > page.totalPages) endPage = page.totalPages;
+
+	const pageList = Array.from({ length: page.totalPages }, (_, index) => index + 1);
+	
+
 
 	return (
 		<center>
@@ -69,14 +77,21 @@ export default function Notice() {
 			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
 				<button className="adminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
 			<button className="adminNoticeWriteBtn" onClick={() => write()}>글쓰기</button>
-			<div className="page">
+			{pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+			{pageList.length !== 0 && <div className="paging">
+				<span><Link to={`/admin/notice/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+				<span><Link to={`/admin/notice/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/admin/notice/${res}`}>{res}</Link>
+						<Link to={`/admin/notice/${res}`}>
+							{page.number + 1 === res ? <span className="tp">{res}</span> : res}
+						</Link>
 						{" "}
 					</span>
 				))}
-			</div>
+				<span><Link to={`/admin/notice/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+				<span><Link to={`/admin/notice/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+			</div>}<br />
 		</center>
 	);
 }
