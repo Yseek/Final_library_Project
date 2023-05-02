@@ -86,21 +86,21 @@ export default function AdminMemberList() {
 
     return (
         <center>
-            <h2>회원 목록 페이지</h2><br />
-            <table className="board-list">
+            <h2>회원 목록</h2>
+            <table className="adminMemberListTable">
                 <thead>
                     <tr>
-                        <th>회원번호</th>
-                        <th>이름</th>
-                        <th>이메일</th>
+                        <th className='adminMemberListTableTh'>회원번호</th>
+                        <th className='adminMemberListTableTh'>이름</th>
+                        <th className='adminMemberListTableTh'>이메일</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(page.content) && page.content.map(member => (
                         <tr key={member.memberSeq} onClick={() => memberContentLink(member.memberSeq)} className="memberRow">
-                            <td>{member.memberSeq}</td>
-                            <td>{member.memberName}</td>
-                            <td>{member.memberEmail}</td>
+                            <td className='adminMemberListTableTd'>{member.memberSeq}</td>
+                            <td className='adminMemberListTableTd'>{member.memberName}</td>
+                            <td className='adminMemberListTableTd'>{member.memberEmail}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -122,13 +122,13 @@ export default function AdminMemberList() {
             </div>}<br />
             <div>
                 <form onSubmit={SearchInput}>
-                    <select onChange={checkSearchCategory} ref={searchCategoryRef}>
+                    <select className='adminMemberListSelect' onChange={checkSearchCategory} ref={searchCategoryRef}>
                         <option>회원번호</option>
                         <option>이메일</option>
                         <option>책번호</option>
                     </select>
-                    <input type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
-                    <button className="adminMemberButton">검색</button>
+                    <input  className='adminMemberListInput' type="text" placeholder={isBookSeq ? "최근에 이 책을 빌린 회원 목록 검색" : ""} size={30} ref={searchKeywordRef}></input>
+                    <button className="adminMemberListBtn">검색</button>
                 </form>
             </div>
         </center>

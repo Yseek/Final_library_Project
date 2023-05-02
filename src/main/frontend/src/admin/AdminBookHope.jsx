@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import './css/AdminBookHope.css';
+import './css/Paging.css';
 import Ip from "../Ip";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
@@ -47,52 +48,63 @@ export default function AdminBookHope() {
 		}
 	}
 
+	var pageWidth = 10;
+	var pageWidthNumber = Math.floor(page.number / pageWidth); // 현재 페이지목록 index
+	var startPage = 1 + pageWidthNumber * pageWidth;
+	var endPage = pageWidthNumber * pageWidth + pageWidth;
+	if (endPage > page.totalPages) endPage = page.totalPages;
+
 	return (
 		<div className="AdminBookHope">
 			<h2>희망 책 신청 승인페이지</h2>
 			<table className="AdminBookHopeTable">
-				<thead className="AdminBookHopeTableHead">
+				<thead>
 					<tr>
-						<th>책제목</th>
-						<th>저자</th>
-						<th>출판사</th>
-						<th>신청날짜</th>
-						<th>신청상태</th>
-						<th>신청자</th>
-						<th>승인</th>
-						<th>거절</th>
+						<th className="AdminBookHopeTableTh">책제목</th>
+						<th className="AdminBookHopeTableTh">저자</th>
+						<th className="AdminBookHopeTableTh">출판사</th>
+						<th className="AdminBookHopeTableTh">신청날짜</th>
+						<th className="AdminBookHopeTableTh">신청상태</th>
+						<th className="AdminBookHopeTableTh">신청자</th>
+						<th className="AdminBookHopeTableTh">승인</th>
+						<th className="AdminBookHopeTableTh">거절</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.bookHopeSeq}>
-							<td>{res.bookHopeTitle}</td>
-							<td>{res.bookHopeWriter}</td>
-							<td>{res.bookHopePub}</td>
-							<td>{res.bookHopeWantDay}</td>
-							<td>
+							<td className="AdminBookHopeTableTd">{res.bookHopeTitle}</td>
+							<td className="AdminBookHopeTableTd">{res.bookHopeWriter}</td>
+							<td className="AdminBookHopeTableTd">{res.bookHopePub}</td>
+							<td className="AdminBookHopeTableTd">{res.bookHopeWantDay}</td>
+							<td className="AdminBookHopeTableTd">
 								{res.bookHopeStatus === 1 && '신청중'}
 								{res.bookHopeStatus === 2 && '입고완료'}
 								{res.bookHopeStatus === 3 && '취소됨'}
 								{res.bookHopeStatus === 4 && '거부됨'}
 							</td>
-							<td>{res.member.memberName}</td>
-							<td><button className="bookHopeButton" disabled={res.bookHopeStatus !== 1} onClick={() => history(`/admin/bookHopeOk/${res.bookHopeSeq}`)}>승인</button></td>
-							<td><button className="bookHopeButton bookHopeBtCc" disabled={res.bookHopeStatus !== 1} onClick={() => deny(res.bookHopeSeq)}>거부</button></td>
+							<td className="AdminBookHopeTableTd">{res.member.memberName}</td>
+							<td className="AdminBookHopeTableTd"><button className="bookHopeButton" disabled={res.bookHopeStatus !== 1} onClick={() => history(`/admin/bookHopeOk/${res.bookHopeSeq}`)}>승인</button></td>
+							<td className="AdminBookHopeTableTd"><button className="bookHopeButton bookHopeBtCc" disabled={res.bookHopeStatus !== 1} onClick={() => deny(res.bookHopeSeq)}>거부</button></td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-			<div className="page">
-				<span><Link to={`/admin/bookhope/1`}>&lt;</Link>&nbsp;</span>
+			{pageList.length === 0 && <span>검색 결과가 없습니다</span>}
+			{pageList.length !== 0 && <div className="paging">
+				<span><Link to={`/admin/bookhope/1`} className="btn-paging first">&laquo;</Link></span>&nbsp;
+				<span><Link to={`/admin/notice/${Math.max(1, page.number + 1 - pageWidth)}`} className="btn-paging prev">&lt;</Link></span>&nbsp;
 				{pageList.map(res => (
 					<span key={res}>
-						<Link to={`/admin/bookhope/${res}`}>{res}</Link>
+						<Link to={`/admin/bookhope/${res}`}>
+							{page.number + 1 === res ? <span className="tp">{res}</span> : res}
+						</Link>
 						{" "}
 					</span>
 				))}
-				<span><Link to={`/admin/bookhope/${page.totalPages}`}>&gt;</Link></span>
-			</div>
+				<span><Link to={`/admin/bookhope/${Math.min(page.totalPages, page.number + 1 + pageWidth)}`} className="btn-paging next">&gt;</Link></span>&nbsp;&nbsp;
+				<span><Link to={`/admin/bookhope/${page.totalPages}`} className="btn-paging last">&raquo;</Link></span>
+			</div>}<br />
 		</div>
 	);
 }

@@ -71,32 +71,32 @@ export default function AdminBookLost() {
         <div className="AdminBookHope">
             <h2>도서 분실신고 처리 페이지</h2>
             <table className="AdminBookHopeTable">
-                <thead className="AdminBookHopeTableHead">
+                <thead>
                     <tr>
-                        <th>책제목</th>
-                        <th>저자</th>
-                        <th>출판사</th>
-                        <th>분실상태</th>
-                        <th>회원번호</th>
-                        <th>대여자</th>
-                        <th>분실</th>
-                        <th>반환</th>
+                        <th className="AdminBookHopeTableTh">책제목</th>
+                        <th className="AdminBookHopeTableTh">저자</th>
+                        <th className="AdminBookHopeTableTh">출판사</th>
+                        <th className="AdminBookHopeTableTh">분실상태</th>
+                        <th className="AdminBookHopeTableTh">회원번호</th>
+                        <th className="AdminBookHopeTableTh">대여자</th>
+                        <th className="AdminBookHopeTableTh">분실</th>
+                        <th className="AdminBookHopeTableTh">반환</th>
                     </tr>
                 </thead>
                 <tbody>
                     {bookList.slice(offset, offset + limit).map((book, index) => (
                         <tr key={index}>
-                            <td>{book.bookTitle}</td>
-                            <td>{book.bookWriter}</td>
-                            <td>{book.bookPub}</td>
-                            <td>
+                            <td className="AdminBookHopeTableTd">{book.bookTitle}</td>
+                            <td className="AdminBookHopeTableTd">{book.bookWriter}</td>
+                            <td className="AdminBookHopeTableTd">{book.bookPub}</td>
+                            <td className="AdminBookHopeTableTd">
                                 {book.bookStatus === 4 && '분실됨'}
                                 {book.bookStatus === 5 && '분실신고됨'}
                             </td>
-                            <td>{book.member.memberSeq}</td>
-                            <td>{book.member.memberName}</td>
-                            <td><button className="bookHopeButton bookHopeBtCc" disabled={book.bookStatus !== 5} onClick={() => lost(book.bookSeq)} >분실</button></td>
-                            <td><button className="bookHopeButton"  onClick={() => returnBook(book.bookSeq)}>반환</button></td>
+                            <td className="AdminBookHopeTableTd">{book.member.memberSeq}</td>
+                            <td className="AdminBookHopeTableTd">{book.member.memberName}</td>
+                            <td className="AdminBookHopeTableTd"><button className="bookHopeButton bookHopeBtCc" disabled={book.bookStatus !== 5} onClick={() => lost(book.bookSeq)} >분실</button></td>
+                            <td className="AdminBookHopeTableTd"><button className="bookHopeButton"  onClick={() => returnBook(book.bookSeq)}>반환</button></td>
                         </tr>
                     ))}
                 </tbody>
