@@ -1,6 +1,7 @@
 package toolguys.library.library.service.admin;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import toolguys.library.library.dto.admin.BookDTO;
 import toolguys.library.library.dto.admin.BookRentDTO;
 import toolguys.library.library.dto.admin.BookReserveDTO;
@@ -40,7 +41,9 @@ public interface AdminServicePKS {
 
     void updateBookInfo(BookDTO dto);
 
-    void updateBookInfoDetail(BookDTO dto);
+    void updateBookInfoDetail(String title, String writer, String pub, String bookStory, long seq, byte status, MultipartFile file);
+
+    void updateBookInfoDetail2(String title, String writer, String pub, String bookStory, long seq, byte status);
 
     @Transactional
     void updateByRent(long reserveSeq, long bookSeq, long memberSeq);

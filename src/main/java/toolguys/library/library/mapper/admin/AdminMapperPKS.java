@@ -41,6 +41,8 @@ public interface AdminMapperPKS {
 
 	void updateBookInfoDetail(HashMap<String, Object> map);
 
+	void updateBookInfoDetail2(HashMap<String, Object> map);
+
 	void statUpdateByRent(long reserveSeq);
 
 	void bookUpdateByRent(long bookSeq);
