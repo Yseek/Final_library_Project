@@ -16,7 +16,7 @@ export default function AdminBookUpdateDetail(){
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 },
             }
         )
@@ -47,7 +47,7 @@ export default function AdminBookUpdateDetail(){
             fetch(`${Ip.url}/admin/booklist/update/detail/1`, {
                 method: "POST",
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 },
                 body: formData
             })
@@ -64,7 +64,7 @@ export default function AdminBookUpdateDetail(){
             fetch(`${Ip.url}/admin/booklist/update/detail/2`, {
                 method: "POST",
                 headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token"),
+                    Authorization: "Bearer " + sessionStorage.getItem("token"),
                 },
                 body: formData
             })
