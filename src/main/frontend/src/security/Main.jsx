@@ -92,20 +92,14 @@ export default function Main() {
 			</div>
 			<div className="mainBottom">
 				<div className="mainLeftBottom">
-					공지사항
-					<thead>
-					<tr>
-						<th className="noticeTableTh">공지 제목</th>
-						<th className="noticeTableTh">공지날짜</th>
-					</tr>
-				</thead>
-		
-					{Array.isArray(page) && page.map(res => (
-						<tr key={res.noticeSeq}>
-							<td className="mainnoticeTable"><Link to={`/notice/content/${res.noticeSeq}`}>{res.noticeTitle.length > 5 ? res.noticeTitle.slice(0, 5) + "..." : res.noticeTitle}</Link></td>
-							<td className="mainnoticeTable">{moment(res.noticeRdate).format('YYYY-MM-DD')}</td>
-						</tr>
-					))}
+					<div className="mainNoticeTable">
+						공지사항
+						{Array.isArray(page) && page.map(res => (
+							<tr key={res.noticeSeq}>
+								<td	className="mainNoticeTableTdTitle">  <a href={`/notice/content/${res.noticeSeq}`} style={{ color: 'black' }}> {res.noticeTitle.length > 20 ? res.noticeTitle.slice(0, 20) + "..." : res.noticeTitle} </a></td>
+							</tr>
+						))}
+					</div>
 				</div>
 				<div className="BookListTable2">
 					추천 도서 목록
