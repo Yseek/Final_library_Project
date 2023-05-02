@@ -1,9 +1,7 @@
 package toolguys.library.library.security.utils;
 
 import java.security.Key;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -30,22 +28,21 @@ public class JwtUtil {
 		}
 	}
 
-	public static List<String> createJwt(String userEmail, String secretKey, Long expiredMs) {
+	public static String createJwt(String userEmail, String secretKey, Long expiredMs) {
 		Claims claims = Jwts.claims();
 		byte[] keyBytes = Decoders.BASE64.decode(secretKey);
 		Key key = Keys.hmacShaKeyFor(keyBytes);
 		claims.put("userEmail", userEmail);
-
-		String refreshToken = Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + expiredMs * 24))
-				.signWith(key, SignatureAlgorithm.HS256).compact();
-
-		String token = Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
+		// Refresh token 구현중
+		// String refreshToken = Jwts.builder().setClaims(claims).setIssuedAt(new 
+		// Date(System.currentTimeMillis()))
+		// .setExpiration(new Date(System.currentTimeMillis() + expiredMs * 24))
+		// .signWith(key, SignatureAlgorithm.HS256).compact();
+		// List<String> tokens = new ArrayList<String>();
+		// tokens.add(token);
+		// tokens.add(refreshToken);
+		return Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + expiredMs))
 				.signWith(key, SignatureAlgorithm.HS256).compact();
-		List<String> tokens = new ArrayList<String>();
-		tokens.add(token);
-		tokens.add(refreshToken);
-		return tokens;
 	}
 }

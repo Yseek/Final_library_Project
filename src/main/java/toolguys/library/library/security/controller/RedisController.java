@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import toolguys.library.library.security.dto.RedisGetValueDTO;
@@ -37,7 +38,7 @@ public class RedisController {
 				.body(dto.getTestKey() + "와" + dto.getTestValues1() + "," + dto.getTestValues2() + "가 잘 들어갔습니다.");
 	}
 
-	@RequestMapping("getSets")
+	@RequestMapping(value = "getSets", method = RequestMethod.POST)
 	public ResponseEntity<Set<String>> getSets(@RequestBody RedisGetValueDTO dto){
 		return ResponseEntity.ok().body(redisService.getSets(dto.getTestKey()));
 	}

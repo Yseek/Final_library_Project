@@ -56,29 +56,35 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		Iterator<String> tokensSet = redisService.getSets(userEmail).iterator();
 		String accessToken = "";
-		String refreshToken = "";
+		// String refreshToken = "";
 		while (tokensSet.hasNext()) {
 			String currentToken = tokensSet.next();
 			if (currentToken.startsWith("atk")) {
 				accessToken = currentToken.split("atk")[1];
-			} else if (currentToken.startsWith("rtk")) {
-				refreshToken = currentToken.split("rtk")[1];
 			}
+			// else if (currentToken.startsWith("rtk")) {
+			// refreshToken = currentToken.split("rtk")[1];
+			// }
 		}
 		System.out.println(Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(accessToken).getBody()
 				.getExpiration());
 
 		// Token Expired 되었는지 여부
-		if (JwtUtil.isExpired(refreshToken, secretKey)) {
+		if (JwtUtil.isExpired(accessToken, secretKey)) {
 			log.error("token이 만료 되었습니다.");
 			filterChain.doFilter(request, response);
 			return;
-		} else if (JwtUtil.isExpired(accessToken, secretKey)) {
-			String retoken = JwtUtil.createJwt(userEmail, secretKey, 100 * 20 * 20L).get(0);
-			redisService.deleteValues(userEmail);
-			redisService.setSets(userEmail, "atk" + retoken, "rtk" + refreshToken);
-			response.setHeader("Authorization", "Bearer " + retoken);
 		}
+		// Refresh Token 구현중
+		// else if (JwtUtil.isExpired(accessToken, secretKey)) {
+		// String retoken = JwtUtil.createJwt(userEmail, secretKey, 1000 * 60 *
+		// 60L).get(0);
+		// redisService.deleteValues(userEmail);
+		// redisService.setSets(userEmail, "atk" + retoken, "rtk" + refreshToken);
+		// log.error("token이 갱신 되었습니다.");
+		// filterChain.doFilter(request, response);
+		// return;
+		// }
 		// Member 에서 권한 꺼내기
 		Member member = securityMemberService.findByMemberEmail(userEmail).get();
 		// 권한 부여
