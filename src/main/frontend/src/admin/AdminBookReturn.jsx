@@ -87,7 +87,7 @@ export default function AdminBookReturn() {
     }
 
     return (
-        <div className='adminBookReturnDiv'>
+        <center>
             <h2>도서반납 처리</h2>
             <table className='adminBookReturnTable'>
                 <thead>
@@ -135,7 +135,7 @@ export default function AdminBookReturn() {
                     setPage={setPage}
                 />
             </span>
-        </div>
+        </center>
     )
 }
 

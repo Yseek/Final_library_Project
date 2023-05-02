@@ -45,7 +45,7 @@ export default function Notice() {
 	};
 
 	return (
-		<div className="NoticeDiv">
+		<center>
 			<h2>공지사항</h2>
 			<p className="NoticeItems">총 {page.totalCount}건, {page.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
@@ -68,7 +68,7 @@ export default function Notice() {
 			</table>
 			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
 				<button className="adminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
-				<button className="adminNoticeWriteBtn"  onClick={() => write()}>글쓰기</button>
+			<button className="adminNoticeWriteBtn" onClick={() => write()}>글쓰기</button>
 			<div className="page">
 				{pageList.map(res => (
 					<span key={res}>
@@ -77,6 +77,6 @@ export default function Notice() {
 					</span>
 				))}
 			</div>
-		</div>
+		</center>
 	);
 }

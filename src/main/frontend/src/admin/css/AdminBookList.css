@@ -1,33 +1,34 @@
-.adminBookRentSearchDiv{
+.adminBookListDiv{
   margin-bottom: 20px;
   
 }
 
-.adminBookRentSearchInput{
+.adminBookListSearchInput{
   margin-left: 5px;
   font-family: 메이플스토리;
   height: 31px;
   font-size: 15px;
 }
 
-.adminBookRentSearchSelect{
+.adminBookListSelect{
   height: 35px;
   font-family: 메이플스토리;
   font-size: 15px;
+  margin-left: 100px;
 }
 
 
-.adminBookReturnTable {
+.adminBookListTable {
 	width: 60vw;
 	border: 1px solid gray;
 	border-radius: 5px;
 	margin-bottom: 2vh;
 	margin-left: 3vw;
+  margin-top: 1vh;
 	font-size: larger;
-	text-align: center;
 }
 
-.adminBookReturnTableTh{
+.adminBookListTableTh{
 	border : 1px solid gray;
 	border-top: none;
 	border-left: none;
@@ -38,7 +39,7 @@
 	color: white;
 }
 
-.adminBookReturnTableTd{
+.adminBookListTableTd{
 	border : 1px solid gray;
 	border-bottom: none;
 	border-left: none;
@@ -49,7 +50,7 @@
   height: 4vh;
 }
 
-.adminBookReturnSearchBtn{
+.adminBookListSearchBtn{
 	background-color: #0665A9;
 	border-radius: 3px;
 	border : 1px solid #0665A9;
@@ -60,9 +61,10 @@
   color: white;
   margin-left: 5px;
   padding: 0px;
+  margin-bottom: 2vh;
 }
 
-.adminBookReturnBtn{
+.adminBookListUptBtn{
   border: none;
 	font-size: large;
   background-color: #f6f6f6;
