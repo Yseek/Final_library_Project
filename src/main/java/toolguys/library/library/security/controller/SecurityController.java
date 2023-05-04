@@ -123,7 +123,8 @@ public class SecurityController {
 	}
 
 	@PostMapping("/admin/findChatList")
-	public ResponseEntity<Object> findChatList(){
+	public ResponseEntity<Object> findChatList() {
 		return ResponseEntity.ok().body(ChatController.userSet);
 	}
+
 }

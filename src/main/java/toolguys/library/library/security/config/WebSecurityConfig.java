@@ -22,7 +22,7 @@ public class WebSecurityConfig {
 
 	@Autowired
 	private final SecurityMemberService securityMemberService;
-
+	
 	@Value("${jwt.secret}")
 	private String secretKey;
 
@@ -32,7 +32,8 @@ public class WebSecurityConfig {
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/memberInfo").hasAnyRole("USER", "ADMIN"));
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/*").hasAnyRole("USER", "ADMIN"));
 		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/admin/*").hasRole("ADMIN"));
-		httpSecurity.authorizeHttpRequests(request -> request.antMatchers("/user/bookList","/user/bookDetail/*").permitAll());
+		httpSecurity.authorizeHttpRequests(
+				request -> request.antMatchers("/user/bookList", "/user/bookDetail/*").permitAll());
 		httpSecurity.exceptionHandling(handling -> handling.accessDeniedHandler(new CustomAccessDeniedHandler()));
 		httpSecurity.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		httpSecurity.addFilterBefore(new JwtFilter(securityMemberService, secretKey),

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import Ip from "../Ip";
 
 export default function Logout() {
-	sessionStorage.removeItem("token");
 	const navi = useNavigate();
 
 	fetch(`${Ip.url}/logout.do`, {
