@@ -14,7 +14,6 @@ import toolguys.library.library.security.exception.ErrorCode;
 
 public class JwtUtil {
 
-
 	public static String getUserEmail(String token, String secretKey) {
 		return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().get("userEmail",
 				String.class);
@@ -25,7 +24,7 @@ public class JwtUtil {
 			return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getExpiration()
 					.before(new Date());
 		} catch (MalformedJwtException mj) {
-			throw new AppException(ErrorCode.INVALID_TOKEN,"토큰 만료");
+			throw new AppException(ErrorCode.INVALID_TOKEN, "토큰 만료");
 		}
 	}
 
@@ -34,7 +33,6 @@ public class JwtUtil {
 		byte[] keyBytes = Decoders.BASE64.decode(secretKey);
 		Key key = Keys.hmacShaKeyFor(keyBytes);
 		claims.put("userEmail", userEmail);
-
 		return Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + expiredMs))
 				.signWith(key, SignatureAlgorithm.HS256).compact();
