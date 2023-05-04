@@ -27,6 +27,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private final SecurityMemberService securityMemberService;
+
 	private final String secretKey;
 
 	@Override
@@ -34,7 +35,6 @@ public class JwtFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 
 		final String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
-		log.info("check" + authorization);
 
 		if (authorization == null || !authorization.startsWith("Bearer ")) {
 			log.error("authorization 이 없습니다.");
@@ -54,6 +54,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		// Token 에서 이름 꺼내기
 		String userEmail = JwtUtil.getUserEmail(token, secretKey);
+
 		// Member 에서 권한 꺼내기
 		Member member = securityMemberService.findByMemberEmail(userEmail).get();
 		// 권한 부여

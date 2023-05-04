@@ -33,7 +33,8 @@ public class SecurityMemberService {
 		if (!bCryptPasswordEncoder.matches(insertPwd, member.getMemberPwd())) {
 			throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드를 잘못 입력했습니다");
 		}
-		return JwtUtil.createJwt(memberEmail, secretKey, expiredMs);
+		String token = JwtUtil.createJwt(memberEmail, secretKey, expiredMs);
+		return token;
 	}
 
 	public void join(Member member) {
