@@ -36,10 +36,17 @@ export default function Notice() {
 		setUserInput(e.target.value.toLowerCase())
 	};
 
+	// 검색 버튼 클릭 이벤트 처리
 	const onClickSearchInput = (e) => {
 		e.preventDefault();
 		history(`/admin/notice/search/${userInput}`);
 	};
+	// 엔터 키 입력 이벤트 처리
+    const onKeyDownSearchInput = (e) => {
+        if (e.keyCode === 13 && userInput.length > 0) {
+            onClickSearchInput(e);
+        }
+    };
 
 	// 한 화면에 보여줄 페이지 수 계산
 	var pageWidth = 10;
@@ -72,7 +79,7 @@ export default function Notice() {
 					))}
 				</tbody>
 			</table>
-			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} size="25" />&nbsp;
+			<span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} onKeyDown={onKeyDownSearchInput} size="25" />&nbsp;
 				<button className="adminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button></span>
 			<button className="adminNoticeWriteBtn" onClick={() => write()}>글쓰기</button>
 			{pageList.length === 0 && <span>검색 결과가 없습니다</span>}
