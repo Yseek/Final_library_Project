@@ -162,7 +162,7 @@ export default function HeaderLayout() {
 			</div>
 			<div className="header">
 				<div className="header__inner">
-						<span className="logoImg"><Link to={''} onClick={() => window.location.replace("/")} >로고</Link></span>
+					<span className="logoImg"><Link to={''} onClick={() => window.location.replace("/")} >로고</Link></span>
 					<div className="chatBox">
 						{memeberOrAdmin != 2 ? <div className="chatBtn">
 							<button type="button" onClick={openChat}>관리자 문의 Chat</button>
@@ -191,14 +191,14 @@ export default function HeaderLayout() {
 				<div className='menuTitle'>메뉴</div>
 				{memeberOrAdmin == 2 ? <div className="adminNav">
 					<ul>
-						<li><Link to={`/admin/notice`}>공지사항 목록</Link></li>
-						<li><Link to={`/admin/bookhope`}>희망도서 승인</Link></li>
-						<li><Link to={`/admin/reserved`}>예약도서 목록</Link></li>
-						<li><Link to={`/admin/return`}>도서반납 처리</Link></li>
-						<li><Link to={`/admin/booklist`}>도서 목록</Link></li>
-						<li><Link to={`/admin/memberList`}>회원 목록</Link></li>
-						<li><Link to={`/admin/addBooks`}>도서 추가</Link></li>
-						<li><Link to={`/admin/bookLost`}>도서 분실신고 처리</Link></li>
+						<li className='sideBarLi1'><Link to={`/admin/notice`}>공지사항 목록</Link></li>
+						<li className='sideBarLi1'><Link to={`/admin/bookhope`}>희망도서 승인</Link></li>
+						<li className='sideBarLi1'><Link to={`/admin/reserved`}>예약도서 목록</Link></li>
+						<li className='sideBarLi1'><Link to={`/admin/return`}>도서반납 처리</Link></li>
+						<li className='sideBarLi1'><Link to={`/admin/booklist`}>도서 목록</Link></li>
+						<li className='sideBarLi1'><Link to={`/admin/memberList`}>회원 목록</Link></li>
+						<li className='sideBarLi1'><Link to={`/admin/addBooks`}>도서 추가</Link></li>
+						<li className='sideBarLi2'><Link to={`/admin/bookLost`}>도서 분실신고 처리</Link></li>
 					</ul>
 				</div>
 					: <div className="userNav">

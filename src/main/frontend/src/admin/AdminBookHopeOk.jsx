@@ -97,7 +97,9 @@ export default function AdminBookHope() {
                 </div>
                 <div className="row">
                     <div className="row-in">          
-                        <h2>책 이미지 파일</h2><input multiple type="file" accept="image/*" onChange={e => onUpload(e)} ref={fileRef}/>
+                        <h2>책 이미지 파일</h2>
+                        <label htmlFor="flie_upload" className='fileBtn'>파일선택</label>
+                        <input id="flie_upload" multiple type="file" accept="image/*" onChange={e => onUpload(e)} ref={fileRef}/>
                     </div>
                 </div>
                 <div className="row">

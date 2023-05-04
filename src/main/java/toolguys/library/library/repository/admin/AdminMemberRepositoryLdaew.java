@@ -11,8 +11,7 @@ import toolguys.library.library.dto.admin.AdminBookRentVo;
 import toolguys.library.library.dto.admin.AdminMemberVo;
 
 public interface AdminMemberRepositoryLdaew extends JpaRepository<Member, Long> {
-	@Query(value = "select * from MEMBER where MEMBERSEQ like %:keyword%", nativeQuery = true)
-	Page<Member> findByMemberSeqContaining(@Param("keyword") String keyword, Pageable pageable);
+	Page<Member> findByMemberSeqLike(Long keyword, Pageable pageable);
 
 	Page<Member> findByMemberEmailContaining(String keyword, Pageable pageable);
 
@@ -24,6 +23,7 @@ public interface AdminMemberRepositoryLdaew extends JpaRepository<Member, Long> 
 			"where BOOKSEQ like %:keyword% and BOOKRENTRDATE > DATE_ADD(NOW(), INTERVAL -7 DAY)", nativeQuery = true)
 	Page<AdminMemberVo> findByBookSeqContaining(@Param("keyword") String keyword, Pageable pageable);
 
+	
 	// 선택한 회원의 대출 현황(현재 대출중인 책 목록) 가져온다
 	@Query(value = "select BOOKSEQ, BOOKTITLE, BOOKWRITER, BOOKPUB, BOOKSTATUS " +
 			"from MEMBER mb join RENTCARD rc on mb.MEMBERSEQ = rc.MEMBER_MEMBERSEQ " +

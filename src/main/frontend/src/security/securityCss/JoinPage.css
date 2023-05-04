@@ -9,28 +9,67 @@
   text-align: left;
 }
 
-.joinInput2{
+.joinInputName{
 	border: 1px solid black;
 	border-radius: 3px;
-	margin-left: 64px;
+	margin-left: 65px;
 }
 
-.joinInput3{
+.joinInputEmail{
 	border: 1px solid black;
 	border-radius: 3px;
 	margin-left: 50px;
 }
 
-.joinInput4{
+.joinInputEmailCheck{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 11px;
+	margin-bottom: 10px;
+}
+
+.joinInputPwd{
 	border: 1px solid black;
 	border-radius: 3px;
 	margin-left: 38px;
 }
 
-.joinInput6{
+.joinInputPwdd{
 	border: 1px solid black;
 	border-radius: 3px;
 	margin-left: 10px;
+}
+
+.joinInputPhone{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 54px;
+}
+
+.joinInputBirth{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 37px;
+}
+
+.joinInputAddrNum{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 40px;
+}
+
+.joinInputAddr{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 69px;
+	margin-top:2vh;
+}
+
+.joinInputAddrDetail{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin-left: 41px;
+	margin-top:2vh;
 }
 
 .joinBtn{
@@ -39,11 +78,19 @@
 	border : 1px solid #0665A9;
 	font-family: 메이플스토리;
 	color: white;
-	width: 4.5vw;
+	width: 5.8vw;
 	height: 3vh;
 	margin-left: 1vw;
 }
 
 p{
 	margin-left: 0vw;
+}
+
+.postApi{
+	margin-left: 800px;
+}
+
+.joinInputEmailCheckk{
+	margin-left: 95px;
 }

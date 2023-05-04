@@ -17,31 +17,31 @@ export default function Notice() {
 	};
 
 	return (
-		<div className="NoticeContent">
+		<center>
 			<h2>공지사항</h2>
 			<font color='gray' size='4' face='휴먼편지체'>
 			</font>
-			<table className="noticeTable" border='2' width='800' align='center'>
+			<table className="noticeTableDetail">
 				<tbody>
 					<tr>
-						<td className="contentColumnName" width="20%" align='center'>작성자</td>
-						<td>{noticeList.memberName}</td>
+						<td className="noticeTableThDetail">작성자</td>
+						<td className="noticeTableTdDetail">{noticeList.memberName}</td>
 					</tr>
 					<tr>
-						<td className="contentColumnName" align='center'>제목</td>
-						<td>{noticeList.noticeTitle}</td>
+						<td className="noticeTableThDetail">제목</td>
+						<td className="noticeTableTdDetail">{noticeList.noticeTitle}</td>
 					</tr>
 					<tr>
-						<td className="contentColumnName" align='center'>내용</td>
-						<td id="contentContent" valign="top"><div id="scroll_box">{noticeList.noticeContent}</div></td>
+						<td className="noticeTableThDetail">내용</td>
+						<td className="noticeTableTdDetail"><div id="scroll_box">{noticeList.noticeContent}</div></td>
 					</tr>
 					<tr>
-						<td className="contentColumnName" align='center'>작성날짜</td>
-						<td>{moment(noticeList.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
+						<td className="noticeTableThDetail">작성날짜</td>
+						<td className="noticeTableTdDetail">{moment(noticeList.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 					</tr>
 				</tbody>
 			</table>
 			<button id="noticeSearchBtn" onClick={goBack}>목록</button>
-		</div>
+		</center>
 	);
 }
