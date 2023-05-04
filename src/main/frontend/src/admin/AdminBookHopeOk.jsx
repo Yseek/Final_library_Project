@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Ip from "../Ip";
+import "./css/AdminAddBooks.css"
 
 export default function AdminBookHope() {
     const { bookHopeSeq } = useParams();
@@ -72,50 +73,35 @@ export default function AdminBookHope() {
      }
 
     return(
-        <div>
+        <div className="adminAddBooksDiv">
+            <h2>희망도서 승인</h2>
             {Object.keys(data).length > 0 && (
             <form method="post" onSubmit={handleSubmit}>
-                <div>
-                    <div>          
-                        <h2>제목</h2><input type="text" ref={titleRef} defaultValue={data.bookHopeTitle}/>
-                    </div>
+                <div className='adminAddBooksIpDiv'>
+                    <span>제목</span><input className='adminAddBooksInput2' type="text" ref={titleRef} defaultValue={data.bookHopeTitle}/>
+                </div>
+                <div className='adminAddBooksIpDiv'>
+                    <span>저자</span><input className='adminAddBooksInput2' type="text" ref={writerRef} defaultValue={data.bookHopeWriter}/>
+                </div>
+                <div className='adminAddBooksIpDiv'>
+                    <span>출판사</span><input className='adminAddBooksInput2' type="text" ref={pubRef} defaultValue={data.bookHopePub}/>
+                </div>
+                <div className='adminAddBooksIpDiv'>
+                     <span>줄거리</span><br/><textarea className="bookStory" ref={bookStoryRef}/>
+                </div>
+                <div className='adminAddBooksIpDiv2'>
+                    <span>책 표지</span>
+                    <label htmlFor="flie_upload" className='fileBtn'>파일선택</label>
+                    <input id="flie_upload" multiple type="file" accept="image/*" onChange={e => onUpload(e)} ref={fileRef}/>
                 </div>
                 <div>
-                    <div>          
-                        <h2>저자</h2><input type="text" ref={writerRef} defaultValue={data.bookHopeWriter}/>
-                    </div>
+                    <img src={imageSrc} width={`300px`} height={`300px`} ></img>
                 </div>
                 <div>
-                    <div>          
-                        <h2>출판사</h2><input type="text" ref={pubRef} defaultValue={data.bookHopePub}/>
-                    </div>
+                    <input type="hidden" defaultValue={data.bookHopeSeq}/>
                 </div>
                 <div>
-                    <div>          
-                        <h2>줄거리</h2><textarea className="bookStory" ref={bookStoryRef}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="row-in">          
-                        <h2>책 이미지 파일</h2>
-                        <label htmlFor="flie_upload" className='fileBtn'>파일선택</label>
-                        <input id="flie_upload" multiple type="file" accept="image/*" onChange={e => onUpload(e)} ref={fileRef}/>
-                    </div>
-                </div>
-                <div>
-                    <div>          
-                        <img src={imageSrc} width={`300px`} height={`300px`} ></img>
-                    </div>
-                </div>
-                <div>
-                    <div>          
-                        <input type="hidden" defaultValue={data.bookHopeSeq}/>
-                    </div>
-                </div>
-                <div>
-                    <div>          
-                        <input type="hidden" ref={bookHopeStatusRef} defaultValue="2"/>
-                    </div>
+                    <input type="hidden" ref={bookHopeStatusRef} defaultValue="2"/>
                 </div>
                 <div>
                     <button type="submit">입력</button>

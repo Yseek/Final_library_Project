@@ -56,24 +56,24 @@ export default function Notice() {
 			<h2>공지사항</h2>
 			<p id="NoticeItems">총 {page.totalCount}건, {page.page}/{page.totalPages}페이지</p>
 			<table className="noticeTable">
-				<thead className="noticeTableHead">
+				<thead>
 					<tr>
-						<th>작성자</th>
-						<th>공지제목</th>
-						<th>공지날짜</th>
+						<th className="noticeTableTh">작성자</th>
+						<th className="noticeTableTh">공지제목</th>
+						<th className="noticeTableTh">공지날짜</th>
 					</tr>
 				</thead>
 				<tbody>
 					{Array.isArray(page.content) && page.content.map(res => (
 						<tr key={res.noticeSeq}>
-							<td width="15%">{res.member.memberName}</td>
-							<td width="60%"><Link to={`/admin/notice/content/${res.noticeSeq}`} className="noticeNoColor">{res.noticeTitle}</Link></td>
-							<td>{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
+							<td className="noticeTableTd">{res.member.memberName}</td>
+							<td className="noticeTableTd"><Link to={`/admin/notice/content/${res.noticeSeq}`} className="noticeNoColor">{res.noticeTitle}</Link></td>
+							<td className="noticeTableTd">{moment(res.noticeRdate).format('YYYY-MM-DD HH:mm:ss')}</td>
 						</tr>
 					))}
 				</tbody>
 			</table>
-            <span><input type="text" placeholder="공지사항 제목 검색" onChange={getValue} onKeyDown={onKeyDownSearchInput} size="25" />&nbsp;
+            <span><input type="text" placeholder="검색어를 입력해 주세요" onChange={getValue} onKeyDown={onKeyDownSearchInput} size="25" />&nbsp;
 				<button className="AdminNoticeSearchBtn" onClick={onClickSearchInput} disabled={userInput.length === 0}>검색</button>&nbsp;</span>
 			<div className="page">
 				{pageList.map(res => (
