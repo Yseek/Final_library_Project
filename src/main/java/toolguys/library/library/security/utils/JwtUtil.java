@@ -33,14 +33,6 @@ public class JwtUtil {
 		byte[] keyBytes = Decoders.BASE64.decode(secretKey);
 		Key key = Keys.hmacShaKeyFor(keyBytes);
 		claims.put("userEmail", userEmail);
-		// Refresh token 구현중
-		// String refreshToken = Jwts.builder().setClaims(claims).setIssuedAt(new 
-		// Date(System.currentTimeMillis()))
-		// .setExpiration(new Date(System.currentTimeMillis() + expiredMs * 24))
-		// .signWith(key, SignatureAlgorithm.HS256).compact();
-		// List<String> tokens = new ArrayList<String>();
-		// tokens.add(token);
-		// tokens.add(refreshToken);
 		return Jwts.builder().setClaims(claims).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + expiredMs))
 				.signWith(key, SignatureAlgorithm.HS256).compact();

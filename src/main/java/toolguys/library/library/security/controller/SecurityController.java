@@ -1,7 +1,6 @@
 package toolguys.library.library.security.controller;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +20,9 @@ import toolguys.library.library.security.dto.JoinEmailCheckRequest;
 import toolguys.library.library.security.dto.MailDupliceteCheckRequst;
 import toolguys.library.library.security.dto.MemberLoginRequest;
 import toolguys.library.library.security.dto.PhoneDuplicateCheckRequest;
-import toolguys.library.library.security.dto.RedisGetValueDTO;
 import toolguys.library.library.security.dto.SendEmailRequest;
 import toolguys.library.library.security.exception.AppException;
 import toolguys.library.library.security.exception.ErrorCode;
-import toolguys.library.library.security.service.RedisService;
 import toolguys.library.library.security.service.SecurityMemberService;
 import toolguys.library.library.security.utils.MailSenderRunner;
 
@@ -38,9 +35,6 @@ public class SecurityController {
 
 	@Autowired
 	MailSenderRunner mailSenderRunner;
-
-	@Autowired
-	RedisService redisService;
 
 	private Map<String, String> key = new HashMap<>();
 
@@ -59,7 +53,6 @@ public class SecurityController {
 
 	@PostMapping("/logout.do")
 	public ResponseEntity<Object> logout(Authentication authentication) {
-		redisService.deleteValues(authentication.getName());
 		return ResponseEntity.ok().body(securityMemberService.memberInfo(authentication.getName()));
 	}
 
@@ -134,19 +127,4 @@ public class SecurityController {
 		return ResponseEntity.ok().body(ChatController.userSet);
 	}
 
-	@PostMapping("/refresh")
-	public ResponseEntity<String> refresh(@RequestBody RedisGetValueDTO dto){
-		System.out.println(dto.getTestKey()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		Iterator<String> tokensSet = redisService.getSets(dto.getTestKey()).iterator();
-		String accessToken = "";
-		while (tokensSet.hasNext()) {
-			String currentToken = tokensSet.next();
-			if (currentToken.startsWith("atk")) {
-				accessToken = currentToken.split("atk")[1];
-			}
-		}
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(accessToken);
-		return ResponseEntity.ok().body(accessToken);
-	}
 }

@@ -1,7 +1,6 @@
 package toolguys.library.library.security.utils;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -17,11 +16,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import toolguys.library.library.domain.Member;
-import toolguys.library.library.security.service.RedisService;
 import toolguys.library.library.security.service.SecurityMemberService;
 
 @RequiredArgsConstructor
@@ -30,9 +27,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private final SecurityMemberService securityMemberService;
-
-	@Autowired
-	private final RedisService redisService;
 
 	private final String secretKey;
 
@@ -51,40 +45,16 @@ public class JwtFilter extends OncePerRequestFilter {
 		// Token 꺼내기
 		String token = authorization.split(" ")[1];
 
-		// Token 에서 이름 꺼내기
-		String userEmail = JwtUtil.getUserEmail(token, secretKey);
-
-		Iterator<String> tokensSet = redisService.getSets(userEmail).iterator();
-		String accessToken = "";
-		// String refreshToken = "";
-		while (tokensSet.hasNext()) {
-			String currentToken = tokensSet.next();
-			if (currentToken.startsWith("atk")) {
-				accessToken = currentToken.split("atk")[1];
-			}
-			// else if (currentToken.startsWith("rtk")) {
-			// refreshToken = currentToken.split("rtk")[1];
-			// }
-		}
-		System.out.println(Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(accessToken).getBody()
-				.getExpiration());
-
 		// Token Expired 되었는지 여부
-		if (JwtUtil.isExpired(accessToken, secretKey)) {
+		if (JwtUtil.isExpired(token, secretKey)) {
 			log.error("token이 만료 되었습니다.");
 			filterChain.doFilter(request, response);
 			return;
 		}
-		// Refresh Token 구현중
-		// else if (JwtUtil.isExpired(accessToken, secretKey)) {
-		// String retoken = JwtUtil.createJwt(userEmail, secretKey, 1000 * 60 *
-		// 60L).get(0);
-		// redisService.deleteValues(userEmail);
-		// redisService.setSets(userEmail, "atk" + retoken, "rtk" + refreshToken);
-		// log.error("token이 갱신 되었습니다.");
-		// filterChain.doFilter(request, response);
-		// return;
-		// }
+
+		// Token 에서 이름 꺼내기
+		String userEmail = JwtUtil.getUserEmail(token, secretKey);
+
 		// Member 에서 권한 꺼내기
 		Member member = securityMemberService.findByMemberEmail(userEmail).get();
 		// 권한 부여
